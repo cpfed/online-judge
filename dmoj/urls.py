@@ -273,6 +273,8 @@ urlpatterns = [
         path('judges', api.api_v2.APIJudgeList.as_view()),
     ])),
 
+    path('api/sync_users/<str:token>/', api.api.SyncUsersFromCPFEDView.as_view(), name='sync_users_from_cpfed'),
+
     path('blog/', paged_list_view(blog.PostList, 'blog_post_list')),
     path('post/<int:id>-<slug:slug>', blog.PostView.as_view(), name='blog_post'),
 
