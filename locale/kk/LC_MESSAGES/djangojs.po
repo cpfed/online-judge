@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: dmoj\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-01-23 05:23+0000\n"
-"PO-Revision-Date: 2024-01-24 00:44\n"
+"PO-Revision-Date: 2023-08-01 00:53\n"
 "Last-Translator: \n"
 "Language-Team: Kazakh\n"
 "Language: kk_KZ\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgctxt "time format with day"
 msgid "%d day %h:%m:%s"
 msgid_plural "%d days %h:%m:%s"
-msgstr[0] "%d күн %h:%m:%s"
+msgstr[0] ""
 msgstr[1] "%d күн %h:%m:%s"
 
 #: resources/common.js:197
@@ -31,26 +31,26 @@ msgstr "%h:%m:%s"
 
 #: resources/problem-vote.js:11
 msgid "Vote on problem points"
-msgstr "Есеп ұпайларына дауыс беріңіз"
+msgstr ""
 
 #: resources/problem-vote.js:16
 #, javascript-format
 msgid "Unable to delete vote: %s"
-msgstr "Берілген дауысты жою мүмкін емес: %s"
+msgstr ""
 
 #: resources/problem-vote.js:28
 #, javascript-format
 msgid "Edit points vote (%s)"
-msgstr "Ұпайлар дауысын өзгерту (%s)"
+msgstr ""
 
 #: resources/problem-vote.js:34
 #, javascript-format
 msgid "Unable to cast vote: %s"
-msgstr "Дауыс беру мүмкін емес: %s"
+msgstr ""
 
 #: resources/problem-vote.js:63
 msgid "Number of votes for this point value"
-msgstr "Осы ұпай мәніне берілген дауыстар саны"
+msgstr ""
 
 #: resources/user_profile.js:47
 msgid "past year"
@@ -59,24 +59,23 @@ msgstr "өткен жыл"
 #: resources/user_profile.js:64
 msgid "%(cnt)d total submission"
 msgid_plural "%(cnt)d total submissions"
-msgstr[0] "%(cnt)d барлық тапсырылым"
-msgstr[1] "%(cnt)d барлық тапсырылым"
+msgstr[0] ""
+msgstr[1] ""
 
 #: resources/user_profile.js:69
 msgid "%(cnt)d submission in the last year"
 msgid_plural "%(cnt)d submissions in the last year"
-msgstr[0] "%(cnt)d тапсырылым cоңғы жылда"
-msgstr[1] "%(cnt)d тапсырылым cоңғы жылда"
+msgstr[0] ""
+msgstr[1] ""
 
 #: resources/user_profile.js:74
 msgid "%(cnt)d submission in %(year)d"
 msgid_plural "%(cnt)d submissions in %(year)d"
-msgstr[0] "%(cnt)d тапсырылым %(year)d жылы"
-msgstr[1] "%(cnt)d тапсырылым %(year)d жылы"
+msgstr[0] ""
+msgstr[1] ""
 
 #: resources/user_profile.js:88
 msgid "%(cnt)d submission on %(date)s"
 msgid_plural "%(cnt)d submissions on %(date)s"
-msgstr[0] "%(cnt)d тапсырылым %(date)s жылы"
-msgstr[1] "%(cnt)d тапсырылым %(date)s жылы"
-
+msgstr[0] ""
+msgstr[1] ""
