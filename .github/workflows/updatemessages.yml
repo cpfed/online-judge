@@ -1,5 +1,6 @@
 name: updatemessages
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 0 * * *'
 jobs:
@@ -100,5 +101,5 @@ jobs:
         title: Update translations from Crowdin
         body: This PR has been auto-generated to pull in latest translations from [Crowdin](https://translate.dmoj.ca).
         labels: i18n, enhancement
-        reviewers: zharaskhan
+        reviewers: ZharaskhanAman
         branch: update-i18n
