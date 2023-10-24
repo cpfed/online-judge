@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: dmoj\n"
+"Project-Id-Version: esep\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-23 05:23+0000\n"
-"PO-Revision-Date: 2023-10-25 01:00\n"
+"POT-Creation-Date: 2023-10-24 08:46+0000\n"
+"PO-Revision-Date: 2023-10-24 13:53\n"
 "Last-Translator: \n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
@@ -11,25 +11,27 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=((n%10==1 && n%100!=11) ? 0 : ((n%10 >= 2 && n%10 <=4 && (n%100 < 12 || n%100 > 14)) ? 1 : ((n%10 == 0 || (n%10 >= 5 && n%10 <=9)) || (n%100 >= 11 && n%100 <= 14)) ? 2 : 3));\n"
-"X-Crowdin-Project: dmoj\n"
-"X-Crowdin-Project-ID: 142963\n"
+"X-Crowdin-Project: esep\n"
+"X-Crowdin-Project-ID: 622648\n"
 "X-Crowdin-Language: ru\n"
 "X-Crowdin-File: djangojs.po\n"
-"X-Crowdin-File-ID: 12\n"
+"X-Crowdin-File-ID: 4\n"
 
+#: resources/common.js:194
 #: resources/common.js:194
 msgctxt "time format with day"
 msgid "%d day %h:%m:%s"
 msgid_plural "%d days %h:%m:%s"
-msgstr[0] "%d день %h:%m:%s"
-msgstr[1] "%d дней %h:%m:%s"
-msgstr[2] "%d дней %h:%m:%s"
-msgstr[3] "%d дней %h:%m:%s"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
+#: resources/common.js:197
 #: resources/common.js:197
 msgctxt "time format without day"
 msgid "%h:%m:%s"
-msgstr "%h:%m:%s"
+msgstr ""
 
 #: resources/problem-vote.js:11
 msgid "Vote on problem points"

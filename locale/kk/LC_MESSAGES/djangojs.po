@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: dmoj\n"
+"Project-Id-Version: esep\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-23 05:23+0000\n"
-"PO-Revision-Date: 2023-08-01 00:53\n"
+"POT-Creation-Date: 2023-10-24 08:46+0000\n"
+"PO-Revision-Date: 2023-10-24 14:56\n"
 "Last-Translator: \n"
 "Language-Team: Kazakh\n"
 "Language: kk_KZ\n"
@@ -11,23 +11,23 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Crowdin-Project: dmoj\n"
-"X-Crowdin-Project-ID: 142963\n"
+"X-Crowdin-Project: esep\n"
+"X-Crowdin-Project-ID: 622648\n"
 "X-Crowdin-Language: kk\n"
 "X-Crowdin-File: djangojs.po\n"
-"X-Crowdin-File-ID: 12\n"
+"X-Crowdin-File-ID: 4\n"
 
 #: resources/common.js:194
 msgctxt "time format with day"
 msgid "%d day %h:%m:%s"
 msgid_plural "%d days %h:%m:%s"
 msgstr[0] ""
-msgstr[1] "%d күн %h:%m:%s"
+msgstr[1] ""
 
 #: resources/common.js:197
 msgctxt "time format without day"
 msgid "%h:%m:%s"
-msgstr "%h:%m:%s"
+msgstr ""
 
 #: resources/problem-vote.js:11
 msgid "Vote on problem points"
@@ -54,7 +54,7 @@ msgstr ""
 
 #: resources/user_profile.js:47
 msgid "past year"
-msgstr "өткен жыл"
+msgstr ""
 
 #: resources/user_profile.js:64
 msgid "%(cnt)d total submission"
@@ -79,3 +79,4 @@ msgid "%(cnt)d submission on %(date)s"
 msgid_plural "%(cnt)d submissions on %(date)s"
 msgstr[0] ""
 msgstr[1] ""
+
