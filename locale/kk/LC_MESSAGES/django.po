@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: esep\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-24 08:46+0000\n"
-"PO-Revision-Date: 2023-10-24 15:14\n"
+"PO-Revision-Date: 2023-10-24 20:07\n"
 "Last-Translator: \n"
 "Language-Team: Kazakh\n"
 "Language: kk_KZ\n"
@@ -252,7 +252,7 @@ msgstr[1] ""
 
 #: judge/admin/contest.py:363 judge/admin/organization.py:110
 msgid "username"
-msgstr ""
+msgstr "қолданушы аты"
 
 #: judge/admin/contest.py:367 templates/base.html:259
 msgid "virtual"
@@ -304,7 +304,7 @@ msgstr ""
 #: templates/problem/list.html:215 templates/user/base-users-table.html:11
 #: templates/user/user-problems.html:60
 msgid "Points"
-msgstr ""
+msgstr "Ұпайлар"
 
 #: judge/admin/problem.py:134
 msgid "Limits"
@@ -313,7 +313,7 @@ msgstr ""
 #: judge/admin/problem.py:135 templates/problem/submission-diff.html:65
 #: templates/stats/tabs.html:4 templates/submission/list.html:319
 msgid "Language"
-msgstr ""
+msgstr "Тіл"
 
 #: judge/admin/problem.py:137
 msgid "History"
@@ -421,7 +421,7 @@ msgstr ""
 
 #: judge/admin/submission.py:43
 msgid "Unaccepted"
-msgstr ""
+msgstr "Қабылданбады"
 
 #: judge/admin/submission.py:85
 #, python-format
@@ -491,7 +491,7 @@ msgstr ""
 #: judge/admin/submission.py:236 judge/models/problem.py:511
 #: judge/models/problem.py:534 judge/models/runtime.py:111
 msgid "language"
-msgstr ""
+msgstr "тіл"
 
 #: judge/admin/submission.py:243
 msgid "Locked"
@@ -520,11 +520,11 @@ msgstr ""
 #: judge/comments.py:47 judge/views/comment.py:41 judge/views/ticket.py:46
 #: judge/views/user.py:348
 msgid "Your part is silent, little toad."
-msgstr ""
+msgstr "Сіз үнсіздік режиміндесіз."
 
 #: judge/comments.py:49 templates/comments/list.html:146
 msgid "You must solve at least one problem before your voice can be heard."
-msgstr ""
+msgstr "Пікір қалдыру үшін кем дегенде бір есеп шығарыңыз."
 
 #: judge/comments.py:96
 msgid "Posted comment"
@@ -575,8 +575,8 @@ msgstr ""
 #, python-format
 msgid "For every **%d minute** you submit before the end of your window, there will be a **1** point bonus."
 msgid_plural "For every **%d minutes** you submit before the end of your window, there will be a **1** point bonus."
-msgstr[0] "Сіздің терезеңіздің жабылуына дейін жіберілген әрбір **%d минут**  үшін  **1**   ұпай түріндегі бонус беріледі"
-msgstr[1] "Сіздің терезеңіздің жабылуына дейін жіберілген әрбір **%d минут** үшін **1** ұпай түріндегі бонус беріледі."
+msgstr[0] ""
+msgstr[1] ""
 
 #: judge/contest_format/ecoo.py:147
 msgid "Ties will be broken by the sum of the last submission time on **all** problems."
@@ -682,7 +682,7 @@ msgstr ""
 #: templates/registration/registration_form.html:139
 #: templates/user/base-users-table.html:6
 msgid "Username"
-msgstr ""
+msgstr "Қолданушы аты"
 
 #: judge/forms.py:162 templates/registration/registration_form.html:151
 #: templates/registration/registration_form.html:165
@@ -1250,7 +1250,7 @@ msgstr ""
 
 #: judge/models/contest.py:492
 msgid "contests"
-msgstr ""
+msgstr "сайыстар"
 
 #: judge/models/contest.py:499
 msgid "associated contest"
@@ -1314,7 +1314,7 @@ msgstr ""
 #: judge/models/contest.py:594 judge/models/contest.py:621
 #: judge/models/problem.py:148
 msgid "points"
-msgstr ""
+msgstr "ұпайлар"
 
 #: judge/models/contest.py:595
 msgid "partial"
@@ -1772,7 +1772,7 @@ msgstr ""
 
 #: judge/models/problem.py:529
 msgid "problem clarifications"
-msgstr ""
+msgstr "есеп нақтылаулары"
 
 #: judge/models/problem.py:544
 msgid "language-specific resource limit"
@@ -2046,7 +2046,7 @@ msgstr ""
 
 #: judge/models/profile.py:104
 msgid "The organization that this class belongs to."
-msgstr ""
+msgstr "Осы сыныпқа жататын ұйым."
 
 #: judge/models/profile.py:106
 msgid "class name"
@@ -2346,7 +2346,7 @@ msgstr ""
 
 #: judge/models/runtime.py:22
 msgid "long name"
-msgstr ""
+msgstr "ұзақ атауы"
 
 #: judge/models/runtime.py:23
 msgid "Longer name for the language, e.g. \"Python 2\" or \"C++11\"."
@@ -2507,15 +2507,15 @@ msgstr ""
 #: judge/models/submission.py:22 judge/models/submission.py:50
 #: judge/utils/problems.py:66
 msgid "Accepted"
-msgstr ""
+msgstr "Қабылданды"
 
 #: judge/models/submission.py:23 judge/models/submission.py:51
 msgid "Wrong Answer"
-msgstr ""
+msgstr "Қате Жауап"
 
 #: judge/models/submission.py:24 judge/models/submission.py:53
 msgid "Time Limit Exceeded"
-msgstr ""
+msgstr "Уақыт шектеуі асырылды"
 
 #: judge/models/submission.py:25 judge/models/submission.py:54
 msgid "Memory Limit Exceeded"
@@ -2523,15 +2523,15 @@ msgstr ""
 
 #: judge/models/submission.py:26 judge/models/submission.py:55
 msgid "Output Limit Exceeded"
-msgstr ""
+msgstr "Шығару шектеуі асырылды"
 
 #: judge/models/submission.py:27 judge/models/submission.py:56
 msgid "Invalid Return"
-msgstr ""
+msgstr "Жарамсыз қайтару"
 
 #: judge/models/submission.py:28 judge/models/submission.py:57
 msgid "Runtime Error"
-msgstr ""
+msgstr "Орындалу кезіндегі қате"
 
 #: judge/models/submission.py:29 judge/models/submission.py:44
 #: judge/models/submission.py:58 judge/utils/problems.py:68
@@ -2974,7 +2974,7 @@ msgstr ""
 #: judge/views/contests.py:58 judge/views/contests.py:248
 #: judge/views/contests.py:251 judge/views/contests.py:456
 msgid "No such contest"
-msgstr ""
+msgstr "Мұндай сайыс жоқ"
 
 #: judge/views/contests.py:59 judge/views/contests.py:249
 #, python-format
@@ -2983,7 +2983,7 @@ msgstr ""
 
 #: judge/views/contests.py:72
 msgid "Contests"
-msgstr ""
+msgstr "Сайыстар"
 
 #: judge/views/contests.py:252
 msgid "Could not find such contest."
@@ -3077,7 +3077,7 @@ msgstr ""
 
 #: judge/views/contests.py:793 templates/contest/contest-tabs.html:13
 msgid "Participation"
-msgstr ""
+msgstr "Қатысу"
 
 #: judge/views/contests.py:837
 #, python-format
@@ -3298,7 +3298,7 @@ msgstr ""
 #: judge/views/problem.py:648 judge/views/problem.py:656
 #, python-format
 msgid "Submit to %s"
-msgstr ""
+msgstr "%s есебіне жөнелту"
 
 #: judge/views/problem.py:701
 msgid "You submitted too many submissions."
@@ -3480,7 +3480,7 @@ msgstr "Барлық жөнелтілімдер"
 
 #: judge/views/submission.py:400 judge/views/submission.py:405
 msgid "All my submissions"
-msgstr ""
+msgstr "Менің барлық жөнелтілімдерім"
 
 #: judge/views/submission.py:401 judge/views/submission.py:406
 #, python-format
@@ -3611,7 +3611,7 @@ msgstr ""
 
 #: judge/views/user.py:82
 msgid "My account"
-msgstr ""
+msgstr "Менің аккаунтым"
 
 #: judge/views/user.py:83
 #, python-format
@@ -3636,7 +3636,7 @@ msgstr ""
 
 #: judge/views/user.py:348
 msgid "Can't edit profile"
-msgstr ""
+msgstr "Профильді өңдей алмайсыз"
 
 #: judge/views/user.py:355
 msgid "Updated on site"
@@ -3662,7 +3662,7 @@ msgstr ""
 
 #: judge/views/user.py:429 templates/user/user-list-tabs.html:4
 msgid "Leaderboard"
-msgstr ""
+msgstr "Көшбасшылар тақтасы"
 
 #: judge/views/user.py:490
 msgid "You have been successfully logged out."
@@ -3726,7 +3726,7 @@ msgstr ""
 #: templates/base.html:216
 #, python-format
 msgid "Hello, %(username)s."
-msgstr ""
+msgstr "Сәлем, %(username)s."
 
 #: templates/base.html:225
 msgid "Stop impersonating"
@@ -3784,12 +3784,12 @@ msgstr ""
 
 #: templates/blog/list.html:52
 msgid "News"
-msgstr ""
+msgstr "Жаңалықтар"
 
 #: templates/blog/list.html:66
 #, python-brace-format
 msgid "posted on {time}"
-msgstr ""
+msgstr "жариялады {time}"
 
 #: templates/blog/list.html:66
 #, python-brace-format
@@ -3802,11 +3802,11 @@ msgstr ""
 
 #: templates/blog/list.html:95 templates/problem/problem.html:331
 msgid "Clarifications"
-msgstr ""
+msgstr "Hақтылаулар"
 
 #: templates/blog/list.html:111 templates/problem/problem.html:342
 msgid "No clarifications have been made at this time."
-msgstr ""
+msgstr "Қазіргі уақытта ешқандай нақтылау болған жоқ."
 
 #: templates/blog/list.html:119 templates/contest/list.html:189
 msgid "Ongoing contests"
@@ -3815,11 +3815,11 @@ msgstr "Ағымдағы сайыстар"
 #: templates/blog/list.html:127
 #, python-format
 msgid "Ends in %(countdown)s."
-msgstr ""
+msgstr "Аяқталуына %(countdown)s."
 
 #: templates/blog/list.html:137 templates/contest/list.html:226
 msgid "Upcoming contests"
-msgstr ""
+msgstr "Алдағы сайыстар"
 
 #: templates/blog/list.html:145 templates/contest/contest.html:41
 #, python-format
@@ -3849,11 +3849,11 @@ msgstr ""
 
 #: templates/comments/list.html:2 templates/user/prepare-data.html:98
 msgid "Comments"
-msgstr ""
+msgstr "Пікірлер"
 
 #: templates/comments/list.html:5
 msgid "There are no comments at the moment."
-msgstr ""
+msgstr "Қазіргі уақытта ешқандай пікір жоқ."
 
 #: templates/comments/list.html:12
 msgid "Comments are disabled on this page."
@@ -3866,7 +3866,7 @@ msgstr ""
 #: templates/comments/list.html:60
 #, python-brace-format
 msgid "commented on {time}"
-msgstr ""
+msgstr "пікір қалдырды {time}"
 
 #: templates/comments/list.html:60
 #, python-brace-format
@@ -3908,7 +3908,7 @@ msgstr ""
 
 #: templates/comments/list.html:141
 msgid "New comment"
-msgstr ""
+msgstr "Жаңа пікір"
 
 #: templates/comments/list.html:155
 msgid "Invalid comment body."
@@ -3991,31 +3991,31 @@ msgstr ""
 
 #: templates/contest/calendar.html:12
 msgid "Sunday"
-msgstr ""
+msgstr "Жексенбі"
 
 #: templates/contest/calendar.html:13
 msgid "Monday"
-msgstr ""
+msgstr "Дүйсенбі"
 
 #: templates/contest/calendar.html:14
 msgid "Tuesday"
-msgstr ""
+msgstr "Cейсенбі"
 
 #: templates/contest/calendar.html:15
 msgid "Wednesday"
-msgstr ""
+msgstr "Сәрсенбі"
 
 #: templates/contest/calendar.html:16
 msgid "Thursday"
-msgstr ""
+msgstr "Бейсенбі"
 
 #: templates/contest/calendar.html:17
 msgid "Friday"
-msgstr ""
+msgstr "Жұма"
 
 #: templates/contest/calendar.html:18
 msgid "Saturday"
-msgstr ""
+msgstr "Сенбі"
 
 #: templates/contest/clone.html:37
 msgid "Enter a new key for the cloned contest:"
@@ -4048,19 +4048,19 @@ msgstr ""
 
 #: templates/contest/contest-list-tabs.html:23
 msgid "Calendar"
-msgstr ""
+msgstr "Күнтізбе"
 
 #: templates/contest/contest-tabs.html:4
 msgid "Info"
-msgstr ""
+msgstr "Ақпарат"
 
 #: templates/contest/contest-tabs.html:6 templates/submission/list.html:336
 msgid "Statistics"
-msgstr ""
+msgstr "Статистика"
 
 #: templates/contest/contest-tabs.html:11
 msgid "Rankings"
-msgstr ""
+msgstr "Рейтингтер"
 
 #: templates/contest/contest-tabs.html:16
 msgid "Hidden Rankings"
@@ -4077,7 +4077,7 @@ msgstr ""
 #: templates/contest/contest-tabs.html:38
 #: templates/contest/contest-tabs.html:58
 msgid "Leave contest"
-msgstr ""
+msgstr "Сайыстан шығу"
 
 #: templates/contest/contest-tabs.html:45 templates/contest/list.html:294
 msgid "Virtual join"
@@ -4135,7 +4135,7 @@ msgstr ""
 #: templates/contest/contest.html:52
 #, python-format
 msgid "Contest ends in %(countdown)s."
-msgstr ""
+msgstr "Сайыстың соңына дейін %(countdown)s."
 
 #: templates/contest/contest.html:58 templates/contest/contest.html:60
 msgid "F j, Y, G:i T"
@@ -4149,7 +4149,7 @@ msgstr ""
 #: templates/contest/contest.html:65
 #, python-format
 msgid "%(length)s long starting on %(start_time)s"
-msgstr ""
+msgstr "%(start_time)s бастап %(length)s жалғасады"
 
 #: templates/contest/contest.html:75
 #, python-format
@@ -4284,11 +4284,11 @@ msgstr ""
 #: templates/contest/list.html:17 templates/contest/media-js.html:9
 #: templates/contest/media-js.html:15
 msgid "Are you sure you want to join?"
-msgstr ""
+msgstr "Сіз қосылғыңыз келетініне сенімдісіз бе?"
 
 #: templates/contest/list.html:18
 msgid "Joining a contest for the first time starts your timer, after which it becomes unstoppable."
-msgstr ""
+msgstr "Сайысқа бірінші рет қатысқан кезде сіздің таймеріңіз іске қосылады, содан кейін оны тоқтату мүмкін болмайды."
 
 #: templates/contest/list.html:70
 msgid "private"
@@ -4306,7 +4306,7 @@ msgstr ""
 #: templates/contest/list.html:105
 #, python-format
 msgid "%(duration)s long"
-msgstr ""
+msgstr "ұзақтығы %(duration)s"
 
 #: templates/contest/list.html:125 templates/contest/list.html:137
 msgid "Join"
@@ -4318,7 +4318,7 @@ msgstr ""
 
 #: templates/contest/list.html:147
 msgid "Active contests"
-msgstr ""
+msgstr "Белсенді сайыстар"
 
 #: templates/contest/list.html:151 templates/contest/list.html:193
 #: templates/contest/list.html:231 templates/contest/list.html:268
@@ -4333,7 +4333,7 @@ msgstr ""
 #: templates/contest/list.html:170 templates/contest/list.html:209
 #, python-format
 msgid "Ends in %(countdown)s"
-msgstr ""
+msgstr "Аяқталуына %(countdown)s"
 
 #: templates/contest/list.html:243
 #, python-format
@@ -4346,11 +4346,11 @@ msgstr ""
 
 #: templates/contest/list.html:260
 msgid "Past contests"
-msgstr ""
+msgstr "Өткен сайыстар"
 
 #: templates/contest/media-js.html:4
 msgid "Are you sure you want to leave?"
-msgstr ""
+msgstr "Шыққыңыз келетініне сенімдісіз бе?"
 
 #: templates/contest/media-js.html:5
 msgid "You cannot come back to a virtual participation. You will have to start a new one."
@@ -4358,7 +4358,7 @@ msgstr ""
 
 #: templates/contest/media-js.html:10
 msgid "Joining a contest starts your timer, after which it becomes unstoppable."
-msgstr ""
+msgstr "Сайыс қатысқан кезде сіздің таймеріңіз іске қосылады, содан кейін оны тоқтату мүмкін болмайды."
 
 #: templates/contest/media-js.html:16
 #, python-format
@@ -4456,7 +4456,7 @@ msgstr ""
 
 #: templates/contest/ranking.html:128
 msgid "Show organizations"
-msgstr ""
+msgstr "Ұйымдарды көрсету"
 
 #: templates/contest/stats.html:38
 msgid "Problem Status Distribution"
@@ -4547,11 +4547,11 @@ msgstr ""
 
 #: templates/organization/home.html:28
 msgid "Are you sure you want to leave this organization?"
-msgstr ""
+msgstr "Сіз бұл ұйымнан кеткіңіз келетініне сенімдісіз бе?"
 
 #: templates/organization/home.html:30
 msgid "You will have to rejoin to show up on the organization leaderboard."
-msgstr ""
+msgstr "Ұйымның көшбасшылар тақтасында пайда болу үшін қайтадан қосылу керек."
 
 #: templates/organization/home.html:32
 msgid "You will have to request membership in order to join again."
@@ -4559,7 +4559,7 @@ msgstr ""
 
 #: templates/organization/home.html:45
 msgid "Leave organization"
-msgstr ""
+msgstr "Ұйымнан шығу"
 
 #: templates/organization/home.html:50
 msgid "Join organization"
@@ -4706,7 +4706,7 @@ msgstr ""
 
 #: templates/problem/data.html:363 templates/problem/data.html:384
 msgid "Output limit"
-msgstr ""
+msgstr "Шығару шектеуі"
 
 #: templates/problem/data.html:367 templates/problem/data.html:385
 msgid "Checker"
@@ -4722,7 +4722,7 @@ msgstr ""
 
 #: templates/problem/data.html:379
 msgid "Input file"
-msgstr ""
+msgstr "Енгізу файлы"
 
 #: templates/problem/data.html:380
 msgid "Output file"
@@ -4734,7 +4734,7 @@ msgstr ""
 
 #: templates/problem/data.html:434 templates/problem/submit.html:190
 msgid "Submit!"
-msgstr ""
+msgstr "Жөнелту!"
 
 #: templates/problem/data.html:435
 msgid "Add new case"
@@ -4769,7 +4769,7 @@ msgstr ""
 #: templates/problem/list.html:189 templates/problem/list.html:207
 #: templates/problem/search-form.html:35 templates/user/user-problems.html:59
 msgid "Category"
-msgstr ""
+msgstr "Санат"
 
 #: templates/problem/list.html:191 templates/problem/list.html:211
 msgid "Types"
@@ -4862,7 +4862,7 @@ msgstr ""
 #: templates/problem/problem.html:106 templates/problem/problem.html:116
 #: templates/problem/problem.html:121
 msgid "Submit solution"
-msgstr "Шешімді жіберу"
+msgstr "Шешімді жөнелту"
 
 #: templates/problem/problem.html:109
 #, python-format
@@ -4881,7 +4881,7 @@ msgstr ""
 
 #: templates/problem/problem.html:133
 msgid "Best submissions"
-msgstr ""
+msgstr "Үздік жөнелтілімдер"
 
 #: templates/problem/problem.html:140
 msgid "Vote on problem points"
@@ -4922,7 +4922,7 @@ msgstr ""
 
 #: templates/problem/problem.html:188 templates/problem/vote-ajax.html:20
 msgid "Points:"
-msgstr ""
+msgstr "Ұпайлар:"
 
 #: templates/problem/problem.html:191 templates/problem/problem.html:193
 msgid "(partial)"
@@ -4930,7 +4930,7 @@ msgstr ""
 
 #: templates/problem/problem.html:198 templates/problem/raw.html:61
 msgid "Time limit:"
-msgstr ""
+msgstr "Уақыт шектеуі:"
 
 #: templates/problem/problem.html:210 templates/problem/raw.html:70
 msgid "Memory limit:"
@@ -4971,40 +4971,40 @@ msgstr ""
 
 #: templates/problem/search-form.html:2
 msgid "Problem search"
-msgstr ""
+msgstr "Есепті іздеу"
 
 #: templates/problem/search-form.html:8
 msgid "Search problems..."
-msgstr ""
+msgstr "Есептерді іздеу..."
 
 #: templates/problem/search-form.html:14
 msgid "Full text search"
-msgstr ""
+msgstr "Толық мәтінді іздеу"
 
 #: templates/problem/search-form.html:21
 msgid "Hide solved problems"
-msgstr ""
+msgstr "Шығарылған есептерді жасыру"
 
 #: templates/problem/search-form.html:27
 msgid "Has editorial"
-msgstr ""
+msgstr "Талдауы бар"
 
 #: templates/problem/search-form.html:32
 msgid "Show problem types"
-msgstr ""
+msgstr "Есеп түрлерін көрсету"
 
 #: templates/problem/search-form.html:38 templates/problem/search-form.html:40
 #: templates/submission/submission-list-tabs.html:4
 msgid "All"
-msgstr ""
+msgstr "Барлығы"
 
 #: templates/problem/search-form.html:51
 msgid "Problem types"
-msgstr ""
+msgstr "Есеп түрлері"
 
 #: templates/problem/search-form.html:62
 msgid "Point range"
-msgstr ""
+msgstr "Ұпай ауқымы"
 
 #: templates/problem/search-form.html:68 templates/submission/list.html:328
 #: templates/ticket/list.html:189
@@ -5034,7 +5034,7 @@ msgstr ""
 
 #: templates/problem/submit.html:138
 msgid "Warning!"
-msgstr ""
+msgstr "Ескерту!"
 
 #: templates/problem/submit.html:139
 #, python-format
@@ -5300,7 +5300,7 @@ msgstr ""
 #: templates/registration/registration_form.html:195
 #: templates/user/edit-profile.html:321
 msgid "Notify me about upcoming contests"
-msgstr ""
+msgstr "Алдағы сайыстар туралы маған хабарлаңыз"
 
 #: templates/registration/registration_form.html:209
 msgid "By registering, you agree to our [Terms & Conditions][0]."
@@ -5490,7 +5490,7 @@ msgstr ""
 
 #: templates/submission/list.html:75
 msgid "Filter by status..."
-msgstr ""
+msgstr "Күйі бойынша сүзу..."
 
 #: templates/submission/list.html:82
 msgid "Filter by language..."
@@ -5498,11 +5498,11 @@ msgstr ""
 
 #: templates/submission/list.html:306
 msgid "Filter submissions"
-msgstr ""
+msgstr "Жөнелтілімдерді сүзгілеу"
 
 #: templates/submission/list.html:342
 msgid "Total:"
-msgstr ""
+msgstr "Барлығы:"
 
 #: templates/submission/list.html:352
 msgid "You were disconnected. Refresh to show latest updates."
@@ -5641,11 +5641,11 @@ msgstr ""
 
 #: templates/submission/submission-list-tabs.html:6
 msgid "Mine"
-msgstr ""
+msgstr "Менікі"
 
 #: templates/submission/submission-list-tabs.html:9
 msgid "Best"
-msgstr ""
+msgstr "Үздік"
 
 #: templates/submission/submission-list-tabs.html:12
 #, python-format
@@ -5747,7 +5747,7 @@ msgstr ""
 
 #: templates/user/base-users-table.html:4
 msgid "Rank"
-msgstr ""
+msgstr "Дәреже"
 
 #: templates/user/base-users.html:15 templates/user/base-users.html:59
 msgid "Search by handle..."
