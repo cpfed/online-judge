@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: esep\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-24 08:46+0000\n"
-"PO-Revision-Date: 2023-10-25 09:14\n"
+"PO-Revision-Date: 2023-10-25 21:04\n"
 "Last-Translator: \n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
@@ -103,7 +103,7 @@ msgstr ""
 
 #: dmoj/urls.py:92 templates/base.html:193
 msgid "Home"
-msgstr ""
+msgstr "Главная"
 
 #: judge/admin/comments.py:25 judge/admin/interface.py:73
 msgid "Content"
@@ -2549,7 +2549,7 @@ msgstr "Неправильный ответ"
 
 #: judge/models/submission.py:24 judge/models/submission.py:53
 msgid "Time Limit Exceeded"
-msgstr ""
+msgstr "Превышено ограничение времени"
 
 #: judge/models/submission.py:25 judge/models/submission.py:54
 msgid "Memory Limit Exceeded"
@@ -3805,11 +3805,11 @@ msgstr ""
 
 #: templates/base.html:266
 msgid "This site works best with JavaScript enabled."
-msgstr ""
+msgstr "Этот сайт лучше всего работает с включенным JavaScript."
 
 #: templates/base.html:293
 msgid "proudly powered by **DMOJ**"
-msgstr ""
+msgstr "proudly powered by **DMOJ**"
 
 #: templates/blog/content.html:13 templates/comments/list.html:89
 #: templates/comments/list.html:105 templates/contest/contest-tabs.html:23
@@ -3852,7 +3852,7 @@ msgstr ""
 
 #: templates/blog/list.html:95 templates/problem/problem.html:331
 msgid "Clarifications"
-msgstr ""
+msgstr "Разъяснения"
 
 #: templates/blog/list.html:111 templates/problem/problem.html:342
 msgid "No clarifications have been made at this time."
@@ -3865,7 +3865,7 @@ msgstr ""
 #: templates/blog/list.html:127
 #, python-format
 msgid "Ends in %(countdown)s."
-msgstr ""
+msgstr "Заканчивается через %(countdown)s."
 
 #: templates/blog/list.html:137 templates/contest/list.html:226
 msgid "Upcoming contests"
@@ -3878,7 +3878,7 @@ msgstr ""
 
 #: templates/blog/list.html:154
 msgid "Comment stream"
-msgstr ""
+msgstr "Прямой эфир"
 
 #: templates/blog/list.html:174
 msgid "New problems"
@@ -4199,7 +4199,7 @@ msgstr ""
 #: templates/contest/contest.html:65
 #, python-format
 msgid "%(length)s long starting on %(start_time)s"
-msgstr ""
+msgstr "Длительность %(length)s с %(start_time)s"
 
 #: templates/contest/contest.html:75
 #, python-format
@@ -4374,7 +4374,7 @@ msgstr ""
 
 #: templates/contest/list.html:147
 msgid "Active contests"
-msgstr ""
+msgstr "Активные соревнования"
 
 #: templates/contest/list.html:151 templates/contest/list.html:193
 #: templates/contest/list.html:231 templates/contest/list.html:268
@@ -5000,7 +5000,7 @@ msgstr "Ограничение времени:"
 
 #: templates/problem/problem.html:210 templates/problem/raw.html:70
 msgid "Memory limit:"
-msgstr ""
+msgstr "Ограничение памяти:"
 
 #: templates/problem/problem.html:246
 msgid "Problem type"
@@ -5012,7 +5012,7 @@ msgstr[3] ""
 
 #: templates/problem/problem.html:259
 msgid "Allowed languages"
-msgstr ""
+msgstr "Разрешенные языки"
 
 #: templates/problem/problem.html:267
 #, python-format
@@ -5045,15 +5045,15 @@ msgstr "Поиск задач"
 
 #: templates/problem/search-form.html:8
 msgid "Search problems..."
-msgstr ""
+msgstr "Поиск задач..."
 
 #: templates/problem/search-form.html:14
 msgid "Full text search"
-msgstr ""
+msgstr "Полнотекстовый поиск"
 
 #: templates/problem/search-form.html:21
 msgid "Hide solved problems"
-msgstr ""
+msgstr "Скрыть решенные задачи"
 
 #: templates/problem/search-form.html:27
 msgid "Has editorial"
