@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: esep\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-24 08:46+0000\n"
-"PO-Revision-Date: 2023-10-24 14:56\n"
+"PO-Revision-Date: 2023-10-25 09:14\n"
 "Last-Translator: \n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
@@ -162,7 +162,7 @@ msgstr ""
 #: templates/contest/contest.html:191 templates/user/user-tabs.html:5
 #: templates/user/users-table.html:23
 msgid "Problems"
-msgstr ""
+msgstr "Задачи"
 
 #: judge/admin/contest.py:77 judge/admin/submission.py:245
 #: judge/admin/contest.py:77 judge/admin/submission.py:245
@@ -279,7 +279,7 @@ msgstr[3] ""
 
 #: judge/admin/contest.py:363 judge/admin/organization.py:110
 msgid "username"
-msgstr ""
+msgstr "имя пользователя"
 
 #: judge/admin/contest.py:367 templates/base.html:259
 #: judge/admin/contest.py:367 templates/base.html:259
@@ -335,7 +335,7 @@ msgstr ""
 #: templates/problem/list.html:215 templates/user/base-users-table.html:11
 #: templates/user/user-problems.html:60
 msgid "Points"
-msgstr ""
+msgstr "Баллы"
 
 #: judge/admin/problem.py:134
 msgid "Limits"
@@ -346,7 +346,7 @@ msgstr ""
 #: judge/admin/problem.py:135 templates/problem/submission-diff.html:65
 #: templates/stats/tabs.html:4 templates/submission/list.html:319
 msgid "Language"
-msgstr ""
+msgstr "Язык"
 
 #: judge/admin/problem.py:137
 msgid "History"
@@ -473,7 +473,7 @@ msgstr ""
 
 #: judge/admin/submission.py:43
 msgid "Unaccepted"
-msgstr ""
+msgstr "Непринятые"
 
 #: judge/admin/submission.py:85
 #, python-format
@@ -549,7 +549,7 @@ msgstr ""
 #: judge/admin/submission.py:236 judge/models/problem.py:511
 #: judge/models/problem.py:534 judge/models/runtime.py:111
 msgid "language"
-msgstr ""
+msgstr "язык"
 
 #: judge/admin/submission.py:243
 #: judge/admin/submission.py:243
@@ -579,11 +579,11 @@ msgstr ""
 #: judge/comments.py:47 judge/views/comment.py:41 judge/views/ticket.py:46
 #: judge/views/user.py:348
 msgid "Your part is silent, little toad."
-msgstr ""
+msgstr "Вы в режиме молчания."
 
 #: judge/comments.py:49 templates/comments/list.html:146
 msgid "You must solve at least one problem before your voice can be heard."
-msgstr "Вы должны решить хотя бы одну задачу, прежде чем голосовать."
+msgstr "Вы должны решить хотя бы одну задачу, прежде чем оставить комментарий."
 
 #: judge/comments.py:96
 msgid "Posted comment"
@@ -751,7 +751,7 @@ msgstr ""
 #: templates/registration/registration_form.html:139
 #: templates/user/base-users-table.html:6
 msgid "Username"
-msgstr ""
+msgstr "Имя пользователя"
 
 #: judge/forms.py:162 templates/registration/registration_form.html:151
 #: templates/registration/registration_form.html:165
@@ -1361,7 +1361,7 @@ msgstr ""
 #: judge/models/contest.py:492
 #: judge/models/contest.py:492
 msgid "contests"
-msgstr ""
+msgstr "соревнования"
 
 #: judge/models/contest.py:499
 #: judge/models/contest.py:499
@@ -1441,7 +1441,7 @@ msgstr "участие в конкурсе"
 #: judge/models/contest.py:594 judge/models/contest.py:621
 #: judge/models/problem.py:148
 msgid "points"
-msgstr ""
+msgstr "баллы"
 
 #: judge/models/contest.py:595
 #: judge/models/contest.py:595
@@ -2797,9 +2797,11 @@ msgstr "судья"
 #: judge/utils/problems.py:66
 msgid "Accepted"
 msgstr "Принято"
+msgstr "Принято"
 
 #: judge/models/submission.py:23 judge/models/submission.py:51
 msgid "Wrong Answer"
+msgstr "Неправильный ответ"
 msgstr "Неправильный ответ"
 
 #: judge/models/submission.py:24 judge/models/submission.py:53
@@ -2820,7 +2822,7 @@ msgstr "Недопустимый возврат"
 
 #: judge/models/submission.py:28 judge/models/submission.py:57
 msgid "Runtime Error"
-msgstr "Ошибка Runtime"
+msgstr "Ошибка исполнения"
 
 #: judge/models/submission.py:29 judge/models/submission.py:44
 #: judge/models/submission.py:58 judge/utils/problems.py:68
@@ -2982,7 +2984,7 @@ msgstr "Изменить статус блокировки отправки"
 #: judge/models/submission.py:232
 #: judge/models/submission.py:232
 msgid "submissions"
-msgstr "сдачи"
+msgstr "посылки"
 
 #: judge/models/submission.py:262 judge/models/submission.py:278
 #: judge/models/submission.py:262 judge/models/submission.py:278
@@ -3269,7 +3271,7 @@ msgstr[3] ""
 #: judge/utils/timedelta.py:53
 msgctxt "time format without day"
 msgid "%h:%m:%s"
-msgstr ""
+msgstr "%h:%m:%s"
 
 #: judge/utils/timedelta.py:59
 msgctxt "time format no seconds with day"
@@ -3340,7 +3342,7 @@ msgstr ""
 #: judge/views/contests.py:58 judge/views/contests.py:248
 #: judge/views/contests.py:251 judge/views/contests.py:456
 msgid "No such contest"
-msgstr ""
+msgstr "Нет такого соревнования"
 
 #: judge/views/contests.py:59 judge/views/contests.py:249
 #: judge/views/contests.py:59 judge/views/contests.py:249
@@ -3350,7 +3352,7 @@ msgstr ""
 
 #: judge/views/contests.py:72
 msgid "Contests"
-msgstr ""
+msgstr "Соревнования"
 
 #: judge/views/contests.py:252
 #: judge/views/contests.py:252
@@ -3459,7 +3461,7 @@ msgstr ""
 
 #: judge/views/contests.py:793 templates/contest/contest-tabs.html:13
 msgid "Participation"
-msgstr ""
+msgstr "Участие"
 
 #: judge/views/contests.py:837
 #, python-format
@@ -3726,7 +3728,7 @@ msgstr "Успешно"
 #: judge/views/problem.py:648 judge/views/problem.py:656
 #, python-format
 msgid "Submit to %s"
-msgstr "Подчиняться %s"
+msgstr "Отправить в %s"
 
 #: judge/views/problem.py:701
 #: judge/views/problem.py:701
@@ -3935,12 +3937,12 @@ msgstr "Представление %(problem)s от %(user)s"
 #: judge/views/submission.py:233 judge/views/submission.py:234
 #: templates/problem/problem.html:132
 msgid "All submissions"
-msgstr "Все сданные работы"
+msgstr "Все посылки"
 
 #: judge/views/submission.py:400 judge/views/submission.py:405
 #: judge/views/submission.py:400 judge/views/submission.py:405
 msgid "All my submissions"
-msgstr "Все мои материалы"
+msgstr "Все мои посылки"
 
 #: judge/views/submission.py:401 judge/views/submission.py:406
 #: judge/views/submission.py:401 judge/views/submission.py:406
@@ -4085,7 +4087,7 @@ msgstr ""
 
 #: judge/views/user.py:82
 msgid "My account"
-msgstr ""
+msgstr "Мой аккаунт"
 
 #: judge/views/user.py:83
 #, python-format
@@ -4094,7 +4096,7 @@ msgstr ""
 
 #: judge/views/user.py:130
 msgid "Login"
-msgstr ""
+msgstr "Войти"
 
 #: judge/views/user.py:171
 msgid "M j, Y, G:i"
@@ -4110,7 +4112,7 @@ msgstr ""
 
 #: judge/views/user.py:348
 msgid "Can't edit profile"
-msgstr ""
+msgstr "Невозможно редактировать профиль"
 
 #: judge/views/user.py:355
 msgid "Updated on site"
@@ -4136,7 +4138,7 @@ msgstr ""
 
 #: judge/views/user.py:429 templates/user/user-list-tabs.html:4
 msgid "Leaderboard"
-msgstr ""
+msgstr "Доска лидеров"
 
 #: judge/views/user.py:490
 msgid "You have been successfully logged out."
@@ -4252,7 +4254,7 @@ msgstr "Изменить пользователя"
 #: templates/base.html:216
 #, python-format
 msgid "Hello, %(username)s."
-msgstr "Привет, %(username)s."
+msgstr "Привет, %(username)s"
 
 #: templates/base.html:225
 #: templates/base.html:225
@@ -4278,6 +4280,7 @@ msgstr "или"
 #: templates/base.html:241
 #: templates/base.html:241
 msgid "Sign up"
+msgstr "Зарегистрироваться"
 msgstr "Зарегистрироваться"
 
 #: templates/base.html:253
@@ -4318,12 +4321,12 @@ msgstr ""
 
 #: templates/blog/list.html:52
 msgid "News"
-msgstr ""
+msgstr "Новости"
 
 #: templates/blog/list.html:66
 #, python-brace-format
 msgid "posted on {time}"
-msgstr "опубликовано на {time}"
+msgstr "опубликовано в {time}"
 
 #: templates/blog/list.html:66
 #, python-brace-format
@@ -4353,7 +4356,7 @@ msgstr "Заканчивается на %(countdown)s."
 
 #: templates/blog/list.html:137 templates/contest/list.html:226
 msgid "Upcoming contests"
-msgstr ""
+msgstr "Предстоящие соревнования"
 
 #: templates/blog/list.html:145 templates/contest/contest.html:41
 #, python-format
@@ -4366,7 +4369,7 @@ msgstr "Поток комментариев"
 
 #: templates/blog/list.html:174
 msgid "New problems"
-msgstr "Новые проблемы"
+msgstr "Новые задачи"
 
 #: templates/blog/list.html:191
 msgid "My open tickets"
@@ -4383,6 +4386,7 @@ msgstr "Публиковать!"
 
 #: templates/comments/list.html:2 templates/user/prepare-data.html:98
 msgid "Comments"
+msgstr "Комментарии"
 msgstr "Комментарии"
 
 #: templates/comments/list.html:5
@@ -4528,31 +4532,31 @@ msgstr ""
 
 #: templates/contest/calendar.html:12
 msgid "Sunday"
-msgstr ""
+msgstr "Воскресенье"
 
 #: templates/contest/calendar.html:13
 msgid "Monday"
-msgstr ""
+msgstr "Понедельник"
 
 #: templates/contest/calendar.html:14
 msgid "Tuesday"
-msgstr ""
+msgstr "Вторник"
 
 #: templates/contest/calendar.html:15
 msgid "Wednesday"
-msgstr ""
+msgstr "Среда"
 
 #: templates/contest/calendar.html:16
 msgid "Thursday"
-msgstr ""
+msgstr "Четверг"
 
 #: templates/contest/calendar.html:17
 msgid "Friday"
-msgstr ""
+msgstr "Пятница"
 
 #: templates/contest/calendar.html:18
 msgid "Saturday"
-msgstr ""
+msgstr "Суббота"
 
 #: templates/contest/clone.html:37
 msgid "Enter a new key for the cloned contest:"
@@ -4568,7 +4572,7 @@ msgstr ""
 
 #: templates/contest/contest-list-tabs.html:10
 msgid "Today"
-msgstr ""
+msgstr "Сегодня"
 
 #: templates/contest/contest-list-tabs.html:13
 msgid "Next"
@@ -4585,20 +4589,20 @@ msgstr ""
 
 #: templates/contest/contest-list-tabs.html:23
 msgid "Calendar"
-msgstr ""
+msgstr "Календарь"
 
 #: templates/contest/contest-tabs.html:4
 msgid "Info"
-msgstr ""
+msgstr "Информация"
 
 #: templates/contest/contest-tabs.html:6 templates/submission/list.html:336
 #: templates/contest/contest-tabs.html:6 templates/submission/list.html:336
 msgid "Statistics"
-msgstr ""
+msgstr "Статистика"
 
 #: templates/contest/contest-tabs.html:11
 msgid "Rankings"
-msgstr ""
+msgstr "Рейтинги"
 
 #: templates/contest/contest-tabs.html:16
 msgid "Hidden Rankings"
@@ -4615,7 +4619,7 @@ msgstr ""
 #: templates/contest/contest-tabs.html:38
 #: templates/contest/contest-tabs.html:58
 msgid "Leave contest"
-msgstr ""
+msgstr "Покинуть соревнование"
 
 #: templates/contest/contest-tabs.html:45 templates/contest/list.html:294
 msgid "Virtual join"
@@ -4668,12 +4672,12 @@ msgstr ""
 #: templates/contest/contest.html:49
 #, python-format
 msgid "You have %(countdown)s remaining."
-msgstr ""
+msgstr "У вас осталось %(countdown)s."
 
 #: templates/contest/contest.html:52
 #, python-format
 msgid "Contest ends in %(countdown)s."
-msgstr ""
+msgstr "Соревнование заканчивается через %(countdown)s."
 
 #: templates/contest/contest.html:58 templates/contest/contest.html:60
 msgid "F j, Y, G:i T"
@@ -4816,7 +4820,7 @@ msgstr "AC тариф"
 #: templates/problem/list.html:194 templates/problem/list.html:226
 #: templates/problem/list.html:194 templates/problem/list.html:226
 msgid "Users"
-msgstr ""
+msgstr "Пользователи"
 
 #: templates/contest/contest.html:200
 msgid "Editorials"
@@ -4830,11 +4834,11 @@ msgstr "Редакция"
 #: templates/contest/list.html:17 templates/contest/media-js.html:9
 #: templates/contest/media-js.html:15
 msgid "Are you sure you want to join?"
-msgstr "Вы уверены, что хотите присоединиться?"
+msgstr "Вы действительно хотите присоединиться?"
 
 #: templates/contest/list.html:18
 msgid "Joining a contest for the first time starts your timer, after which it becomes unstoppable."
-msgstr "При первом участии в конкурсе запускается ваш таймер, после чего егоневозможно остановить."
+msgstr "Когда вы впервые присоединяетесь к соревнованию, ваш таймер запускается и не может быть остановлен."
 
 #: templates/contest/list.html:70
 msgid "private"
@@ -4869,7 +4873,7 @@ msgstr "Активные конкурсы"
 #: templates/contest/list.html:151 templates/contest/list.html:193
 #: templates/contest/list.html:231 templates/contest/list.html:268
 msgid "Contest"
-msgstr ""
+msgstr "Соревнование"
 
 #: templates/contest/list.html:168
 #, python-format
@@ -4892,11 +4896,11 @@ msgstr "На данный момент нет запланированных к�
 
 #: templates/contest/list.html:260
 msgid "Past contests"
-msgstr ""
+msgstr "Прошедшие соревнования"
 
 #: templates/contest/media-js.html:4
 msgid "Are you sure you want to leave?"
-msgstr ""
+msgstr "Вы уверены, что хотите выйти?"
 
 #: templates/contest/media-js.html:5
 msgid "You cannot come back to a virtual participation. You will have to start a new one."
@@ -4904,7 +4908,7 @@ msgstr ""
 
 #: templates/contest/media-js.html:10
 msgid "Joining a contest starts your timer, after which it becomes unstoppable."
-msgstr "Присоединение к конкурсу запускает ваш таймер, после чего его невозможно остановить."
+msgstr "Присоединение к соревнованию запускает ваш таймер, после чего его невозможно остановить."
 
 #: templates/contest/media-js.html:16
 #, python-format
@@ -5009,6 +5013,7 @@ msgstr "Просмотр участия пользователя"
 #: templates/contest/ranking.html:128
 msgid "Show organizations"
 msgstr "Показать организации"
+msgstr "Показать организации"
 
 #: templates/contest/stats.html:38
 msgid "Problem Status Distribution"
@@ -5111,7 +5116,7 @@ msgstr ""
 
 #: templates/organization/home.html:45
 msgid "Leave organization"
-msgstr ""
+msgstr "Покинуть организацию"
 
 #: templates/organization/home.html:50
 msgid "Join organization"
@@ -5260,6 +5265,7 @@ msgstr ""
 #: templates/problem/data.html:363 templates/problem/data.html:384
 msgid "Output limit"
 msgstr "Ограничение вывода"
+msgstr "Ограничение вывода"
 
 #: templates/problem/data.html:367 templates/problem/data.html:385
 msgid "Checker"
@@ -5275,7 +5281,7 @@ msgstr ""
 
 #: templates/problem/data.html:379
 msgid "Input file"
-msgstr ""
+msgstr "Файл ввода"
 
 #: templates/problem/data.html:380
 msgid "Output file"
@@ -5287,7 +5293,7 @@ msgstr ""
 
 #: templates/problem/data.html:434 templates/problem/submit.html:190
 msgid "Submit!"
-msgstr ""
+msgstr "Отослать!"
 
 #: templates/problem/data.html:435
 msgid "Add new case"
@@ -5327,7 +5333,7 @@ msgstr ""
 #: templates/problem/list.html:189 templates/problem/list.html:207
 #: templates/problem/search-form.html:35 templates/user/user-problems.html:59
 msgid "Category"
-msgstr ""
+msgstr "Категория"
 
 #: templates/problem/list.html:191 templates/problem/list.html:211
 #: templates/problem/list.html:191 templates/problem/list.html:211
@@ -5443,7 +5449,7 @@ msgstr ""
 #: templates/problem/problem.html:106 templates/problem/problem.html:116
 #: templates/problem/problem.html:121
 msgid "Submit solution"
-msgstr ""
+msgstr "Отослать решение"
 
 #: templates/problem/problem.html:109
 #, python-format
@@ -5464,7 +5470,7 @@ msgstr ""
 
 #: templates/problem/problem.html:133
 msgid "Best submissions"
-msgstr ""
+msgstr "Лучшие посылки"
 
 #: templates/problem/problem.html:140
 msgid "Vote on problem points"
@@ -5505,7 +5511,7 @@ msgstr ""
 
 #: templates/problem/problem.html:188 templates/problem/vote-ajax.html:20
 msgid "Points:"
-msgstr ""
+msgstr "Баллы:"
 
 #: templates/problem/problem.html:191 templates/problem/problem.html:193
 msgid "(partial)"
@@ -5514,7 +5520,7 @@ msgstr ""
 #: templates/problem/problem.html:198 templates/problem/raw.html:61
 #: templates/problem/problem.html:198 templates/problem/raw.html:61
 msgid "Time limit:"
-msgstr "Ограничение по времени:"
+msgstr "Ограничение времени:"
 
 #: templates/problem/problem.html:210 templates/problem/raw.html:70
 #: templates/problem/problem.html:210 templates/problem/raw.html:70
@@ -5560,7 +5566,7 @@ msgstr ""
 
 #: templates/problem/search-form.html:2
 msgid "Problem search"
-msgstr ""
+msgstr "Поиск задач"
 
 #: templates/problem/search-form.html:8
 msgid "Search problems..."
