@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: esep\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-24 08:46+0000\n"
-"PO-Revision-Date: 2023-10-24 20:07\n"
+"PO-Revision-Date: 2023-10-25 09:14\n"
 "Last-Translator: \n"
 "Language-Team: Kazakh\n"
 "Language: kk_KZ\n"
@@ -2917,7 +2917,7 @@ msgstr[1] ""
 #: judge/utils/timedelta.py:53
 msgctxt "time format without day"
 msgid "%h:%m:%s"
-msgstr ""
+msgstr "%h:%m:%s"
 
 #: judge/utils/timedelta.py:59
 msgctxt "time format no seconds with day"
@@ -2930,8 +2930,8 @@ msgstr[1] ""
 #, python-format
 msgid "%d day"
 msgid_plural "%d days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d күн"
+msgstr[1] "%d күн"
 
 #: judge/utils/timedelta.py:63
 msgctxt "hours and minutes"
@@ -3726,7 +3726,7 @@ msgstr ""
 #: templates/base.html:216
 #, python-format
 msgid "Hello, %(username)s."
-msgstr "Сәлем, %(username)s."
+msgstr "Сәлем, %(username)s"
 
 #: templates/base.html:225
 msgid "Stop impersonating"
@@ -4031,7 +4031,7 @@ msgstr ""
 
 #: templates/contest/contest-list-tabs.html:10
 msgid "Today"
-msgstr ""
+msgstr "Бүгін"
 
 #: templates/contest/contest-list-tabs.html:13
 msgid "Next"
@@ -4130,7 +4130,7 @@ msgstr ""
 #: templates/contest/contest.html:49
 #, python-format
 msgid "You have %(countdown)s remaining."
-msgstr ""
+msgstr "Сізде %(countdown)s қалды."
 
 #: templates/contest/contest.html:52
 #, python-format
@@ -4271,7 +4271,7 @@ msgstr ""
 #: templates/contest/list.html:194 templates/contest/list.html:271
 #: templates/problem/list.html:194 templates/problem/list.html:226
 msgid "Users"
-msgstr ""
+msgstr "Қолданушылар"
 
 #: templates/contest/contest.html:200
 msgid "Editorials"
@@ -4323,7 +4323,7 @@ msgstr "Белсенді сайыстар"
 #: templates/contest/list.html:151 templates/contest/list.html:193
 #: templates/contest/list.html:231 templates/contest/list.html:268
 msgid "Contest"
-msgstr ""
+msgstr "Сайыс"
 
 #: templates/contest/list.html:168
 #, python-format
