@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: esep\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-24 08:46+0000\n"
-"PO-Revision-Date: 2023-10-25 21:04\n"
+"PO-Revision-Date: 2023-10-25 21:35\n"
 "Last-Translator: \n"
 "Language-Team: Kazakh\n"
 "Language: kk_KZ\n"
@@ -3616,7 +3616,7 @@ msgstr "Менің аккаунтым"
 #: judge/views/user.py:83
 #, python-format
 msgid "User %s"
-msgstr ""
+msgstr "Қолданушы %s"
 
 #: judge/views/user.py:130
 msgid "Login"
@@ -3646,7 +3646,7 @@ msgstr ""
 #: templates/admin/auth/user/change_form.html:17 templates/base.html:223
 #: templates/user/user-tabs.html:16
 msgid "Edit profile"
-msgstr "Анкетаны өзгерту"
+msgstr "Профильді жаңарту"
 
 #: judge/views/user.py:401
 msgid "Generated API token for user"
@@ -3794,7 +3794,7 @@ msgstr "жариялады {time}"
 #: templates/blog/list.html:66
 #, python-brace-format
 msgid "posted {time}"
-msgstr ""
+msgstr "жариялады {time}"
 
 #: templates/blog/list.html:81
 msgid "Continue reading..."
@@ -3845,7 +3845,7 @@ msgstr ""
 #: templates/comments/edit-ajax.html:16 templates/comments/list.html:163
 #: templates/ticket/ticket.html:181
 msgid "Post!"
-msgstr ""
+msgstr "Жариялау!"
 
 #: templates/comments/list.html:2 templates/user/prepare-data.html:98
 msgid "Comments"
@@ -4764,7 +4764,7 @@ msgstr "Түрі бойынша сүзу..."
 
 #: templates/problem/list.html:167
 msgid "Hot problems"
-msgstr ""
+msgstr "Жаңа есептер"
 
 #: templates/problem/list.html:189 templates/problem/list.html:207
 #: templates/problem/search-form.html:35 templates/user/user-problems.html:59
@@ -5013,7 +5013,7 @@ msgstr ""
 
 #: templates/problem/search-form.html:69
 msgid "Random"
-msgstr ""
+msgstr "Кездейсоқ"
 
 #: templates/problem/submission-diff.html:62
 #: templates/status/language-list.html:34 templates/ticket/list.html:200
