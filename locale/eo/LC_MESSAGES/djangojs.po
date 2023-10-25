@@ -3,17 +3,17 @@ msgstr ""
 "Project-Id-Version: esep\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-24 08:46+0000\n"
-"PO-Revision-Date: 2023-10-25 21:04\n"
+"PO-Revision-Date: 2023-10-25 19:52\n"
 "Last-Translator: \n"
-"Language-Team: Kazakh\n"
-"Language: kk_KZ\n"
+"Language-Team: Esperanto\n"
+"Language: eo_UY\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Crowdin-Project: esep\n"
 "X-Crowdin-Project-ID: 622648\n"
-"X-Crowdin-Language: kk\n"
+"X-Crowdin-Language: eo\n"
 "X-Crowdin-File: djangojs.po\n"
 "X-Crowdin-File-ID: 4\n"
 
@@ -21,62 +21,62 @@ msgstr ""
 msgctxt "time format with day"
 msgid "%d day %h:%m:%s"
 msgid_plural "%d days %h:%m:%s"
-msgstr[0] "%d күн %h:%m:%s"
-msgstr[1] "%d күн %h:%m:%s"
+msgstr[0] "crwdns2836:1%dcrwdnd2836:1%h:%m:%scrwdne2836:1"
+msgstr[1] "crwdns2836:5%dcrwdnd2836:5%h:%m:%scrwdne2836:5"
 
 #: resources/common.js:197
 msgctxt "time format without day"
 msgid "%h:%m:%s"
-msgstr ""
+msgstr "crwdns2838:0%h:%m:%scrwdne2838:0"
 
 #: resources/problem-vote.js:11
 msgid "Vote on problem points"
-msgstr ""
+msgstr "crwdns2840:0crwdne2840:0"
 
 #: resources/problem-vote.js:16
 #, javascript-format
 msgid "Unable to delete vote: %s"
-msgstr ""
+msgstr "crwdns2842:0%scrwdne2842:0"
 
 #: resources/problem-vote.js:28
 #, javascript-format
 msgid "Edit points vote (%s)"
-msgstr ""
+msgstr "crwdns2844:0%scrwdne2844:0"
 
 #: resources/problem-vote.js:34
 #, javascript-format
 msgid "Unable to cast vote: %s"
-msgstr ""
+msgstr "crwdns2846:0%scrwdne2846:0"
 
 #: resources/problem-vote.js:63
 msgid "Number of votes for this point value"
-msgstr ""
+msgstr "crwdns2848:0crwdne2848:0"
 
 #: resources/user_profile.js:47
 msgid "past year"
-msgstr "өткен жыл"
+msgstr "crwdns2850:0crwdne2850:0"
 
 #: resources/user_profile.js:64
 msgid "%(cnt)d total submission"
 msgid_plural "%(cnt)d total submissions"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "crwdns2852:1%(cnt)dcrwdne2852:1"
+msgstr[1] "crwdns2852:5%(cnt)dcrwdne2852:5"
 
 #: resources/user_profile.js:69
 msgid "%(cnt)d submission in the last year"
 msgid_plural "%(cnt)d submissions in the last year"
-msgstr[0] "Соңғы жылдағы %(cnt)d жөнелтілім"
-msgstr[1] "Соңғы жылдағы %(cnt)d жөнелтілімдер"
+msgstr[0] "crwdns2854:1%(cnt)dcrwdne2854:1"
+msgstr[1] "crwdns2854:5%(cnt)dcrwdne2854:5"
 
 #: resources/user_profile.js:74
 msgid "%(cnt)d submission in %(year)d"
 msgid_plural "%(cnt)d submissions in %(year)d"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "crwdns2856:1%(cnt)dcrwdnd2856:1%(year)dcrwdne2856:1"
+msgstr[1] "crwdns2856:5%(cnt)dcrwdnd2856:5%(year)dcrwdne2856:5"
 
 #: resources/user_profile.js:88
 msgid "%(cnt)d submission on %(date)s"
 msgid_plural "%(cnt)d submissions on %(date)s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "crwdns2858:1%(cnt)dcrwdnd2858:1%(date)scrwdne2858:1"
+msgstr[1] "crwdns2858:5%(cnt)dcrwdnd2858:5%(date)scrwdne2858:5"
 
