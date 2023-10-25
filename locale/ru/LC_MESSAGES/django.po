@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: esep\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-24 08:46+0000\n"
-"PO-Revision-Date: 2023-10-25 21:04\n"
+"PO-Revision-Date: 2023-10-25 21:35\n"
 "Last-Translator: \n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
@@ -155,7 +155,7 @@ msgstr ""
 #: templates/problem/list.html:204 templates/user/user-problems.html:58
 #: templates/user/user-problems.html:102
 msgid "Problem"
-msgstr ""
+msgstr "Задача"
 
 #: judge/admin/contest.py:66 judge/views/problem.py:353
 #: judge/admin/contest.py:66 judge/views/problem.py:353
@@ -2810,15 +2810,16 @@ msgstr "Превышено ограничение времени"
 
 #: judge/models/submission.py:25 judge/models/submission.py:54
 msgid "Memory Limit Exceeded"
-msgstr "Превышено ограничение по памяти"
+msgstr "Превышено ограничение памяти"
 
 #: judge/models/submission.py:26 judge/models/submission.py:55
 msgid "Output Limit Exceeded"
 msgstr "Превышено ограничение вывода"
+msgstr "Превышено ограничение вывода"
 
 #: judge/models/submission.py:27 judge/models/submission.py:56
 msgid "Invalid Return"
-msgstr "Недопустимый возврат"
+msgstr "Некорректный возврат"
 
 #: judge/models/submission.py:28 judge/models/submission.py:57
 msgid "Runtime Error"
@@ -2827,6 +2828,7 @@ msgstr "Ошибка исполнения"
 #: judge/models/submission.py:29 judge/models/submission.py:44
 #: judge/models/submission.py:58 judge/utils/problems.py:68
 msgid "Compile Error"
+msgstr "Ошибка компиляции"
 msgstr "Ошибка компиляции"
 
 #: judge/models/submission.py:30 judge/models/submission.py:43
@@ -2840,7 +2842,7 @@ msgstr "Короткая схема"
 #: judge/models/submission.py:32 judge/models/submission.py:45
 #: judge/models/submission.py:64
 msgid "Aborted"
-msgstr "Отменено"
+msgstr "Прервано"
 
 #: judge/models/submission.py:39 judge/models/submission.py:60
 msgid "Queued"
@@ -3263,10 +3265,10 @@ msgstr "Ваш пароль не может быть обычно использ
 msgctxt "time format with day"
 msgid "%d day %h:%m:%s"
 msgid_plural "%d days %h:%m:%s"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%d день %h:%m:%s"
+msgstr[1] "%d дня %h:%m:%s"
+msgstr[2] "%d дней %h:%m:%s"
+msgstr[3] "%d дней %h:%m:%s"
 
 #: judge/utils/timedelta.py:53
 msgctxt "time format without day"
@@ -3277,10 +3279,10 @@ msgstr "%h:%m:%s"
 msgctxt "time format no seconds with day"
 msgid "%d day %h:%m"
 msgid_plural "%d days %h:%m"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%d день %h:%m"
+msgstr[1] "%d дня %h:%m"
+msgstr[2] "%d дней %h:%m"
+msgstr[3] "%d дней %h:%m"
 
 #: judge/utils/timedelta.py:61
 #, python-format
@@ -3905,7 +3907,7 @@ msgstr ""
 #: judge/views/status.py:23 templates/submission/list.html:310
 #: judge/views/status.py:23 templates/submission/list.html:310
 msgid "Status"
-msgstr ""
+msgstr "Статус"
 
 #: judge/views/status.py:108
 msgid "Version"
@@ -4122,7 +4124,7 @@ msgstr ""
 #: templates/admin/auth/user/change_form.html:17 templates/base.html:223
 #: templates/user/user-tabs.html:16
 msgid "Edit profile"
-msgstr ""
+msgstr "Редактировать профиль"
 
 #: judge/views/user.py:401
 msgid "Generated API token for user"
@@ -4259,7 +4261,7 @@ msgstr "Привет, %(username)s"
 #: templates/base.html:225
 #: templates/base.html:225
 msgid "Stop impersonating"
-msgstr "Остановить работу от имени другого лица"
+msgstr "Прекратить претворение"
 
 #: templates/base.html:230
 #: templates/base.html:230
@@ -4310,15 +4312,15 @@ msgstr ""
 #: templates/blog/content.html:27
 #, python-format
 msgid "posted on %(time)s"
-msgstr "опубликовано на %(time)s"
+msgstr "опубликовано в %(time)s"
 
 #: templates/blog/list.html:45
 msgid "Blog"
-msgstr ""
+msgstr "Блог"
 
 #: templates/blog/list.html:47
 msgid "Events"
-msgstr ""
+msgstr "События"
 
 #: templates/blog/list.html:52
 msgid "News"
@@ -4333,6 +4335,7 @@ msgstr "опубликовано в {time}"
 #, python-brace-format
 msgid "posted {time}"
 msgstr "опубликовано {time}"
+msgstr "опубликовано {time}"
 
 #: templates/blog/list.html:81
 msgid "Continue reading..."
@@ -4344,11 +4347,11 @@ msgstr "Разъяснения"
 
 #: templates/blog/list.html:111 templates/problem/problem.html:342
 msgid "No clarifications have been made at this time."
-msgstr "В настоящее время никаких разъяснений получено не было."
+msgstr "В настоящее время никаких разъяснений не сделано."
 
 #: templates/blog/list.html:119 templates/contest/list.html:189
 msgid "Ongoing contests"
-msgstr ""
+msgstr "Текущие соревнования"
 
 #: templates/blog/list.html:127
 #, python-format
@@ -4383,7 +4386,7 @@ msgstr "Новые заявки"
 #: templates/comments/edit-ajax.html:16 templates/comments/list.html:163
 #: templates/ticket/ticket.html:181
 msgid "Post!"
-msgstr "Публиковать!"
+msgstr "Опубликовать!"
 
 #: templates/comments/list.html:2 templates/user/prepare-data.html:98
 msgid "Comments"
@@ -4392,7 +4395,7 @@ msgstr "Комментарии"
 
 #: templates/comments/list.html:5
 msgid "There are no comments at the moment."
-msgstr ""
+msgstr "В настоящее время комментариев нет."
 
 #: templates/comments/list.html:12
 msgid "Comments are disabled on this page."
@@ -4406,10 +4409,12 @@ msgstr "Пожалуйста, войдите, чтобы проголосова�
 #, python-brace-format
 msgid "commented on {time}"
 msgstr "прокомментировал {time}"
+msgstr "прокомментировал {time}"
 
 #: templates/comments/list.html:60
 #, python-brace-format
 msgid "commented {time}"
+msgstr "прокомментировал {time}"
 msgstr "прокомментировал {time}"
 
 #: templates/comments/list.html:71
@@ -4423,7 +4428,7 @@ msgstr ""
 
 #: templates/comments/list.html:82
 msgid "Link"
-msgstr ""
+msgstr "Ссылка"
 
 #: templates/comments/list.html:87 templates/comments/list.html:101
 msgid "Reply"
@@ -4447,7 +4452,7 @@ msgstr "Всё равно показать."
 
 #: templates/comments/list.html:141
 msgid "New comment"
-msgstr ""
+msgstr "Новый комментарий"
 
 #: templates/comments/list.html:155
 msgid "Invalid comment body."
@@ -4507,12 +4512,12 @@ msgstr ""
 #: templates/common-content.html:32 templates/user/edit-profile.html:214
 #: templates/common-content.html:32 templates/user/edit-profile.html:214
 msgid "Click to copy"
-msgstr ""
+msgstr "Нажмите, чтобы скопировать"
 
 #: templates/common-content.html:33 templates/user/edit-profile.html:215
 #: templates/common-content.html:33 templates/user/edit-profile.html:215
 msgid "Copy"
-msgstr ""
+msgstr "Скопировать"
 
 #: templates/common-content.html:44 templates/user/edit-profile.html:226
 #: templates/common-content.html:44 templates/user/edit-profile.html:226
@@ -4586,7 +4591,7 @@ msgstr ""
 #: templates/contest/contest-list-tabs.html:22
 #: templates/problem/problem-list-tabs.html:5
 msgid "List"
-msgstr ""
+msgstr "Список"
 
 #: templates/contest/contest-list-tabs.html:23
 msgid "Calendar"
@@ -4633,7 +4638,7 @@ msgstr ""
 #: templates/contest/contest-tabs.html:67
 #: templates/contest/contest-tabs.html:81
 msgid "Join contest"
-msgstr ""
+msgstr "Присоединиться к соревнованию"
 
 #: templates/contest/contest-tabs.html:73
 msgid "Spectate contest"
@@ -4857,7 +4862,7 @@ msgstr "%(time_limit)s окно"
 #: templates/contest/list.html:105
 #, python-format
 msgid "%(duration)s long"
-msgstr "%(duration)s длительности"
+msgstr "Длительность %(duration)s"
 
 #: templates/contest/list.html:125 templates/contest/list.html:137
 msgid "Join"
@@ -4884,7 +4889,7 @@ msgstr "Окно заканчивается в %(countdown)s"
 #: templates/contest/list.html:170 templates/contest/list.html:209
 #, python-format
 msgid "Ends in %(countdown)s"
-msgstr "Заканчивается в %(countdown)s"
+msgstr "Заканчивается через %(countdown)s"
 
 #: templates/contest/list.html:243
 #, python-format
@@ -4893,7 +4898,7 @@ msgstr "Начало в %(countdown)s"
 
 #: templates/contest/list.html:254
 msgid "There are no scheduled contests at this time."
-msgstr "На данный момент нет запланированных конкурсов."
+msgstr "На данный момент нет запланированных соревнований."
 
 #: templates/contest/list.html:260
 msgid "Past contests"
@@ -4971,7 +4976,7 @@ msgstr "В качестве альтернативы к этому конкур�
 
 #: templates/contest/ranking-table.html:7
 msgid "Organization"
-msgstr ""
+msgstr "Организация"
 
 #: templates/contest/ranking-table.html:27
 #, python-brace-format
@@ -5328,7 +5333,7 @@ msgstr ""
 #: templates/problem/list.html:167
 #: templates/problem/list.html:167
 msgid "Hot problems"
-msgstr ""
+msgstr "Новые задачи"
 
 #: templates/problem/list.html:189 templates/problem/list.html:207
 #: templates/problem/list.html:189 templates/problem/list.html:207
@@ -5592,7 +5597,7 @@ msgstr ""
 #: templates/problem/search-form.html:38 templates/problem/search-form.html:40
 #: templates/submission/submission-list-tabs.html:4
 msgid "All"
-msgstr ""
+msgstr "Все"
 
 #: templates/problem/search-form.html:51
 msgid "Problem types"
@@ -5607,7 +5612,7 @@ msgstr ""
 #: templates/problem/search-form.html:68 templates/submission/list.html:328
 #: templates/ticket/list.html:189
 msgid "Go"
-msgstr ""
+msgstr "Перейти"
 
 #: templates/problem/search-form.html:69
 msgid "Random"
@@ -6180,27 +6185,27 @@ msgstr ""
 #: templates/submission/list.html:75
 #: templates/submission/list.html:75
 msgid "Filter by status..."
-msgstr ""
+msgstr "Фильтровать по статусу..."
 
 #: templates/submission/list.html:82
 #: templates/submission/list.html:82
 msgid "Filter by language..."
-msgstr ""
+msgstr "Фильтровать по языку..."
 
 #: templates/submission/list.html:306
 #: templates/submission/list.html:306
 msgid "Filter submissions"
-msgstr ""
+msgstr "Фильтровать посылки"
 
 #: templates/submission/list.html:342
 #: templates/submission/list.html:342
 msgid "Total:"
-msgstr ""
+msgstr "Итого:"
 
 #: templates/submission/list.html:352
 #: templates/submission/list.html:352
 msgid "You were disconnected. Refresh to show latest updates."
-msgstr ""
+msgstr "Вы были отключены. Обновите для показа последних обновлений."
 
 #: templates/submission/row.html:44
 #, python-format
@@ -6335,7 +6340,7 @@ msgstr ""
 
 #: templates/submission/submission-list-tabs.html:6
 msgid "Mine"
-msgstr ""
+msgstr "Мои"
 
 #: templates/submission/submission-list-tabs.html:9
 msgid "Best"
@@ -6451,7 +6456,7 @@ msgstr ""
 #: templates/user/base-users-table.html:4
 #: templates/user/base-users-table.html:4
 msgid "Rank"
-msgstr ""
+msgstr "Ранг"
 
 #: templates/user/base-users.html:15 templates/user/base-users.html:59
 #: templates/user/base-users.html:15 templates/user/base-users.html:59
