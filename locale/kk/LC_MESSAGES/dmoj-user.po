@@ -1,0 +1,35 @@
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Crowdin-Project: esep\n"
+"X-Crowdin-Project-ID: 622648\n"
+"X-Crowdin-Language: kk\n"
+"X-Crowdin-File: dmoj-user.po\n"
+"X-Crowdin-File-ID: 8\n"
+"Project-Id-Version: esep\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language-Team: Kazakh\n"
+"Language: kk_KZ\n"
+"PO-Revision-Date: 2023-10-26 18:02\n"
+
+msgid "Problems"
+msgstr "Есептер"
+
+msgid "Submissions"
+msgstr "Жөнелтілімдер"
+
+msgid "Users"
+msgstr "Қолданушылар"
+
+msgid "Contests"
+msgstr "Сайыстар"
+
+msgid "About"
+msgstr "Біз туралы"
+
+msgid "Status"
+msgstr "Күй"
+
+msgid "Simple Math"
+msgstr "Қарапайым математика"
+
