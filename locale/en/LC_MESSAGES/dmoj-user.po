@@ -1,0 +1,20 @@
+msgid "Problems"
+msgstr ""
+
+msgid "Submissions"
+msgstr ""
+
+msgid "Users"
+msgstr ""
+
+msgid "Contests"
+msgstr ""
+
+msgid "About"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Simple Math"
+msgstr ""
