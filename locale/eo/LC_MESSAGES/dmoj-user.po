@@ -1,0 +1,35 @@
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Crowdin-Project: esep\n"
+"X-Crowdin-Project-ID: 622648\n"
+"X-Crowdin-Language: eo\n"
+"X-Crowdin-File: dmoj-user.po\n"
+"X-Crowdin-File-ID: 8\n"
+"Project-Id-Version: esep\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language-Team: Esperanto\n"
+"Language: eo_UY\n"
+"PO-Revision-Date: 2023-10-26 18:02\n"
+
+msgid "Problems"
+msgstr "crwdns2874:0crwdne2874:0"
+
+msgid "Submissions"
+msgstr "crwdns2876:0crwdne2876:0"
+
+msgid "Users"
+msgstr "crwdns2878:0crwdne2878:0"
+
+msgid "Contests"
+msgstr "crwdns2880:0crwdne2880:0"
+
+msgid "About"
+msgstr "crwdns2882:0crwdne2882:0"
+
+msgid "Status"
+msgstr "crwdns2884:0crwdne2884:0"
+
+msgid "Simple Math"
+msgstr "crwdns2886:0crwdne2886:0"
+
