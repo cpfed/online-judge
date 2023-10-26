@@ -55,6 +55,16 @@ jobs:
              }
           },
          },
+         {
+          "source" : "/locale/en/LC_MESSAGES/dmoj-user.po",
+          "translation" : "/locale/%two_letters_code%/LC_MESSAGES/dmoj-user.po",
+          "languages_mapping" : {
+            "two_letters_code" : {
+                "zh-CN": "zh_Hans",
+                "sr-CS": "sr_Latn"
+             }
+          },
+         },
         ]
         EOF
         echo "api_token: ${CROWDIN_API_TOKEN}" >> crowdin.yaml
