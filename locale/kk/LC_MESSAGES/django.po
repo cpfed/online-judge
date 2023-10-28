@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: esep\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-24 08:46+0000\n"
-"PO-Revision-Date: 2023-10-25 21:35\n"
+"PO-Revision-Date: 2023-10-28 00:54\n"
 "Last-Translator: \n"
 "Language-Team: Kazakh\n"
 "Language: kk_KZ\n"
@@ -128,17 +128,17 @@ msgstr "Пікірлерді көрсету"
 #, python-format
 msgid "%d comment successfully unhidden."
 msgid_plural "%d comments successfully unhidden."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d пікір сәтті көрсетілді."
+msgstr[1] "%d пікірлер сәтті көрсетілді."
 
 #: judge/admin/comments.py:54 judge/models/comment.py:29
 #: judge/models/comment.py:182
 msgid "associated page"
-msgstr ""
+msgstr "байланысты бет"
 
 #: judge/admin/contest.py:31
 msgid "Included contests"
-msgstr ""
+msgstr "Қосылған сайыстар"
 
 #: judge/admin/contest.py:65 templates/contest/contest.html:195
 #: templates/contest/moss.html:41 templates/problem/list.html:188
@@ -162,11 +162,11 @@ msgstr ""
 
 #: judge/admin/contest.py:122
 msgid "Settings"
-msgstr ""
+msgstr "Параметрлер"
 
 #: judge/admin/contest.py:125
 msgid "Scheduling"
-msgstr ""
+msgstr "Жоспарлау"
 
 #: judge/admin/contest.py:126
 msgid "Details"
@@ -426,12 +426,12 @@ msgstr "Қабылданбады"
 #: judge/admin/submission.py:85
 #, python-format
 msgid "%s (spectating)"
-msgstr ""
+msgstr "%s (көрермен)"
 
 #: judge/admin/submission.py:87
 #, python-format
 msgid "%s (virtual %d)"
-msgstr ""
+msgstr "%s (виртуалды %d)"
 
 #: judge/admin/submission.py:94
 #, python-format
@@ -472,21 +472,21 @@ msgstr ""
 
 #: judge/admin/submission.py:222
 msgid "time"
-msgstr ""
+msgstr "уақыт"
 
 #: judge/admin/submission.py:226
 msgid "memory"
-msgstr ""
+msgstr "жад"
 
 #: judge/admin/submission.py:232
 #, python-format
 msgid "%d KB"
-msgstr ""
+msgstr "%d KB"
 
 #: judge/admin/submission.py:234
 #, python-format
 msgid "%.2f MB"
-msgstr ""
+msgstr "%.2f MB"
 
 #: judge/admin/submission.py:236 judge/models/problem.py:511
 #: judge/models/problem.py:534 judge/models/runtime.py:111
@@ -495,7 +495,7 @@ msgstr "тіл"
 
 #: judge/admin/submission.py:243
 msgid "Locked"
-msgstr ""
+msgstr "Бұғатталған"
 
 #: judge/admin/taxon.py:11 judge/admin/taxon.py:34
 msgid "Included problems"
@@ -532,7 +532,7 @@ msgstr "Жарияланған пікір"
 
 #: judge/contest_format/atcoder.py:19
 msgid "AtCoder"
-msgstr ""
+msgstr "AtCoder"
 
 #: judge/contest_format/atcoder.py:117 judge/contest_format/default.py:79
 #: judge/contest_format/icpc.py:127 judge/contest_format/legacy_ioi.py:97
@@ -589,7 +589,7 @@ msgstr ""
 
 #: judge/contest_format/icpc.py:19
 msgid "ICPC"
-msgstr ""
+msgstr "ICPC"
 
 #: judge/contest_format/icpc.py:137
 msgid "Ties will be broken by the sum of the last score altering submission time on problems with a non-zero score, followed by the time of the last score altering submission."
@@ -597,7 +597,7 @@ msgstr ""
 
 #: judge/contest_format/ioi.py:11
 msgid "IOI"
-msgstr ""
+msgstr "IOI"
 
 #: judge/contest_format/ioi.py:96
 msgid "The maximum score for each problem batch will be used."
@@ -609,7 +609,7 @@ msgstr ""
 
 #: judge/contest_format/legacy_ioi.py:18
 msgid "IOI (pre-2016)"
-msgstr ""
+msgstr "IOI(2016-ға дейін)"
 
 #: judge/forms.py:29
 #, python-brace-format
@@ -651,15 +651,15 @@ msgstr[1] ""
 
 #: judge/forms.py:99
 msgid "Download comments?"
-msgstr ""
+msgstr "Пікірлерді жүктеу керек пе?"
 
 #: judge/forms.py:100
 msgid "Download submissions?"
-msgstr ""
+msgstr "Жөнелтілімдерді жүктеу керек пе?"
 
 #: judge/forms.py:101
 msgid "Filter by problem code glob:"
-msgstr ""
+msgstr "Жаһандық мәселе коды бойынша сүзіңіз:"
 
 #: judge/forms.py:105
 msgid "Leave empty to include all submissions"
@@ -695,7 +695,7 @@ msgstr "Кодтың ұзындығы жарамсыз."
 
 #: judge/forms.py:225
 msgid "Invalid WebAuthn response."
-msgstr ""
+msgstr "WebAuthn жауабы жарамсыз."
 
 #: judge/forms.py:228
 msgid "No WebAuthn challenge issued."
@@ -736,7 +736,7 @@ msgstr ""
 
 #: judge/jinja2/rating.py:24
 msgid "Unrated"
-msgstr ""
+msgstr "Рейтингсіз"
 
 #: judge/models/choices.py:24
 msgid "Follow site theme"
@@ -808,17 +808,17 @@ msgstr ""
 
 #: judge/models/comment.py:39
 msgid "comment"
-msgstr ""
+msgstr "пікір"
 
 #: judge/models/comment.py:40
 msgid "comments"
-msgstr ""
+msgstr "пікірлер"
 
 #: judge/models/comment.py:75 judge/models/comment.py:127
 #: judge/models/problem.py:564
 #, python-format
 msgid "Editorial for %s"
-msgstr ""
+msgstr "%s талдауы"
 
 #: judge/models/comment.py:155
 #, python-format
@@ -935,7 +935,7 @@ msgstr ""
 
 #: judge/models/contest.py:84
 msgid "spectators"
-msgstr ""
+msgstr "көрермендер"
 
 #: judge/models/contest.py:85
 msgid "These users will be able to spectate the contest, but not see the problems ahead of time."
@@ -943,7 +943,7 @@ msgstr ""
 
 #: judge/models/contest.py:88 judge/models/runtime.py:139
 msgid "description"
-msgstr ""
+msgstr "сипаттама"
 
 #: judge/models/contest.py:89 judge/models/problem.py:506
 #: judge/models/runtime.py:141
@@ -961,7 +961,7 @@ msgstr ""
 #: judge/models/contest.py:92 judge/models/problem.py:137
 #: judge/models/problem.py:535
 msgid "time limit"
-msgstr ""
+msgstr "уақыт шектеуі"
 
 #: judge/models/contest.py:93 judge/models/problem.py:155
 msgid "publicly visible"
@@ -2507,40 +2507,40 @@ msgstr ""
 #: judge/models/submission.py:22 judge/models/submission.py:50
 #: judge/utils/problems.py:66
 msgid "Accepted"
-msgstr "Қабылданды"
+msgstr "Қабылданды (AC)"
 
 #: judge/models/submission.py:23 judge/models/submission.py:51
 msgid "Wrong Answer"
-msgstr "Қате Жауап"
+msgstr "Қате Жауап (WA)"
 
 #: judge/models/submission.py:24 judge/models/submission.py:53
 msgid "Time Limit Exceeded"
-msgstr "Уақыт шектеуі асырылды"
+msgstr "Уақыт шектеуі асырылды (TLE)"
 
 #: judge/models/submission.py:25 judge/models/submission.py:54
 msgid "Memory Limit Exceeded"
-msgstr "Жад шекеуі асырылды"
+msgstr "Жад шекеуі асырылды (MLE)"
 
 #: judge/models/submission.py:26 judge/models/submission.py:55
 msgid "Output Limit Exceeded"
-msgstr "Шығару шектеуі асырылды"
+msgstr "Шығару шектеуі асырылды (OLE)"
 
 #: judge/models/submission.py:27 judge/models/submission.py:56
 msgid "Invalid Return"
-msgstr "Жарамсыз қайтару"
+msgstr "Жарамсыз қайтару (IR)"
 
 #: judge/models/submission.py:28 judge/models/submission.py:57
 msgid "Runtime Error"
-msgstr "Орындалу кезіндегі қате"
+msgstr "Орындалу кезіндегі қате (RE)"
 
 #: judge/models/submission.py:29 judge/models/submission.py:44
 #: judge/models/submission.py:58 judge/utils/problems.py:68
 msgid "Compile Error"
-msgstr "Компиляциялық қате"
+msgstr "Компиляциялық қате (CE)"
 
 #: judge/models/submission.py:30 judge/models/submission.py:43
 msgid "Internal Error"
-msgstr ""
+msgstr "Ішкі қате (IR)"
 
 #: judge/models/submission.py:31 judge/models/submission.py:52
 msgid "Short Circuited"
@@ -2897,7 +2897,7 @@ msgstr "Уақыт шегінен асып кетті"
 
 #: judge/utils/problems.py:70
 msgid "Error"
-msgstr ""
+msgstr "Қате"
 
 #: judge/utils/pwned.py:109
 msgid "This password is too common."
@@ -3096,7 +3096,7 @@ msgstr ""
 
 #: judge/views/error.py:14
 msgid "404 error"
-msgstr ""
+msgstr "404 қате"
 
 #: judge/views/error.py:15
 #, python-format
@@ -3106,12 +3106,12 @@ msgstr ""
 #: judge/views/error.py:22
 #, python-format
 msgid "no permission for %s"
-msgstr ""
+msgstr "%s үшін рұқсат жоқ"
 
 #: judge/views/error.py:30
 #, python-format
 msgid "corrupt page %s"
-msgstr ""
+msgstr "%s бүлінген бет"
 
 #: judge/views/language.py:12 templates/status/judge-status-table.html:10
 #: templates/status/status-tabs.html:5
@@ -3824,7 +3824,7 @@ msgstr "Алдағы сайыстар"
 #: templates/blog/list.html:145 templates/contest/contest.html:41
 #, python-format
 msgid "Starting in %(countdown)s."
-msgstr ""
+msgstr "Басталуына %(countdown)s."
 
 #: templates/blog/list.html:154
 msgid "Comment stream"
@@ -4338,7 +4338,7 @@ msgstr "Аяқталуына %(countdown)s"
 #: templates/contest/list.html:243
 #, python-format
 msgid "Starting in %(countdown)s"
-msgstr ""
+msgstr "Басталуына %(countdown)s"
 
 #: templates/contest/list.html:254
 msgid "There are no scheduled contests at this time."
@@ -5470,19 +5470,19 @@ msgstr ""
 #: templates/submission/internal-error-message.html:3
 #, python-format
 msgid "An internal error occurred while grading, and the %(site_name)s administrators have been notified."
-msgstr ""
+msgstr "Бағалау кезінде ішкі қате орын алды және %(site_name)s әкімшілеріне хабарланды."
 
 #: templates/submission/internal-error-message.html:5
 msgid "In the meantime, try resubmitting in a few seconds."
-msgstr ""
+msgstr "Әзірше, бірнеше секундтан кейін қайта жіберіп көріңіз."
 
 #: templates/submission/internal-error-message.html:7
 msgid "An internal error occurred while grading."
-msgstr ""
+msgstr "Бағалау кезінде ішкі қате орын алды."
 
 #: templates/submission/internal-error-message.html:14
 msgid "Error information"
-msgstr ""
+msgstr "Қате туралы ақпарат"
 
 #: templates/submission/list.html:35 templates/submission/status.html:80
 msgid "Are you sure you want to rejudge?"
@@ -5555,7 +5555,7 @@ msgstr ""
 
 #: templates/submission/status-testcases.html:14
 msgid "Compilation Error"
-msgstr ""
+msgstr "Компляциялық қате (CE)"
 
 #: templates/submission/status-testcases.html:18
 msgid "Compilation Warnings"
