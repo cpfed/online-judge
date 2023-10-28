@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: esep\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-24 08:46+0000\n"
-"PO-Revision-Date: 2023-10-25 21:35\n"
+"PO-Revision-Date: 2023-10-28 00:54\n"
 "Last-Translator: \n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
@@ -1051,7 +1051,7 @@ msgstr ""
 #: judge/models/contest.py:92 judge/models/problem.py:137
 #: judge/models/problem.py:535
 msgid "time limit"
-msgstr ""
+msgstr "ограничение времени"
 
 #: judge/models/contest.py:93 judge/models/problem.py:155
 #: judge/models/contest.py:93 judge/models/problem.py:155
@@ -1168,11 +1168,11 @@ msgstr "Должны ли судьи оценивать только предв�
 
 #: judge/models/contest.py:135
 msgid "show short form settings display"
-msgstr "Показать отображение настроек краткой формы"
+msgstr "показать отображение настроек краткой формы"
 
 #: judge/models/contest.py:136
 msgid "Whether to show a section containing contest settings on the contest page or not."
-msgstr "Показывать ли раздел, содержащий настройки конкурса, на странице конкурса или нет."
+msgstr "Показывать ли раздел, содержащий настройки соревнования, на странице соревнования или нет."
 
 #: judge/models/contest.py:139 judge/models/problem.py:181
 #: judge/models/contest.py:139 judge/models/problem.py:181
@@ -1234,7 +1234,7 @@ msgstr "краткое описание конкурса"
 #: judge/models/contest.py:156 judge/models/problem.py:167
 #: judge/models/contest.py:156 judge/models/problem.py:167
 msgid "Plain-text, shown in meta description tag, e.g. for social media."
-msgstr "Обычный текст, отображаемый в теге мета описания, например, для социальных сетей."
+msgstr "Текст, отображаемый в мете описания, например для социальных сетей."
 
 #: judge/models/contest.py:157 judge/models/profile.py:57
 #: judge/models/profile.py:110
@@ -1782,7 +1782,7 @@ msgstr "Группа задач, указанная в разделе Катег
 #: judge/models/problem.py:138
 #: judge/models/problem.py:138
 msgid "The time limit for this problem, in seconds. Fractional seconds (e.g. 1.5) are supported."
-msgstr "Ограничение по времени для этой задачи в секундах. Поддерживаются дробные секунды (например, 1.5)."
+msgstr "Ограничение по времени для решения этой задачи в секундах. Поддерживаются доли секунды (например, 1,5)."
 
 #: judge/models/problem.py:142 judge/models/problem.py:538
 #: judge/models/problem.py:142 judge/models/problem.py:538
@@ -2796,44 +2796,40 @@ msgstr "судья"
 #: judge/models/submission.py:22 judge/models/submission.py:50
 #: judge/utils/problems.py:66
 msgid "Accepted"
-msgstr "Принято"
-msgstr "Принято"
+msgstr "Принято (AC)"
 
 #: judge/models/submission.py:23 judge/models/submission.py:51
 msgid "Wrong Answer"
-msgstr "Неправильный ответ"
-msgstr "Неправильный ответ"
+msgstr "Неправильный ответ (WA)"
 
 #: judge/models/submission.py:24 judge/models/submission.py:53
 msgid "Time Limit Exceeded"
-msgstr "Превышено ограничение времени"
+msgstr "Превышено ограничение времени (TLE)"
 
 #: judge/models/submission.py:25 judge/models/submission.py:54
 msgid "Memory Limit Exceeded"
-msgstr "Превышено ограничение памяти"
+msgstr "Превышено ограничение памяти (MLE)"
 
 #: judge/models/submission.py:26 judge/models/submission.py:55
 msgid "Output Limit Exceeded"
-msgstr "Превышено ограничение вывода"
-msgstr "Превышено ограничение вывода"
+msgstr "Превышено ограничение вывода (OLE)"
 
 #: judge/models/submission.py:27 judge/models/submission.py:56
 msgid "Invalid Return"
-msgstr "Некорректный возврат"
+msgstr "Некорректный возврат (IR)"
 
 #: judge/models/submission.py:28 judge/models/submission.py:57
 msgid "Runtime Error"
-msgstr "Ошибка исполнения"
+msgstr "Ошибка исполнения (RE)"
 
 #: judge/models/submission.py:29 judge/models/submission.py:44
 #: judge/models/submission.py:58 judge/utils/problems.py:68
 msgid "Compile Error"
-msgstr "Ошибка компиляции"
-msgstr "Ошибка компиляции"
+msgstr "Ошибка компиляции (CE)"
 
 #: judge/models/submission.py:30 judge/models/submission.py:43
 msgid "Internal Error"
-msgstr "Внутренняя ошибка"
+msgstr "Внутренняя ошибка (IR)"
 
 #: judge/models/submission.py:31 judge/models/submission.py:52
 msgid "Short Circuited"
@@ -2900,6 +2896,7 @@ msgstr "результат"
 #: judge/models/submission.py:78
 #: judge/models/submission.py:78
 msgid "compile errors"
+msgstr "ошибки компиляции"
 msgstr "ошибки компиляции"
 
 #: judge/models/submission.py:80
@@ -3244,13 +3241,15 @@ msgstr "Как вы повредили путь к генератору?"
 #: judge/utils/problems.py:67
 msgid "Wrong"
 msgstr "Неправильно"
+msgstr "Неправильно"
 
 #: judge/utils/problems.py:69
 msgid "Timeout"
-msgstr "Время ожидания истекло"
+msgstr "Таймаут"
 
 #: judge/utils/problems.py:70
 msgid "Error"
+msgstr "Ошибка"
 msgstr "Ошибка"
 
 #: judge/utils/pwned.py:109
@@ -3482,7 +3481,7 @@ msgstr ""
 
 #: judge/views/error.py:14
 msgid "404 error"
-msgstr ""
+msgstr "Ошибка 404"
 
 #: judge/views/error.py:15
 #, python-format
@@ -3492,12 +3491,12 @@ msgstr ""
 #: judge/views/error.py:22
 #, python-format
 msgid "no permission for %s"
-msgstr ""
+msgstr "нет разрешения для %s"
 
 #: judge/views/error.py:30
 #, python-format
 msgid "corrupt page %s"
-msgstr ""
+msgstr "поврежденная страница %s"
 
 #: judge/views/language.py:12 templates/status/judge-status-table.html:10
 #: templates/status/status-tabs.html:5
@@ -4365,7 +4364,7 @@ msgstr "Предстоящие соревнования"
 #: templates/blog/list.html:145 templates/contest/contest.html:41
 #, python-format
 msgid "Starting in %(countdown)s."
-msgstr "Начало в %(countdown)s."
+msgstr "До начала %(countdown)s."
 
 #: templates/blog/list.html:154
 msgid "Comment stream"
@@ -4474,7 +4473,7 @@ msgstr "оригинал"
 #: templates/comments/media-js.html:101
 #, python-brace-format
 msgid "Could not vote: {error}"
-msgstr "Не смог проголосовать: {error}"
+msgstr "Не удалось проголосовать: {error}"
 
 #: templates/comments/media-js.html:137
 msgid "Are you sure you want to hide this comment?"
@@ -4495,7 +4494,7 @@ msgstr "Не удалось обновить комментарий."
 #: templates/comments/media-js.html:185
 #, python-brace-format
 msgid "Could not edit comment: {error}"
-msgstr ""
+msgstr "Не удалось редактировать комментарий: {error}"
 
 #: templates/comments/votes.html:5
 msgid "Voter"
@@ -4894,7 +4893,7 @@ msgstr "Заканчивается через %(countdown)s"
 #: templates/contest/list.html:243
 #, python-format
 msgid "Starting in %(countdown)s"
-msgstr "Начало в %(countdown)s"
+msgstr "До соревнования %(countdown)s"
 
 #: templates/contest/list.html:254
 msgid "There are no scheduled contests at this time."
@@ -5088,7 +5087,7 @@ msgstr "Обновление рассылки"
 
 #: templates/newsletter/subscription_update.html:9
 msgid "Due to a technical error we were not able to submit your confirmation email. This could be because your email address is invalid."
-msgstr ""
+msgstr "Из-за технической ошибки мы не смогли отправить ваше подтверждение по электронной почте. Возможно, ваш адрес электронной почты является недопустимым."
 
 #: templates/newsletter/subscription_update.html:14
 msgid "Update subscription"
@@ -5262,7 +5261,7 @@ msgstr ""
 
 #: templates/problem/data.html:356
 msgid "Show columns:"
-msgstr ""
+msgstr "Показать столбцы:"
 
 #: templates/problem/data.html:359 templates/problem/data.html:383
 msgid "Output prefix"
@@ -5588,11 +5587,11 @@ msgstr "Скрыть решенные задачи"
 
 #: templates/problem/search-form.html:27
 msgid "Has editorial"
-msgstr ""
+msgstr "Есть разбор"
 
 #: templates/problem/search-form.html:32
 msgid "Show problem types"
-msgstr ""
+msgstr "Показать типы задач"
 
 #: templates/problem/search-form.html:38 templates/problem/search-form.html:40
 #: templates/submission/submission-list-tabs.html:4
@@ -5605,7 +5604,7 @@ msgstr ""
 
 #: templates/problem/search-form.html:62
 msgid "Point range"
-msgstr ""
+msgstr "Диапазон баллов"
 
 #: templates/problem/search-form.html:68 templates/submission/list.html:328
 #: templates/ticket/list.html:189
@@ -6064,7 +6063,7 @@ msgstr ""
 
 #: templates/registration/totp_enable.html:103
 msgid "These codes will never be shown again after you enable two-factor authentication."
-msgstr ""
+msgstr "Эти коды никогда не будут показаны повторно после того, как вы включите двухфакторную аутентификацию."
 
 #: templates/registration/totp_enable.html:108
 msgid "Important:"
@@ -6164,19 +6163,19 @@ msgstr ""
 #: templates/submission/internal-error-message.html:3
 #, python-format
 msgid "An internal error occurred while grading, and the %(site_name)s administrators have been notified."
-msgstr ""
+msgstr "Во время проверки произошла внутренняя ошибка, администраторы %(site_name)s уведомлены."
 
 #: templates/submission/internal-error-message.html:5
 msgid "In the meantime, try resubmitting in a few seconds."
-msgstr ""
+msgstr "Тем временем, попробуйте пересдать повторно через несколько секунд."
 
 #: templates/submission/internal-error-message.html:7
 msgid "An internal error occurred while grading."
-msgstr ""
+msgstr "Во время проверки произошла внутренняя ошибка."
 
 #: templates/submission/internal-error-message.html:14
 msgid "Error information"
-msgstr ""
+msgstr "Информация об ошибке"
 
 #: templates/submission/list.html:35 templates/submission/status.html:81
 msgid "Are you sure you want to rejudge?"
@@ -6254,7 +6253,7 @@ msgstr ""
 
 #: templates/submission/status-testcases.html:14
 msgid "Compilation Error"
-msgstr ""
+msgstr "Ошибка компиляции (CE)"
 
 #: templates/submission/status-testcases.html:18
 msgid "Compilation Warnings"
@@ -6324,7 +6323,7 @@ msgstr ""
 
 #: templates/submission/status-testcases.html:164
 msgid "Submission aborted!"
-msgstr ""
+msgstr "Посылка прервана!"
 
 #: templates/submission/status.html:73
 msgid "View source"
@@ -6380,7 +6379,7 @@ msgstr ""
 #: templates/ticket/list.html:168
 #: templates/ticket/list.html:168
 msgid "Show my tickets only"
-msgstr ""
+msgstr "Показывать только мои заявки"
 
 #: templates/ticket/list.html:172
 #: templates/ticket/list.html:172
@@ -6427,7 +6426,7 @@ msgstr ""
 #: templates/ticket/ticket.html:30
 #, python-brace-format
 msgid "Could not change ticket: {error}"
-msgstr ""
+msgstr "Не удалось изменить заявку: {error}"
 
 #: templates/ticket/ticket.html:189
 msgid "Associated object"
