@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: esep\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-24 08:46+0000\n"
-"PO-Revision-Date: 2023-10-28 00:54\n"
+"PO-Revision-Date: 2023-10-29 04:05\n"
 "Last-Translator: \n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
@@ -2777,7 +2777,7 @@ msgstr ""
 
 #: judge/models/ticket.py:14
 msgid "assignees"
-msgstr ""
+msgstr "исполнители"
 
 #: judge/models/ticket.py:16
 msgid "quick notes"
@@ -3587,7 +3587,7 @@ msgstr ""
 #: judge/views/ticket.py:91 judge/views/ticket.py:94
 #, python-format
 msgid "New ticket for %s"
-msgstr ""
+msgstr "Новая заявка для %s"
 
 #: judge/views/ticket.py:148
 #, python-format
@@ -3602,7 +3602,7 @@ msgstr ""
 #: judge/views/ticket.py:307
 #, python-format
 msgid "New Ticket: %s"
-msgstr ""
+msgstr "Новая заявка: %s"
 
 #: judge/views/ticket.py:308
 #, python-format
@@ -3620,7 +3620,7 @@ msgstr ""
 #: judge/views/ticket.py:330
 #, python-format
 msgid "New Ticket Message For: %s"
-msgstr ""
+msgstr "Сообщение о новой заявке: %s"
 
 #: judge/views/two_factor.py:50
 msgid "Enable Two-factor Authentication"
@@ -4665,7 +4665,7 @@ msgstr ""
 
 #: templates/organization/new.html:10 templates/ticket/new.html:20
 msgid "Create"
-msgstr ""
+msgstr "Создать"
 
 #: templates/organization/requests/detail.html:13
 msgid "User:"
@@ -5033,7 +5033,7 @@ msgstr ""
 
 #: templates/problem/problem.html:320
 msgid "Request clarification"
-msgstr ""
+msgstr "Запросить разъяснение"
 
 #: templates/problem/problem.html:322
 msgid "Report an issue"
@@ -5742,7 +5742,7 @@ msgstr ""
 
 #: templates/ticket/list.html:73 templates/ticket/ticket.html:96
 msgid "Closed: "
-msgstr ""
+msgstr "Закрыто: "
 
 #: templates/ticket/list.html:157
 msgid "Use desktop notification"
@@ -5750,7 +5750,7 @@ msgstr ""
 
 #: templates/ticket/list.html:163
 msgid "Hide closed tickets"
-msgstr ""
+msgstr "Скрыть закрытые заявки"
 
 #: templates/ticket/list.html:168
 msgid "Show my tickets only"
@@ -5763,10 +5763,10 @@ msgstr ""
 #: templates/ticket/list.html:181 templates/ticket/ticket.html:196
 msgid "Assignee"
 msgid_plural "Assignees"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Исполнитель"
+msgstr[1] "Исполнители"
+msgstr[2] "Исполнителей"
+msgstr[3] "Исполнителя"
 
 #: templates/ticket/list.html:201
 msgid "Title"
@@ -5774,7 +5774,7 @@ msgstr ""
 
 #: templates/ticket/list.html:203
 msgid "Assignees"
-msgstr ""
+msgstr "Исполнители"
 
 #: templates/ticket/message.html:11
 #, python-brace-format
@@ -5788,11 +5788,11 @@ msgstr ""
 
 #: templates/ticket/new_problem.html:7
 msgid "Thanks for opening a ticket!"
-msgstr ""
+msgstr "Спасибо, что создали заявку!"
 
 #: templates/ticket/new_problem.html:9
 msgid "Please keep in mind that this form is for reporting issues with a problem statement, and not for asking for help. If you require assistance on solving a problem, ask in the comments instead."
-msgstr ""
+msgstr "Пожалуйста, имейте в виду, что эта форма предназначена для сообщения о проблемах с ошибками, а не для обращения за помощью. Если вам нужна помощь в решении проблемы, спросите в комментариях вместо него."
 
 #: templates/ticket/ticket.html:30
 #, python-brace-format
@@ -5801,7 +5801,7 @@ msgstr "Не удалось изменить заявку: {error}"
 
 #: templates/ticket/ticket.html:189
 msgid "Associated object"
-msgstr ""
+msgstr "Связанный объект"
 
 #: templates/ticket/ticket.html:206
 msgid "No one is assigned."
@@ -5809,7 +5809,7 @@ msgstr ""
 
 #: templates/ticket/ticket.html:212
 msgid "Close ticket"
-msgstr ""
+msgstr "Закрыть заявку"
 
 #: templates/ticket/ticket.html:214
 msgid "Reopen ticket"
