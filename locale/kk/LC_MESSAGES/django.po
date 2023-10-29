@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: esep\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-24 08:46+0000\n"
-"PO-Revision-Date: 2023-10-28 00:54\n"
+"PO-Revision-Date: 2023-10-29 04:05\n"
 "Last-Translator: \n"
 "Language-Team: Kazakh\n"
 "Language: kk_KZ\n"
@@ -2731,7 +2731,7 @@ msgstr ""
 
 #: judge/models/ticket.py:10
 msgid "ticket title"
-msgstr ""
+msgstr "өтінім атауы"
 
 #: judge/models/ticket.py:11
 msgid "ticket creator"
@@ -3524,7 +3524,7 @@ msgstr ""
 
 #: judge/views/ticket.py:33 judge/views/ticket.py:39
 msgid "Ticket title"
-msgstr ""
+msgstr "Өтінім атауы"
 
 #: judge/views/ticket.py:40
 msgid "Issue description"
@@ -3537,7 +3537,7 @@ msgstr ""
 #: judge/views/ticket.py:91 judge/views/ticket.py:94
 #, python-format
 msgid "New ticket for %s"
-msgstr ""
+msgstr "%s үшін жаңа өтінім"
 
 #: judge/views/ticket.py:148
 #, python-format
@@ -3552,7 +3552,7 @@ msgstr ""
 #: judge/views/ticket.py:307
 #, python-format
 msgid "New Ticket: %s"
-msgstr ""
+msgstr "Жаңа өтінім:%s"
 
 #: judge/views/ticket.py:308
 #, python-format
@@ -3840,7 +3840,7 @@ msgstr ""
 
 #: templates/blog/list.html:210
 msgid "New tickets"
-msgstr ""
+msgstr "Жаңа өтінімдер"
 
 #: templates/comments/edit-ajax.html:16 templates/comments/list.html:163
 #: templates/ticket/ticket.html:181
@@ -3967,11 +3967,11 @@ msgstr ""
 
 #: templates/common-content.html:32 templates/user/edit-profile.html:214
 msgid "Click to copy"
-msgstr ""
+msgstr "Көшіру үшін басыңыз"
 
 #: templates/common-content.html:33 templates/user/edit-profile.html:215
 msgid "Copy"
-msgstr ""
+msgstr "Көшіру"
 
 #: templates/common-content.html:44 templates/user/edit-profile.html:226
 msgid "Copied!"
@@ -4607,7 +4607,7 @@ msgstr ""
 
 #: templates/organization/new.html:10 templates/ticket/new.html:20
 msgid "Create"
-msgstr ""
+msgstr "Қалдыру"
 
 #: templates/organization/requests/detail.html:13
 msgid "User:"
@@ -4963,7 +4963,7 @@ msgstr ""
 
 #: templates/problem/problem.html:320
 msgid "Request clarification"
-msgstr ""
+msgstr "Түсіндіруді сұрау"
 
 #: templates/problem/problem.html:322
 msgid "Report an issue"
@@ -5687,8 +5687,8 @@ msgstr ""
 #: templates/ticket/list.html:181 templates/ticket/ticket.html:196
 msgid "Assignee"
 msgid_plural "Assignees"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Орындаушы"
+msgstr[1] "Орындаушылар"
 
 #: templates/ticket/list.html:201
 msgid "Title"
@@ -5696,7 +5696,7 @@ msgstr ""
 
 #: templates/ticket/list.html:203
 msgid "Assignees"
-msgstr ""
+msgstr "Орындаушылар"
 
 #: templates/ticket/message.html:11
 #, python-brace-format
@@ -5710,11 +5710,11 @@ msgstr ""
 
 #: templates/ticket/new_problem.html:7
 msgid "Thanks for opening a ticket!"
-msgstr ""
+msgstr "Өтінім қалдырғаныңызға рақмет!"
 
 #: templates/ticket/new_problem.html:9
 msgid "Please keep in mind that this form is for reporting issues with a problem statement, and not for asking for help. If you require assistance on solving a problem, ask in the comments instead."
-msgstr ""
+msgstr "Есіңізде болсын, бұл форма көмек сұрауға емес, есепті баяндауға қатысты мәселелер туралы хабарлауға арналған. Егер Сізге қандай да бір мәселені шешуге көмек қажет болса, оның орнына пікір қалдырыңыз."
 
 #: templates/ticket/ticket.html:30
 #, python-brace-format
