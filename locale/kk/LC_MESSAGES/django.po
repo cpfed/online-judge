@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esep\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-24 08:46+0000\n"
-"PO-Revision-Date: 2023-10-29 04:05\n"
+"POT-Creation-Date: 2024-03-17 08:35+0000\n"
+"PO-Revision-Date: 2024-03-17 08:37\n"
 "Last-Translator: \n"
 "Language-Team: Kazakh\n"
 "Language: kk_KZ\n"
@@ -17,75 +17,79 @@ msgstr ""
 "X-Crowdin-File: django.po\n"
 "X-Crowdin-File-ID: 2\n"
 
-#: dmoj/settings.py:385
+#: dmoj/settings.py:395
 msgid "Catalan"
 msgstr "Каталан"
 
-#: dmoj/settings.py:386
+#: dmoj/settings.py:396
 msgid "German"
 msgstr "Немісше"
 
-#: dmoj/settings.py:387
+#: dmoj/settings.py:397
 msgid "Greek"
 msgstr "Грекше"
 
-#: dmoj/settings.py:388
+#: dmoj/settings.py:398
 msgid "English"
 msgstr "Ағылшынша"
 
-#: dmoj/settings.py:389
+#: dmoj/settings.py:399
 msgid "Spanish"
 msgstr "Испанша"
 
-#: dmoj/settings.py:390
+#: dmoj/settings.py:400
 msgid "French"
 msgstr "Французша"
 
-#: dmoj/settings.py:391
+#: dmoj/settings.py:401
 msgid "Croatian"
 msgstr "Хорватша"
 
-#: dmoj/settings.py:392
+#: dmoj/settings.py:402
 msgid "Hungarian"
 msgstr "Мажар тілі"
 
-#: dmoj/settings.py:393
+#: dmoj/settings.py:403
 msgid "Japanese"
 msgstr "Жапонша"
 
-#: dmoj/settings.py:394
+#: dmoj/settings.py:404
+msgid "Kazakh"
+msgstr ""
+
+#: dmoj/settings.py:405
 msgid "Korean"
 msgstr "Кәрісше"
 
-#: dmoj/settings.py:395
+#: dmoj/settings.py:406
 msgid "Brazilian Portuguese"
 msgstr "Бразилдық"
 
-#: dmoj/settings.py:396
+#: dmoj/settings.py:407
 msgid "Romanian"
 msgstr "Румынша"
 
-#: dmoj/settings.py:397
+#: dmoj/settings.py:408
 msgid "Russian"
 msgstr "Орысша"
 
-#: dmoj/settings.py:398
+#: dmoj/settings.py:409
 msgid "Serbian (Latin)"
 msgstr "Сербше (Латын)"
 
-#: dmoj/settings.py:399
+#: dmoj/settings.py:410
 msgid "Turkish"
 msgstr "Түрікше"
 
-#: dmoj/settings.py:400
+#: dmoj/settings.py:411
 msgid "Vietnamese"
 msgstr "Вьетнамша"
 
-#: dmoj/settings.py:401
+#: dmoj/settings.py:412
 msgid "Simplified Chinese"
 msgstr "Қытайша (Жеңілдетілген)"
 
-#: dmoj/settings.py:402
+#: dmoj/settings.py:413
 msgid "Traditional Chinese"
 msgstr "Қытайша (Дәстүрлі)"
 
@@ -101,7 +105,7 @@ msgstr "Тіркеу аяқталды"
 msgid "Registration Not Allowed"
 msgstr "Тіркеуге рұқсат етілмейді"
 
-#: dmoj/urls.py:92 templates/base.html:193
+#: dmoj/urls.py:95 templates/base.html:193
 msgid "Home"
 msgstr "Басты бет"
 
@@ -147,7 +151,7 @@ msgstr "Қосылған сайыстар"
 msgid "Problem"
 msgstr "Есеп"
 
-#: judge/admin/contest.py:66 judge/views/problem.py:353
+#: judge/admin/contest.py:66 judge/views/problem.py:355
 #: templates/contest/contest.html:191 templates/user/user-tabs.html:5
 #: templates/user/users-table.html:23
 msgid "Problems"
@@ -156,7 +160,7 @@ msgstr "Есептер"
 #: judge/admin/contest.py:77 judge/admin/submission.py:245
 #: templates/admin/judge/submission/change_form.html:14
 #: templates/admin/judge/submission/change_form.html:17
-#: templates/submission/source.html:34 templates/submission/status.html:89
+#: templates/submission/source.html:34 templates/submission/status.html:90
 msgid "Rejudge"
 msgstr ""
 
@@ -266,7 +270,7 @@ msgstr ""
 msgid "Summary"
 msgstr ""
 
-#: judge/admin/interface.py:125 judge/admin/profile.py:95
+#: judge/admin/interface.py:125 judge/admin/profile.py:107
 #: judge/admin/submission.py:218 judge/models/contest.py:500
 #: judge/models/contest.py:632 judge/models/profile.py:349
 #: judge/models/profile.py:380 judge/models/submission.py:67
@@ -279,7 +283,7 @@ msgid "object"
 msgstr ""
 
 #: judge/admin/organization.py:83 judge/admin/problem.py:183
-#: judge/admin/profile.py:93
+#: judge/admin/profile.py:105
 msgid "View on site"
 msgstr ""
 
@@ -300,7 +304,7 @@ msgid "Taxonomy"
 msgstr ""
 
 #: judge/admin/problem.py:133 templates/contest/contest.html:196
-#: templates/problem/data.html:381 templates/problem/list.html:193
+#: templates/problem/data.html:390 templates/problem/list.html:193
 #: templates/problem/list.html:215 templates/user/base-users-table.html:11
 #: templates/user/user-problems.html:60
 msgid "Points"
@@ -365,23 +369,23 @@ msgstr[1] ""
 msgid "problem"
 msgstr "есеп"
 
-#: judge/admin/profile.py:35 judge/admin/profile.py:103
+#: judge/admin/profile.py:36 judge/admin/profile.py:115
 msgid "timezone"
 msgstr "уақыт белдеуі"
 
-#: judge/admin/profile.py:99
+#: judge/admin/profile.py:111
 msgid "email"
 msgstr ""
 
-#: judge/admin/profile.py:107
+#: judge/admin/profile.py:119
 msgid "date joined"
 msgstr ""
 
-#: judge/admin/profile.py:111
+#: judge/admin/profile.py:123
 msgid "Recalculate scores"
 msgstr ""
 
-#: judge/admin/profile.py:117
+#: judge/admin/profile.py:129
 #, python-format
 msgid "%d user had scores recalculated."
 msgid_plural "%d users had scores recalculated."
@@ -389,8 +393,8 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: judge/admin/runtime.py:52 templates/user/edit-profile.html:119
-#: templates/user/edit-profile.html:241 templates/user/edit-profile.html:353
-#: templates/user/edit-profile.html:383
+#: templates/user/edit-profile.html:241 templates/user/edit-profile.html:358
+#: templates/user/edit-profile.html:388
 msgid "Regenerate"
 msgstr ""
 
@@ -518,7 +522,7 @@ msgid "Comment body"
 msgstr ""
 
 #: judge/comments.py:47 judge/views/comment.py:41 judge/views/ticket.py:46
-#: judge/views/user.py:348
+#: judge/views/user.py:353
 msgid "Your part is silent, little toad."
 msgstr "Сіз үнсіздік режиміндесіз."
 
@@ -611,121 +615,129 @@ msgstr ""
 msgid "IOI (pre-2016)"
 msgstr "IOI(2016-ға дейін)"
 
-#: judge/forms.py:29
+#: judge/forms.py:31
 #, python-brace-format
 msgid "Two-factor authentication tokens must be {count} decimal digit."
 msgid_plural "Two-factor authentication tokens must be {count} decimal digits."
 msgstr[0] ""
 msgstr[1] ""
 
-#: judge/forms.py:34
+#: judge/forms.py:36
 msgid "Invalid two-factor authentication token."
 msgstr ""
 
-#: judge/forms.py:37
+#: judge/forms.py:39
 msgid "Scratch codes must be 16 Base32 characters."
 msgstr ""
 
-#: judge/forms.py:39 judge/forms.py:266
+#: judge/forms.py:41 judge/forms.py:288
 msgid "Invalid scratch code."
 msgstr ""
 
-#: judge/forms.py:46
+#: judge/forms.py:48
 msgid "Subscribe to contest updates"
 msgstr ""
 
-#: judge/forms.py:47
+#: judge/forms.py:49
 msgid "Enable experimental features"
 msgstr ""
 
-#: judge/forms.py:72
+#: judge/forms.py:74
 msgid "You must solve at least one problem before you can update your profile."
 msgstr ""
 
-#: judge/forms.py:80 judge/views/organization.py:176 judge/views/register.py:58
+#: judge/forms.py:82 judge/views/organization.py:176 judge/views/register.py:50
 #, python-brace-format
 msgid "You may not be part of more than {count} public organization."
 msgid_plural "You may not be part of more than {count} public organizations."
 msgstr[0] ""
 msgstr[1] ""
 
-#: judge/forms.py:99
+#: judge/forms.py:110
+msgid "This email address is already taken."
+msgstr ""
+
+#: judge/forms.py:116
+msgid "Invalid password"
+msgstr ""
+
+#: judge/forms.py:121
 msgid "Download comments?"
 msgstr "Пікірлерді жүктеу керек пе?"
 
-#: judge/forms.py:100
+#: judge/forms.py:122
 msgid "Download submissions?"
 msgstr "Жөнелтілімдерді жүктеу керек пе?"
 
-#: judge/forms.py:101
+#: judge/forms.py:123
 msgid "Filter by problem code glob:"
 msgstr "Жаһандық мәселе коды бойынша сүзіңіз:"
 
-#: judge/forms.py:105
+#: judge/forms.py:127
 msgid "Leave empty to include all submissions"
 msgstr ""
 
-#: judge/forms.py:108 templates/problem/manage_submission.html:144
+#: judge/forms.py:130 templates/problem/manage_submission.html:144
 msgid "Filter by result:"
 msgstr "Нәтижесі бойынша сүзгілеу:"
 
-#: judge/forms.py:114
+#: judge/forms.py:136
 msgid "Please select at least one thing to download."
 msgstr ""
 
-#: judge/forms.py:140
+#: judge/forms.py:162
 msgid "Any judge"
 msgstr ""
 
-#: judge/forms.py:161 judge/views/register.py:25
+#: judge/forms.py:183 judge/views/register.py:22
 #: templates/problem/submission-diff.html:63
 #: templates/registration/registration_form.html:139
 #: templates/user/base-users-table.html:6
 msgid "Username"
 msgstr "Қолданушы аты"
 
-#: judge/forms.py:162 templates/registration/registration_form.html:151
+#: judge/forms.py:184 templates/registration/registration_form.html:151
 #: templates/registration/registration_form.html:165
 msgid "Password"
 msgstr "Құпиясөз"
 
-#: judge/forms.py:194
+#: judge/forms.py:216
 msgid "Invalid code length."
 msgstr "Кодтың ұзындығы жарамсыз."
 
-#: judge/forms.py:225
+#: judge/forms.py:247
 msgid "Invalid WebAuthn response."
 msgstr "WebAuthn жауабы жарамсыз."
 
-#: judge/forms.py:228
+#: judge/forms.py:250
 msgid "No WebAuthn challenge issued."
 msgstr ""
 
-#: judge/forms.py:234
+#: judge/forms.py:256
 msgid "Invalid WebAuthn credential ID."
 msgstr ""
 
-#: judge/forms.py:264
+#: judge/forms.py:286
 msgid "Invalid two-factor authentication token or scratch code."
 msgstr ""
 
-#: judge/forms.py:268
+#: judge/forms.py:290
 msgid "Must specify either totp_token or webauthn_response."
 msgstr ""
 
-#: judge/forms.py:272 judge/models/problem.py:118
+#: judge/forms.py:294 judge/models/problem.py:118
 msgid "Problem code must be ^[a-z0-9]+$"
 msgstr "Есеп коды ^[a-z0-9]+$ болуы тиіс"
 
-#: judge/forms.py:277
+#: judge/forms.py:299
 msgid "Problem with code already exists."
 msgstr ""
 
-#: judge/forms.py:282 judge/models/contest.py:68
+#: judge/forms.py:304 judge/models/contest.py:68
 msgid "Contest id must be ^[a-z0-9]+$"
 msgstr ""
 
-#: judge/forms.py:287
+#: judge/forms.py:309
 msgid "Contest with key already exists."
 msgstr ""
 
@@ -1915,7 +1927,7 @@ msgstr ""
 msgid "checker arguments"
 msgstr ""
 
-#: judge/models/problem_data.py:48 judge/models/problem_data.py:96
+#: judge/models/problem_data.py:48
 msgid "Checker arguments as a JSON object."
 msgstr ""
 
@@ -1961,6 +1973,18 @@ msgstr ""
 
 #: judge/models/problem_data.py:91
 msgid "case is pretest?"
+msgstr ""
+
+#: judge/models/problem_data.py:96
+msgid "checker arguments as a JSON object"
+msgstr ""
+
+#: judge/models/problem_data.py:97
+msgid "batch dependencies"
+msgstr ""
+
+#: judge/models/problem_data.py:98
+msgid "batch dependencies as a comma-separated list of integers"
 msgstr ""
 
 #: judge/models/profile.py:42
@@ -2845,45 +2869,64 @@ msgstr ""
 msgid "Preparing your comment data"
 msgstr ""
 
+#: judge/utils/mail.py:18
+msgid "Your email provider is not allowed due to history of abuse. Please use a reputable email provider."
+msgstr ""
+
 #: judge/utils/pdfoid.py:22
 #, python-brace-format
 msgid "Page {page_number} of {total_pages}"
 msgstr ""
 
-#: judge/utils/problem_data.py:63
+#: judge/utils/problem_data.py:64
 msgid "Empty batches not allowed."
 msgstr ""
 
-#: judge/utils/problem_data.py:82
+#: judge/utils/problem_data.py:83
 #, python-format
 msgid "Points must be defined for non-batch case #%d."
 msgstr ""
 
-#: judge/utils/problem_data.py:87
+#: judge/utils/problem_data.py:88
 #, python-format
 msgid "Input file for case %d does not exist: %s"
 msgstr ""
 
-#: judge/utils/problem_data.py:90
+#: judge/utils/problem_data.py:91
 #, python-format
 msgid "Output file for case %d does not exist: %s"
 msgstr ""
 
-#: judge/utils/problem_data.py:115
+#: judge/utils/problem_data.py:117
 #, python-format
 msgid "Batch start case #%d requires points."
 msgstr ""
 
-#: judge/utils/problem_data.py:136
+#: judge/utils/problem_data.py:124
+#, python-format
+msgid "Dependencies must be a comma-separated list of integers for batch start case #%d."
+msgstr ""
+
+#: judge/utils/problem_data.py:129
+#, python-format
+msgid "Dependencies must depend on previous batches for batch start case #%d."
+msgstr ""
+
+#: judge/utils/problem_data.py:132
+#, python-format
+msgid "Dependencies must be positive for batch start case #%d."
+msgstr ""
+
+#: judge/utils/problem_data.py:154
 #, python-format
 msgid "Attempt to end batch outside of one in case #%d."
 msgstr ""
 
-#: judge/utils/problem_data.py:154
+#: judge/utils/problem_data.py:172
 msgid "How did you corrupt the zip path?"
 msgstr ""
 
-#: judge/utils/problem_data.py:160
+#: judge/utils/problem_data.py:178
 msgid "How did you corrupt the generator path?"
 msgstr ""
 
@@ -2972,7 +3015,7 @@ msgid "Editing comment"
 msgstr ""
 
 #: judge/views/contests.py:58 judge/views/contests.py:248
-#: judge/views/contests.py:251 judge/views/contests.py:456
+#: judge/views/contests.py:251 judge/views/contests.py:458
 msgid "No such contest"
 msgstr "Мұндай сайыс жоқ"
 
@@ -2994,102 +3037,102 @@ msgstr ""
 msgid "Access to contest \"%s\" denied"
 msgstr ""
 
-#: judge/views/contests.py:300
+#: judge/views/contests.py:302
 msgid "Clone Contest"
 msgstr ""
 
-#: judge/views/contests.py:334
+#: judge/views/contests.py:336
 #, python-format
 msgid "Cloned contest from %s"
 msgstr ""
 
-#: judge/views/contests.py:370
+#: judge/views/contests.py:372
 msgid "Contest not ongoing"
 msgstr ""
 
-#: judge/views/contests.py:371
+#: judge/views/contests.py:373
 #, python-format
 msgid "\"%s\" is not currently ongoing."
 msgstr ""
 
-#: judge/views/contests.py:376
+#: judge/views/contests.py:378
 msgid "Banned from joining"
 msgstr ""
 
-#: judge/views/contests.py:377
+#: judge/views/contests.py:379
 msgid "You have been declared persona non grata for this contest. You are permanently barred from joining this contest."
 msgstr ""
 
-#: judge/views/contests.py:407
+#: judge/views/contests.py:409
 msgid "Cannot enter"
 msgstr ""
 
-#: judge/views/contests.py:408
+#: judge/views/contests.py:410
 msgid "You are not able to join this contest."
 msgstr ""
 
-#: judge/views/contests.py:446
+#: judge/views/contests.py:448
 #, python-format
 msgid "Enter access code for \"%s\""
 msgstr ""
 
-#: judge/views/contests.py:457
+#: judge/views/contests.py:459
 #, python-format
 msgid "You are not in contest \"%s\"."
 msgstr ""
 
-#: judge/views/contests.py:515
+#: judge/views/contests.py:517
 #, python-format
 msgid "Contests in %(month)s"
 msgstr ""
 
-#: judge/views/contests.py:515
+#: judge/views/contests.py:517
 msgid "F Y"
 msgstr ""
 
-#: judge/views/contests.py:573
+#: judge/views/contests.py:575
 #, python-format
 msgid "%s Statistics"
 msgstr ""
 
-#: judge/views/contests.py:747
+#: judge/views/contests.py:750
 #, python-format
 msgid "%s Rankings"
 msgstr ""
 
-#: judge/views/contests.py:755
+#: judge/views/contests.py:758
 msgid "???"
 msgstr ""
 
-#: judge/views/contests.py:771
+#: judge/views/contests.py:774
 #, python-format
 msgid "Your participation in %(contest)s"
 msgstr ""
 
-#: judge/views/contests.py:772
+#: judge/views/contests.py:775
 #, python-format
 msgid "%(user)s's participation in %(contest)s"
 msgstr ""
 
-#: judge/views/contests.py:781
+#: judge/views/contests.py:784
 msgid "Live"
 msgstr ""
 
-#: judge/views/contests.py:793 templates/contest/contest-tabs.html:13
+#: judge/views/contests.py:796 templates/contest/contest-tabs.html:13
 msgid "Participation"
 msgstr "Қатысу"
 
-#: judge/views/contests.py:837
+#: judge/views/contests.py:840
 #, python-format
 msgid "%s MOSS Results"
 msgstr ""
 
-#: judge/views/contests.py:864
+#: judge/views/contests.py:867
 #, python-format
 msgid "Running MOSS for %s..."
 msgstr ""
 
-#: judge/views/contests.py:887
+#: judge/views/contests.py:890
 #, python-format
 msgid "Contest tag: %s"
 msgstr ""
@@ -3131,7 +3174,7 @@ msgstr ""
 msgid "Could not find such organization."
 msgstr ""
 
-#: judge/views/organization.py:98 judge/views/register.py:33
+#: judge/views/organization.py:98 judge/views/register.py:30
 #: templates/user/user-list-tabs.html:5
 msgid "Organizations"
 msgstr "Ұйымдар"
@@ -3274,93 +3317,101 @@ msgstr "\"%s\" коды бар есепті табу мүмкін болмады
 msgid "Editorial for {0}"
 msgstr ""
 
-#: judge/views/problem.py:137
+#: judge/views/problem.py:138
 msgid "No such editorial"
 msgstr ""
 
-#: judge/views/problem.py:138
+#: judge/views/problem.py:139
 #, python-format
 msgid "Could not find an editorial with the code \"%s\"."
 msgstr "\"%s\" коды бар талдауды табу мүмкін болмады."
 
-#: judge/views/problem.py:239
+#: judge/views/problem.py:241
 msgid "Not allowed to vote on this problem."
 msgstr ""
 
-#: judge/views/problem.py:262
+#: judge/views/problem.py:264
 msgid "Not allowed to delete votes on this problem."
 msgstr ""
 
-#: judge/views/problem.py:265
+#: judge/views/problem.py:267
 msgid "success"
 msgstr ""
 
-#: judge/views/problem.py:648 judge/views/problem.py:656
+#: judge/views/problem.py:650 judge/views/problem.py:658
 #, python-format
 msgid "Submit to %s"
 msgstr "%s есебіне жөнелту"
 
-#: judge/views/problem.py:701
+#: judge/views/problem.py:703
 msgid "You submitted too many submissions."
 msgstr ""
 
-#: judge/views/problem.py:705
+#: judge/views/problem.py:707
 msgid "Banned from submitting"
 msgstr ""
 
-#: judge/views/problem.py:706
+#: judge/views/problem.py:708
 msgid "You have been declared persona non grata for this problem. You are permanently barred from submitting to this problem."
 msgstr ""
 
-#: judge/views/problem.py:710
+#: judge/views/problem.py:712
 msgid "Too many submissions"
 msgstr "Тым көп жөнелтілімдер жасадыңыз"
 
-#: judge/views/problem.py:711
+#: judge/views/problem.py:713
 msgid "You have exceeded the submission limit for this problem."
 msgstr ""
 
-#: judge/views/problem.py:761
+#: judge/views/problem.py:763
 msgid "Do you want me to ban you?"
 msgstr ""
 
-#: judge/views/problem.py:779
+#: judge/views/problem.py:781
 msgid "Clone Problem"
 msgstr ""
 
-#: judge/views/problem.py:806
+#: judge/views/problem.py:808
 #, python-format
 msgid "Cloned problem from %s"
 msgstr ""
 
-#: judge/views/problem_data.py:37
+#: judge/views/problem_data.py:38
 msgid "Checker arguments must be a JSON object."
 msgstr ""
 
-#: judge/views/problem_data.py:39
+#: judge/views/problem_data.py:40
 msgid "Checker arguments is invalid JSON."
 msgstr ""
 
-#: judge/views/problem_data.py:46
+#: judge/views/problem_data.py:47
 msgid "Your zip file is invalid!"
 msgstr ""
 
-#: judge/views/problem_data.py:105 judge/views/problem_data.py:108
+#: judge/views/problem_data.py:51
+msgid "Zip files must end in '.zip'"
+msgstr ""
+
+#: judge/views/problem_data.py:58
+msgid "Generators must not be named init.yml."
+msgstr ""
+
+#: judge/views/problem_data.py:119 judge/views/problem_data.py:122
 #, python-brace-format
 msgid "Comparing submissions for {0}"
 msgstr ""
 
-#: judge/views/problem_data.py:144
+#: judge/views/problem_data.py:158
 #, python-brace-format
 msgid "Editing data for {0}"
 msgstr ""
 
-#: judge/views/problem_data.py:147
+#: judge/views/problem_data.py:161
 #, python-format
 msgid "Editing data for %s"
 msgstr ""
 
-#: judge/views/problem_data.py:245 judge/views/problem_data.py:246
+#: judge/views/problem_data.py:268 judge/views/problem_data.py:269
 #, python-format
 msgid "Generated init.yml for %s"
 msgstr ""
@@ -3402,40 +3453,36 @@ msgstr ""
 msgid "Best solutions for problem %(number)s in %(contest)s"
 msgstr ""
 
-#: judge/views/register.py:26
+#: judge/views/register.py:23
 msgid "A username must contain letters, numbers, or underscores."
 msgstr ""
 
-#: judge/views/register.py:28 templates/registration/registration_form.html:173
+#: judge/views/register.py:25 templates/registration/registration_form.html:173
 msgid "Timezone"
 msgstr "Уақыт белдеуі"
 
-#: judge/views/register.py:30
+#: judge/views/register.py:27
 msgid "Preferred language"
 msgstr ""
 
-#: judge/views/register.py:37
+#: judge/views/register.py:34
 msgid "Subscribe to newsletter?"
 msgstr ""
 
-#: judge/views/register.py:44
+#: judge/views/register.py:41
 #, python-format
 msgid "The email address \"%s\" is already taken. Only one registration is allowed per address."
 msgstr ""
 
-#: judge/views/register.py:50
-msgid "Your email provider is not allowed due to history of abuse. Please use a reputable email provider."
-msgstr ""
-
-#: judge/views/register.py:65
+#: judge/views/register.py:57
 msgid "Register"
 msgstr "Тіркелу"
 
-#: judge/views/register.py:101
+#: judge/views/register.py:93
 msgid "Activation Key Invalid"
 msgstr ""
 
-#: judge/views/register.py:112
+#: judge/views/register.py:104
 msgid "Authentication failure"
 msgstr ""
 
@@ -3577,7 +3624,7 @@ msgid "Enable Two-factor Authentication"
 msgstr ""
 
 #: judge/views/two_factor.py:110
-msgid "Refresh Two-factor Authentication"
+msgid "Edit Two-factor Authentication"
 msgstr ""
 
 #: judge/views/two_factor.py:118
@@ -3600,76 +3647,127 @@ msgstr ""
 msgid "Perform Two-factor Authentication"
 msgstr ""
 
-#: judge/views/user.py:78
+#: judge/views/user.py:83
 msgid "No such user"
 msgstr ""
 
-#: judge/views/user.py:78
+#: judge/views/user.py:83
 #, python-format
 msgid "No user handle \"%s\"."
 msgstr ""
 
-#: judge/views/user.py:82
+#: judge/views/user.py:87
 msgid "My account"
 msgstr "Менің аккаунтым"
 
-#: judge/views/user.py:83
+#: judge/views/user.py:88
 #, python-format
 msgid "User %s"
 msgstr "Қолданушы %s"
 
-#: judge/views/user.py:130
+#: judge/views/user.py:135
 msgid "Login"
 msgstr "Кіру"
 
-#: judge/views/user.py:171
+#: judge/views/user.py:176
 msgid "M j, Y, G:i"
 msgstr ""
 
-#: judge/views/user.py:295
+#: judge/views/user.py:300
 msgid "Preparing your data..."
 msgstr ""
 
-#: judge/views/user.py:299 templates/user/edit-profile.html:344
+#: judge/views/user.py:304 templates/user/edit-profile.html:349
 msgid "Download your data"
 msgstr ""
 
-#: judge/views/user.py:348
+#: judge/views/user.py:353
 msgid "Can't edit profile"
 msgstr "Профильді өңдей алмайсыз"
 
-#: judge/views/user.py:355
+#: judge/views/user.py:360
 msgid "Updated on site"
 msgstr ""
 
-#: judge/views/user.py:387 templates/admin/auth/user/change_form.html:14
+#: judge/views/user.py:392 templates/admin/auth/user/change_form.html:14
 #: templates/admin/auth/user/change_form.html:17 templates/base.html:223
 #: templates/user/user-tabs.html:16
 msgid "Edit profile"
 msgstr "Профильді жаңарту"
 
-#: judge/views/user.py:401
+#: judge/views/user.py:406
 msgid "Generated API token for user"
 msgstr ""
 
-#: judge/views/user.py:413
+#: judge/views/user.py:418
 msgid "Removed API token for user"
 msgstr ""
 
-#: judge/views/user.py:423
+#: judge/views/user.py:428
 msgid "Generated scratch codes for user"
 msgstr ""
 
-#: judge/views/user.py:429 templates/user/user-list-tabs.html:4
+#: judge/views/user.py:434 templates/user/user-list-tabs.html:4
 msgid "Leaderboard"
 msgstr "Көшбасшылар тақтасы"
 
-#: judge/views/user.py:490
+#: judge/views/user.py:495
 msgid "You have been successfully logged out."
 msgstr "Сіз жүйеден сәтті шықтыңыз."
 
-#: judge/views/user.py:507
+#: judge/views/user.py:515
 msgid "You have sent too many password reset requests. Please try again later."
+msgstr ""
+
+#: judge/views/user.py:521 templates/user/edit-profile.html:343
+msgid "Change your email"
+msgstr ""
+
+#: judge/views/user.py:568
+msgid "Email change requested"
+msgstr ""
+
+#: judge/views/user.py:569
+#, python-format
+msgid "Please click on the link sent to %s."
+msgstr ""
+
+#: judge/views/user.py:581
+msgid "You have sent too many email change requests. Please try again later."
+msgstr ""
+
+#: judge/views/user.py:598
+msgid "Invalid activation key. Please try again."
+msgstr ""
+
+#: judge/views/user.py:600
+msgid "This request has expired. Please try again."
+msgstr ""
+
+#: judge/views/user.py:603
+msgid "Please try again while logged in to the account this email change was originally requested from."
+msgstr ""
+
+#: judge/views/user.py:610
+msgid "The email you originally requested has since been registered by another user. Please try again with a new email."
+msgstr ""
+
+#: judge/views/user.py:616
+#, python-format
+msgid "Changed email address from %s to %s"
+msgstr ""
+
+#: judge/views/user.py:623
+msgid "Email change failed"
+msgstr ""
+
+#: judge/views/user.py:627
+msgid "Email successfully changed"
+msgstr ""
+
+#: judge/views/user.py:628
+#, python-format
+msgid "The email attached to your account has been changed to %s."
 msgstr ""
 
 #: templates/admin/judge/contest/change_form.html:9
@@ -3697,13 +3795,13 @@ msgstr ""
 
 #: templates/admin/judge/judge/change_form.html:27
 #: templates/admin/judge/judge/change_form.html:30
-#: templates/user/edit-profile.html:372 templates/user/edit-profile.html:375
+#: templates/user/edit-profile.html:377 templates/user/edit-profile.html:380
 msgid "Disable"
 msgstr ""
 
 #: templates/admin/judge/judge/change_form.html:33
 #: templates/admin/judge/judge/change_form.html:36
-#: templates/user/edit-profile.html:403
+#: templates/user/edit-profile.html:408
 msgid "Enable"
 msgstr ""
 
@@ -3764,8 +3862,9 @@ msgstr "proudly powered by **DMOJ**"
 #: templates/blog/content.html:13 templates/comments/list.html:89
 #: templates/comments/list.html:105 templates/contest/contest-tabs.html:23
 #: templates/contest/tag-title.html:9 templates/flatpages/admin_link.html:3
-#: templates/license.html:10 templates/problem/data.html:424
-#: templates/problem/editorial.html:14
+#: templates/license.html:10 templates/problem/data.html:434
+#: templates/problem/data.html:440 templates/problem/editorial.html:14
+#: templates/user/edit-profile.html:382
 msgid "Edit"
 msgstr ""
 
@@ -4652,7 +4751,7 @@ msgid "There are no requests to approve."
 msgstr ""
 
 #: templates/organization/requests/pending.html:17
-#: templates/problem/data.html:388
+#: templates/problem/data.html:398
 msgid "Delete?"
 msgstr ""
 
@@ -4692,55 +4791,63 @@ msgstr ""
 msgid "precision (decimal digits)"
 msgstr ""
 
-#: templates/problem/data.html:340
+#: templates/problem/data.html:345
 msgid "View YAML"
 msgstr ""
 
-#: templates/problem/data.html:356
+#: templates/problem/data.html:361
 msgid "Show columns:"
 msgstr ""
 
-#: templates/problem/data.html:359 templates/problem/data.html:383
+#: templates/problem/data.html:364 templates/problem/data.html:392
 msgid "Output prefix"
 msgstr ""
 
-#: templates/problem/data.html:363 templates/problem/data.html:384
+#: templates/problem/data.html:368 templates/problem/data.html:393
 msgid "Output limit"
 msgstr "Шығару шектеуі"
 
-#: templates/problem/data.html:367 templates/problem/data.html:385
+#: templates/problem/data.html:372 templates/problem/data.html:394
 msgid "Checker"
 msgstr ""
 
-#: templates/problem/data.html:371 templates/problem/data.html:386
+#: templates/problem/data.html:376 templates/problem/data.html:395
 msgid "Generator args"
 msgstr ""
 
-#: templates/problem/data.html:378
+#: templates/problem/data.html:380
+msgid "Batch dependencies"
+msgstr ""
+
+#: templates/problem/data.html:387
 msgid "Type"
 msgstr ""
 
-#: templates/problem/data.html:379
+#: templates/problem/data.html:388
 msgid "Input file"
 msgstr "Енгізу файлы"
 
-#: templates/problem/data.html:380
+#: templates/problem/data.html:389
 msgid "Output file"
 msgstr ""
 
-#: templates/problem/data.html:382
+#: templates/problem/data.html:391
 msgid "Pretest?"
 msgstr ""
 
-#: templates/problem/data.html:434 templates/problem/submit.html:190
+#: templates/problem/data.html:396
+msgid "Batch Dependencies"
+msgstr ""
+
+#: templates/problem/data.html:450 templates/problem/submit.html:190
 msgid "Submit!"
 msgstr "Жөнелту!"
 
-#: templates/problem/data.html:435
+#: templates/problem/data.html:451
 msgid "Add new case"
 msgstr ""
 
-#: templates/problem/data.html:437
+#: templates/problem/data.html:453 templates/problem/data.html:454
 msgid "Save"
 msgstr ""
 
@@ -5157,6 +5264,68 @@ msgstr[1] ""
 msgid "Activate your %(site_name)s account"
 msgstr ""
 
+#: templates/registration/email_change.html:20
+msgid "Request email change"
+msgstr ""
+
+#: templates/registration/email_change_activate_email.html:9
+#: templates/registration/email_change_activate_email.txt:3
+#, python-format
+msgid "You have requested to change your email address to this email for your user account at %(site_name)s."
+msgstr ""
+
+#: templates/registration/email_change_activate_email.html:11
+#, python-format
+msgid "Please click the link to confirm this email change. The link will expire in %(count)s minute."
+msgid_plural "Please click the link to confirm this email change. The link will expire in %(count)s minutes."
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/registration/email_change_activate_email.html:21
+#: templates/registration/email_change_activate_email.txt:14
+#, python-format
+msgid "If you have encountered any problems, feel free to shoot us an email at %(email)s."
+msgstr ""
+
+#: templates/registration/email_change_activate_email.txt:5
+#, python-format
+msgid "Please go to this page to confirm this email change. The link will expire in %(count)s minute."
+msgid_plural "Please go to this page to confirm this email change. The link will expire in %(count)s minutes."
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/registration/email_change_activate_subject.txt:1
+#, python-format
+msgid "Email change request on %(site_name)s"
+msgstr ""
+
+#: templates/registration/email_change_notify_email.html:9
+#: templates/registration/email_change_notify_email.txt:2
+#, python-format
+msgid "Someone (hopefully you!) has requested to change the email address associated with your user account at %(site_name)s to %(new_email)s."
+msgstr ""
+
+#: templates/registration/email_change_notify_email.html:11
+#: templates/registration/email_change_notify_email.txt:4
+msgid "If this was you, no further action is required."
+msgstr ""
+
+#: templates/registration/email_change_notify_email.html:17
+#: templates/registration/email_change_notify_email.txt:6
+#, python-format
+msgid "If this was not you, please change your password and email us immediately at %(email)s."
+msgstr ""
+
+#: templates/registration/email_change_notify_email.html:20
+#: templates/registration/email_change_notify_email.txt:8
+msgid "If this was not you, please change your password and reply to this email immediately."
+msgstr ""
+
+#: templates/registration/email_change_notify_subject.txt:1
+#, python-format
+msgid "Alert: Email change request on %(site_name)s"
+msgstr ""
+
 #: templates/registration/login.html:35
 msgid "Invalid username or password."
 msgstr "Пайдаланушы аты немесе құпиясөз дұрыс емес."
@@ -5340,7 +5509,7 @@ msgid "Enter the 6-digit code generated by your app:"
 msgstr ""
 
 #: templates/registration/totp_enable.html:90
-msgid "Refresh Two Factor Authentication"
+msgid "Edit Two Factor Authentication"
 msgstr ""
 
 #: templates/registration/totp_enable.html:92
@@ -5348,17 +5517,17 @@ msgid "Enable Two Factor Authentication"
 msgstr ""
 
 #: templates/registration/totp_enable.html:98
-#: templates/user/edit-profile.html:391
+#: templates/user/edit-profile.html:396
 msgid "Below is a list of one-time use scratch codes."
 msgstr ""
 
 #: templates/registration/totp_enable.html:99
-#: templates/user/edit-profile.html:392
+#: templates/user/edit-profile.html:397
 msgid "These codes can only be used once and are for emergency use."
 msgstr ""
 
 #: templates/registration/totp_enable.html:100
-#: templates/user/edit-profile.html:393
+#: templates/user/edit-profile.html:398
 msgid "You can use these codes to login to your account or disable two-factor authentication."
 msgstr ""
 
@@ -5367,7 +5536,7 @@ msgid "If you ever need more scratch codes, you can regenerate them on the edit 
 msgstr ""
 
 #: templates/registration/totp_enable.html:102
-#: templates/user/edit-profile.html:395
+#: templates/user/edit-profile.html:400
 msgid "Please write these down and keep them in a secure location."
 msgstr ""
 
@@ -5484,7 +5653,7 @@ msgstr "Бағалау кезінде ішкі қате орын алды."
 msgid "Error information"
 msgstr "Қате туралы ақпарат"
 
-#: templates/submission/list.html:35 templates/submission/status.html:80
+#: templates/submission/list.html:35 templates/submission/status.html:81
 msgid "Are you sure you want to rejudge?"
 msgstr ""
 
@@ -5541,7 +5710,7 @@ msgstr ""
 msgid "View raw source"
 msgstr ""
 
-#: templates/submission/source.html:28 templates/submission/status.html:74
+#: templates/submission/source.html:28 templates/submission/status.html:75
 msgid "Resubmit"
 msgstr ""
 
@@ -5627,15 +5796,15 @@ msgstr ""
 msgid "Submission aborted!"
 msgstr "Жөнелтілім тоқтатылды!"
 
-#: templates/submission/status.html:72
+#: templates/submission/status.html:73
 msgid "View source"
 msgstr ""
 
-#: templates/submission/status.html:109
+#: templates/submission/status.html:110
 msgid "Press Ctrl-Enter or Command-Enter to abort."
 msgstr ""
 
-#: templates/submission/status.html:111
+#: templates/submission/status.html:112
 msgid "Abort"
 msgstr ""
 
@@ -5777,7 +5946,7 @@ msgstr ""
 msgid "Generating..."
 msgstr ""
 
-#: templates/user/edit-profile.html:125 templates/user/edit-profile.html:355
+#: templates/user/edit-profile.html:125 templates/user/edit-profile.html:360
 msgid "Remove"
 msgstr ""
 
@@ -5785,8 +5954,8 @@ msgstr ""
 msgid "Are you sure you want to remove your API token?"
 msgstr ""
 
-#: templates/user/edit-profile.html:142 templates/user/edit-profile.html:359
-#: templates/user/edit-profile.html:387
+#: templates/user/edit-profile.html:142 templates/user/edit-profile.html:364
+#: templates/user/edit-profile.html:392
 msgid "Generate"
 msgstr ""
 
@@ -5802,7 +5971,7 @@ msgstr ""
 msgid "This will invalidate any previous scratch codes you have."
 msgstr ""
 
-#: templates/user/edit-profile.html:204 templates/user/edit-profile.html:396
+#: templates/user/edit-profile.html:204 templates/user/edit-profile.html:401
 msgid "You will not be able to view your scratch codes after you leave this page!"
 msgstr ""
 
@@ -5846,55 +6015,51 @@ msgstr ""
 msgid "Change your password"
 msgstr "Құпиясөзді өзгерту"
 
-#: templates/user/edit-profile.html:350
+#: templates/user/edit-profile.html:355
 msgid "API token:"
 msgstr ""
 
-#: templates/user/edit-profile.html:356 templates/user/edit-profile.html:384
+#: templates/user/edit-profile.html:361 templates/user/edit-profile.html:389
 msgid "Hidden"
 msgstr ""
 
-#: templates/user/edit-profile.html:369
+#: templates/user/edit-profile.html:374
 msgid "Two-factor authentication is enabled:"
 msgstr ""
 
-#: templates/user/edit-profile.html:377
-msgid "Refresh"
-msgstr ""
-
-#: templates/user/edit-profile.html:380
+#: templates/user/edit-profile.html:385
 msgid "Scratch codes:"
 msgstr ""
 
-#: templates/user/edit-profile.html:394
+#: templates/user/edit-profile.html:399
 msgid "If you ever need more scratch codes, you can regenerate them here."
 msgstr ""
 
-#: templates/user/edit-profile.html:402
+#: templates/user/edit-profile.html:407
 msgid "Two-factor Authentication is disabled:"
 msgstr ""
 
-#: templates/user/edit-profile.html:410
+#: templates/user/edit-profile.html:415
 msgid "Security keys:"
 msgstr ""
 
-#: templates/user/edit-profile.html:420
+#: templates/user/edit-profile.html:425
 msgid "Delete"
 msgstr ""
 
-#: templates/user/edit-profile.html:427
+#: templates/user/edit-profile.html:432
 msgid "Enter a name for this key"
 msgstr ""
 
-#: templates/user/edit-profile.html:428
+#: templates/user/edit-profile.html:433
 msgid "Add"
 msgstr ""
 
-#: templates/user/edit-profile.html:436
+#: templates/user/edit-profile.html:441
 msgid "User-script:"
 msgstr ""
 
-#: templates/user/edit-profile.html:440
+#: templates/user/edit-profile.html:445
 msgid "Update profile"
 msgstr ""
 

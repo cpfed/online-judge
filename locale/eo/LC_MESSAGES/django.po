@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esep\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-24 08:46+0000\n"
-"PO-Revision-Date: 2023-10-25 19:52\n"
+"POT-Creation-Date: 2024-03-17 08:35+0000\n"
+"PO-Revision-Date: 2024-03-17 08:37\n"
 "Last-Translator: \n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
@@ -17,75 +17,79 @@ msgstr ""
 "X-Crowdin-File: django.po\n"
 "X-Crowdin-File-ID: 2\n"
 
-#: dmoj/settings.py:385
+#: dmoj/settings.py:395
 msgid "Catalan"
 msgstr "crwdns2:0crwdne2:0"
 
-#: dmoj/settings.py:386
+#: dmoj/settings.py:396
 msgid "German"
 msgstr "crwdns4:0crwdne4:0"
 
-#: dmoj/settings.py:387
+#: dmoj/settings.py:397
 msgid "Greek"
 msgstr "crwdns6:0crwdne6:0"
 
-#: dmoj/settings.py:388
+#: dmoj/settings.py:398
 msgid "English"
 msgstr "crwdns8:0crwdne8:0"
 
-#: dmoj/settings.py:389
+#: dmoj/settings.py:399
 msgid "Spanish"
 msgstr "crwdns10:0crwdne10:0"
 
-#: dmoj/settings.py:390
+#: dmoj/settings.py:400
 msgid "French"
 msgstr "crwdns12:0crwdne12:0"
 
-#: dmoj/settings.py:391
+#: dmoj/settings.py:401
 msgid "Croatian"
 msgstr "crwdns14:0crwdne14:0"
 
-#: dmoj/settings.py:392
+#: dmoj/settings.py:402
 msgid "Hungarian"
 msgstr "crwdns16:0crwdne16:0"
 
-#: dmoj/settings.py:393
+#: dmoj/settings.py:403
 msgid "Japanese"
 msgstr "crwdns18:0crwdne18:0"
 
-#: dmoj/settings.py:394
+#: dmoj/settings.py:404
+msgid "Kazakh"
+msgstr "crwdns2888:0crwdne2888:0"
+
+#: dmoj/settings.py:405
 msgid "Korean"
 msgstr "crwdns20:0crwdne20:0"
 
-#: dmoj/settings.py:395
+#: dmoj/settings.py:406
 msgid "Brazilian Portuguese"
 msgstr "crwdns22:0crwdne22:0"
 
-#: dmoj/settings.py:396
+#: dmoj/settings.py:407
 msgid "Romanian"
 msgstr "crwdns24:0crwdne24:0"
 
-#: dmoj/settings.py:397
+#: dmoj/settings.py:408
 msgid "Russian"
 msgstr "crwdns26:0crwdne26:0"
 
-#: dmoj/settings.py:398
+#: dmoj/settings.py:409
 msgid "Serbian (Latin)"
 msgstr "crwdns28:0crwdne28:0"
 
-#: dmoj/settings.py:399
+#: dmoj/settings.py:410
 msgid "Turkish"
 msgstr "crwdns30:0crwdne30:0"
 
-#: dmoj/settings.py:400
+#: dmoj/settings.py:411
 msgid "Vietnamese"
 msgstr "crwdns32:0crwdne32:0"
 
-#: dmoj/settings.py:401
+#: dmoj/settings.py:412
 msgid "Simplified Chinese"
 msgstr "crwdns34:0crwdne34:0"
 
-#: dmoj/settings.py:402
+#: dmoj/settings.py:413
 msgid "Traditional Chinese"
 msgstr "crwdns36:0crwdne36:0"
 
@@ -101,7 +105,7 @@ msgstr "crwdns40:0crwdne40:0"
 msgid "Registration Not Allowed"
 msgstr "crwdns42:0crwdne42:0"
 
-#: dmoj/urls.py:92 templates/base.html:193
+#: dmoj/urls.py:95 templates/base.html:193
 msgid "Home"
 msgstr "crwdns44:0crwdne44:0"
 
@@ -147,7 +151,7 @@ msgstr "crwdns58:0crwdne58:0"
 msgid "Problem"
 msgstr "crwdns60:0crwdne60:0"
 
-#: judge/admin/contest.py:66 judge/views/problem.py:353
+#: judge/admin/contest.py:66 judge/views/problem.py:355
 #: templates/contest/contest.html:191 templates/user/user-tabs.html:5
 #: templates/user/users-table.html:23
 msgid "Problems"
@@ -156,7 +160,7 @@ msgstr "crwdns62:0crwdne62:0"
 #: judge/admin/contest.py:77 judge/admin/submission.py:245
 #: templates/admin/judge/submission/change_form.html:14
 #: templates/admin/judge/submission/change_form.html:17
-#: templates/submission/source.html:34 templates/submission/status.html:89
+#: templates/submission/source.html:34 templates/submission/status.html:90
 msgid "Rejudge"
 msgstr "crwdns64:0crwdne64:0"
 
@@ -266,7 +270,7 @@ msgstr "crwdns106:0crwdne106:0"
 msgid "Summary"
 msgstr "crwdns108:0crwdne108:0"
 
-#: judge/admin/interface.py:125 judge/admin/profile.py:95
+#: judge/admin/interface.py:125 judge/admin/profile.py:107
 #: judge/admin/submission.py:218 judge/models/contest.py:500
 #: judge/models/contest.py:632 judge/models/profile.py:349
 #: judge/models/profile.py:380 judge/models/submission.py:67
@@ -279,7 +283,7 @@ msgid "object"
 msgstr "crwdns112:0crwdne112:0"
 
 #: judge/admin/organization.py:83 judge/admin/problem.py:183
-#: judge/admin/profile.py:93
+#: judge/admin/profile.py:105
 msgid "View on site"
 msgstr "crwdns114:0crwdne114:0"
 
@@ -300,7 +304,7 @@ msgid "Taxonomy"
 msgstr "crwdns122:0crwdne122:0"
 
 #: judge/admin/problem.py:133 templates/contest/contest.html:196
-#: templates/problem/data.html:381 templates/problem/list.html:193
+#: templates/problem/data.html:390 templates/problem/list.html:193
 #: templates/problem/list.html:215 templates/user/base-users-table.html:11
 #: templates/user/user-problems.html:60
 msgid "Points"
@@ -365,23 +369,23 @@ msgstr[1] "crwdns144:5%dcrwdne144:5"
 msgid "problem"
 msgstr "crwdns146:0crwdne146:0"
 
-#: judge/admin/profile.py:35 judge/admin/profile.py:103
+#: judge/admin/profile.py:36 judge/admin/profile.py:115
 msgid "timezone"
 msgstr "crwdns148:0crwdne148:0"
 
-#: judge/admin/profile.py:99
+#: judge/admin/profile.py:111
 msgid "email"
 msgstr "crwdns150:0crwdne150:0"
 
-#: judge/admin/profile.py:107
+#: judge/admin/profile.py:119
 msgid "date joined"
 msgstr "crwdns152:0crwdne152:0"
 
-#: judge/admin/profile.py:111
+#: judge/admin/profile.py:123
 msgid "Recalculate scores"
 msgstr "crwdns154:0crwdne154:0"
 
-#: judge/admin/profile.py:117
+#: judge/admin/profile.py:129
 #, python-format
 msgid "%d user had scores recalculated."
 msgid_plural "%d users had scores recalculated."
@@ -389,8 +393,8 @@ msgstr[0] "crwdns156:1%dcrwdne156:1"
 msgstr[1] "crwdns156:5%dcrwdne156:5"
 
 #: judge/admin/runtime.py:52 templates/user/edit-profile.html:119
-#: templates/user/edit-profile.html:241 templates/user/edit-profile.html:353
-#: templates/user/edit-profile.html:383
+#: templates/user/edit-profile.html:241 templates/user/edit-profile.html:358
+#: templates/user/edit-profile.html:388
 msgid "Regenerate"
 msgstr "crwdns158:0crwdne158:0"
 
@@ -518,7 +522,7 @@ msgid "Comment body"
 msgstr "crwdns214:0crwdne214:0"
 
 #: judge/comments.py:47 judge/views/comment.py:41 judge/views/ticket.py:46
-#: judge/views/user.py:348
+#: judge/views/user.py:353
 msgid "Your part is silent, little toad."
 msgstr "crwdns216:0crwdne216:0"
 
@@ -611,121 +615,129 @@ msgstr "crwdns254:0crwdne254:0"
 msgid "IOI (pre-2016)"
 msgstr "crwdns256:0crwdne256:0"
 
-#: judge/forms.py:29
+#: judge/forms.py:31
 #, python-brace-format
 msgid "Two-factor authentication tokens must be {count} decimal digit."
 msgid_plural "Two-factor authentication tokens must be {count} decimal digits."
 msgstr[0] "crwdns258:1{count}crwdne258:1"
 msgstr[1] "crwdns258:5{count}crwdne258:5"
 
-#: judge/forms.py:34
+#: judge/forms.py:36
 msgid "Invalid two-factor authentication token."
 msgstr "crwdns260:0crwdne260:0"
 
-#: judge/forms.py:37
+#: judge/forms.py:39
 msgid "Scratch codes must be 16 Base32 characters."
 msgstr "crwdns262:0crwdne262:0"
 
-#: judge/forms.py:39 judge/forms.py:266
+#: judge/forms.py:41 judge/forms.py:288
 msgid "Invalid scratch code."
 msgstr "crwdns264:0crwdne264:0"
 
-#: judge/forms.py:46
+#: judge/forms.py:48
 msgid "Subscribe to contest updates"
 msgstr "crwdns266:0crwdne266:0"
 
-#: judge/forms.py:47
+#: judge/forms.py:49
 msgid "Enable experimental features"
 msgstr "crwdns268:0crwdne268:0"
 
-#: judge/forms.py:72
+#: judge/forms.py:74
 msgid "You must solve at least one problem before you can update your profile."
 msgstr "crwdns270:0crwdne270:0"
 
-#: judge/forms.py:80 judge/views/organization.py:176 judge/views/register.py:58
+#: judge/forms.py:82 judge/views/organization.py:176 judge/views/register.py:50
 #, python-brace-format
 msgid "You may not be part of more than {count} public organization."
 msgid_plural "You may not be part of more than {count} public organizations."
 msgstr[0] "crwdns272:1{count}crwdne272:1"
 msgstr[1] "crwdns272:5{count}crwdne272:5"
 
-#: judge/forms.py:99
+#: judge/forms.py:110
+msgid "This email address is already taken."
+msgstr "crwdns2890:0crwdne2890:0"
+
+#: judge/forms.py:116
+msgid "Invalid password"
+msgstr "crwdns2892:0crwdne2892:0"
+
+#: judge/forms.py:121
 msgid "Download comments?"
 msgstr "crwdns274:0crwdne274:0"
 
-#: judge/forms.py:100
+#: judge/forms.py:122
 msgid "Download submissions?"
 msgstr "crwdns276:0crwdne276:0"
 
-#: judge/forms.py:101
+#: judge/forms.py:123
 msgid "Filter by problem code glob:"
 msgstr "crwdns278:0crwdne278:0"
 
-#: judge/forms.py:105
+#: judge/forms.py:127
 msgid "Leave empty to include all submissions"
 msgstr "crwdns280:0crwdne280:0"
 
-#: judge/forms.py:108 templates/problem/manage_submission.html:144
+#: judge/forms.py:130 templates/problem/manage_submission.html:144
 msgid "Filter by result:"
 msgstr "crwdns282:0crwdne282:0"
 
-#: judge/forms.py:114
+#: judge/forms.py:136
 msgid "Please select at least one thing to download."
 msgstr "crwdns284:0crwdne284:0"
 
-#: judge/forms.py:140
+#: judge/forms.py:162
 msgid "Any judge"
 msgstr "crwdns286:0crwdne286:0"
 
-#: judge/forms.py:161 judge/views/register.py:25
+#: judge/forms.py:183 judge/views/register.py:22
 #: templates/problem/submission-diff.html:63
 #: templates/registration/registration_form.html:139
 #: templates/user/base-users-table.html:6
 msgid "Username"
 msgstr "crwdns288:0crwdne288:0"
 
-#: judge/forms.py:162 templates/registration/registration_form.html:151
+#: judge/forms.py:184 templates/registration/registration_form.html:151
 #: templates/registration/registration_form.html:165
 msgid "Password"
 msgstr "crwdns290:0crwdne290:0"
 
-#: judge/forms.py:194
+#: judge/forms.py:216
 msgid "Invalid code length."
 msgstr "crwdns292:0crwdne292:0"
 
-#: judge/forms.py:225
+#: judge/forms.py:247
 msgid "Invalid WebAuthn response."
 msgstr "crwdns294:0crwdne294:0"
 
-#: judge/forms.py:228
+#: judge/forms.py:250
 msgid "No WebAuthn challenge issued."
 msgstr "crwdns296:0crwdne296:0"
 
-#: judge/forms.py:234
+#: judge/forms.py:256
 msgid "Invalid WebAuthn credential ID."
 msgstr "crwdns298:0crwdne298:0"
 
-#: judge/forms.py:264
+#: judge/forms.py:286
 msgid "Invalid two-factor authentication token or scratch code."
 msgstr "crwdns300:0crwdne300:0"
 
-#: judge/forms.py:268
+#: judge/forms.py:290
 msgid "Must specify either totp_token or webauthn_response."
 msgstr "crwdns302:0crwdne302:0"
 
-#: judge/forms.py:272 judge/models/problem.py:118
+#: judge/forms.py:294 judge/models/problem.py:118
 msgid "Problem code must be ^[a-z0-9]+$"
-msgstr "crwdns304:0[a-z0-9]crwdne304:0"
+msgstr "crwdns304:0crwdne304:0"
 
-#: judge/forms.py:277
+#: judge/forms.py:299
 msgid "Problem with code already exists."
 msgstr "crwdns306:0crwdne306:0"
 
-#: judge/forms.py:282 judge/models/contest.py:68
+#: judge/forms.py:304 judge/models/contest.py:68
 msgid "Contest id must be ^[a-z0-9]+$"
-msgstr "crwdns308:0[a-z0-9]crwdne308:0"
+msgstr "crwdns308:0crwdne308:0"
 
-#: judge/forms.py:287
+#: judge/forms.py:309
 msgid "Contest with key already exists."
 msgstr "crwdns310:0crwdne310:0"
 
@@ -776,7 +788,7 @@ msgstr "crwdns332:0crwdne332:0"
 
 #: judge/models/comment.py:23
 msgid "Page code must be ^[pcs]:[a-z0-9]+$|^b:\\d+$"
-msgstr "crwdns334:0[pcs]crwdnd334:0[a-z0-9]crwdne334:0"
+msgstr "crwdns334:0crwdne334:0"
 
 #: judge/models/comment.py:27
 msgid "commenter"
@@ -1915,7 +1927,7 @@ msgstr "crwdns892:0crwdne892:0"
 msgid "checker arguments"
 msgstr "crwdns894:0crwdne894:0"
 
-#: judge/models/problem_data.py:48 judge/models/problem_data.py:96
+#: judge/models/problem_data.py:48
 msgid "Checker arguments as a JSON object."
 msgstr "crwdns896:0crwdne896:0"
 
@@ -1962,6 +1974,18 @@ msgstr "crwdns916:0crwdne916:0"
 #: judge/models/problem_data.py:91
 msgid "case is pretest?"
 msgstr "crwdns918:0crwdne918:0"
+
+#: judge/models/problem_data.py:96
+msgid "checker arguments as a JSON object"
+msgstr "crwdns2894:0crwdne2894:0"
+
+#: judge/models/problem_data.py:97
+msgid "batch dependencies"
+msgstr "crwdns2896:0crwdne2896:0"
+
+#: judge/models/problem_data.py:98
+msgid "batch dependencies as a comma-separated list of integers"
+msgstr "crwdns2898:0crwdne2898:0"
 
 #: judge/models/profile.py:42
 msgid "organization title"
@@ -2845,45 +2869,64 @@ msgstr "crwdns1350:0crwdne1350:0"
 msgid "Preparing your comment data"
 msgstr "crwdns1352:0crwdne1352:0"
 
+#: judge/utils/mail.py:18
+msgid "Your email provider is not allowed due to history of abuse. Please use a reputable email provider."
+msgstr "crwdns1602:0crwdne1602:0"
+
 #: judge/utils/pdfoid.py:22
 #, python-brace-format
 msgid "Page {page_number} of {total_pages}"
 msgstr "crwdns1354:0{page_number}crwdnd1354:0{total_pages}crwdne1354:0"
 
-#: judge/utils/problem_data.py:63
+#: judge/utils/problem_data.py:64
 msgid "Empty batches not allowed."
 msgstr "crwdns1356:0crwdne1356:0"
 
-#: judge/utils/problem_data.py:82
+#: judge/utils/problem_data.py:83
 #, python-format
 msgid "Points must be defined for non-batch case #%d."
 msgstr "crwdns1358:0%dcrwdne1358:0"
 
-#: judge/utils/problem_data.py:87
+#: judge/utils/problem_data.py:88
 #, python-format
 msgid "Input file for case %d does not exist: %s"
 msgstr "crwdns1360:0%dcrwdnd1360:0%scrwdne1360:0"
 
-#: judge/utils/problem_data.py:90
+#: judge/utils/problem_data.py:91
 #, python-format
 msgid "Output file for case %d does not exist: %s"
 msgstr "crwdns1362:0%dcrwdnd1362:0%scrwdne1362:0"
 
-#: judge/utils/problem_data.py:115
+#: judge/utils/problem_data.py:117
 #, python-format
 msgid "Batch start case #%d requires points."
 msgstr "crwdns1364:0%dcrwdne1364:0"
 
-#: judge/utils/problem_data.py:136
+#: judge/utils/problem_data.py:124
+#, python-format
+msgid "Dependencies must be a comma-separated list of integers for batch start case #%d."
+msgstr "crwdns2900:0%dcrwdne2900:0"
+
+#: judge/utils/problem_data.py:129
+#, python-format
+msgid "Dependencies must depend on previous batches for batch start case #%d."
+msgstr "crwdns2902:0%dcrwdne2902:0"
+
+#: judge/utils/problem_data.py:132
+#, python-format
+msgid "Dependencies must be positive for batch start case #%d."
+msgstr "crwdns2904:0%dcrwdne2904:0"
+
+#: judge/utils/problem_data.py:154
 #, python-format
 msgid "Attempt to end batch outside of one in case #%d."
 msgstr "crwdns1366:0%dcrwdne1366:0"
 
-#: judge/utils/problem_data.py:154
+#: judge/utils/problem_data.py:172
 msgid "How did you corrupt the zip path?"
 msgstr "crwdns1368:0crwdne1368:0"
 
-#: judge/utils/problem_data.py:160
+#: judge/utils/problem_data.py:178
 msgid "How did you corrupt the generator path?"
 msgstr "crwdns1370:0crwdne1370:0"
 
@@ -2972,7 +3015,7 @@ msgid "Editing comment"
 msgstr "crwdns1406:0crwdne1406:0"
 
 #: judge/views/contests.py:58 judge/views/contests.py:248
-#: judge/views/contests.py:251 judge/views/contests.py:456
+#: judge/views/contests.py:251 judge/views/contests.py:458
 msgid "No such contest"
 msgstr "crwdns1408:0crwdne1408:0"
 
@@ -2994,102 +3037,102 @@ msgstr "crwdns1414:0crwdne1414:0"
 msgid "Access to contest \"%s\" denied"
 msgstr "crwdns1416:0%scrwdne1416:0"
 
-#: judge/views/contests.py:300
+#: judge/views/contests.py:302
 msgid "Clone Contest"
 msgstr "crwdns1418:0crwdne1418:0"
 
-#: judge/views/contests.py:334
+#: judge/views/contests.py:336
 #, python-format
 msgid "Cloned contest from %s"
 msgstr "crwdns1420:0%scrwdne1420:0"
 
-#: judge/views/contests.py:370
+#: judge/views/contests.py:372
 msgid "Contest not ongoing"
 msgstr "crwdns1422:0crwdne1422:0"
 
-#: judge/views/contests.py:371
+#: judge/views/contests.py:373
 #, python-format
 msgid "\"%s\" is not currently ongoing."
 msgstr "crwdns1424:0%scrwdne1424:0"
 
-#: judge/views/contests.py:376
+#: judge/views/contests.py:378
 msgid "Banned from joining"
 msgstr "crwdns1426:0crwdne1426:0"
 
-#: judge/views/contests.py:377
+#: judge/views/contests.py:379
 msgid "You have been declared persona non grata for this contest. You are permanently barred from joining this contest."
 msgstr "crwdns1428:0crwdne1428:0"
 
-#: judge/views/contests.py:407
+#: judge/views/contests.py:409
 msgid "Cannot enter"
 msgstr "crwdns1430:0crwdne1430:0"
 
-#: judge/views/contests.py:408
+#: judge/views/contests.py:410
 msgid "You are not able to join this contest."
 msgstr "crwdns1432:0crwdne1432:0"
 
-#: judge/views/contests.py:446
+#: judge/views/contests.py:448
 #, python-format
 msgid "Enter access code for \"%s\""
 msgstr "crwdns1434:0%scrwdne1434:0"
 
-#: judge/views/contests.py:457
+#: judge/views/contests.py:459
 #, python-format
 msgid "You are not in contest \"%s\"."
 msgstr "crwdns1436:0%scrwdne1436:0"
 
-#: judge/views/contests.py:515
+#: judge/views/contests.py:517
 #, python-format
 msgid "Contests in %(month)s"
 msgstr "crwdns1438:0%(month)scrwdne1438:0"
 
-#: judge/views/contests.py:515
+#: judge/views/contests.py:517
 msgid "F Y"
 msgstr "crwdns1440:0crwdne1440:0"
 
-#: judge/views/contests.py:573
+#: judge/views/contests.py:575
 #, python-format
 msgid "%s Statistics"
 msgstr "crwdns1442:0%scrwdne1442:0"
 
-#: judge/views/contests.py:747
+#: judge/views/contests.py:750
 #, python-format
 msgid "%s Rankings"
 msgstr "crwdns1444:0%scrwdne1444:0"
 
-#: judge/views/contests.py:755
+#: judge/views/contests.py:758
 msgid "???"
 msgstr "crwdns1446:0crwdne1446:0"
 
-#: judge/views/contests.py:771
+#: judge/views/contests.py:774
 #, python-format
 msgid "Your participation in %(contest)s"
 msgstr "crwdns1448:0%(contest)scrwdne1448:0"
 
-#: judge/views/contests.py:772
+#: judge/views/contests.py:775
 #, python-format
 msgid "%(user)s's participation in %(contest)s"
 msgstr "crwdns1450:0%(user)scrwdnd1450:0%(contest)scrwdne1450:0"
 
-#: judge/views/contests.py:781
+#: judge/views/contests.py:784
 msgid "Live"
 msgstr "crwdns1452:0crwdne1452:0"
 
-#: judge/views/contests.py:793 templates/contest/contest-tabs.html:13
+#: judge/views/contests.py:796 templates/contest/contest-tabs.html:13
 msgid "Participation"
 msgstr "crwdns1454:0crwdne1454:0"
 
-#: judge/views/contests.py:837
+#: judge/views/contests.py:840
 #, python-format
 msgid "%s MOSS Results"
 msgstr "crwdns1456:0%scrwdne1456:0"
 
-#: judge/views/contests.py:864
+#: judge/views/contests.py:867
 #, python-format
 msgid "Running MOSS for %s..."
 msgstr "crwdns1458:0%scrwdne1458:0"
 
-#: judge/views/contests.py:887
+#: judge/views/contests.py:890
 #, python-format
 msgid "Contest tag: %s"
 msgstr "crwdns1460:0%scrwdne1460:0"
@@ -3131,7 +3174,7 @@ msgstr "crwdns1474:0%scrwdne1474:0"
 msgid "Could not find such organization."
 msgstr "crwdns1476:0crwdne1476:0"
 
-#: judge/views/organization.py:98 judge/views/register.py:33
+#: judge/views/organization.py:98 judge/views/register.py:30
 #: templates/user/user-list-tabs.html:5
 msgid "Organizations"
 msgstr "crwdns1478:0crwdne1478:0"
@@ -3274,93 +3317,101 @@ msgstr "crwdns1532:0%scrwdne1532:0"
 msgid "Editorial for {0}"
 msgstr "crwdns1534:0{0}crwdne1534:0"
 
-#: judge/views/problem.py:137
+#: judge/views/problem.py:138
 msgid "No such editorial"
 msgstr "crwdns1536:0crwdne1536:0"
 
-#: judge/views/problem.py:138
+#: judge/views/problem.py:139
 #, python-format
 msgid "Could not find an editorial with the code \"%s\"."
 msgstr "crwdns1538:0%scrwdne1538:0"
 
-#: judge/views/problem.py:239
+#: judge/views/problem.py:241
 msgid "Not allowed to vote on this problem."
 msgstr "crwdns1540:0crwdne1540:0"
 
-#: judge/views/problem.py:262
+#: judge/views/problem.py:264
 msgid "Not allowed to delete votes on this problem."
 msgstr "crwdns1542:0crwdne1542:0"
 
-#: judge/views/problem.py:265
+#: judge/views/problem.py:267
 msgid "success"
 msgstr "crwdns1544:0crwdne1544:0"
 
-#: judge/views/problem.py:648 judge/views/problem.py:656
+#: judge/views/problem.py:650 judge/views/problem.py:658
 #, python-format
 msgid "Submit to %s"
 msgstr "crwdns1546:0%scrwdne1546:0"
 
-#: judge/views/problem.py:701
+#: judge/views/problem.py:703
 msgid "You submitted too many submissions."
 msgstr "crwdns1548:0crwdne1548:0"
 
-#: judge/views/problem.py:705
+#: judge/views/problem.py:707
 msgid "Banned from submitting"
 msgstr "crwdns1550:0crwdne1550:0"
 
-#: judge/views/problem.py:706
+#: judge/views/problem.py:708
 msgid "You have been declared persona non grata for this problem. You are permanently barred from submitting to this problem."
 msgstr "crwdns1552:0crwdne1552:0"
 
-#: judge/views/problem.py:710
+#: judge/views/problem.py:712
 msgid "Too many submissions"
 msgstr "crwdns1554:0crwdne1554:0"
 
-#: judge/views/problem.py:711
+#: judge/views/problem.py:713
 msgid "You have exceeded the submission limit for this problem."
 msgstr "crwdns1556:0crwdne1556:0"
 
-#: judge/views/problem.py:761
+#: judge/views/problem.py:763
 msgid "Do you want me to ban you?"
 msgstr "crwdns1558:0crwdne1558:0"
 
-#: judge/views/problem.py:779
+#: judge/views/problem.py:781
 msgid "Clone Problem"
 msgstr "crwdns1560:0crwdne1560:0"
 
-#: judge/views/problem.py:806
+#: judge/views/problem.py:808
 #, python-format
 msgid "Cloned problem from %s"
 msgstr "crwdns1562:0%scrwdne1562:0"
 
-#: judge/views/problem_data.py:37
+#: judge/views/problem_data.py:38
 msgid "Checker arguments must be a JSON object."
 msgstr "crwdns1564:0crwdne1564:0"
 
-#: judge/views/problem_data.py:39
+#: judge/views/problem_data.py:40
 msgid "Checker arguments is invalid JSON."
 msgstr "crwdns1566:0crwdne1566:0"
 
-#: judge/views/problem_data.py:46
+#: judge/views/problem_data.py:47
 msgid "Your zip file is invalid!"
 msgstr "crwdns1568:0crwdne1568:0"
 
-#: judge/views/problem_data.py:105 judge/views/problem_data.py:108
+#: judge/views/problem_data.py:51
+msgid "Zip files must end in '.zip'"
+msgstr "crwdns2906:0crwdne2906:0"
+
+#: judge/views/problem_data.py:58
+msgid "Generators must not be named init.yml."
+msgstr "crwdns2908:0crwdne2908:0"
+
+#: judge/views/problem_data.py:119 judge/views/problem_data.py:122
 #, python-brace-format
 msgid "Comparing submissions for {0}"
 msgstr "crwdns1570:0{0}crwdne1570:0"
 
-#: judge/views/problem_data.py:144
+#: judge/views/problem_data.py:158
 #, python-brace-format
 msgid "Editing data for {0}"
 msgstr "crwdns1572:0{0}crwdne1572:0"
 
-#: judge/views/problem_data.py:147
+#: judge/views/problem_data.py:161
 #, python-format
 msgid "Editing data for %s"
 msgstr "crwdns1574:0%scrwdne1574:0"
 
-#: judge/views/problem_data.py:245 judge/views/problem_data.py:246
+#: judge/views/problem_data.py:268 judge/views/problem_data.py:269
 #, python-format
 msgid "Generated init.yml for %s"
 msgstr "crwdns1576:0%scrwdne1576:0"
@@ -3402,40 +3453,36 @@ msgstr "crwdns1588:0%(problem)scrwdnd1588:0%(contest)scrwdne1588:0"
 msgid "Best solutions for problem %(number)s in %(contest)s"
 msgstr "crwdns1590:0%(number)scrwdnd1590:0%(contest)scrwdne1590:0"
 
-#: judge/views/register.py:26
+#: judge/views/register.py:23
 msgid "A username must contain letters, numbers, or underscores."
 msgstr "crwdns1592:0crwdne1592:0"
 
-#: judge/views/register.py:28 templates/registration/registration_form.html:173
+#: judge/views/register.py:25 templates/registration/registration_form.html:173
 msgid "Timezone"
 msgstr "crwdns1594:0crwdne1594:0"
 
-#: judge/views/register.py:30
+#: judge/views/register.py:27
 msgid "Preferred language"
 msgstr "crwdns1596:0crwdne1596:0"
 
-#: judge/views/register.py:37
+#: judge/views/register.py:34
 msgid "Subscribe to newsletter?"
 msgstr "crwdns1598:0crwdne1598:0"
 
-#: judge/views/register.py:44
+#: judge/views/register.py:41
 #, python-format
 msgid "The email address \"%s\" is already taken. Only one registration is allowed per address."
 msgstr "crwdns1600:0%scrwdne1600:0"
 
-#: judge/views/register.py:50
-msgid "Your email provider is not allowed due to history of abuse. Please use a reputable email provider."
-msgstr "crwdns1602:0crwdne1602:0"
-
-#: judge/views/register.py:65
+#: judge/views/register.py:57
 msgid "Register"
 msgstr "crwdns1604:0crwdne1604:0"
 
-#: judge/views/register.py:101
+#: judge/views/register.py:93
 msgid "Activation Key Invalid"
 msgstr "crwdns1606:0crwdne1606:0"
 
-#: judge/views/register.py:112
+#: judge/views/register.py:104
 msgid "Authentication failure"
 msgstr "crwdns1608:0crwdne1608:0"
 
@@ -3577,8 +3624,8 @@ msgid "Enable Two-factor Authentication"
 msgstr "crwdns1668:0crwdne1668:0"
 
 #: judge/views/two_factor.py:110
-msgid "Refresh Two-factor Authentication"
-msgstr "crwdns1670:0crwdne1670:0"
+msgid "Edit Two-factor Authentication"
+msgstr "crwdns2910:0crwdne2910:0"
 
 #: judge/views/two_factor.py:118
 msgid "Disable Two-factor Authentication"
@@ -3600,77 +3647,128 @@ msgstr "crwdns1678:0crwdne1678:0"
 msgid "Perform Two-factor Authentication"
 msgstr "crwdns1680:0crwdne1680:0"
 
-#: judge/views/user.py:78
+#: judge/views/user.py:83
 msgid "No such user"
 msgstr "crwdns1682:0crwdne1682:0"
 
-#: judge/views/user.py:78
+#: judge/views/user.py:83
 #, python-format
 msgid "No user handle \"%s\"."
 msgstr "crwdns1684:0%scrwdne1684:0"
 
-#: judge/views/user.py:82
+#: judge/views/user.py:87
 msgid "My account"
 msgstr "crwdns1686:0crwdne1686:0"
 
-#: judge/views/user.py:83
+#: judge/views/user.py:88
 #, python-format
 msgid "User %s"
 msgstr "crwdns1688:0%scrwdne1688:0"
 
-#: judge/views/user.py:130
+#: judge/views/user.py:135
 msgid "Login"
 msgstr "crwdns1690:0crwdne1690:0"
 
-#: judge/views/user.py:171
+#: judge/views/user.py:176
 msgid "M j, Y, G:i"
 msgstr "crwdns1692:0crwdne1692:0"
 
-#: judge/views/user.py:295
+#: judge/views/user.py:300
 msgid "Preparing your data..."
 msgstr "crwdns1694:0crwdne1694:0"
 
-#: judge/views/user.py:299 templates/user/edit-profile.html:344
+#: judge/views/user.py:304 templates/user/edit-profile.html:349
 msgid "Download your data"
 msgstr "crwdns1696:0crwdne1696:0"
 
-#: judge/views/user.py:348
+#: judge/views/user.py:353
 msgid "Can't edit profile"
 msgstr "crwdns1698:0crwdne1698:0"
 
-#: judge/views/user.py:355
+#: judge/views/user.py:360
 msgid "Updated on site"
 msgstr "crwdns1700:0crwdne1700:0"
 
-#: judge/views/user.py:387 templates/admin/auth/user/change_form.html:14
+#: judge/views/user.py:392 templates/admin/auth/user/change_form.html:14
 #: templates/admin/auth/user/change_form.html:17 templates/base.html:223
 #: templates/user/user-tabs.html:16
 msgid "Edit profile"
 msgstr "crwdns1702:0crwdne1702:0"
 
-#: judge/views/user.py:401
+#: judge/views/user.py:406
 msgid "Generated API token for user"
 msgstr "crwdns1704:0crwdne1704:0"
 
-#: judge/views/user.py:413
+#: judge/views/user.py:418
 msgid "Removed API token for user"
 msgstr "crwdns1706:0crwdne1706:0"
 
-#: judge/views/user.py:423
+#: judge/views/user.py:428
 msgid "Generated scratch codes for user"
 msgstr "crwdns1708:0crwdne1708:0"
 
-#: judge/views/user.py:429 templates/user/user-list-tabs.html:4
+#: judge/views/user.py:434 templates/user/user-list-tabs.html:4
 msgid "Leaderboard"
 msgstr "crwdns1710:0crwdne1710:0"
 
-#: judge/views/user.py:490
+#: judge/views/user.py:495
 msgid "You have been successfully logged out."
 msgstr "crwdns1712:0crwdne1712:0"
 
-#: judge/views/user.py:507
+#: judge/views/user.py:515
 msgid "You have sent too many password reset requests. Please try again later."
 msgstr "crwdns1714:0crwdne1714:0"
+
+#: judge/views/user.py:521 templates/user/edit-profile.html:343
+msgid "Change your email"
+msgstr "crwdns2912:0crwdne2912:0"
+
+#: judge/views/user.py:568
+msgid "Email change requested"
+msgstr "crwdns2914:0crwdne2914:0"
+
+#: judge/views/user.py:569
+#, python-format
+msgid "Please click on the link sent to %s."
+msgstr "crwdns2916:0%scrwdne2916:0"
+
+#: judge/views/user.py:581
+msgid "You have sent too many email change requests. Please try again later."
+msgstr "crwdns2918:0crwdne2918:0"
+
+#: judge/views/user.py:598
+msgid "Invalid activation key. Please try again."
+msgstr "crwdns2920:0crwdne2920:0"
+
+#: judge/views/user.py:600
+msgid "This request has expired. Please try again."
+msgstr "crwdns2922:0crwdne2922:0"
+
+#: judge/views/user.py:603
+msgid "Please try again while logged in to the account this email change was originally requested from."
+msgstr "crwdns2924:0crwdne2924:0"
+
+#: judge/views/user.py:610
+msgid "The email you originally requested has since been registered by another user. Please try again with a new email."
+msgstr "crwdns2926:0crwdne2926:0"
+
+#: judge/views/user.py:616
+#, python-format
+msgid "Changed email address from %s to %s"
+msgstr "crwdns2928:0%scrwdnd2928:0%scrwdne2928:0"
+
+#: judge/views/user.py:623
+msgid "Email change failed"
+msgstr "crwdns2930:0crwdne2930:0"
+
+#: judge/views/user.py:627
+msgid "Email successfully changed"
+msgstr "crwdns2932:0crwdne2932:0"
+
+#: judge/views/user.py:628
+#, python-format
+msgid "The email attached to your account has been changed to %s."
+msgstr "crwdns2934:0%scrwdne2934:0"
 
 #: templates/admin/judge/contest/change_form.html:9
 msgid "Are you sure you want to rejudge ALL the submissions?"
@@ -3697,13 +3795,13 @@ msgstr "crwdns1724:0crwdne1724:0"
 
 #: templates/admin/judge/judge/change_form.html:27
 #: templates/admin/judge/judge/change_form.html:30
-#: templates/user/edit-profile.html:372 templates/user/edit-profile.html:375
+#: templates/user/edit-profile.html:377 templates/user/edit-profile.html:380
 msgid "Disable"
 msgstr "crwdns1726:0crwdne1726:0"
 
 #: templates/admin/judge/judge/change_form.html:33
 #: templates/admin/judge/judge/change_form.html:36
-#: templates/user/edit-profile.html:403
+#: templates/user/edit-profile.html:408
 msgid "Enable"
 msgstr "crwdns1728:0crwdne1728:0"
 
@@ -3764,8 +3862,9 @@ msgstr "crwdns1752:0crwdne1752:0"
 #: templates/blog/content.html:13 templates/comments/list.html:89
 #: templates/comments/list.html:105 templates/contest/contest-tabs.html:23
 #: templates/contest/tag-title.html:9 templates/flatpages/admin_link.html:3
-#: templates/license.html:10 templates/problem/data.html:424
-#: templates/problem/editorial.html:14
+#: templates/license.html:10 templates/problem/data.html:434
+#: templates/problem/data.html:440 templates/problem/editorial.html:14
+#: templates/user/edit-profile.html:382
 msgid "Edit"
 msgstr "crwdns1754:0crwdne1754:0"
 
@@ -4652,7 +4751,7 @@ msgid "There are no requests to approve."
 msgstr "crwdns2158:0crwdne2158:0"
 
 #: templates/organization/requests/pending.html:17
-#: templates/problem/data.html:388
+#: templates/problem/data.html:398
 msgid "Delete?"
 msgstr "crwdns2160:0crwdne2160:0"
 
@@ -4692,55 +4791,63 @@ msgstr "crwdns2176:0crwdne2176:0"
 msgid "precision (decimal digits)"
 msgstr "crwdns2178:0crwdne2178:0"
 
-#: templates/problem/data.html:340
+#: templates/problem/data.html:345
 msgid "View YAML"
 msgstr "crwdns2180:0crwdne2180:0"
 
-#: templates/problem/data.html:356
+#: templates/problem/data.html:361
 msgid "Show columns:"
 msgstr "crwdns2182:0crwdne2182:0"
 
-#: templates/problem/data.html:359 templates/problem/data.html:383
+#: templates/problem/data.html:364 templates/problem/data.html:392
 msgid "Output prefix"
 msgstr "crwdns2184:0crwdne2184:0"
 
-#: templates/problem/data.html:363 templates/problem/data.html:384
+#: templates/problem/data.html:368 templates/problem/data.html:393
 msgid "Output limit"
 msgstr "crwdns2186:0crwdne2186:0"
 
-#: templates/problem/data.html:367 templates/problem/data.html:385
+#: templates/problem/data.html:372 templates/problem/data.html:394
 msgid "Checker"
 msgstr "crwdns2188:0crwdne2188:0"
 
-#: templates/problem/data.html:371 templates/problem/data.html:386
+#: templates/problem/data.html:376 templates/problem/data.html:395
 msgid "Generator args"
 msgstr "crwdns2190:0crwdne2190:0"
 
-#: templates/problem/data.html:378
+#: templates/problem/data.html:380
+msgid "Batch dependencies"
+msgstr "crwdns2936:0crwdne2936:0"
+
+#: templates/problem/data.html:387
 msgid "Type"
 msgstr "crwdns2192:0crwdne2192:0"
 
-#: templates/problem/data.html:379
+#: templates/problem/data.html:388
 msgid "Input file"
 msgstr "crwdns2194:0crwdne2194:0"
 
-#: templates/problem/data.html:380
+#: templates/problem/data.html:389
 msgid "Output file"
 msgstr "crwdns2196:0crwdne2196:0"
 
-#: templates/problem/data.html:382
+#: templates/problem/data.html:391
 msgid "Pretest?"
 msgstr "crwdns2198:0crwdne2198:0"
 
-#: templates/problem/data.html:434 templates/problem/submit.html:190
+#: templates/problem/data.html:396
+msgid "Batch Dependencies"
+msgstr "crwdns2938:0crwdne2938:0"
+
+#: templates/problem/data.html:450 templates/problem/submit.html:190
 msgid "Submit!"
 msgstr "crwdns2200:0crwdne2200:0"
 
-#: templates/problem/data.html:435
+#: templates/problem/data.html:451
 msgid "Add new case"
 msgstr "crwdns2202:0crwdne2202:0"
 
-#: templates/problem/data.html:437
+#: templates/problem/data.html:453 templates/problem/data.html:454
 msgid "Save"
 msgstr "crwdns2204:0crwdne2204:0"
 
@@ -5157,6 +5264,68 @@ msgstr[1] "crwdns2386:5%(site_name)scrwdnd2386:5%(count)scrwdne2386:5"
 msgid "Activate your %(site_name)s account"
 msgstr "crwdns2388:0%(site_name)scrwdne2388:0"
 
+#: templates/registration/email_change.html:20
+msgid "Request email change"
+msgstr "crwdns2940:0crwdne2940:0"
+
+#: templates/registration/email_change_activate_email.html:9
+#: templates/registration/email_change_activate_email.txt:3
+#, python-format
+msgid "You have requested to change your email address to this email for your user account at %(site_name)s."
+msgstr "crwdns2942:0%(site_name)scrwdne2942:0"
+
+#: templates/registration/email_change_activate_email.html:11
+#, python-format
+msgid "Please click the link to confirm this email change. The link will expire in %(count)s minute."
+msgid_plural "Please click the link to confirm this email change. The link will expire in %(count)s minutes."
+msgstr[0] "crwdns2944:1%(count)scrwdne2944:1"
+msgstr[1] "crwdns2944:5%(count)scrwdne2944:5"
+
+#: templates/registration/email_change_activate_email.html:21
+#: templates/registration/email_change_activate_email.txt:14
+#, python-format
+msgid "If you have encountered any problems, feel free to shoot us an email at %(email)s."
+msgstr "crwdns2946:0%(email)scrwdne2946:0"
+
+#: templates/registration/email_change_activate_email.txt:5
+#, python-format
+msgid "Please go to this page to confirm this email change. The link will expire in %(count)s minute."
+msgid_plural "Please go to this page to confirm this email change. The link will expire in %(count)s minutes."
+msgstr[0] "crwdns2948:1%(count)scrwdne2948:1"
+msgstr[1] "crwdns2948:5%(count)scrwdne2948:5"
+
+#: templates/registration/email_change_activate_subject.txt:1
+#, python-format
+msgid "Email change request on %(site_name)s"
+msgstr "crwdns2950:0%(site_name)scrwdne2950:0"
+
+#: templates/registration/email_change_notify_email.html:9
+#: templates/registration/email_change_notify_email.txt:2
+#, python-format
+msgid "Someone (hopefully you!) has requested to change the email address associated with your user account at %(site_name)s to %(new_email)s."
+msgstr "crwdns2952:0%(site_name)scrwdnd2952:0%(new_email)scrwdne2952:0"
+
+#: templates/registration/email_change_notify_email.html:11
+#: templates/registration/email_change_notify_email.txt:4
+msgid "If this was you, no further action is required."
+msgstr "crwdns2954:0crwdne2954:0"
+
+#: templates/registration/email_change_notify_email.html:17
+#: templates/registration/email_change_notify_email.txt:6
+#, python-format
+msgid "If this was not you, please change your password and email us immediately at %(email)s."
+msgstr "crwdns2956:0%(email)scrwdne2956:0"
+
+#: templates/registration/email_change_notify_email.html:20
+#: templates/registration/email_change_notify_email.txt:8
+msgid "If this was not you, please change your password and reply to this email immediately."
+msgstr "crwdns2958:0crwdne2958:0"
+
+#: templates/registration/email_change_notify_subject.txt:1
+#, python-format
+msgid "Alert: Email change request on %(site_name)s"
+msgstr "crwdns2960:0%(site_name)scrwdne2960:0"
+
 #: templates/registration/login.html:35
 msgid "Invalid username or password."
 msgstr "crwdns2390:0crwdne2390:0"
@@ -5184,7 +5353,7 @@ msgstr "crwdns2400:0crwdne2400:0"
 
 #: templates/registration/password_change_form.html:7
 msgid "We found your password in [a database of compromised passwords][0]."
-msgstr "crwdns2402:0[0]crwdne2402:0"
+msgstr "crwdns2402:0crwdne2402:0"
 
 #: templates/registration/password_change_form.html:8
 msgid "To protect your account, we are requiring you to change your password to a more secure password."
@@ -5304,7 +5473,7 @@ msgstr "crwdns2456:0crwdne2456:0"
 
 #: templates/registration/registration_form.html:209
 msgid "By registering, you agree to our [Terms & Conditions][0]."
-msgstr "crwdns2458:0[0]crwdne2458:0"
+msgstr "crwdns2458:0crwdne2458:0"
 
 #: templates/registration/registration_form.html:212
 msgid "Register!"
@@ -5340,25 +5509,25 @@ msgid "Enter the 6-digit code generated by your app:"
 msgstr "crwdns2474:0crwdne2474:0"
 
 #: templates/registration/totp_enable.html:90
-msgid "Refresh Two Factor Authentication"
-msgstr "crwdns2476:0crwdne2476:0"
+msgid "Edit Two Factor Authentication"
+msgstr "crwdns2962:0crwdne2962:0"
 
 #: templates/registration/totp_enable.html:92
 msgid "Enable Two Factor Authentication"
 msgstr "crwdns2478:0crwdne2478:0"
 
 #: templates/registration/totp_enable.html:98
-#: templates/user/edit-profile.html:391
+#: templates/user/edit-profile.html:396
 msgid "Below is a list of one-time use scratch codes."
 msgstr "crwdns2480:0crwdne2480:0"
 
 #: templates/registration/totp_enable.html:99
-#: templates/user/edit-profile.html:392
+#: templates/user/edit-profile.html:397
 msgid "These codes can only be used once and are for emergency use."
 msgstr "crwdns2482:0crwdne2482:0"
 
 #: templates/registration/totp_enable.html:100
-#: templates/user/edit-profile.html:393
+#: templates/user/edit-profile.html:398
 msgid "You can use these codes to login to your account or disable two-factor authentication."
 msgstr "crwdns2484:0crwdne2484:0"
 
@@ -5367,7 +5536,7 @@ msgid "If you ever need more scratch codes, you can regenerate them on the edit 
 msgstr "crwdns2486:0crwdne2486:0"
 
 #: templates/registration/totp_enable.html:102
-#: templates/user/edit-profile.html:395
+#: templates/user/edit-profile.html:400
 msgid "Please write these down and keep them in a secure location."
 msgstr "crwdns2488:0crwdne2488:0"
 
@@ -5484,7 +5653,7 @@ msgstr "crwdns2538:0crwdne2538:0"
 msgid "Error information"
 msgstr "crwdns2540:0crwdne2540:0"
 
-#: templates/submission/list.html:35 templates/submission/status.html:80
+#: templates/submission/list.html:35 templates/submission/status.html:81
 msgid "Are you sure you want to rejudge?"
 msgstr "crwdns2542:0crwdne2542:0"
 
@@ -5541,7 +5710,7 @@ msgstr "crwdns2566:0crwdne2566:0"
 msgid "View raw source"
 msgstr "crwdns2568:0crwdne2568:0"
 
-#: templates/submission/source.html:28 templates/submission/status.html:74
+#: templates/submission/source.html:28 templates/submission/status.html:75
 msgid "Resubmit"
 msgstr "crwdns2570:0crwdne2570:0"
 
@@ -5627,15 +5796,15 @@ msgstr "crwdns2606:0crwdne2606:0"
 msgid "Submission aborted!"
 msgstr "crwdns2608:0crwdne2608:0"
 
-#: templates/submission/status.html:72
+#: templates/submission/status.html:73
 msgid "View source"
 msgstr "crwdns2610:0crwdne2610:0"
 
-#: templates/submission/status.html:109
+#: templates/submission/status.html:110
 msgid "Press Ctrl-Enter or Command-Enter to abort."
 msgstr "crwdns2612:0crwdne2612:0"
 
-#: templates/submission/status.html:111
+#: templates/submission/status.html:112
 msgid "Abort"
 msgstr "crwdns2614:0crwdne2614:0"
 
@@ -5777,7 +5946,7 @@ msgstr "crwdns2678:0crwdne2678:0"
 msgid "Generating..."
 msgstr "crwdns2680:0crwdne2680:0"
 
-#: templates/user/edit-profile.html:125 templates/user/edit-profile.html:355
+#: templates/user/edit-profile.html:125 templates/user/edit-profile.html:360
 msgid "Remove"
 msgstr "crwdns2682:0crwdne2682:0"
 
@@ -5785,8 +5954,8 @@ msgstr "crwdns2682:0crwdne2682:0"
 msgid "Are you sure you want to remove your API token?"
 msgstr "crwdns2684:0crwdne2684:0"
 
-#: templates/user/edit-profile.html:142 templates/user/edit-profile.html:359
-#: templates/user/edit-profile.html:387
+#: templates/user/edit-profile.html:142 templates/user/edit-profile.html:364
+#: templates/user/edit-profile.html:392
 msgid "Generate"
 msgstr "crwdns2686:0crwdne2686:0"
 
@@ -5802,7 +5971,7 @@ msgstr "crwdns2690:0crwdne2690:0"
 msgid "This will invalidate any previous scratch codes you have."
 msgstr "crwdns2692:0crwdne2692:0"
 
-#: templates/user/edit-profile.html:204 templates/user/edit-profile.html:396
+#: templates/user/edit-profile.html:204 templates/user/edit-profile.html:401
 msgid "You will not be able to view your scratch codes after you leave this page!"
 msgstr "crwdns2694:0crwdne2694:0"
 
@@ -5846,55 +6015,51 @@ msgstr "crwdns2712:0crwdne2712:0"
 msgid "Change your password"
 msgstr "crwdns2714:0crwdne2714:0"
 
-#: templates/user/edit-profile.html:350
+#: templates/user/edit-profile.html:355
 msgid "API token:"
 msgstr "crwdns2716:0crwdne2716:0"
 
-#: templates/user/edit-profile.html:356 templates/user/edit-profile.html:384
+#: templates/user/edit-profile.html:361 templates/user/edit-profile.html:389
 msgid "Hidden"
 msgstr "crwdns2718:0crwdne2718:0"
 
-#: templates/user/edit-profile.html:369
+#: templates/user/edit-profile.html:374
 msgid "Two-factor authentication is enabled:"
 msgstr "crwdns2720:0crwdne2720:0"
 
-#: templates/user/edit-profile.html:377
-msgid "Refresh"
-msgstr "crwdns2722:0crwdne2722:0"
-
-#: templates/user/edit-profile.html:380
+#: templates/user/edit-profile.html:385
 msgid "Scratch codes:"
 msgstr "crwdns2724:0crwdne2724:0"
 
-#: templates/user/edit-profile.html:394
+#: templates/user/edit-profile.html:399
 msgid "If you ever need more scratch codes, you can regenerate them here."
 msgstr "crwdns2726:0crwdne2726:0"
 
-#: templates/user/edit-profile.html:402
+#: templates/user/edit-profile.html:407
 msgid "Two-factor Authentication is disabled:"
 msgstr "crwdns2728:0crwdne2728:0"
 
-#: templates/user/edit-profile.html:410
+#: templates/user/edit-profile.html:415
 msgid "Security keys:"
 msgstr "crwdns2730:0crwdne2730:0"
 
-#: templates/user/edit-profile.html:420
+#: templates/user/edit-profile.html:425
 msgid "Delete"
 msgstr "crwdns2732:0crwdne2732:0"
 
-#: templates/user/edit-profile.html:427
+#: templates/user/edit-profile.html:432
 msgid "Enter a name for this key"
 msgstr "crwdns2734:0crwdne2734:0"
 
-#: templates/user/edit-profile.html:428
+#: templates/user/edit-profile.html:433
 msgid "Add"
 msgstr "crwdns2736:0crwdne2736:0"
 
-#: templates/user/edit-profile.html:436
+#: templates/user/edit-profile.html:441
 msgid "User-script:"
 msgstr "crwdns2738:0crwdne2738:0"
 
-#: templates/user/edit-profile.html:440
+#: templates/user/edit-profile.html:445
 msgid "Update profile"
 msgstr "crwdns2740:0crwdne2740:0"
 
