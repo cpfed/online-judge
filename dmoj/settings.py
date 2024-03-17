@@ -107,8 +107,15 @@ DMOJ_STATS_SUBMISSION_RESULT_COLORS = {
 }
 DMOJ_API_PAGE_SIZE = 1000
 
-DMOJ_PASSWORD_RESET_LIMIT_WINDOW = 3600
+# Number of password resets per window (in minutes)
+DMOJ_PASSWORD_RESET_LIMIT_WINDOW = 60
 DMOJ_PASSWORD_RESET_LIMIT_COUNT = 10
+
+# Number of email change requests per window (in minutes)
+DMOJ_EMAIL_CHANGE_LIMIT_WINDOW = 60
+DMOJ_EMAIL_CHANGE_LIMIT_COUNT = 10
+# Number of minutes before an email change request activation key expires
+DMOJ_EMAIL_CHANGE_EXPIRY_MINUTES = 60
 
 # At the bare minimum, dark and light theme CSS file locations must be declared
 DMOJ_THEME_CSS = {
@@ -121,6 +128,9 @@ DMOJ_THEME_DEFAULT_ACE_THEME = {
     'dark': 'twilight',
 }
 DMOJ_SELECT2_THEME = 'dmoj'
+
+DMOJ_ENABLE_COMMENTS = True
+DMOJ_ENABLE_SOCIAL = True
 
 MARKDOWN_STYLES = {}
 MARKDOWN_DEFAULT_STYLE = {}
@@ -391,6 +401,7 @@ LANGUAGES = [
     ('hr', _('Croatian')),
     ('hu', _('Hungarian')),
     ('ja', _('Japanese')),
+    ('kk', _('Kazakh')),
     ('ko', _('Korean')),
     ('pt', _('Brazilian Portuguese')),
     ('ro', _('Romanian')),
@@ -600,6 +611,9 @@ except IOError:
 
 # Check settings are consistent
 assert DMOJ_PROBLEM_MIN_USER_POINTS_VOTE >= DMOJ_PROBLEM_MIN_PROBLEM_POINTS
+
+# <= 1 minute expiry is unusable UX
+assert DMOJ_EMAIL_CHANGE_EXPIRY_MINUTES > 1
 
 if DMOJ_PDF_PDFOID_URL:
     # If a cache is configured, it must already exist and be a directory
