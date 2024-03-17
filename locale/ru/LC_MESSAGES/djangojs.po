@@ -18,7 +18,6 @@ msgstr ""
 "X-Crowdin-File-ID: 4\n"
 
 #: resources/common.js:194
-#: resources/common.js:194
 msgctxt "time format with day"
 msgid "%d day %h:%m:%s"
 msgid_plural "%d days %h:%m:%s"
@@ -28,42 +27,41 @@ msgstr[2] "%d дней %h:%m:%s"
 msgstr[3] "%d дней %h:%m:%s"
 
 #: resources/common.js:197
-#: resources/common.js:197
 msgctxt "time format without day"
 msgid "%h:%m:%s"
 msgstr "%h:%m:%s"
 
 #: resources/problem-vote.js:11
 msgid "Vote on problem points"
-msgstr "Голосовать за точки задач"
+msgstr ""
 
 #: resources/problem-vote.js:16
 #, javascript-format
 msgid "Unable to delete vote: %s"
-msgstr "Не удалось удалить голосование: %s"
+msgstr ""
 
 #: resources/problem-vote.js:28
 #, javascript-format
 msgid "Edit points vote (%s)"
-msgstr "Редактировать голос очков (%s)"
+msgstr ""
 
 #: resources/problem-vote.js:34
 #, javascript-format
 msgid "Unable to cast vote: %s"
-msgstr "Невозможно проголосовать: %s"
+msgstr ""
 
 #: resources/problem-vote.js:63
 msgid "Number of votes for this point value"
-msgstr "Количество голосов за это значение"
+msgstr ""
 
 #: resources/user_profile.js:47
 msgid "past year"
-msgstr "прошедший год"
+msgstr ""
 
 #: resources/user_profile.js:64
 msgid "%(cnt)d total submission"
 msgid_plural "%(cnt)d total submissions"
-msgstr[0] "Всего сабмитов %(cnt)d"
+msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
@@ -71,7 +69,7 @@ msgstr[3] ""
 #: resources/user_profile.js:69
 msgid "%(cnt)d submission in the last year"
 msgid_plural "%(cnt)d submissions in the last year"
-msgstr[0] "%(cnt)d сабмит за последний год"
+msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
@@ -79,7 +77,7 @@ msgstr[3] ""
 #: resources/user_profile.js:74
 msgid "%(cnt)d submission in %(year)d"
 msgid_plural "%(cnt)d submissions in %(year)d"
-msgstr[0] "%(cnt)d отправлено в %(year)d"
+msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
@@ -87,7 +85,7 @@ msgstr[3] ""
 #: resources/user_profile.js:88
 msgid "%(cnt)d submission on %(date)s"
 msgid_plural "%(cnt)d submissions on %(date)s"
-msgstr[0] "%(cnt)d отправлено в %(date)s"
+msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""

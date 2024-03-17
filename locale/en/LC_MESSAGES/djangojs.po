@@ -19,14 +19,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: resources/common.js:194
-#: resources/common.js:194
 msgctxt "time format with day"
 msgid "%d day %h:%m:%s"
 msgid_plural "%d days %h:%m:%s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: resources/common.js:197
 #: resources/common.js:197
 msgctxt "time format without day"
 msgid "%h:%m:%s"

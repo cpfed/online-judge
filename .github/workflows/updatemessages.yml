@@ -73,8 +73,7 @@ jobs:
          },
         ]
         EOF
-        echo "api_token: ${CROWDIN_API_TOKEN}" >> crowdin.yaml
-        echo "api_token: ${CROWDIN_API_TOKEN}" >> crowdin.yaml
+        echo "api_key: ${CROWDIN_API_TOKEN}" >> crowdin.yaml
         crowdin download
         rm crowdin.yaml
     - name: Cleanup
