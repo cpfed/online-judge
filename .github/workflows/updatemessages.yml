@@ -107,7 +107,7 @@ jobs:
           git reset --hard "$i18n_head"
         fi
     - name: Create pull request
-      uses: peter-evans/create-pull-request@v4
+      uses: peter-evans/create-pull-request@v6
       with:
         commit-message: 'i18n: update translations from Crowdin'
         title: Update translations from Crowdin
