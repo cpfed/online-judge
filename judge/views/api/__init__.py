@@ -1,5 +1,6 @@
 from .api import (
     SyncUsersFromCPFEDView,
+    SyncRegionFromCPFEDView,
 )
 from .api_v2 import (
     APIContestDetail, APIContestList, APIContestParticipationList, APIOrganizationList, APIProblemDetail,

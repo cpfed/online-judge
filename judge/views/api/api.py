@@ -82,3 +82,38 @@ class SyncUsersFromCPFEDView(View):
             return JsonResponse({'detail': 'User registered successfully'}, status=201)
         except Exception as e:
             return JsonResponse({'detail': str(e)}, status=400)
+
+
+def add_org(username, org_id):
+    """
+    Add org to the given user
+    """
+
+    user = org = get_object_or_404(User, username=username)
+    org = get_object_or_404(Organization, id=org_id)
+    profile = user.profile
+    profile.organizations.add(org)
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class SyncRegionFromCPFEDView(View):
+    def post(self, request, token, *args, **kwargs):
+        try:
+            if token != settings.CPFED_TOKEN:
+                return JsonResponse({'detail': 'Unauthorized'}, status=403)
+
+            data = json.loads(request.body)
+
+            username = data.get('username')
+            org_id = data.get('org_id')
+
+            if not all([username, org_id]):
+                return JsonResponse(
+                    {'detail': 'Missing required parameters.'}, status=400,
+                )
+
+            add_org(username, org_id)
+
+            return JsonResponse({'detail': 'Region added successfully'}, status=201)
+        except Exception as e:
+            return JsonResponse({'detail': str(e)}, status=400)

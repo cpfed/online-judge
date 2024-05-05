@@ -274,6 +274,7 @@ urlpatterns = [
     ])),
 
     path('api/sync_users/<str:token>/', api.api.SyncUsersFromCPFEDView.as_view(), name='sync_users_from_cpfed'),
+    path('api/sync_region/<str:token>/', api.api.SyncRegionFromCPFEDView.as_view(), name='sync_region_from_cpfed'),
 
     path('blog/', paged_list_view(blog.PostList, 'blog_post_list')),
     path('post/<int:id>-<slug:slug>', blog.PostView.as_view(), name='blog_post'),
