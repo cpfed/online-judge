@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% set problem = problemsource.problem %}
+{% set problem_name = problem and problem.name or problemsource.problem_code %}
+{% set title = _('Importing problem') + ' ' + problem_name %}
+
+{% block content_title %}
+{{ _('Importing problem') }}
+{% if problem %}
+<a href="{{ url('problem_detail', problem=problem.code) }}">{{ problem.name }}</a>
+{% else %}
+{{ problemsource.problem_code }}
+{% endif %}
+{% endblock %}
+
+{% block header %}
+    {% if problem %}
+        <div class="title-line-action">
+            [<a href="{{ url('admin:judge_problem_change', problem.id) }}">{{ _('Edit problem') }}</a>]
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+<p>{{ _("Source URL") }}: <code>{{ problemsource.polygon_url }}</code></p>
+<p>{{ _("Importer") }}: <strong>{{ problemsource.user.username }}</strong></p>
+<form method="POST" action="">
+    {% csrf_token %}
+
+    <button>Reimport</button>
+</form>
+<h3 style="margin-top: 1em;">Import results</h3>
+{% for problem_import in problemsource.imports.order_by('-id').all() %}
+<p>{{ problem_import.created_at }} — {{ problem_import.get_status_display() }}</p>
+{% if problem_import.error %}
+<pre><code>{{ problem_import.error }}</code></pre>
+{% endif %}
+<details>
+    <summary>Import log</summary>
+    <pre><code>{{ problem_import.log }}</code></pre>
+</details>
+<hr/>
+{% endfor %}
+
+{% endblock %}

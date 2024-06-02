@@ -54,9 +54,10 @@ class ProblemData(models.Model):
         self.__original_zipfile = self.zipfile
 
     def save(self, *args, **kwargs):
+        result = super(ProblemData, self).save(*args, **kwargs)
         if self.zipfile != self.__original_zipfile:
             self.__original_zipfile.delete(save=False)
-        return super(ProblemData, self).save(*args, **kwargs)
+        return result
 
     def has_yml(self):
         return problem_data_storage.exists('%s/init.yml' % self.problem.code)

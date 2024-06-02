@@ -146,6 +146,7 @@ class ProblemAdmin(NoBatchDeleteMixin, VersionAdmin):
     list_filter = ('is_public', ProblemCreatorListFilter)
     form = ProblemForm
     date_hierarchy = 'date'
+    change_list_template = 'admin/judge/problem/change_list.html'
 
     def get_actions(self, request):
         actions = super(ProblemAdmin, self).get_actions(request)

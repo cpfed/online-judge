@@ -80,7 +80,7 @@ class ContestSubmissionInline(admin.StackedInline):
                                                                          contest__problems=submission.problem) \
                     .only('id', 'contest__name', 'virtual')
 
-                def label(obj):
+                def label(obj):  # noqa: F811
                     if obj.spectate:
                         return gettext('%s (spectating)') % obj.contest.name
                     if obj.virtual:

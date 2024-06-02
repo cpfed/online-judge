@@ -192,6 +192,7 @@ else:
                         'judge.ProblemType',
                         'judge.License',
                         'judge.ProblemPointsVote',
+                        'polygon.ProblemSource',
                     ],
                 },
                 ('judge.Submission', 'fa-check-square-o'),
@@ -256,6 +257,7 @@ else:
 INSTALLED_APPS += (
     'django.contrib.admin',
     'judge',
+    'polygon',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.flatpages',

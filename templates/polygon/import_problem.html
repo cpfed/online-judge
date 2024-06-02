@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block media %}
+    <style>
+        ul.errorlist {
+            border: 3px red solid;
+            border-radius: 5px;
+            padding-top: 1em;
+            padding-bottom: 1em;
+            background: #e99;
+        }
+
+        .fullwidth input {
+            width: 100%;
+        }
+
+        .mb-3 {
+            margin-bottom: 0.6em;
+        }
+    </style>
+{% endblock %}
+
+{% set title = _("Import problem from Polygon") %}
+
+{% block body %}
+    <p>{% trans %}Before continuing share your problem in Polygon with {{ polygon_user }}.{% endtrans %}</p>
+    <form method="POST" action="">
+        {% csrf_token %}
+        <div><label class="inline-header">{{ form.url.label }}</label></div>
+        <div><span class="fullwidth">{{ form.url }}</span></div>
+        <div class="mb-3"><span class="grayed">{{ form.url.help_text }}</span></div>
+
+        <div><label class="inline-header">{{ form.code.label }}</label></div>
+        <div><span class="fullwidth">{{ form.code }}</span></div>
+        <div class="mb-3"><span class="grayed">{{ form.code.help_text }}</span></div>
+
+        <button>{{ _('Import') }}</button>
+    </form>
+{% endblock %}

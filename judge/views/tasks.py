@@ -37,13 +37,16 @@ def task_status(request, task_id):
     if not is_safe_url(redirect, allowed_hosts={request.get_host()}):
         redirect = None
 
+    always_redirect = 'always' in request.GET
+
     status = get_task_status(task_id)
-    if status['code'] == 'SUCCESS' and redirect:
+    if (status['code'] == 'SUCCESS' or status['code'] == 'FAILURE' and always_redirect) and redirect:
         return HttpResponseRedirect(redirect)
 
     return render(request, 'task_status.html', {
         'task_id': task_id, 'task_status': json.dumps(status),
         'message': request.GET.get('message', ''), 'redirect': redirect or '',
+        'always_redirect': always_redirect,
     })
 
 
