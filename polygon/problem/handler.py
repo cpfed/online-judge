@@ -135,6 +135,8 @@ def handle_import(context: ImportContext) -> Problem:
     if total_points == 0:
         context.logger.info('No points configured, treating problem as non-partial')
         partial = False
+        total_points = 1.0
+        config.test_cases[-1]['points'] = 1  # Add score for the last test
     else:
         context.logger.info('Points configured, treating problem as partial')
         partial = True

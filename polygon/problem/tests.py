@@ -87,6 +87,9 @@ def parse_testset(context: ImportContext, storage: zipfile.ZipFile, name: str) -
         gcd = math.gcd(*all_points)
         for item in result:
             item['points'] = int(item['points'] * 100) // gcd
+    else:
+        for item in result:
+            item['points'] = int(item['points'])
 
     test_count = sum(len(item['batched']) if 'batched' in item else 1 for item in result)
     batch_count = len(groups)
