@@ -12,7 +12,7 @@ class ImportForm(forms.Form):
             RegexValidator('^https://polygon.codeforces.com/', _('Only polygon.codeforces.com links are supported')),
         ],
         max_length=511,
-        help_text=_('Problem URL in the right sidebar'),
+        help_text=_('Problem URL in the right sidebar of Polygon problem page'),
     )
 
     code = forms.CharField(

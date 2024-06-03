@@ -23,7 +23,11 @@
 {% set title = _("Import problem from Polygon") %}
 
 {% block body %}
-    <p>{% trans %}Before continuing share your problem in Polygon with {{ polygon_user }}.{% endtrans %}</p>
+    <p>{% trans %}Before continuing:{% endtrans %}</p>
+    <ul>
+        <li>{% trans %}Share your problem in Polygon with {{ polygon_user }}{% endtrans %}</li>
+        <li>{% trans %}Generate full problem package for the actual problem revision{% endtrans %}</li>
+    </ul>
     <form method="POST" action="">
         {% csrf_token %}
         <div><label class="inline-header">{{ form.url.label }}</label></div>
