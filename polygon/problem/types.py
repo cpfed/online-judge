@@ -28,6 +28,7 @@ class ImportContext:
     descriptor: _Element
     logger: Logger
     temp_dir: Path
+    upload_id: str
     image_cache: dict[str, str] = field(default_factory=dict)
 
 

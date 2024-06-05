@@ -1,5 +1,4 @@
 import math
-import time
 import zipfile
 from typing import Any, Dict, List
 
@@ -100,7 +99,7 @@ def parse_testset(context: ImportContext, storage: zipfile.ZipFile, name: str) -
 
 def parse_tests(context: ImportContext) -> ProblemConfig:
     revision = context.descriptor.get('revision')
-    archive = f'tests-r{revision}-{int(time.time())}.zip'
+    archive = f'tests-r{revision}-{context.upload_id}.zip'
 
     context.logger.debug('Storing tests in %s', archive)
     with zipfile.ZipFile(context.temp_dir / archive, 'w') as zf:

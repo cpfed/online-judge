@@ -63,7 +63,7 @@
             }
             enableSubmit();
 
-            $('#id_polygon_id').keypress(smartDebounce(
+            const polygonIdHandler = smartDebounce(
                 () => fetch(
                     '{{ url("polygon_check_problem") }}',
                     {
@@ -91,7 +91,10 @@
                         enableSubmit();
                     }
                 }
-            ));
+            );
+
+            $('#id_polygon_id').keypress(polygonIdHandler);
+            $('#id_polygon_id').change(polygonIdHandler);
 
             $('#id_code').keypress(function() {
                 codeTouched = true;

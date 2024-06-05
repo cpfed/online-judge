@@ -1,14 +1,12 @@
 import io
 import logging
-import os
+import random
 import tempfile
 import zipfile
 from pathlib import Path
 
 from celery import shared_task
 from celery.app.task import Task
-from django.conf import settings
-from django.core.files.storage import default_storage
 from lxml import etree as ET
 
 from judge.models import Problem, Profile
@@ -81,18 +79,11 @@ def import_problem(self: Task, problem_source_id: int, profile_id: int):
                     descriptor=ET.fromstring(package.read('problem.xml')),
                     logger=logger,
                     temp_dir=temp_dir,
+                    upload_id=random.randbytes(4).hex(),
                 )
 
-                try:
-                    problem_source.problem = handle_import(context)
-                    problem_source.save()
-                except:  # noqa: E722, we need cleanup for every failure including KeyboardInterrupt
-                    for image_url in context.image_cache.values():
-                        source_path = default_storage.path(
-                            os.path.join(settings.MARTOR_UPLOAD_MEDIA_DIR, os.path.basename(image_url)),
-                        )
-                        os.remove(source_path)
-                    raise
+                problem_source.problem = handle_import(context)
+                problem_source.save()
     except Exception as exc:
         problem_import.status = 'F'
         logger.exception('Failed to import problem')

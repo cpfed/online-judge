@@ -5,6 +5,7 @@ from typing import List
 
 from django.conf import settings
 from django.core.files import File
+from django.core.files.storage import default_storage
 from django.db import transaction
 from django.utils import timezone
 
@@ -134,6 +135,7 @@ def prepare_properties(context: ImportContext, config: ProblemConfig, statements
 
 
 def cleanup(context: ImportContext, config: ProblemConfig):
+    # Cleanup judge directory
     expected_files = ['init.yml', config.archive]
     if config.interactive:
         expected_files += config.interactive.files
@@ -150,6 +152,11 @@ def cleanup(context: ImportContext, config: ProblemConfig):
             else:
                 context.logger.info('Removing old file %s', file.name)
                 file.unlink()
+
+    # Cleanup media directory
+    for item in default_storage.listdir(f'problems/{context.source.problem_code}')[0]:
+        if item != context.upload_id:
+            shutil.rmtree(default_storage.path(f'problems/{context.source.problem_code}/{item}'), ignore_errors=True)
 
 
 def judge_main_submission(context: ImportContext, problem: Problem) -> None:
@@ -220,13 +227,22 @@ def handle_import(context: ImportContext) -> Problem:
     config = parse_tests(context)
     context.task.report('Processing assets')
     parse_assets(context, config)
-    context.task.report('Processing statements')
-    statements = parse_statements(context)
 
-    context.task.report('Saving problem')
-    properties = prepare_properties(context, config, statements)
+    try:
+        context.task.report('Processing statements')
+        statements = parse_statements(context)
 
-    problem = save_problem(context, properties, config)
+        context.task.report('Saving problem')
+        properties = prepare_properties(context, config, statements)
+
+        problem = save_problem(context, properties, config)
+    except:  # noqa: E722, we need cleanup for every failure including KeyboardInterrupt
+        try:
+            shutil.rmtree(default_storage.path(f'problems/{context.source.problem_code}/{context.upload_id}'))
+        except FileNotFoundError:
+            pass
+        raise
+
     cleanup(context, config)
 
     judge_main_submission(context, problem)

@@ -6,10 +6,10 @@ import subprocess
 import tempfile
 from typing import Any, List
 
-from django.core.files import File
+from django.conf import settings
+from django.core.files.storage import default_storage
 from django.utils.translation import gettext as _, override
 
-from judge.views.widgets import django_uploader
 from .exceptions import ProblemImportError
 from .types import ImportContext, Statement
 
@@ -42,6 +42,8 @@ local function normalize_quote(text)
     text = text:gsub('\u{2019}', "'") -- right single quote
     text = text:gsub('\u{201C}', '"') -- left double quote
     text = text:gsub('\u{201D}', '"') -- right double quote
+    text = text:gsub('<<', '\u{00AB}') -- russian left quote
+    text = text:gsub('>>', '\u{00BB}') -- russian right quote
     return text
 end
 
@@ -228,16 +230,25 @@ def pandoc_get_version() -> tuple[int, int, int]:
 
 def process_images(context: ImportContext, statement_folder: str, text: str) -> str:
     def save_image(image_path: str) -> str:
+        if len(context.image_cache) == 0:
+            os.makedirs(
+                default_storage.path(f'problems/{context.source.problem_code}/{context.upload_id}'),
+                exist_ok=True,
+            )
+
         norm_path = os.path.normpath(os.path.join(statement_folder, image_path))
         sha1 = hashlib.sha1(context.package.read(norm_path)).hexdigest()
 
         if sha1 not in context.image_cache:
-            image = File(
-                file=context.package.open(norm_path, 'r'),
-                name=os.path.basename(image_path),
-            )
-            data = json.loads(django_uploader(image))
-            context.image_cache[sha1] = data['link']
+            path = f'problems/{context.source.problem_code}/{context.upload_id}/{sha1}_{os.path.basename(image_path)}'
+            with context.package.open(norm_path, 'r') as image_source:
+                default_storage.save(path, image_source)
+
+            url = settings.MEDIA_URL
+            if not url.endswith('/'):
+                url = url + '/'
+            url += path
+            context.image_cache[sha1] = url
 
         return context.image_cache[sha1]
 
