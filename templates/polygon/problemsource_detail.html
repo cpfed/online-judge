@@ -32,7 +32,8 @@
 {% block header %}
     {% if problem %}
         <div class="title-line-action">
-            [<a href="{{ url('admin:judge_problem_change', problem.id) }}">{{ _('Edit problem') }}</a>]
+            [<a href="{{ url('polygon_new_problem') }}">{{ _('Import another') }}</a> |
+            <a href="{{ url('admin:judge_problem_change', problem.id) }}">{{ _('Edit problem') }}</a>]
         </div>
     {% endif %}
 {% endblock %}

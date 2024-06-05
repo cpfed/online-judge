@@ -111,12 +111,12 @@ def prepare_properties(context: ImportContext, config: ProblemConfig, statements
 
     total_points = sum(case['points'] for case in config.test_cases)
     if total_points == 0:
-        context.logger.info('No points configured. Adding 1 point for the last testcase.')
+        context.logger.info('No points configured, adding 1 point for the last testcase')
         partial = False
         total_points = 1.0
         config.test_cases[-1]['points'] = 1  # Add score for the last test
     else:
-        context.logger.info('Found points. Total score: %s', total_points)
+        context.logger.info('Found points, total score: %s', total_points)
         partial = True
 
     return ProblemProperties(
@@ -165,14 +165,14 @@ def judge_main_submission(context: ImportContext, problem: Problem) -> None:
 
         language = source_tag.get('type')
         if language not in POLYGON_COMPILERS:
-            context.logger.warning('Main solution has unsupported type %s', language)
+            context.logger.warning('Main solution has unsupported type %s, skipping...', language)
             return None
 
         source_file = context.package.read(source_tag.get('path'))
         try:
             source_file = source_file.decode()
         except UnicodeDecodeError:
-            context.logger.warning('Main solution is not a valid Unicode file')
+            context.logger.warning('Main solution is not a valid Unicode file, skipping...')
             return None
 
         return MainSolution(POLYGON_COMPILERS[language], source_file)

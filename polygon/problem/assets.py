@@ -44,7 +44,7 @@ def parse_assets(context: ImportContext, config: ProblemConfig) -> None:
         config.unbuffered = True
 
         context.logger.warning('DMOJ does not support checker and interactor at the same time')
-        context.logger.info('Your checker should ALWAYS quitf(_ok), all checks should be in the interactor.')
+        context.logger.info('Your checker should ALWAYS quitf(_ok), all checks should be made in the interactor')
         return
 
     context.logger.info('Problem is non-interactive, adding checker')
