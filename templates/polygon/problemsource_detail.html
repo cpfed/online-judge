@@ -1,5 +1,21 @@
 {% extends "base.html" %}
 
+{% macro render_log(line) %}
+{%- if line.startswith('DEBUG:') -%}
+<span style="color: #666;">{{ line.split(':', 1)[1] }}</span>
+{%- elif line.startswith('INFO:') -%}
+{{ line.split(':', 1)[1] }}
+{%- elif line.startswith('WARNING:') -%}
+<span style="color: #c90; font-weight: bold;">{{ line.split(':', 1)[1] }}</span>
+{%- elif line.startswith('ERROR:') -%}
+<span style="color: #c00; font-weight: bold;">{{ line.split(':', 1)[1] }}</span>
+{%- elif line.startswith('CRITICAL:') -%}
+<span style="color: #f00; font-weight: bold;">{{ line.split(':', 1)[1] }}</span>
+{%- else -%}
+{{ line }}
+{%- endif -%}
+{% endmacro %}
+
 {% set problem = problemsource.problem %}
 {% set problem_name = problem and problem.name or problemsource.problem_code %}
 {% set title = _('Importing problem') + ' ' + problem_name %}
@@ -22,22 +38,42 @@
 {% endblock %}
 
 {% block body %}
-<p>{{ _("Source URL") }}: <code>{{ problemsource.polygon_url }}</code></p>
-<p>{{ _("Importer") }}: <strong>{{ problemsource.user.username }}</strong></p>
+<p>{{ _('by') }} <strong>{{ problemsource.author.username }}</strong></p>
+<p>{{ _('Polygon problem') }} <a href="https://polygon.codeforces.com/problems?problemId={{ problemsource.polygon_id }}" target="_blank">{{ problemsource.polygon_id }}</a></p>
+{% if problemsource.main_submission is not none %}
+{% set submission = problemsource.main_submission %}
+<p>{{ _('Main correct solution') }}: <a href="{{ url('submission_status', submission.id) }}">{{ submission.long_status }},
+    {% if submission.is_graded -%}
+    {%- if submission.status in ('IE', 'CE', 'AB') -%}
+        ---
+    {%- else -%}
+        {{ submission.case_points|floatformat(0) }} / {{ submission.case_total|floatformat(0) }}
+    {%- endif -%}
+{%- else -%}
+    <i class="fa fa-spinner fa-pulse grading-spinner"></i>
+{%- endif -%}
+</a></p>
+{% endif %}
 <form method="POST" action="">
     {% csrf_token %}
 
-    <button>Reimport</button>
+    <button>{{ _('Reimport') }}</button>
 </form>
-<h3 style="margin-top: 1em;">Import results</h3>
+<h3 style="margin-top: 1em;">{{ _('Import attempts') }}</h3>
 {% for problem_import in problemsource.imports.order_by('-id').all() %}
-<p>{{ problem_import.created_at }} — {{ problem_import.get_status_display() }}</p>
-{% if problem_import.error %}
-<pre><code>{{ problem_import.error }}</code></pre>
-{% endif %}
-<details>
-    <summary>Import log</summary>
-    <pre><code>{{ problem_import.log }}</code></pre>
+<p>
+    <span class="time">{{ relative_time(problem_import.created_at) }}</span> {{ _('by') }} <strong>{{ problem_import.author.username }}</strong> — {{ problem_import.get_status_display() }}
+    {% if problem_import.error %}
+    — <span style="color: darkred;">{{ problem_import.error }}</span>
+    {% endif %}
+</p>
+<details {% if loop.index == 1 %}open{% endif %}>
+    <summary>{{ _('Import log') }}</summary>
+    <pre><code>
+{%- for line in problem_import.log.splitlines() %}
+{{ render_log(line) }}
+{% endfor -%}
+</code></pre>
 </details>
 <hr/>
 {% endfor %}

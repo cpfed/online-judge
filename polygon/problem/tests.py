@@ -23,7 +23,7 @@ def parse_testset(context: ImportContext, storage: zipfile.ZipFile, name: str) -
     groups_enabled = group_blocks is not None
     if groups_enabled:
         for idx, group_block in enumerate(group_blocks, start=1):
-            name = int(group_block.get('name'))
+            name = group_block.get('name')
 
             points_policy = group_block.get('points-policy')
             assert points_policy in ['complete-group', 'each-test']
@@ -82,7 +82,7 @@ def parse_testset(context: ImportContext, storage: zipfile.ZipFile, name: str) -
 
     all_points: list[float] = [item['points'] for item in result]
     if any(not p.is_integer() for p in all_points):
-        context.logger.warning('FLOATING-POINT TEST POINTS ARE NOT SUPPORTED. NORMALIZING TO INTEGERS')
+        context.logger.warning('Found tests with floating-point score. It is not supported, points will be normalized')
         all_points = [int(p * 100) for p in all_points]
         gcd = math.gcd(*all_points)
         for item in result:
@@ -102,7 +102,7 @@ def parse_tests(context: ImportContext) -> ProblemConfig:
     revision = context.descriptor.get('revision')
     archive = f'tests-r{revision}-{int(time.time())}.zip'
 
-    context.logger.info('Storing tests in %s', archive)
+    context.logger.debug('Storing tests in %s', archive)
     with zipfile.ZipFile(context.temp_dir / archive, 'w') as zf:
         pretests = parse_testset(context, zf, 'pretests')
         tests = parse_testset(context, zf, 'tests')

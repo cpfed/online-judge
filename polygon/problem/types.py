@@ -6,13 +6,14 @@ from zipfile import ZipFile
 
 from lxml.etree import _Element
 
-from judge.models import ProblemGroup
+from judge.models import ProblemGroup, Profile
 from ..models import ProblemSource
 
 
 @dataclass
 class ImportContext:
     source: ProblemSource
+    author: Profile
     package: ZipFile
     descriptor: _Element
     logger: Logger
@@ -48,6 +49,12 @@ class Grader:
     feedback: bool
     lang: str = 'CPP20'
     type: str = 'testlib'
+
+
+@dataclass
+class MainSolution:
+    language: str
+    source: str
 
 
 @dataclass

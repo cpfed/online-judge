@@ -1,17 +1,21 @@
 import json
 import shutil
 from pathlib import Path
+from typing import List
 
 from django.conf import settings
 from django.core.files import File
 from django.db import transaction
 from django.utils import timezone
 
-from judge.models import Language, Problem, ProblemData, ProblemGroup, ProblemTranslation, ProblemType, Solution
+from judge.models import Language, Problem, ProblemData, ProblemGroup, ProblemTranslation, ProblemType, Solution, \
+    Submission, SubmissionSource
 from .assets import parse_assets
+from .constants import POLYGON_COMPILERS
+from .exceptions import ProblemImportError
 from .statement import parse_statements
 from .tests import parse_tests
-from .types import ImportContext, ProblemConfig, ProblemProperties
+from .types import ImportContext, MainSolution, ProblemConfig, ProblemProperties, Statement
 from .utils import asdict_notnull
 
 
@@ -33,8 +37,8 @@ def save_problem(
         context.logger.info('Updating existing problem')
 
     problem.allowed_languages.set(Language.objects.all())
-    if context.source.user not in problem.authors.all():
-        problem.authors.add(context.source.user)
+    if context.source.author not in problem.authors.all():
+        problem.authors.add(context.source.author)
     if problem.types.count() == 0:
         problem.types.set([ProblemType.objects.order_by('id').first()])  # Uncategorized
     problem.save()
@@ -87,33 +91,7 @@ def save_problem(
     return problem
 
 
-def cleanup(context: ImportContext, config: ProblemConfig):
-    expected_files = ['init.yml', config.archive]
-    if config.interactive:
-        expected_files += config.interactive.files
-    if config.checker:
-        expected_files += config.checker.args.files
-
-    problem_path = Path(settings.DMOJ_PROBLEM_DATA_ROOT) / context.source.problem_code
-
-    for file in problem_path.iterdir():
-        if file.name not in expected_files:
-            if file.is_dir():
-                context.logger.info('Removing old directory %s', file.name)
-                shutil.rmtree(file)
-            else:
-                context.logger.info('Removing old file %s', file.name)
-                file.unlink()
-
-
-def handle_import(context: ImportContext) -> Problem:
-    revision = context.descriptor.get('revision')
-    context.logger.info('Importing problem revision %s', revision)
-
-    config = parse_tests(context)
-    parse_assets(context, config)
-    statements = parse_statements(context)
-
+def prepare_properties(context: ImportContext, config: ProblemConfig, statements: List[Statement]) -> ProblemProperties:
     main_language = settings.LANGUAGE_CODE.split('-')[0]
     main_statement = next((s for s in statements if s.language == main_language), None)
     if main_statement is None:
@@ -133,15 +111,15 @@ def handle_import(context: ImportContext) -> Problem:
 
     total_points = sum(case['points'] for case in config.test_cases)
     if total_points == 0:
-        context.logger.info('No points configured, treating problem as non-partial')
+        context.logger.info('No points configured. Adding 1 point for the last testcase.')
         partial = False
         total_points = 1.0
         config.test_cases[-1]['points'] = 1  # Add score for the last test
     else:
-        context.logger.info('Points configured, treating problem as partial')
+        context.logger.info('Found points. Total score: %s', total_points)
         partial = True
 
-    properties = ProblemProperties(
+    return ProblemProperties(
         code=context.source.problem_code,
         name=main_statement.name,
         time_limit=float(testset.find('time-limit').text) / 1000,  # in s
@@ -154,6 +132,99 @@ def handle_import(context: ImportContext) -> Problem:
         group=ProblemGroup.objects.order_by('id').first(),  # Uncategorized
     )
 
+
+def cleanup(context: ImportContext, config: ProblemConfig):
+    expected_files = ['init.yml', config.archive]
+    if config.interactive:
+        expected_files += config.interactive.files
+    if config.checker:
+        expected_files += config.checker.args.files
+
+    problem_path = Path(settings.DMOJ_PROBLEM_DATA_ROOT) / context.source.problem_code
+
+    for file in problem_path.iterdir():
+        if file.name not in expected_files:
+            if file.is_dir():
+                context.logger.info('Removing old directory %s', file.name)
+                shutil.rmtree(file)
+            else:
+                context.logger.info('Removing old file %s', file.name)
+                file.unlink()
+
+
+def judge_main_submission(context: ImportContext, problem: Problem) -> None:
+    def get_package_submission() -> MainSolution | None:
+        main_solution = context.descriptor.find('.//solution[@tag="main"]')
+        if main_solution is None:
+            context.logger.warning('Problem has no main correct solution')
+            return None
+
+        source_tag = main_solution.find('source')
+        if source_tag is None:
+            raise ProblemImportError('No source for main solution')
+
+        language = source_tag.get('type')
+        if language not in POLYGON_COMPILERS:
+            context.logger.warning('Main solution has unsupported type %s', language)
+            return None
+
+        source_file = context.package.read(source_tag.get('path'))
+        try:
+            source_file = source_file.decode()
+        except UnicodeDecodeError:
+            context.logger.warning('Main solution is not a valid Unicode file')
+            return None
+
+        return MainSolution(POLYGON_COMPILERS[language], source_file)
+
+    def get_cached_submission() -> MainSolution | None:
+        if context.source.main_submission is None:
+            return None
+
+        submission = context.source.main_submission
+        return MainSolution(submission.language.key, submission.source.source)
+
+    package_submission = get_package_submission()
+    if package_submission is None:
+        return
+
+    cached_submission = get_cached_submission()
+
+    if cached_submission != package_submission:
+        context.logger.info('Submitting main correct solution')
+        with transaction.atomic():
+            submission = Submission.objects.create(
+                problem=problem,
+                user=context.author,
+                language=Language.objects.get(key=package_submission.language),
+            )
+            SubmissionSource.objects.create(
+                submission=submission,
+                source=package_submission.source,
+            )
+
+        context.source.main_submission = submission
+        context.source.save()
+
+        context.source.main_submission.judge(force_judge=True)
+    else:
+        context.logger.info('Main correct solution is not changed, rejudging')
+        context.source.main_submission.judge(force_judge=True, rejudge=True, rejudge_user=context.author.user)
+
+
+def handle_import(context: ImportContext) -> Problem:
+    revision = context.descriptor.get('revision')
+    context.logger.info('Importing problem revision %s', revision)
+
+    config = parse_tests(context)
+    parse_assets(context, config)
+    statements = parse_statements(context)
+
+    properties = prepare_properties(context, config, statements)
+
     problem = save_problem(context, properties, config)
     cleanup(context, config)
+
+    judge_main_submission(context, problem)
+
     return problem

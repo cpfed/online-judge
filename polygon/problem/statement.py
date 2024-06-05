@@ -313,10 +313,15 @@ def parse_statements(context: ImportContext) -> List[Statement]:
 
     for statement_block in statement_blocks:
         origin_language = statement_block.get('language', 'unknown')
+        if origin_language not in POLYGON_TO_DMOJ_LANG:
+            context.logger.warning(
+                "Unknown language %s. Statement will be saved, but it's never to be shown",
+                origin_language,
+            )
         language = POLYGON_TO_DMOJ_LANG.get(origin_language, origin_language)
 
         if language in existing_languages:
-            context.logger.warning('Duplicate statement in %s, skipping...', language)
+            context.logger.warning('Duplicate language %s, skipping...', language)
             continue
 
         existing_languages.add(language)

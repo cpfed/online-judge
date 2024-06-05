@@ -6,13 +6,10 @@ __all__ = ('ImportForm', 'ReimportForm')
 
 
 class ImportForm(forms.Form):
-    url = forms.CharField(
-        label=_('Polygon URL'),
-        validators=[
-            RegexValidator('^https://polygon.codeforces.com/', _('Only polygon.codeforces.com links are supported')),
-        ],
-        max_length=511,
-        help_text=_('Problem URL in the right sidebar of Polygon problem page'),
+    polygon_id = forms.IntegerField(
+        label=_('Polygon problem ID'),
+        required=True,
+        help_text=_('Numeric problem ID from Polygon'),
     )
 
     code = forms.CharField(

@@ -43,8 +43,8 @@ def parse_assets(context: ImportContext, config: ProblemConfig) -> None:
         config.interactive = Grader(files=['interactor.cpp', 'testlib.h'], feedback=feedback)
         config.unbuffered = True
 
-        context.logger.warning('DMOJ DOES NOT SUPPORT CHECKER AND INTERACTOR AT THE SAME TIME')
-        context.logger.warning('You should merge checker into the interactor, and always quitf(_ok) in checker.')
+        context.logger.warning('DMOJ does not support checker and interactor at the same time')
+        context.logger.info('Your checker should ALWAYS quitf(_ok), all checks should be in the interactor.')
         return
 
     context.logger.info('Problem is non-interactive, adding checker')

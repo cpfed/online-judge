@@ -2,13 +2,19 @@ from django.core.validators import RegexValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from judge.models.problem import Problem
-from judge.models.profile import Profile
+from judge.models import Problem, Profile, Submission
 
 
 class ProblemSource(models.Model):
-    polygon_url = models.CharField(max_length=511)
-    user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='problem_sources')
+    polygon_id = models.IntegerField(unique=True, null=False)
+    author = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='problem_sources')
+    main_submission = models.ForeignKey(
+        Submission,
+        on_delete=models.SET_NULL,
+        related_name='polygon_imports',
+        null=True,
+        db_index=False,
+    )
 
     # This is DMOJ problem code to be created
     problem_code = models.CharField(
@@ -36,6 +42,7 @@ class ProblemSourceImport(models.Model):
     )
 
     problem_source = models.ForeignKey(ProblemSource, on_delete=models.CASCADE, related_name='imports')
+    author = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='problem_imports')
     status = models.CharField(max_length=2, choices=STATUS, default='P')
     log = models.TextField(null=True)
     error = models.TextField(null=True)

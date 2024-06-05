@@ -21,22 +21,22 @@ class ImportProblemView(PermissionRequiredMixin, FormView):
         with transaction.atomic():
             # Ensure changes are committed
             problem_source = ProblemSource(
-                polygon_url=form.cleaned_data['url'],
-                user=self.request.profile,
+                polygon_id=form.cleaned_data['polygon_id'],
+                author=self.request.profile,
                 problem_code=form.cleaned_data['code'],
             )
             problem_source.save()
 
-        task = import_problem_task.delay(problem_source.id)
+        task = import_problem_task.delay(problem_source.id, self.request.profile.id)
 
         return HttpResponseRedirect(
             reverse('task_status', kwargs={'task_id': task.id}) +
-            '?redirect=' +
+            '?always=1&redirect=' +
             reverse('polygon_source', kwargs={'pk': problem_source.id}),
         )
 
     def get_context_data(self, **kwargs):
-        kwargs['polygon_user'] = settings.POLYGON_LOGIN
+        kwargs['polygon_user'] = settings.POLYGON_USER
         return super().get_context_data(**kwargs)
 
 
@@ -48,7 +48,7 @@ class ProblemSourceView(PermissionRequiredMixin, FormMixin, DetailView):
     def get_object(self, queryset=None):
         result: ProblemSource = super().get_object(queryset)
 
-        if result.problem is None and result.user != self.request.profile:
+        if result.problem is None and result.author != self.request.profile:
             raise PermissionDenied()
 
         if result.problem is not None and not result.problem.is_editable_by(self.request.user):
@@ -66,7 +66,7 @@ class ProblemSourceView(PermissionRequiredMixin, FormMixin, DetailView):
     def form_valid(self, form):
         problem_source = self.get_object()
 
-        task = import_problem_task.delay(problem_source.id)
+        task = import_problem_task.delay(problem_source.id, self.request.profile.id)
 
         return HttpResponseRedirect(
             reverse('task_status', kwargs={'task_id': task.id}) +

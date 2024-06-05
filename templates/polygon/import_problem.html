@@ -30,9 +30,9 @@
     </ul>
     <form method="POST" action="">
         {% csrf_token %}
-        <div><label class="inline-header">{{ form.url.label }}</label></div>
-        <div><span class="fullwidth">{{ form.url }}</span></div>
-        <div class="mb-3"><span class="grayed">{{ form.url.help_text }}</span></div>
+        <div><label class="inline-header">{{ form.polygon_id.label }}</label></div>
+        <div><span class="fullwidth">{{ form.polygon_id }}</span></div>
+        <div class="mb-3"><span class="grayed">{{ form.polygon_id.help_text }}</span></div>
 
         <div><label class="inline-header">{{ form.code.label }}</label></div>
         <div><span class="fullwidth">{{ form.code }}</span></div>
