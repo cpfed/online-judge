@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="https://avatars2.githubusercontent.com/u/6934864?v=3&s=1000" width="120px">
+  <img src="https://github.com/DMOJ/online-judge/blob/master/logo.png?raw=true" width="120px">
   <br>
   DMOJ: Modern Online Judge
 </h1>
@@ -91,9 +91,9 @@ Use the site in whatever language you're most comfortable in &mdash; visit [tran
 ### Highly featured administration interface
 The DMOJ admin interface is highly versatile, and can be efficiently used for anything from managing users to authoring problem statements.
 
-![](https://dmoj.ml/data/_other/readme/problem-admin.png)
+![](https://static.dmoj.ca/data/_other/readme/problem-admin.png)
 
-![](https://dmoj.ml/data/_other/readme/admin-dashboard.png)
+![](https://static.dmoj.ca/data/_other/readme/admin-dashboard.png)
 
 ## Supported languages
 
@@ -102,7 +102,7 @@ Check out [**DMOJ/judge-server**](https://github.com/DMOJ/judge-server) for more
 Supported languages include:
 * C++ 11/14/17/20 (GCC and Clang)
 * C 99/11
-* Java 8-19
+* Java 8-22
 * Python 2/3
 * PyPy 2/3
 * Pascal
@@ -110,6 +110,7 @@ Supported languages include:
 
 The judge can also grade in the languages listed below:
 * Ada
+* Algol 68
 * AWK
 * COBOL
 * D
