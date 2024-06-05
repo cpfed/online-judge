@@ -216,10 +216,14 @@ def handle_import(context: ImportContext) -> Problem:
     revision = context.descriptor.get('revision')
     context.logger.info('Importing problem revision %s', revision)
 
+    context.task.report('Processing testsets')
     config = parse_tests(context)
+    context.task.report('Processing assets')
     parse_assets(context, config)
+    context.task.report('Processing statements')
     statements = parse_statements(context)
 
+    context.task.report('Saving problem')
     properties = prepare_properties(context, config, statements)
 
     problem = save_problem(context, properties, config)

@@ -6,6 +6,7 @@ import zipfile
 from pathlib import Path
 
 from celery import shared_task
+from celery.app.task import Task
 from django.conf import settings
 from django.core.files.storage import default_storage
 from lxml import etree as ET
@@ -13,7 +14,7 @@ from lxml import etree as ET
 from judge.models import Problem, Profile
 from . import api
 from .models import ProblemSource, ProblemSourceImport
-from .problem import ImportContext, ProblemImportError, handle_import
+from .problem import ImportContext, ProblemImportError, TaskReporter, handle_import
 
 __all__ = 'import_problem'
 
@@ -40,7 +41,7 @@ def prepare_archive(logger: logging.Logger, problem_id: int, path: Path) -> None
 
 
 @shared_task(bind=True)
-def import_problem(self, problem_source_id: int, profile_id: int):
+def import_problem(self: Task, problem_source_id: int, profile_id: int):
     problem_source = ProblemSource.objects.get(id=problem_source_id)
     author = Profile.objects.get(id=profile_id)
     problem_import = ProblemSourceImport(problem_source=problem_source, author=author)
@@ -53,9 +54,11 @@ def import_problem(self, problem_source_id: int, profile_id: int):
     logger.setLevel(logging.DEBUG)
     logger.addHandler(log_handler)
 
+    task = TaskReporter(self)
+
     try:
         problem_code = problem_source.problem_code
-        Problem._meta.get_field('code').run_validators(problem_code)
+        Problem._meta.get_field('code').run_validators(problem_code)  # Just to ensure nothing broke
         if problem_source.problem is None and Problem.objects.filter(code=problem_code).exists():
             raise ProblemImportError(f'Problem with code {problem_code} already exists')
 
@@ -63,6 +66,7 @@ def import_problem(self, problem_source_id: int, profile_id: int):
             temp_dir = Path(temp_dir)
             archive_path = temp_dir / 'archive.zip'
 
+            task.report('Downloading problem archive')
             prepare_archive(logger, problem_source.polygon_id, archive_path)
 
             with zipfile.ZipFile(archive_path) as package:
@@ -71,6 +75,7 @@ def import_problem(self, problem_source_id: int, profile_id: int):
 
                 context = ImportContext(
                     source=problem_source,
+                    task=task,
                     author=author,
                     package=package,
                     descriptor=ET.fromstring(package.read('problem.xml')),

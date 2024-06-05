@@ -24,7 +24,7 @@ def get_task_status(task_id):
     elif result.state == 'FAILURE':
         return {'code': 'FAILURE', 'error': str(info)}
     else:
-        return {'code': 'WORKING'}
+        return {'code': 'WORKING', 'stage': info.get('stage') if isinstance(info, dict) else None}
 
 
 def task_status(request, task_id):

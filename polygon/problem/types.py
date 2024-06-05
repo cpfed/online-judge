@@ -4,15 +4,25 @@ from pathlib import Path
 from typing import Any, Dict, List
 from zipfile import ZipFile
 
+from celery.app.task import Task
 from lxml.etree import _Element
 
 from judge.models import ProblemGroup, Profile
 from ..models import ProblemSource
 
 
+class TaskReporter:
+    def __init__(self, task: Task):
+        self.task = task
+
+    def report(self, stage: str):
+        self.task.update_state(state='WORKING', meta={'stage': stage})
+
+
 @dataclass
 class ImportContext:
     source: ProblemSource
+    task: TaskReporter
     author: Profile
     package: ZipFile
     descriptor: _Element
