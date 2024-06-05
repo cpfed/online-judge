@@ -374,6 +374,8 @@ urlpatterns = [
     path('polygon/', include([
         path('import', polygon_views.ImportProblemView.as_view(), name='polygon_new_problem'),
         path('source/<int:pk>', polygon_views.ProblemSourceView.as_view(), name='polygon_source'),
+        path('check_problem', polygon_views.check_problem, name='polygon_check_problem'),
+        path('check_code', polygon_views.check_code_uniqueness, name='polygon_check_code'),
     ])),
 ]
 

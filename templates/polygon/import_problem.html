@@ -20,6 +20,115 @@
     </style>
 {% endblock %}
 
+{% block js_media %}
+    <script type="text/javascript">
+        const smartDebounce = function(promise, onresolve, resolutionTimeout = 500) {
+            let bouncer;
+            let timeout;
+
+            const nested = async function(bouncer, ...args) {
+                const result = await promise(...args);
+                if (bouncer.cancelled) {
+                    return;
+                }
+                await onresolve(result);
+            }
+
+            return function(...args) {
+                if (bouncer) {
+                    bouncer.cancelled = true;
+                }
+
+                if (timeout) {
+                    clearTimeout(timeout);
+                }
+
+                timeout = setTimeout(() => {
+                    timeout = null;
+                    bouncer = {cancelled: false};
+                    nested(bouncer, ...args);
+                }, resolutionTimeout);
+            }
+        };
+
+        $(document).ready(function () {
+            let codeTouched = false;
+            let polygonIdOk = false;
+            let codeOk = false;
+
+            function enableSubmit() {
+                const disabled = !polygonIdOk || !codeOk;
+                $('#submit').prop('disabled', disabled);
+                $('#submit').attr('class', disabled ? 'disabled' : '');
+            }
+            enableSubmit();
+
+            $('#id_polygon_id').keypress(smartDebounce(
+                () => fetch(
+                    '{{ url("polygon_check_problem") }}',
+                    {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: `id=${$('#id_polygon_id').val()}`
+                    }
+                ),
+                async (response) =>  {
+                    if (response.status === 200) {
+                        data = await response.json();
+                        $('#polygon_id_error').text('');
+                        if (data['suggested_code'] && !codeTouched) {
+                            $('#id_code').val(data['suggested_code']);
+                            codeOk = true;
+                        }
+                        polygonIdOk = true;
+                        enableSubmit();
+                    } else {
+                        error = await response.text();
+                        $('#polygon_id_error').text(error);
+                        polygonIdOk = false;
+                        enableSubmit();
+                    }
+                }
+            ));
+
+            $('#id_code').keypress(function() {
+                codeTouched = true;
+            });
+
+            const codeHandler = smartDebounce(
+                () => fetch(
+                    '{{ url("polygon_check_code") }}',
+                    {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: `code=${$(this).val()}`
+                    }
+                ),
+                async function(response) {
+                    if (response.status === 200) {
+                        $('#code_error').text('');
+                        codeOk = true;
+                        enableSubmit();
+                    } else {
+                        error = await response.text();
+                        $('#code_error').text(error);
+                        codeOk = false;
+                        enableSubmit();
+                    }
+                }
+            );
+
+            $('#id_code').keypress(codeHandler);
+            $('#id_code').change(codeHandler);
+        });
+    </script>
+{% endblock %}
+
+
 {% set title = _("Import problem from Polygon") %}
 
 {% block body %}
@@ -32,12 +141,14 @@
         {% csrf_token %}
         <div><label class="inline-header">{{ form.polygon_id.label }}</label></div>
         <div><span class="fullwidth">{{ form.polygon_id }}</span></div>
-        <div class="mb-3"><span class="grayed">{{ form.polygon_id.help_text }}</span></div>
+        <div><span class="grayed">{{ form.polygon_id.help_text }}</span></div>
+        <div class="mb-3"><span style="color: #a00;" id="polygon_id_error"></span></div>
 
         <div><label class="inline-header">{{ form.code.label }}</label></div>
         <div><span class="fullwidth">{{ form.code }}</span></div>
-        <div class="mb-3"><span class="grayed">{{ form.code.help_text }}</span></div>
+        <div><span class="grayed">{{ form.code.help_text }}</span></div>
+        <div class="mb-3"><span style="color: #a00;" id="code_error"></span></div>
 
-        <button>{{ _('Import') }}</button>
+        <button id="submit">{{ _('Import') }}</button>
     </form>
 {% endblock %}

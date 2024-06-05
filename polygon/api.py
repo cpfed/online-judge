@@ -83,7 +83,7 @@ def get_problem(problem_id: int) -> Problem:
 
     if len(response) == 0:
         raise ProblemImportError(f'Problem {problem_id} does not exist ' +
-                                 'or user {settings.POLYGON_USER} has no access to it')
+                                 f'or user {settings.POLYGON_USER} has no access to it')
     if len(response) > 1:
         raise ProblemImportError(f'Invalid Polygon response: multiple problems for ID {problem_id}')
 
