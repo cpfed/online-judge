@@ -161,6 +161,9 @@
         {% if not problem.is_manually_managed %}
             <div><a href="{{ url('problem_data', problem.code) }}">{{ _('Edit test data') }}</a></div>
         {% endif %}
+        {% if problem.polygon_source and perms.polygon.import_problems %}
+        <div><a href="{{ url('polygon_source', problem.polygon_source.id) }}">{{ _('Polygon synchronization') }}</a></div>
+        {% endif %}
     {% elif request.user.is_authenticated and has_tickets %}
         <hr>
         <div>

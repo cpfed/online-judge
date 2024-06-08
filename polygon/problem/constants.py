@@ -1,0 +1,16 @@
+POLYGON_COMPILERS = {
+    'c.gcc': 'C11',
+    'cpp.g++': 'CPP20',
+    'cpp.g++11': 'CPP11',
+    'cpp.g++14': 'CPP14',
+    'cpp.g++17': 'CPP17',
+    'cpp.gcc11-64-winlibs-g++20': 'CPP20',
+    'cpp.ms2017': 'CPP17',
+    'cpp.msys2-mingw64-9-g++17': 'CPP17',
+    'java8': 'JAVA8',
+    'pas.fpc': 'PAS',
+    'pas.dpr': 'PAS',
+    'perl.5': 'PERL',
+    'python.2': 'PY2',
+    'python.3': 'PY3',
+}

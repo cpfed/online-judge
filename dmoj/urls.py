@@ -22,6 +22,7 @@ from judge.views.select2 import AssigneeSelect2View, ClassSelect2View, CommentSe
     ContestUserSearchSelect2View, OrganizationSelect2View, ProblemSelect2View, TicketUserSelect2View, \
     UserSearchSelect2View, UserSelect2View
 from judge.views.widgets import martor_image_uploader
+from polygon import views as polygon_views
 
 admin.autodiscover()
 
@@ -368,6 +369,13 @@ urlpatterns = [
         path('success', tasks.demo_success),
         path('failure', tasks.demo_failure),
         path('progress', tasks.demo_progress),
+    ])),
+
+    path('polygon/', include([
+        path('import', polygon_views.ImportProblemView.as_view(), name='polygon_new_problem'),
+        path('source/<int:pk>', polygon_views.ProblemSourceView.as_view(), name='polygon_source'),
+        path('check_problem', polygon_views.check_problem, name='polygon_check_problem'),
+        path('check_code', polygon_views.check_code_uniqueness, name='polygon_check_code'),
     ])),
 ]
 

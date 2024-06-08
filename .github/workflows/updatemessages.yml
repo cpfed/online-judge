@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '0 0 * * *'
-permissions: 
+permissions:
    contents: write
    pull-requests: write
 jobs:
@@ -14,10 +14,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         fetch-depth: 0
-    - name: Set up Python 3.7
+    - name: Set up Python 3.11
       uses: actions/setup-python@v5
       with:
-        python-version: '3.7'
+        python-version: '3.11'
     - name: Checkout submodules
       run: |
         git submodule init
@@ -39,39 +39,21 @@ jobs:
         CROWDIN_API_TOKEN: ${{ secrets.CROWDIN_API_TOKEN }}
       run: |
         cat > crowdin.yaml <<EOF
-        "project_id" : "622648"
-        "files": [
-         {
-          "source" : "/locale/en/LC_MESSAGES/django.po",
-          "translation" : "/locale/%two_letters_code%/LC_MESSAGES/django.po",
-          "languages_mapping" : {
-            "two_letters_code" : {
-                "zh-CN": "zh_Hans",
-                "sr-CS": "sr_Latn"
-             }
-          },
-         },
-         {
-          "source" : "/locale/en/LC_MESSAGES/djangojs.po",
-          "translation" : "/locale/%two_letters_code%/LC_MESSAGES/djangojs.po",
-          "languages_mapping" : {
-            "two_letters_code" : {
-                "zh-CN": "zh_Hans",
-                "sr-CS": "sr_Latn"
-             }
-          },
-         },
-         {
-          "source" : "/locale/en/LC_MESSAGES/dmoj-user.po",
-          "translation" : "/locale/%two_letters_code%/LC_MESSAGES/dmoj-user.po",
-          "languages_mapping" : {
-            "two_letters_code" : {
-                "zh-CN": "zh_Hans",
-                "sr-CS": "sr_Latn"
-             }
-          },
-         },
-        ]
+        project_id: 622648
+
+        files:
+          - source: /locale/en/LC_MESSAGES/django.po
+            translation: /locale/%two_letters_code%/LC_MESSAGES/django.po
+            languages_mapping:
+              two_letters_code:
+                zh-CN: zh_Hans
+                sr-CS: sr_Latn
+          - source: /locale/en/LC_MESSAGES/djangojs.po
+            translation: /locale/%two_letters_code%/LC_MESSAGES/djangojs.po
+            languages_mapping:
+              two_letters_code:
+                zh-CN: zh_Hans
+                sr-CS: sr_Latn
         EOF
         echo "api_token: ${CROWDIN_API_TOKEN}" >> crowdin.yaml
         crowdin download
