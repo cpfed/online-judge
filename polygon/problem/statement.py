@@ -275,32 +275,30 @@ def parse_problem_properties(language: str, problem_properties: dict[str, Any]) 
     with override(language):
         description = pandoc_tex_to_markdown(problem_properties['legend'])
 
-        description += header(_('Input'))
-        description += pandoc_tex_to_markdown(problem_properties['input'])
+        if problem_properties['input']:
+            description += header(_('Input'))
+            description += pandoc_tex_to_markdown(problem_properties['input'])
 
-        # Output
-        description += header(_('Output'))
-        description += pandoc_tex_to_markdown(problem_properties['output'])
+        if problem_properties['output']:
+            description += header(_('Output'))
+            description += pandoc_tex_to_markdown(problem_properties['output'])
 
-        # Interaction
-        if problem_properties['interaction'] is not None:
+        if problem_properties['interaction']:
             description += header(_('Interaction'))
             description += pandoc_tex_to_markdown(problem_properties['interaction'])
 
-        # Scoring
-        if problem_properties['scoring'] is not None:
+        if problem_properties['scoring']:
             description += header(_('Scoring'))
             description += pandoc_tex_to_markdown(problem_properties['scoring'])
 
         # Sample tests
         for i, sample in enumerate(problem_properties['sampleTests'], start=1):
-            description += header(f'{_("Sample Input")} {i}')
+            description += header(_('Sample Input {}').format(i))
             description += '```\n' + sample['input'].strip() + '\n```\n'
-            description += header(f'{_("Sample Output")} {i}')
+            description += header(_('Sample Output {}').format(i))
             description += '```\n' + sample['output'].strip() + '\n```\n'
 
-        # Notes
-        if problem_properties['notes'] != '':
+        if problem_properties['notes']:
             description += header(_('Notes'))
             description += pandoc_tex_to_markdown(problem_properties['notes'])
 

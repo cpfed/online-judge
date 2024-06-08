@@ -70,3 +70,7 @@ select#id_tags.django-select2 {
   position: sticky;
   top: 38px;
 }
+
+.polygon-icon {
+    vertical-align: text-bottom;
+}

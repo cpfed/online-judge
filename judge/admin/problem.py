@@ -136,7 +136,8 @@ class ProblemAdmin(NoBatchDeleteMixin, VersionAdmin):
         (_('Justice'), {'fields': ('banned_users',)}),
         (_('History'), {'fields': ('change_message',)}),
     )
-    list_display = ['code', 'name', 'show_authors', 'points', 'is_public', 'show_public']
+    list_display = ['show_polygon', 'code', 'name', 'show_authors', 'points', 'is_public', 'show_public']
+    list_display_links = ['code']
     ordering = ['code']
     search_fields = ('code', 'name', 'authors__user__username', 'curators__user__username')
     inlines = [LanguageLimitInline, ProblemClarificationInline, ProblemSolutionInline, ProblemTranslationInline]
@@ -156,6 +157,10 @@ class ProblemAdmin(NoBatchDeleteMixin, VersionAdmin):
             actions[name] = (func, name, desc)
 
             func, name, desc = self.get_action('make_private')
+            actions[name] = (func, name, desc)
+
+        if request.user.has_perm('polygon.import_problems'):
+            func, name, desc = self.get_action('reimport')
             actions[name] = (func, name, desc)
 
         func, name, desc = self.get_action('update_publish_date')
@@ -182,6 +187,16 @@ class ProblemAdmin(NoBatchDeleteMixin, VersionAdmin):
     @admin.display(description='')
     def show_public(self, obj):
         return format_html('<a href="{1}">{0}</a>', gettext('View on site'), obj.get_absolute_url())
+
+    @admin.display(description='')
+    def show_polygon(self, obj):
+        if hasattr(obj, 'polygon_source'):
+            return format_html(
+                '<a href="{1}"><img class="polygon-icon" src="/static/polygon.png" title="{0}" /></a>',
+                _('Problem imported from Polygon'),
+                reverse('polygon_source', kwargs={'pk': obj.polygon_source.id}),
+            )
+        return ''
 
     def _rescore(self, request, problem_id):
         from judge.tasks import rescore_problem
@@ -211,6 +226,20 @@ class ProblemAdmin(NoBatchDeleteMixin, VersionAdmin):
         self.message_user(request, ngettext('%d problem successfully marked as private.',
                                             '%d problems successfully marked as private.',
                                             count) % count)
+
+    @admin.display(description=_('Reimport problems from Polygon'))
+    def reimport(self, request, queryset):
+        from polygon.tasks import import_problem
+
+        jobs = 0
+        for problem in queryset:
+            if not hasattr(problem, 'polygon_source'):
+                continue
+            jobs += 1
+            import_problem.delay(problem.polygon_source.id, request.user.id)
+        self.message_user(request, ngettext('%d problem is being reimported.',
+                                            '%d problems are being reimported.',
+                                            jobs) % jobs)
 
     def get_queryset(self, request):
         return Problem.get_editable_problems(request.user).prefetch_related('authors__user').distinct()
