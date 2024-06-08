@@ -1,5 +1,8 @@
 project_id: 622648
 
+# After upgrading to 4.0, this will not be necessary
+api_token_env: CROWDIN_PERSONAL_TOKEN
+
 files:
   - source: /locale/en/LC_MESSAGES/django.po
     translation: /locale/%two_letters_code%/LC_MESSAGES/django.po
