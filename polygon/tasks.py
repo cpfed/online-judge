@@ -82,8 +82,7 @@ def import_problem(self: Task, problem_source_id: int, profile_id: int):
                     upload_id=random.randbytes(4).hex(),
                 )
 
-                problem_source.problem = handle_import(context)
-                problem_source.save()
+                handle_import(context)
     except Exception as exc:
         problem_import.status = 'F'
         logger.exception('Failed to import problem')

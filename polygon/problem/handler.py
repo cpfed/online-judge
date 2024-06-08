@@ -154,9 +154,10 @@ def cleanup(context: ImportContext, config: ProblemConfig):
                 file.unlink()
 
     # Cleanup media directory
-    for item in default_storage.listdir(f'problems/{context.source.problem_code}')[0]:
-        if item != context.upload_id:
-            shutil.rmtree(default_storage.path(f'problems/{context.source.problem_code}/{item}'), ignore_errors=True)
+    if default_storage.exists(f'problems/{context.source.problem_code}'):
+        for item in default_storage.listdir(f'problems/{context.source.problem_code}')[0]:
+            if item != context.upload_id:
+                shutil.rmtree(default_storage.path(f'problems/{context.source.problem_code}/{item}'), ignore_errors=True)
 
 
 def judge_main_submission(context: ImportContext, problem: Problem) -> None:
@@ -219,7 +220,7 @@ def judge_main_submission(context: ImportContext, problem: Problem) -> None:
         context.source.main_submission.judge(force_judge=True, rejudge=True, rejudge_user=context.author.user)
 
 
-def handle_import(context: ImportContext) -> Problem:
+def handle_import(context: ImportContext):
     revision = context.descriptor.get('revision')
     context.logger.info('Importing problem revision %s', revision)
 
@@ -236,6 +237,9 @@ def handle_import(context: ImportContext) -> Problem:
         properties = prepare_properties(context, config, statements)
 
         problem = save_problem(context, properties, config)
+
+        context.source.problem = problem
+        context.source.save()
     except:  # noqa: E722, we need cleanup for every failure including KeyboardInterrupt
         try:
             shutil.rmtree(default_storage.path(f'problems/{context.source.problem_code}/{context.upload_id}'))
@@ -246,5 +250,3 @@ def handle_import(context: ImportContext) -> Problem:
     cleanup(context, config)
 
     judge_main_submission(context, problem)
-
-    return problem
