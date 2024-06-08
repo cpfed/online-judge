@@ -38,28 +38,8 @@ jobs:
         python manage.py makemessages -l en -d djangojs
     - name: Download strings from Crowdin
       env:
-        CROWDIN_API_TOKEN: ${{ secrets.CROWDIN_API_TOKEN }}
-      run: |
-        cat > crowdin.yaml <<EOF
-        project_id: 622648
-
-        files:
-          - source: /locale/en/LC_MESSAGES/django.po
-            translation: /locale/%two_letters_code%/LC_MESSAGES/django.po
-            languages_mapping:
-              two_letters_code:
-                zh-CN: zh_Hans
-                sr-CS: sr_Latn
-          - source: /locale/en/LC_MESSAGES/djangojs.po
-            translation: /locale/%two_letters_code%/LC_MESSAGES/djangojs.po
-            languages_mapping:
-              two_letters_code:
-                zh-CN: zh_Hans
-                sr-CS: sr_Latn
-        EOF
-        echo "api_token: ${CROWDIN_API_TOKEN}" >> crowdin.yaml
-        crowdin download
-        rm crowdin.yaml
+        CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_API_TOKEN }}
+      run: crowdin download
     - name: Cleanup
       run: |
         rm -rf src/

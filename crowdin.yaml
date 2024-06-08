@@ -1,0 +1,21 @@
+project_id: 622648
+
+files:
+  - source: /locale/en/LC_MESSAGES/django.po
+    translation: /locale/%two_letters_code%/LC_MESSAGES/django.po
+    languages_mapping:
+      two_letters_code:
+        zh-CN: zh_Hans
+        sr-CS: sr_Latn
+  - source: /locale/en/LC_MESSAGES/djangojs.po
+    translation: /locale/%two_letters_code%/LC_MESSAGES/djangojs.po
+    languages_mapping:
+      two_letters_code:
+        zh-CN: zh_Hans
+        sr-CS: sr_Latn
+  - source: /locale/en/LC_MESSAGES/dmoj-user.po
+    translation: /locale/%two_letters_code%/LC_MESSAGES/dmoj-user.po
+    languages_mapping:
+      two_letters_code:
+        zh-CN: zh_Hans
+        sr-CS: sr_Latn
