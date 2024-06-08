@@ -269,8 +269,8 @@ def process_images(context: ImportContext, statement_folder: str, text: str) -> 
 
 
 def parse_problem_properties(language: str, problem_properties: dict[str, Any]) -> str:
-    def header(text: str) -> str:
-        return f'\n## {text}\n\n'
+    def header(text: str, level: int = 2) -> str:
+        return f'\n{"#" * level} {text}\n\n'
 
     with override(language):
         description = pandoc_tex_to_markdown(problem_properties['legend'])
@@ -291,12 +291,13 @@ def parse_problem_properties(language: str, problem_properties: dict[str, Any]) 
             description += header(_('Scoring'))
             description += pandoc_tex_to_markdown(problem_properties['scoring'])
 
-        # Sample tests
-        for i, sample in enumerate(problem_properties['sampleTests'], start=1):
-            description += header(_('Sample Input {}').format(i))
-            description += '```\n' + sample['input'].strip() + '\n```\n'
-            description += header(_('Sample Output {}').format(i))
-            description += '```\n' + sample['output'].strip() + '\n```\n'
+        if problem_properties['sampleTests']:
+            description += header(_('Samples'))
+            for i, sample in enumerate(problem_properties['sampleTests'], start=1):
+                description += header(_('Input {}').format(i), level=3)
+                description += '```\n' + sample['input'].strip() + '\n```\n'
+                description += header(_('Output {}').format(i), level=3)
+                description += '```\n' + sample['output'].strip() + '\n```\n'
 
         if problem_properties['notes']:
             description += header(_('Notes'))
