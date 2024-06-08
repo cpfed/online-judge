@@ -157,7 +157,10 @@ def cleanup(context: ImportContext, config: ProblemConfig):
     if default_storage.exists(f'problems/{context.source.problem_code}'):
         for item in default_storage.listdir(f'problems/{context.source.problem_code}')[0]:
             if item != context.upload_id:
-                shutil.rmtree(default_storage.path(f'problems/{context.source.problem_code}/{item}'), ignore_errors=True)
+                shutil.rmtree(
+                    default_storage.path(f'problems/{context.source.problem_code}/{item}'),
+                    ignore_errors=True,
+                )
 
 
 def judge_main_submission(context: ImportContext, problem: Problem) -> None:
