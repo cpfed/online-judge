@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esep\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-17 08:35+0000\n"
-"PO-Revision-Date: 2024-03-17 08:37\n"
+"POT-Creation-Date: 2024-06-08 22:04+0000\n"
+"PO-Revision-Date: 2024-06-08 22:25\n"
 "Last-Translator: \n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
@@ -17,95 +17,95 @@ msgstr ""
 "X-Crowdin-File: django.po\n"
 "X-Crowdin-File-ID: 2\n"
 
-#: dmoj/settings.py:395
+#: dmoj/settings.py:398
 msgid "Catalan"
 msgstr "crwdns2:0crwdne2:0"
 
-#: dmoj/settings.py:396
+#: dmoj/settings.py:399
 msgid "German"
 msgstr "crwdns4:0crwdne4:0"
 
-#: dmoj/settings.py:397
+#: dmoj/settings.py:400
 msgid "Greek"
 msgstr "crwdns6:0crwdne6:0"
 
-#: dmoj/settings.py:398
+#: dmoj/settings.py:401
 msgid "English"
 msgstr "crwdns8:0crwdne8:0"
 
-#: dmoj/settings.py:399
+#: dmoj/settings.py:402
 msgid "Spanish"
 msgstr "crwdns10:0crwdne10:0"
 
-#: dmoj/settings.py:400
+#: dmoj/settings.py:403
 msgid "French"
 msgstr "crwdns12:0crwdne12:0"
 
-#: dmoj/settings.py:401
+#: dmoj/settings.py:404
 msgid "Croatian"
 msgstr "crwdns14:0crwdne14:0"
 
-#: dmoj/settings.py:402
+#: dmoj/settings.py:405
 msgid "Hungarian"
 msgstr "crwdns16:0crwdne16:0"
 
-#: dmoj/settings.py:403
+#: dmoj/settings.py:406
 msgid "Japanese"
 msgstr "crwdns18:0crwdne18:0"
 
-#: dmoj/settings.py:404
+#: dmoj/settings.py:407
 msgid "Kazakh"
 msgstr "crwdns2888:0crwdne2888:0"
 
-#: dmoj/settings.py:405
+#: dmoj/settings.py:408
 msgid "Korean"
 msgstr "crwdns20:0crwdne20:0"
 
-#: dmoj/settings.py:406
+#: dmoj/settings.py:409
 msgid "Brazilian Portuguese"
 msgstr "crwdns22:0crwdne22:0"
 
-#: dmoj/settings.py:407
+#: dmoj/settings.py:410
 msgid "Romanian"
 msgstr "crwdns24:0crwdne24:0"
 
-#: dmoj/settings.py:408
+#: dmoj/settings.py:411
 msgid "Russian"
 msgstr "crwdns26:0crwdne26:0"
 
-#: dmoj/settings.py:409
+#: dmoj/settings.py:412
 msgid "Serbian (Latin)"
 msgstr "crwdns28:0crwdne28:0"
 
-#: dmoj/settings.py:410
+#: dmoj/settings.py:413
 msgid "Turkish"
 msgstr "crwdns30:0crwdne30:0"
 
-#: dmoj/settings.py:411
+#: dmoj/settings.py:414
 msgid "Vietnamese"
 msgstr "crwdns32:0crwdne32:0"
 
-#: dmoj/settings.py:412
+#: dmoj/settings.py:415
 msgid "Simplified Chinese"
 msgstr "crwdns34:0crwdne34:0"
 
-#: dmoj/settings.py:413
+#: dmoj/settings.py:416
 msgid "Traditional Chinese"
 msgstr "crwdns36:0crwdne36:0"
 
-#: dmoj/urls.py:31
+#: dmoj/urls.py:32
 msgid "Activation Successful!"
 msgstr "crwdns38:0crwdne38:0"
 
-#: dmoj/urls.py:39
+#: dmoj/urls.py:40
 msgid "Registration Completed"
 msgstr "crwdns40:0crwdne40:0"
 
-#: dmoj/urls.py:43
+#: dmoj/urls.py:44
 msgid "Registration Not Allowed"
 msgstr "crwdns42:0crwdne42:0"
 
-#: dmoj/urls.py:95 templates/base.html:193
+#: dmoj/urls.py:96 templates/base.html:193
 msgid "Home"
 msgstr "crwdns44:0crwdne44:0"
 
@@ -236,29 +236,29 @@ msgid_plural "%d contests successfully unlocked."
 msgstr[0] "crwdns94:1%dcrwdne94:1"
 msgstr[1] "crwdns94:5%dcrwdne94:5"
 
-#: judge/admin/contest.py:280 judge/admin/submission.py:177
+#: judge/admin/contest.py:283 judge/admin/submission.py:177
 #, python-format
 msgid "%d submission was successfully scheduled for rejudging."
 msgid_plural "%d submissions were successfully scheduled for rejudging."
 msgstr[0] "crwdns96:1%dcrwdne96:1"
 msgstr[1] "crwdns96:5%dcrwdne96:5"
 
-#: judge/admin/contest.py:353
+#: judge/admin/contest.py:356
 msgid "Recalculate results"
 msgstr "crwdns98:0crwdne98:0"
 
-#: judge/admin/contest.py:359
+#: judge/admin/contest.py:362
 #, python-format
 msgid "%d participation recalculated."
 msgid_plural "%d participations recalculated."
 msgstr[0] "crwdns100:1%dcrwdne100:1"
 msgstr[1] "crwdns100:5%dcrwdne100:5"
 
-#: judge/admin/contest.py:363 judge/admin/organization.py:110
+#: judge/admin/contest.py:366 judge/admin/organization.py:110
 msgid "username"
 msgstr "crwdns102:0crwdne102:0"
 
-#: judge/admin/contest.py:367 templates/base.html:259
+#: judge/admin/contest.py:370 templates/base.html:259
 msgid "virtual"
 msgstr "crwdns104:0crwdne104:0"
 
@@ -282,7 +282,7 @@ msgstr "crwdns110:0crwdne110:0"
 msgid "object"
 msgstr "crwdns112:0crwdne112:0"
 
-#: judge/admin/organization.py:83 judge/admin/problem.py:183
+#: judge/admin/organization.py:83 judge/admin/problem.py:189
 #: judge/admin/profile.py:105
 msgid "View on site"
 msgstr "crwdns114:0crwdne114:0"
@@ -323,45 +323,60 @@ msgstr "crwdns128:0crwdne128:0"
 msgid "History"
 msgstr "crwdns130:0crwdne130:0"
 
-#: judge/admin/problem.py:177 judge/models/contest.py:70
+#: judge/admin/problem.py:183 judge/models/contest.py:70
 #: judge/models/interface.py:67 judge/models/problem.py:553
 msgid "authors"
 msgstr "crwdns132:0crwdne132:0"
 
-#: judge/admin/problem.py:189
+#: judge/admin/problem.py:196
+msgid "Problem imported from Polygon"
+msgstr "crwdns3016:0crwdne3016:0"
+
+#: judge/admin/problem.py:205
 msgid "Set publish date to now"
 msgstr "crwdns134:0crwdne134:0"
 
-#: judge/admin/problem.py:192
+#: judge/admin/problem.py:208
 #, python-format
 msgid "%d problem's publish date successfully updated."
 msgid_plural "%d problems' publish date successfully updated."
 msgstr[0] "crwdns136:1%dcrwdne136:1"
 msgstr[1] "crwdns136:5%dcrwdne136:5"
 
-#: judge/admin/problem.py:196
+#: judge/admin/problem.py:212
 msgid "Mark problems as public"
 msgstr "crwdns138:0crwdne138:0"
 
-#: judge/admin/problem.py:201
+#: judge/admin/problem.py:217
 #, python-format
 msgid "%d problem successfully marked as public."
 msgid_plural "%d problems successfully marked as public."
 msgstr[0] "crwdns140:1%dcrwdne140:1"
 msgstr[1] "crwdns140:5%dcrwdne140:5"
 
-#: judge/admin/problem.py:205
+#: judge/admin/problem.py:221
 msgid "Mark problems as private"
 msgstr "crwdns142:0crwdne142:0"
 
-#: judge/admin/problem.py:210
+#: judge/admin/problem.py:226
 #, python-format
 msgid "%d problem successfully marked as private."
 msgid_plural "%d problems successfully marked as private."
 msgstr[0] "crwdns144:1%dcrwdne144:1"
 msgstr[1] "crwdns144:5%dcrwdne144:5"
 
-#: judge/admin/problem.py:268 judge/models/contest.py:592
+#: judge/admin/problem.py:230
+msgid "Reimport problems from Polygon"
+msgstr "crwdns3018:0crwdne3018:0"
+
+#: judge/admin/problem.py:240
+#, python-format
+msgid "%d problem is being reimported."
+msgid_plural "%d problems are being reimported."
+msgstr[0] "crwdns3020:1%dcrwdne3020:1"
+msgstr[1] "crwdns3020:5%dcrwdne3020:5"
+
+#: judge/admin/problem.py:298 judge/models/contest.py:592
 #: judge/models/contest.py:617 judge/models/contest.py:657
 #: judge/models/problem.py:505 judge/models/problem.py:510
 #: judge/models/problem.py:533 judge/models/problem.py:593
@@ -392,21 +407,21 @@ msgid_plural "%d users had scores recalculated."
 msgstr[0] "crwdns156:1%dcrwdne156:1"
 msgstr[1] "crwdns156:5%dcrwdne156:5"
 
-#: judge/admin/runtime.py:52 templates/user/edit-profile.html:119
+#: judge/admin/runtime.py:53 templates/user/edit-profile.html:119
 #: templates/user/edit-profile.html:241 templates/user/edit-profile.html:358
 #: templates/user/edit-profile.html:388
 msgid "Regenerate"
 msgstr "crwdns158:0crwdne158:0"
 
-#: judge/admin/runtime.py:66
+#: judge/admin/runtime.py:67
 msgid "Description"
 msgstr "crwdns160:0crwdne160:0"
 
-#: judge/admin/runtime.py:67
+#: judge/admin/runtime.py:68
 msgid "Information"
 msgstr "crwdns162:0crwdne162:0"
 
-#: judge/admin/runtime.py:68
+#: judge/admin/runtime.py:69
 msgid "Capabilities"
 msgstr "crwdns164:0crwdne164:0"
 
@@ -725,7 +740,8 @@ msgstr "crwdns300:0crwdne300:0"
 msgid "Must specify either totp_token or webauthn_response."
 msgstr "crwdns302:0crwdne302:0"
 
-#: judge/forms.py:294 judge/models/problem.py:118
+#: judge/forms.py:294 judge/models/problem.py:118 polygon/forms.py:18
+#: polygon/models.py:24
 msgid "Problem code must be ^[a-z0-9]+$"
 msgstr "crwdns304:0crwdne304:0"
 
@@ -1594,7 +1610,7 @@ msgstr "crwdns726:0crwdne726:0"
 msgid "Only own submissions"
 msgstr "crwdns728:0crwdne728:0"
 
-#: judge/models/problem.py:119
+#: judge/models/problem.py:119 polygon/forms.py:19
 msgid "A short, unique code for the problem, used in the URL after /problem/"
 msgstr "crwdns730:0crwdne730:0"
 
@@ -1734,7 +1750,7 @@ msgstr "crwdns796:0crwdne796:0"
 msgid "Edit problems with full markup"
 msgstr "crwdns798:0crwdne798:0"
 
-#: judge/models/problem.py:500 templates/problem/problem.html:181
+#: judge/models/problem.py:500 templates/problem/problem.html:184
 msgid "Clone problem"
 msgstr "crwdns800:0crwdne800:0"
 
@@ -1899,11 +1915,11 @@ msgstr "crwdns878:0crwdne878:0"
 msgid "generator file"
 msgstr "crwdns880:0crwdne880:0"
 
-#: judge/models/problem_data.py:41 judge/models/problem_data.py:92
+#: judge/models/problem_data.py:41 judge/models/problem_data.py:93
 msgid "output prefix length"
 msgstr "crwdns882:0crwdne882:0"
 
-#: judge/models/problem_data.py:42 judge/models/problem_data.py:93
+#: judge/models/problem_data.py:42 judge/models/problem_data.py:94
 msgid "output limit length"
 msgstr "crwdns884:0crwdne884:0"
 
@@ -1911,7 +1927,7 @@ msgstr "crwdns884:0crwdne884:0"
 msgid "init.yml generation feedback"
 msgstr "crwdns886:0crwdne886:0"
 
-#: judge/models/problem_data.py:44 judge/models/problem_data.py:94
+#: judge/models/problem_data.py:44 judge/models/problem_data.py:95
 msgid "checker"
 msgstr "crwdns888:0crwdne888:0"
 
@@ -1923,7 +1939,7 @@ msgstr "crwdns890:0crwdne890:0"
 msgid "disable bigInteger / bigDecimal"
 msgstr "crwdns892:0crwdne892:0"
 
-#: judge/models/problem_data.py:47 judge/models/problem_data.py:95
+#: judge/models/problem_data.py:47 judge/models/problem_data.py:96
 msgid "checker arguments"
 msgstr "crwdns894:0crwdne894:0"
 
@@ -1931,59 +1947,59 @@ msgstr "crwdns894:0crwdne894:0"
 msgid "Checker arguments as a JSON object."
 msgstr "crwdns896:0crwdne896:0"
 
-#: judge/models/problem_data.py:79
+#: judge/models/problem_data.py:80
 msgid "problem data set"
 msgstr "crwdns898:0crwdne898:0"
 
-#: judge/models/problem_data.py:81
+#: judge/models/problem_data.py:82
 msgid "case position"
 msgstr "crwdns900:0crwdne900:0"
 
-#: judge/models/problem_data.py:82
+#: judge/models/problem_data.py:83
 msgid "case type"
 msgstr "crwdns902:0crwdne902:0"
 
-#: judge/models/problem_data.py:83
+#: judge/models/problem_data.py:84
 msgid "Normal case"
 msgstr "crwdns904:0crwdne904:0"
 
-#: judge/models/problem_data.py:84
+#: judge/models/problem_data.py:85
 msgid "Batch start"
 msgstr "crwdns906:0crwdne906:0"
 
-#: judge/models/problem_data.py:85
+#: judge/models/problem_data.py:86
 msgid "Batch end"
 msgstr "crwdns908:0crwdne908:0"
 
-#: judge/models/problem_data.py:87
+#: judge/models/problem_data.py:88
 msgid "input file name"
 msgstr "crwdns910:0crwdne910:0"
 
-#: judge/models/problem_data.py:88
+#: judge/models/problem_data.py:89
 msgid "output file name"
 msgstr "crwdns912:0crwdne912:0"
 
-#: judge/models/problem_data.py:89
+#: judge/models/problem_data.py:90
 msgid "generator arguments"
 msgstr "crwdns914:0crwdne914:0"
 
-#: judge/models/problem_data.py:90
+#: judge/models/problem_data.py:91
 msgid "point value"
 msgstr "crwdns916:0crwdne916:0"
 
-#: judge/models/problem_data.py:91
+#: judge/models/problem_data.py:92
 msgid "case is pretest?"
 msgstr "crwdns918:0crwdne918:0"
 
-#: judge/models/problem_data.py:96
+#: judge/models/problem_data.py:97
 msgid "checker arguments as a JSON object"
 msgstr "crwdns2894:0crwdne2894:0"
 
-#: judge/models/problem_data.py:97
+#: judge/models/problem_data.py:98
 msgid "batch dependencies"
 msgstr "crwdns2896:0crwdne2896:0"
 
-#: judge/models/problem_data.py:98
+#: judge/models/problem_data.py:99
 msgid "batch dependencies as a comma-separated list of integers"
 msgstr "crwdns2898:0crwdne2898:0"
 
@@ -2580,6 +2596,7 @@ msgid "Queued"
 msgstr "crwdns1208:0crwdne1208:0"
 
 #: judge/models/submission.py:40 judge/models/submission.py:61
+#: polygon/models.py:39
 msgid "Processing"
 msgstr "crwdns1210:0crwdne1210:0"
 
@@ -2588,6 +2605,7 @@ msgid "Grading"
 msgstr "crwdns1212:0crwdne1212:0"
 
 #: judge/models/submission.py:42 judge/models/submission.py:63
+#: polygon/models.py:40
 msgid "Completed"
 msgstr "crwdns1214:0crwdne1214:0"
 
@@ -3770,6 +3788,62 @@ msgstr "crwdns2932:0crwdne2932:0"
 msgid "The email attached to your account has been changed to %s."
 msgstr "crwdns2934:0%scrwdne2934:0"
 
+#: polygon/forms.py:10
+msgid "Polygon problem ID"
+msgstr "crwdns2964:0crwdne2964:0"
+
+#: polygon/forms.py:12
+msgid "Numeric problem ID from Polygon"
+msgstr "crwdns2966:0crwdne2966:0"
+
+#: polygon/forms.py:16
+msgid "Problem code"
+msgstr "crwdns2968:0crwdne2968:0"
+
+#: polygon/models.py:34
+msgid "Import problems from Polygon"
+msgstr "crwdns2970:0crwdne2970:0"
+
+#: polygon/models.py:41
+msgid "Failed"
+msgstr "crwdns2972:0crwdne2972:0"
+
+#: polygon/problem/statement.py:279
+msgid "Input"
+msgstr "crwdns2974:0crwdne2974:0"
+
+#: polygon/problem/statement.py:283
+msgid "Output"
+msgstr "crwdns2976:0crwdne2976:0"
+
+#: polygon/problem/statement.py:287
+msgid "Interaction"
+msgstr "crwdns2978:0crwdne2978:0"
+
+#: polygon/problem/statement.py:291
+msgid "Scoring"
+msgstr "crwdns2980:0crwdne2980:0"
+
+#: polygon/problem/statement.py:295
+msgid "Samples"
+msgstr "crwdns3026:0crwdne3026:0"
+
+#: polygon/problem/statement.py:297
+msgid "Input {}"
+msgstr "crwdns3028:0crwdne3028:0"
+
+#: polygon/problem/statement.py:299
+msgid "Output {}"
+msgstr "crwdns3030:0crwdne3030:0"
+
+#: polygon/problem/statement.py:303
+msgid "Notes"
+msgstr "crwdns2982:0crwdne2982:0"
+
+#: polygon/views.py:142
+msgid "Problem exists"
+msgstr "crwdns2984:0crwdne2984:0"
+
 #: templates/admin/judge/contest/change_form.html:9
 msgid "Are you sure you want to rejudge ALL the submissions?"
 msgstr "crwdns1716:0crwdne1716:0"
@@ -3815,6 +3889,10 @@ msgstr "crwdns1730:0crwdne1730:0"
 #: templates/admin/judge/problem/change_form.html:23
 msgid "View problem votes"
 msgstr "crwdns1732:0crwdne1732:0"
+
+#: templates/admin/judge/problem/change_list.html:8
+msgid "Import from Polygon"
+msgstr "crwdns2986:0crwdne2986:0"
 
 #: templates/admin/judge/profile/change_form.html:14
 #: templates/admin/judge/profile/change_form.html:17
@@ -3899,11 +3977,11 @@ msgstr "crwdns1766:0{time}crwdne1766:0"
 msgid "Continue reading..."
 msgstr "crwdns1768:0crwdne1768:0"
 
-#: templates/blog/list.html:95 templates/problem/problem.html:331
+#: templates/blog/list.html:95 templates/problem/problem.html:334
 msgid "Clarifications"
 msgstr "crwdns1770:0crwdne1770:0"
 
-#: templates/blog/list.html:111 templates/problem/problem.html:342
+#: templates/blog/list.html:111 templates/problem/problem.html:345
 msgid "No clarifications have been made at this time."
 msgstr "crwdns1772:0crwdne1772:0"
 
@@ -4783,6 +4861,66 @@ msgstr "crwdns2172:0crwdne2172:0"
 msgid "Update preview"
 msgstr "crwdns2174:0crwdne2174:0"
 
+#: templates/polygon/import_problem.html:135
+msgid "Import problem from Polygon"
+msgstr "crwdns2988:0crwdne2988:0"
+
+#: templates/polygon/import_problem.html:138
+msgid "Before continuing:"
+msgstr "crwdns2990:0crwdne2990:0"
+
+#: templates/polygon/import_problem.html:140
+#, python-format
+msgid "Share your problem in Polygon with %(polygon_user)s"
+msgstr "crwdns2992:0%(polygon_user)scrwdne2992:0"
+
+#: templates/polygon/import_problem.html:141
+msgid "Generate full problem package for the actual problem revision"
+msgstr "crwdns2994:0crwdne2994:0"
+
+#: templates/polygon/import_problem.html:155
+msgid "Import"
+msgstr "crwdns2996:0crwdne2996:0"
+
+#: templates/polygon/problemsource_detail.html:21
+#: templates/polygon/problemsource_detail.html:24
+msgid "Importing problem"
+msgstr "crwdns2998:0crwdne2998:0"
+
+#: templates/polygon/problemsource_detail.html:35
+msgid "Import another"
+msgstr "crwdns3000:0crwdne3000:0"
+
+#: templates/polygon/problemsource_detail.html:36
+#: templates/problem/problem.html:160
+msgid "Edit problem"
+msgstr "crwdns2278:0crwdne2278:0"
+
+#: templates/polygon/problemsource_detail.html:42
+#: templates/polygon/problemsource_detail.html:66
+msgid "by"
+msgstr "crwdns3002:0crwdne3002:0"
+
+#: templates/polygon/problemsource_detail.html:43
+msgid "Polygon problem"
+msgstr "crwdns3004:0crwdne3004:0"
+
+#: templates/polygon/problemsource_detail.html:46
+msgid "Main correct solution"
+msgstr "crwdns3006:0crwdne3006:0"
+
+#: templates/polygon/problemsource_detail.html:61
+msgid "Reimport"
+msgstr "crwdns3008:0crwdne3008:0"
+
+#: templates/polygon/problemsource_detail.html:63
+msgid "Import attempts"
+msgstr "crwdns3010:0crwdne3010:0"
+
+#: templates/polygon/problemsource_detail.html:72
+msgid "Import log"
+msgstr "crwdns3012:0crwdne3012:0"
+
 #: templates/problem/clone.html:37
 msgid "Enter a new code for the cloned problem:"
 msgstr "crwdns2176:0crwdne2176:0"
@@ -4859,7 +4997,7 @@ msgstr "crwdns2206:0crwdne2206:0"
 msgid "Submitting an official solution before solving the problem yourself is a bannable offence."
 msgstr "crwdns2208:0crwdne2208:0"
 
-#: templates/problem/editorial.html:30 templates/problem/problem.html:230
+#: templates/problem/editorial.html:30 templates/problem/problem.html:233
 msgid "Author:"
 msgid_plural "Authors:"
 msgstr[0] "crwdns2210:1crwdne2210:1"
@@ -5011,68 +5149,68 @@ msgstr "crwdns2274:0crwdne2274:0"
 msgid "Manage tickets"
 msgstr "crwdns2276:0crwdne2276:0"
 
-#: templates/problem/problem.html:160
-msgid "Edit problem"
-msgstr "crwdns2278:0crwdne2278:0"
-
 #: templates/problem/problem.html:162
 msgid "Edit test data"
 msgstr "crwdns2280:0crwdne2280:0"
 
-#: templates/problem/problem.html:167
+#: templates/problem/problem.html:165
+msgid "Polygon synchronization"
+msgstr "crwdns3014:0crwdne3014:0"
+
+#: templates/problem/problem.html:170
 msgid "My tickets"
 msgstr "crwdns2282:0crwdne2282:0"
 
-#: templates/problem/problem.html:175
+#: templates/problem/problem.html:178
 msgid "Manage submissions"
 msgstr "crwdns2284:0crwdne2284:0"
 
-#: templates/problem/problem.html:188 templates/problem/vote-ajax.html:20
+#: templates/problem/problem.html:191 templates/problem/vote-ajax.html:20
 msgid "Points:"
 msgstr "crwdns2286:0crwdne2286:0"
 
-#: templates/problem/problem.html:191 templates/problem/problem.html:193
+#: templates/problem/problem.html:194 templates/problem/problem.html:196
 msgid "(partial)"
 msgstr "crwdns2288:0crwdne2288:0"
 
-#: templates/problem/problem.html:198 templates/problem/raw.html:61
+#: templates/problem/problem.html:201 templates/problem/raw.html:61
 msgid "Time limit:"
 msgstr "crwdns2290:0crwdne2290:0"
 
-#: templates/problem/problem.html:210 templates/problem/raw.html:70
+#: templates/problem/problem.html:213 templates/problem/raw.html:70
 msgid "Memory limit:"
 msgstr "crwdns2292:0crwdne2292:0"
 
-#: templates/problem/problem.html:246
+#: templates/problem/problem.html:249
 msgid "Problem type"
 msgid_plural "Problem types"
 msgstr[0] "crwdns2294:1crwdne2294:1"
 msgstr[1] "crwdns2294:5crwdne2294:5"
 
-#: templates/problem/problem.html:259
+#: templates/problem/problem.html:262
 msgid "Allowed languages"
 msgstr "crwdns2296:0crwdne2296:0"
 
-#: templates/problem/problem.html:267
+#: templates/problem/problem.html:270
 #, python-format
 msgid "No %(lang)s judge online"
 msgstr "crwdns2298:0%(lang)scrwdne2298:0"
 
-#: templates/problem/problem.html:278
+#: templates/problem/problem.html:281
 msgid "Judge:"
 msgid_plural "Judges:"
 msgstr[0] "crwdns2300:1crwdne2300:1"
 msgstr[1] "crwdns2300:5crwdne2300:5"
 
-#: templates/problem/problem.html:295
+#: templates/problem/problem.html:298
 msgid "none available"
 msgstr "crwdns2302:0crwdne2302:0"
 
-#: templates/problem/problem.html:320
+#: templates/problem/problem.html:323
 msgid "Request clarification"
 msgstr "crwdns2304:0crwdne2304:0"
 
-#: templates/problem/problem.html:322
+#: templates/problem/problem.html:325
 msgid "Report an issue"
 msgstr "crwdns2306:0crwdne2306:0"
 
@@ -5821,11 +5959,11 @@ msgstr "crwdns2618:0crwdne2618:0"
 msgid "%(user)s's"
 msgstr "crwdns2620:0%(user)scrwdne2620:0"
 
-#: templates/task_status.html:92
+#: templates/task_status.html:93
 msgid "Completed!"
 msgstr "crwdns2622:0crwdne2622:0"
 
-#: templates/task_status.html:95
+#: templates/task_status.html:96
 msgid "Failed!"
 msgstr "crwdns2624:0crwdne2624:0"
 

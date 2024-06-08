@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esep\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-17 08:35+0000\n"
-"PO-Revision-Date: 2024-03-17 08:37\n"
+"POT-Creation-Date: 2024-06-08 22:04+0000\n"
+"PO-Revision-Date: 2024-06-08 22:25\n"
 "Last-Translator: \n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
@@ -17,95 +17,95 @@ msgstr ""
 "X-Crowdin-File: django.po\n"
 "X-Crowdin-File-ID: 2\n"
 
-#: dmoj/settings.py:395
+#: dmoj/settings.py:398
 msgid "Catalan"
 msgstr ""
 
-#: dmoj/settings.py:396
+#: dmoj/settings.py:399
 msgid "German"
 msgstr ""
 
-#: dmoj/settings.py:397
+#: dmoj/settings.py:400
 msgid "Greek"
 msgstr ""
 
-#: dmoj/settings.py:398
+#: dmoj/settings.py:401
 msgid "English"
 msgstr ""
 
-#: dmoj/settings.py:399
+#: dmoj/settings.py:402
 msgid "Spanish"
 msgstr ""
 
-#: dmoj/settings.py:400
+#: dmoj/settings.py:403
 msgid "French"
 msgstr ""
 
-#: dmoj/settings.py:401
+#: dmoj/settings.py:404
 msgid "Croatian"
 msgstr ""
 
-#: dmoj/settings.py:402
+#: dmoj/settings.py:405
 msgid "Hungarian"
 msgstr ""
 
-#: dmoj/settings.py:403
+#: dmoj/settings.py:406
 msgid "Japanese"
 msgstr ""
 
-#: dmoj/settings.py:404
+#: dmoj/settings.py:407
 msgid "Kazakh"
 msgstr ""
 
-#: dmoj/settings.py:405
+#: dmoj/settings.py:408
 msgid "Korean"
 msgstr ""
 
-#: dmoj/settings.py:406
+#: dmoj/settings.py:409
 msgid "Brazilian Portuguese"
 msgstr ""
 
-#: dmoj/settings.py:407
+#: dmoj/settings.py:410
 msgid "Romanian"
 msgstr ""
 
-#: dmoj/settings.py:408
+#: dmoj/settings.py:411
 msgid "Russian"
 msgstr ""
 
-#: dmoj/settings.py:409
+#: dmoj/settings.py:412
 msgid "Serbian (Latin)"
 msgstr ""
 
-#: dmoj/settings.py:410
+#: dmoj/settings.py:413
 msgid "Turkish"
 msgstr ""
 
-#: dmoj/settings.py:411
+#: dmoj/settings.py:414
 msgid "Vietnamese"
 msgstr ""
 
-#: dmoj/settings.py:412
+#: dmoj/settings.py:415
 msgid "Simplified Chinese"
 msgstr ""
 
-#: dmoj/settings.py:413
+#: dmoj/settings.py:416
 msgid "Traditional Chinese"
 msgstr ""
 
-#: dmoj/urls.py:31
+#: dmoj/urls.py:32
 msgid "Activation Successful!"
 msgstr ""
 
-#: dmoj/urls.py:39
+#: dmoj/urls.py:40
 msgid "Registration Completed"
 msgstr ""
 
-#: dmoj/urls.py:43
+#: dmoj/urls.py:44
 msgid "Registration Not Allowed"
 msgstr ""
 
-#: dmoj/urls.py:95 templates/base.html:193
+#: dmoj/urls.py:96 templates/base.html:193
 msgid "Home"
 msgstr "Главная"
 
@@ -248,7 +248,7 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: judge/admin/contest.py:280 judge/admin/submission.py:177
+#: judge/admin/contest.py:283 judge/admin/submission.py:177
 #, python-format
 msgid "%d submission was successfully scheduled for rejudging."
 msgid_plural "%d submissions were successfully scheduled for rejudging."
@@ -257,11 +257,11 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: judge/admin/contest.py:353
+#: judge/admin/contest.py:356
 msgid "Recalculate results"
 msgstr ""
 
-#: judge/admin/contest.py:359
+#: judge/admin/contest.py:362
 #, python-format
 msgid "%d participation recalculated."
 msgid_plural "%d participations recalculated."
@@ -270,11 +270,11 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: judge/admin/contest.py:363 judge/admin/organization.py:110
+#: judge/admin/contest.py:366 judge/admin/organization.py:110
 msgid "username"
 msgstr "имя пользователя"
 
-#: judge/admin/contest.py:367 templates/base.html:259
+#: judge/admin/contest.py:370 templates/base.html:259
 msgid "virtual"
 msgstr ""
 
@@ -298,7 +298,7 @@ msgstr ""
 msgid "object"
 msgstr ""
 
-#: judge/admin/organization.py:83 judge/admin/problem.py:183
+#: judge/admin/organization.py:83 judge/admin/problem.py:189
 #: judge/admin/profile.py:105
 msgid "View on site"
 msgstr ""
@@ -339,16 +339,20 @@ msgstr "Язык"
 msgid "History"
 msgstr ""
 
-#: judge/admin/problem.py:177 judge/models/contest.py:70
+#: judge/admin/problem.py:183 judge/models/contest.py:70
 #: judge/models/interface.py:67 judge/models/problem.py:553
 msgid "authors"
 msgstr ""
 
-#: judge/admin/problem.py:189
+#: judge/admin/problem.py:196
+msgid "Problem imported from Polygon"
+msgstr ""
+
+#: judge/admin/problem.py:205
 msgid "Set publish date to now"
 msgstr ""
 
-#: judge/admin/problem.py:192
+#: judge/admin/problem.py:208
 #, python-format
 msgid "%d problem's publish date successfully updated."
 msgid_plural "%d problems' publish date successfully updated."
@@ -357,11 +361,11 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: judge/admin/problem.py:196
+#: judge/admin/problem.py:212
 msgid "Mark problems as public"
 msgstr ""
 
-#: judge/admin/problem.py:201
+#: judge/admin/problem.py:217
 #, python-format
 msgid "%d problem successfully marked as public."
 msgid_plural "%d problems successfully marked as public."
@@ -370,11 +374,11 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: judge/admin/problem.py:205
+#: judge/admin/problem.py:221
 msgid "Mark problems as private"
 msgstr ""
 
-#: judge/admin/problem.py:210
+#: judge/admin/problem.py:226
 #, python-format
 msgid "%d problem successfully marked as private."
 msgid_plural "%d problems successfully marked as private."
@@ -383,7 +387,20 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: judge/admin/problem.py:268 judge/models/contest.py:592
+#: judge/admin/problem.py:230
+msgid "Reimport problems from Polygon"
+msgstr ""
+
+#: judge/admin/problem.py:240
+#, python-format
+msgid "%d problem is being reimported."
+msgid_plural "%d problems are being reimported."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#: judge/admin/problem.py:298 judge/models/contest.py:592
 #: judge/models/contest.py:617 judge/models/contest.py:657
 #: judge/models/problem.py:505 judge/models/problem.py:510
 #: judge/models/problem.py:533 judge/models/problem.py:593
@@ -416,21 +433,21 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: judge/admin/runtime.py:52 templates/user/edit-profile.html:119
+#: judge/admin/runtime.py:53 templates/user/edit-profile.html:119
 #: templates/user/edit-profile.html:241 templates/user/edit-profile.html:358
 #: templates/user/edit-profile.html:388
 msgid "Regenerate"
 msgstr ""
 
-#: judge/admin/runtime.py:66
+#: judge/admin/runtime.py:67
 msgid "Description"
 msgstr ""
 
-#: judge/admin/runtime.py:67
+#: judge/admin/runtime.py:68
 msgid "Information"
 msgstr ""
 
-#: judge/admin/runtime.py:68
+#: judge/admin/runtime.py:69
 msgid "Capabilities"
 msgstr ""
 
@@ -759,7 +776,8 @@ msgstr ""
 msgid "Must specify either totp_token or webauthn_response."
 msgstr ""
 
-#: judge/forms.py:294 judge/models/problem.py:118
+#: judge/forms.py:294 judge/models/problem.py:118 polygon/forms.py:18
+#: polygon/models.py:24
 msgid "Problem code must be ^[a-z0-9]+$"
 msgstr ""
 
@@ -1628,7 +1646,7 @@ msgstr ""
 msgid "Only own submissions"
 msgstr ""
 
-#: judge/models/problem.py:119
+#: judge/models/problem.py:119 polygon/forms.py:19
 msgid "A short, unique code for the problem, used in the URL after /problem/"
 msgstr ""
 
@@ -1768,7 +1786,7 @@ msgstr ""
 msgid "Edit problems with full markup"
 msgstr ""
 
-#: judge/models/problem.py:500 templates/problem/problem.html:181
+#: judge/models/problem.py:500 templates/problem/problem.html:184
 msgid "Clone problem"
 msgstr ""
 
@@ -1933,11 +1951,11 @@ msgstr ""
 msgid "generator file"
 msgstr ""
 
-#: judge/models/problem_data.py:41 judge/models/problem_data.py:92
+#: judge/models/problem_data.py:41 judge/models/problem_data.py:93
 msgid "output prefix length"
 msgstr ""
 
-#: judge/models/problem_data.py:42 judge/models/problem_data.py:93
+#: judge/models/problem_data.py:42 judge/models/problem_data.py:94
 msgid "output limit length"
 msgstr ""
 
@@ -1945,7 +1963,7 @@ msgstr ""
 msgid "init.yml generation feedback"
 msgstr ""
 
-#: judge/models/problem_data.py:44 judge/models/problem_data.py:94
+#: judge/models/problem_data.py:44 judge/models/problem_data.py:95
 msgid "checker"
 msgstr ""
 
@@ -1957,7 +1975,7 @@ msgstr ""
 msgid "disable bigInteger / bigDecimal"
 msgstr ""
 
-#: judge/models/problem_data.py:47 judge/models/problem_data.py:95
+#: judge/models/problem_data.py:47 judge/models/problem_data.py:96
 msgid "checker arguments"
 msgstr ""
 
@@ -1965,59 +1983,59 @@ msgstr ""
 msgid "Checker arguments as a JSON object."
 msgstr ""
 
-#: judge/models/problem_data.py:79
+#: judge/models/problem_data.py:80
 msgid "problem data set"
 msgstr ""
 
-#: judge/models/problem_data.py:81
+#: judge/models/problem_data.py:82
 msgid "case position"
 msgstr ""
 
-#: judge/models/problem_data.py:82
+#: judge/models/problem_data.py:83
 msgid "case type"
 msgstr ""
 
-#: judge/models/problem_data.py:83
+#: judge/models/problem_data.py:84
 msgid "Normal case"
 msgstr ""
 
-#: judge/models/problem_data.py:84
+#: judge/models/problem_data.py:85
 msgid "Batch start"
 msgstr ""
 
-#: judge/models/problem_data.py:85
+#: judge/models/problem_data.py:86
 msgid "Batch end"
 msgstr ""
 
-#: judge/models/problem_data.py:87
+#: judge/models/problem_data.py:88
 msgid "input file name"
 msgstr ""
 
-#: judge/models/problem_data.py:88
+#: judge/models/problem_data.py:89
 msgid "output file name"
 msgstr ""
 
-#: judge/models/problem_data.py:89
+#: judge/models/problem_data.py:90
 msgid "generator arguments"
 msgstr ""
 
-#: judge/models/problem_data.py:90
+#: judge/models/problem_data.py:91
 msgid "point value"
 msgstr ""
 
-#: judge/models/problem_data.py:91
+#: judge/models/problem_data.py:92
 msgid "case is pretest?"
 msgstr ""
 
-#: judge/models/problem_data.py:96
+#: judge/models/problem_data.py:97
 msgid "checker arguments as a JSON object"
 msgstr ""
 
-#: judge/models/problem_data.py:97
+#: judge/models/problem_data.py:98
 msgid "batch dependencies"
 msgstr ""
 
-#: judge/models/problem_data.py:98
+#: judge/models/problem_data.py:99
 msgid "batch dependencies as a comma-separated list of integers"
 msgstr ""
 
@@ -2614,6 +2632,7 @@ msgid "Queued"
 msgstr ""
 
 #: judge/models/submission.py:40 judge/models/submission.py:61
+#: polygon/models.py:39
 msgid "Processing"
 msgstr ""
 
@@ -2622,6 +2641,7 @@ msgid "Grading"
 msgstr ""
 
 #: judge/models/submission.py:42 judge/models/submission.py:63
+#: polygon/models.py:40
 msgid "Completed"
 msgstr ""
 
@@ -3820,6 +3840,62 @@ msgstr ""
 msgid "The email attached to your account has been changed to %s."
 msgstr ""
 
+#: polygon/forms.py:10
+msgid "Polygon problem ID"
+msgstr ""
+
+#: polygon/forms.py:12
+msgid "Numeric problem ID from Polygon"
+msgstr ""
+
+#: polygon/forms.py:16
+msgid "Problem code"
+msgstr ""
+
+#: polygon/models.py:34
+msgid "Import problems from Polygon"
+msgstr ""
+
+#: polygon/models.py:41
+msgid "Failed"
+msgstr ""
+
+#: polygon/problem/statement.py:279
+msgid "Input"
+msgstr "Входные данные"
+
+#: polygon/problem/statement.py:283
+msgid "Output"
+msgstr "Выходные данные"
+
+#: polygon/problem/statement.py:287
+msgid "Interaction"
+msgstr "Формат взаимодействия"
+
+#: polygon/problem/statement.py:291
+msgid "Scoring"
+msgstr "Система оценивания"
+
+#: polygon/problem/statement.py:295
+msgid "Samples"
+msgstr "Примеры"
+
+#: polygon/problem/statement.py:297
+msgid "Input {}"
+msgstr "Ввод {}"
+
+#: polygon/problem/statement.py:299
+msgid "Output {}"
+msgstr "Ответ {}"
+
+#: polygon/problem/statement.py:303
+msgid "Notes"
+msgstr "Примечания"
+
+#: polygon/views.py:142
+msgid "Problem exists"
+msgstr ""
+
 #: templates/admin/judge/contest/change_form.html:9
 msgid "Are you sure you want to rejudge ALL the submissions?"
 msgstr ""
@@ -3864,6 +3940,10 @@ msgstr ""
 #: templates/admin/judge/problem/change_form.html:20
 #: templates/admin/judge/problem/change_form.html:23
 msgid "View problem votes"
+msgstr ""
+
+#: templates/admin/judge/problem/change_list.html:8
+msgid "Import from Polygon"
 msgstr ""
 
 #: templates/admin/judge/profile/change_form.html:14
@@ -3949,11 +4029,11 @@ msgstr "опубликовано {time}"
 msgid "Continue reading..."
 msgstr ""
 
-#: templates/blog/list.html:95 templates/problem/problem.html:331
+#: templates/blog/list.html:95 templates/problem/problem.html:334
 msgid "Clarifications"
 msgstr "Разъяснения"
 
-#: templates/blog/list.html:111 templates/problem/problem.html:342
+#: templates/blog/list.html:111 templates/problem/problem.html:345
 msgid "No clarifications have been made at this time."
 msgstr "В настоящее время никаких разъяснений не сделано."
 
@@ -4841,6 +4921,66 @@ msgstr ""
 msgid "Update preview"
 msgstr ""
 
+#: templates/polygon/import_problem.html:135
+msgid "Import problem from Polygon"
+msgstr ""
+
+#: templates/polygon/import_problem.html:138
+msgid "Before continuing:"
+msgstr ""
+
+#: templates/polygon/import_problem.html:140
+#, python-format
+msgid "Share your problem in Polygon with %(polygon_user)s"
+msgstr ""
+
+#: templates/polygon/import_problem.html:141
+msgid "Generate full problem package for the actual problem revision"
+msgstr ""
+
+#: templates/polygon/import_problem.html:155
+msgid "Import"
+msgstr ""
+
+#: templates/polygon/problemsource_detail.html:21
+#: templates/polygon/problemsource_detail.html:24
+msgid "Importing problem"
+msgstr ""
+
+#: templates/polygon/problemsource_detail.html:35
+msgid "Import another"
+msgstr ""
+
+#: templates/polygon/problemsource_detail.html:36
+#: templates/problem/problem.html:160
+msgid "Edit problem"
+msgstr ""
+
+#: templates/polygon/problemsource_detail.html:42
+#: templates/polygon/problemsource_detail.html:66
+msgid "by"
+msgstr ""
+
+#: templates/polygon/problemsource_detail.html:43
+msgid "Polygon problem"
+msgstr ""
+
+#: templates/polygon/problemsource_detail.html:46
+msgid "Main correct solution"
+msgstr ""
+
+#: templates/polygon/problemsource_detail.html:61
+msgid "Reimport"
+msgstr ""
+
+#: templates/polygon/problemsource_detail.html:63
+msgid "Import attempts"
+msgstr ""
+
+#: templates/polygon/problemsource_detail.html:72
+msgid "Import log"
+msgstr ""
+
 #: templates/problem/clone.html:37
 msgid "Enter a new code for the cloned problem:"
 msgstr ""
@@ -4917,7 +5057,7 @@ msgstr ""
 msgid "Submitting an official solution before solving the problem yourself is a bannable offence."
 msgstr ""
 
-#: templates/problem/editorial.html:30 templates/problem/problem.html:230
+#: templates/problem/editorial.html:30 templates/problem/problem.html:233
 msgid "Author:"
 msgid_plural "Authors:"
 msgstr[0] ""
@@ -5077,39 +5217,39 @@ msgstr ""
 msgid "Manage tickets"
 msgstr ""
 
-#: templates/problem/problem.html:160
-msgid "Edit problem"
-msgstr ""
-
 #: templates/problem/problem.html:162
 msgid "Edit test data"
 msgstr ""
 
-#: templates/problem/problem.html:167
+#: templates/problem/problem.html:165
+msgid "Polygon synchronization"
+msgstr ""
+
+#: templates/problem/problem.html:170
 msgid "My tickets"
 msgstr ""
 
-#: templates/problem/problem.html:175
+#: templates/problem/problem.html:178
 msgid "Manage submissions"
 msgstr ""
 
-#: templates/problem/problem.html:188 templates/problem/vote-ajax.html:20
+#: templates/problem/problem.html:191 templates/problem/vote-ajax.html:20
 msgid "Points:"
 msgstr "Баллы:"
 
-#: templates/problem/problem.html:191 templates/problem/problem.html:193
+#: templates/problem/problem.html:194 templates/problem/problem.html:196
 msgid "(partial)"
 msgstr ""
 
-#: templates/problem/problem.html:198 templates/problem/raw.html:61
+#: templates/problem/problem.html:201 templates/problem/raw.html:61
 msgid "Time limit:"
 msgstr "Ограничение времени:"
 
-#: templates/problem/problem.html:210 templates/problem/raw.html:70
+#: templates/problem/problem.html:213 templates/problem/raw.html:70
 msgid "Memory limit:"
 msgstr "Ограничение памяти:"
 
-#: templates/problem/problem.html:246
+#: templates/problem/problem.html:249
 msgid "Problem type"
 msgid_plural "Problem types"
 msgstr[0] ""
@@ -5117,16 +5257,16 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: templates/problem/problem.html:259
+#: templates/problem/problem.html:262
 msgid "Allowed languages"
 msgstr "Разрешенные языки"
 
-#: templates/problem/problem.html:267
+#: templates/problem/problem.html:270
 #, python-format
 msgid "No %(lang)s judge online"
 msgstr ""
 
-#: templates/problem/problem.html:278
+#: templates/problem/problem.html:281
 msgid "Judge:"
 msgid_plural "Judges:"
 msgstr[0] ""
@@ -5134,15 +5274,15 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: templates/problem/problem.html:295
+#: templates/problem/problem.html:298
 msgid "none available"
 msgstr ""
 
-#: templates/problem/problem.html:320
+#: templates/problem/problem.html:323
 msgid "Request clarification"
 msgstr "Запросить разъяснение"
 
-#: templates/problem/problem.html:322
+#: templates/problem/problem.html:325
 msgid "Report an issue"
 msgstr ""
 
@@ -5901,11 +6041,11 @@ msgstr ""
 msgid "%(user)s's"
 msgstr ""
 
-#: templates/task_status.html:92
+#: templates/task_status.html:93
 msgid "Completed!"
 msgstr ""
 
-#: templates/task_status.html:95
+#: templates/task_status.html:96
 msgid "Failed!"
 msgstr ""
 
