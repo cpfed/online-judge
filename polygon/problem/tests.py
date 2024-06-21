@@ -21,7 +21,7 @@ def parse_testset(context: ImportContext, storage: zipfile.ZipFile, name: str) -
     group_blocks = testset.find('groups')
     groups_enabled = group_blocks is not None
     if groups_enabled:
-        for idx, group_block in enumerate(group_blocks, start=1):
+        for group_block in group_blocks:
             name = group_block.get('name')
 
             points_policy = group_block.get('points-policy')
@@ -45,7 +45,8 @@ def parse_testset(context: ImportContext, storage: zipfile.ZipFile, name: str) -
             group = Batch(points=float(group_block.get('points', 0)), dependencies=dependencies)
 
             groups.append(group)
-            group_name_to_id[name] = idx
+            # If dict is empty, assign 1; if it has one element; assign 2; etc
+            group_name_to_id[name] = len(group_name_to_id) + 1
 
     ungrouped_tests: List[Dict[str, str]] = []
     input_path_pattern = testset.find('input-path-pattern').text
@@ -69,6 +70,7 @@ def parse_testset(context: ImportContext, storage: zipfile.ZipFile, name: str) -
         points = float(test.get('points', 0))
         group = test.get('group', None)
         if group in group_name_to_id:
+            # groups are 1-indexes, and lists are 0-indexed
             group_id = group_name_to_id[group] - 1
             groups[group_id].batched.append(test_record)
         else:

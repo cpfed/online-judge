@@ -57,7 +57,7 @@ class ProblemSourceView(PermissionRequiredMixin, FormMixin, DetailView):
     def get_object(self, queryset=None):
         result: ProblemSource = super().get_object(queryset)
 
-        if result.problem is None and result.author != self.request.profile:
+        if result.problem is None and result.author != self.request.profile and not self.request.user.is_superuser:
             raise PermissionDenied()
 
         if result.problem is not None and not result.problem.is_editable_by(self.request.user):
