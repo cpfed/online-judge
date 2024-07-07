@@ -13,7 +13,7 @@ class BasicAuthMiddleware(MiddlewareMixin):
                 'The Django remote user auth middleware requires the'
                 ' authentication middleware to be installed.  Edit your'
                 ' MIDDLEWARE setting to insert'
-                ' 'django.contrib.auth.middleware.AuthenticationMiddleware''
+                " 'django.contrib.auth.middleware.AuthenticationMiddleware'"
                 ' before the RemoteUserMiddleware class.')
         try:
             header = request.headers['Authorization']
