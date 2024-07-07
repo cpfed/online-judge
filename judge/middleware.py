@@ -109,7 +109,8 @@ class APIMiddleware(object):
 
         token = self.header_pattern.match(full_token)
         if not token:
-            return HttpResponse('Invalid authorization header', status=400)
+            return self.get_response(request)
+            # return HttpResponse('Invalid authorization header', status=400)
         if request.path.startswith(reverse('admin:index')):
             return HttpResponse('Admin inaccessible', status=403)
 
