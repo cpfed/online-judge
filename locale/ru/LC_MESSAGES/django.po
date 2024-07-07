@@ -5085,7 +5085,7 @@ msgstr "Типы"
 #: templates/problem/list.html:218
 #, python-format
 msgid "AC %%"
-msgstr "% AC"
+msgstr "%% AC"
 
 #: templates/problem/manage_submission.html:56
 msgid "Leave empty to not filter by language"
@@ -6487,4 +6487,3 @@ msgstr "Изменить профиль"
 #: templates/widgets/select_all.html:8
 msgid "Check all"
 msgstr "Выбрать все"
-
