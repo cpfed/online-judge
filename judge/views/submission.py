@@ -269,7 +269,7 @@ class SubmissionsListBase(DiggPaginatorMixin, TitleMixin, ListView):
                                                               language=self.request.LANGUAGE_CODE), to_attr='_trans'))
         if self.in_contest:
             queryset = queryset.filter(contest_object=self.contest)
-            if not self.contest.can_see_full_scoreboard(self.request.user):
+            if not self.contest.can_see_full_scoreboard(self.request.user) or self.contest.freeze_time is not None:
                 queryset = queryset.filter(user=self.request.profile)
         else:
             queryset = queryset.select_related('contest_object').defer('contest_object__description')

@@ -90,6 +90,7 @@ class Contest(models.Model):
     start_time = models.DateTimeField(verbose_name=_('start time'), db_index=True)
     end_time = models.DateTimeField(verbose_name=_('end time'), db_index=True)
     time_limit = models.DurationField(verbose_name=_('time limit'), blank=True, null=True)
+    freeze_time = models.DurationField(verbose_name=_('freeze time'), blank=True, null=True)
     is_visible = models.BooleanField(verbose_name=_('publicly visible'), default=False,
                                      help_text=_('Should be set even for organization-private contests, where it '
                                                  'determines whether the contest is visible to members of the '

@@ -122,7 +122,7 @@ class ContestAdmin(NoBatchDeleteMixin, VersionAdmin):
         (_('Settings'), {'fields': ('is_visible', 'use_clarifications', 'hide_problem_tags', 'hide_problem_authors',
                                     'show_short_display', 'run_pretests_only', 'locked_after', 'scoreboard_visibility',
                                     'points_precision')}),
-        (_('Scheduling'), {'fields': ('start_time', 'end_time', 'time_limit')}),
+        (_('Scheduling'), {'fields': ('start_time', 'end_time', 'time_limit', 'freeze_time')}),
         (_('Details'), {'fields': ('description', 'og_image', 'logo_override_image', 'tags', 'summary')}),
         (_('Format'), {'fields': ('format_name', 'format_config', 'problem_label_script')}),
         (_('Rating'), {'fields': ('is_rated', 'rate_all', 'rating_floor', 'rating_ceiling', 'rate_exclude')}),
@@ -198,7 +198,7 @@ class ContestAdmin(NoBatchDeleteMixin, VersionAdmin):
         super().save_model(request, obj, form, change)
         # We need this flag because `save_related` deals with the inlines, but does not know if we have already rescored
         self._rescored = False
-        if form.changed_data and any(f in form.changed_data for f in ('format_config', 'format_name')):
+        if form.changed_data and any(f in form.changed_data for f in ('format_config', 'format_name', 'freeze_time')):
             self._rescore(obj.key)
             self._rescored = True
 
