@@ -71,7 +71,7 @@ class ICPCContestFormat(DefaultContestFormat):
             for points, time, prob in cursor.fetchall():
                 time = from_database_time(time)
                 dt = (time - participation.start).total_seconds()
-                is_frozen = dt > self.contest.freeze_time.total_seconds()
+                is_frozen = self.contest.freeze_time is not None and dt > self.contest.freeze_time.total_seconds()
 
                 # Compute penalty
                 if self.config['penalty']:
