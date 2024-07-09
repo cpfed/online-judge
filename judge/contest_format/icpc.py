@@ -52,9 +52,6 @@ class ICPCContestFormat(DefaultContestFormat):
         format_data = {}
 
         with connection.cursor() as cursor:
-            # Known bug: submissions after frozen OK are misinterpreted.
-            # They increase penalty but do not affect penalty time.
-            # It's a rare case and thus considered as insignificant.
             cursor.execute("""
                 SELECT MAX(cs.points) as `points`, CASE
                     WHEN MAX(cs.points) = 0 THEN MAX(sub.date)
@@ -74,18 +71,7 @@ class ICPCContestFormat(DefaultContestFormat):
             for points, time, prob in cursor.fetchall():
                 time = from_database_time(time)
                 dt = (time - participation.start).total_seconds()
-
-                if dt > self.contest.freeze_time.total_seconds():
-                    if self.config['penalty']:
-                        subs = participation.submissions.exclude(submission__result__isnull=True) \
-                                                        .exclude(submission__result__in=['IE', 'CE']) \
-                                                        .filter(problem_id=prob)
-                        prev = subs.count()
-                    else:
-                        prev = 0
-
-                    format_data[str(prob)] = {'time': dt, 'points': 0, 'penalty': prev, 'frozen': True}
-                    continue
+                is_frozen = dt > self.contest.freeze_time.total_seconds()
 
                 # Compute penalty
                 if self.config['penalty']:
@@ -94,19 +80,25 @@ class ICPCContestFormat(DefaultContestFormat):
                                                     .exclude(submission__result__in=['IE', 'CE']) \
                                                     .filter(problem_id=prob)
                     if points:
-                        prev = subs.filter(submission__date__lte=time).count() - 1
-                        penalty += prev * self.config['penalty'] * 60
+                        prev = subs.filter(submission__date__lte=time).count()
+                        if not is_frozen:
+                            prev -= 1
+                            penalty += prev * self.config['penalty'] * 60
                     else:
                         # We should always display the penalty, even if the user has a score of 0
                         prev = subs.count()
                 else:
                     prev = 0
 
-                if points:
+                if points and not is_frozen:
                     cumtime += dt
                     last = max(last, dt)
+                else:
+                    points = 0
 
                 format_data[str(prob)] = {'time': dt, 'points': points, 'penalty': prev}
+                if is_frozen:
+                    format_data[str(prob)]['frozen'] = True
                 score += points
 
         participation.cumtime = cumtime + penalty
