@@ -52,13 +52,19 @@ class ICPCContestFormat(DefaultContestFormat):
         format_data = {}
 
         with connection.cursor() as cursor:
+            # Known bug: submissions after frozen OK are misinterpreted.
+            # They increase penalty but do not affect penalty time.
+            # It's a rare case and thus considered as insignificant.
             cursor.execute("""
-                SELECT MAX(cs.points) as `points`, (
-                    SELECT MIN(csub.date)
-                        FROM judge_contestsubmission ccs LEFT OUTER JOIN
-                             judge_submission csub ON (csub.id = ccs.submission_id)
-                        WHERE ccs.problem_id = cp.id AND ccs.participation_id = %s AND ccs.points = MAX(cs.points)
-                ) AS `time`, cp.id AS `prob`
+                SELECT MAX(cs.points) as `points`, CASE
+                    WHEN MAX(cs.points) = 0 THEN MAX(sub.date)
+                    ELSE (
+                        SELECT MIN(csub.date)
+                            FROM judge_contestsubmission ccs LEFT OUTER JOIN
+                                judge_submission csub ON (csub.id = ccs.submission_id)
+                            WHERE ccs.problem_id = cp.id AND ccs.participation_id = %s AND ccs.points = MAX(cs.points)
+                    )
+                END AS `time`, cp.id AS `prob`
                 FROM judge_contestproblem cp INNER JOIN
                      judge_contestsubmission cs ON (cs.problem_id = cp.id AND cs.participation_id = %s) LEFT OUTER JOIN
                      judge_submission sub ON (sub.id = cs.submission_id)
@@ -68,6 +74,18 @@ class ICPCContestFormat(DefaultContestFormat):
             for points, time, prob in cursor.fetchall():
                 time = from_database_time(time)
                 dt = (time - participation.start).total_seconds()
+
+                if dt > self.contest.freeze_time.total_seconds():
+                    if self.config['penalty']:
+                        subs = participation.submissions.exclude(submission__result__isnull=True) \
+                                                        .exclude(submission__result__in=['IE', 'CE']) \
+                                                        .filter(problem_id=prob)
+                        prev = subs.count()
+                    else:
+                        prev = 0
+
+                    format_data[str(prob)] = {'time': dt, 'points': 0, 'penalty': prev, 'frozen': True}
+                    continue
 
                 # Compute penalty
                 if self.config['penalty']:
@@ -108,7 +126,7 @@ class ICPCContestFormat(DefaultContestFormat):
                        self.best_solution_state(format_data['points'], contest_problem.points)),
                 url=reverse('contest_user_submissions',
                             args=[self.contest.key, participation.user.user.username, contest_problem.problem.code]),
-                points=floatformat(format_data['points']),
+                points='?' if 'frozen' in format_data else floatformat(format_data['points']),
                 penalty=penalty,
                 time=nice_repr(timedelta(seconds=format_data['time']), 'noday'),
             )
