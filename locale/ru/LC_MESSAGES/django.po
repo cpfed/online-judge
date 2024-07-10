@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: esep\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-08 22:04+0000\n"
-"PO-Revision-Date: 2024-06-10 00:36\n"
+"POT-Creation-Date: 2024-07-09 19:25+0000\n"
+"PO-Revision-Date: 2024-07-10 00:36\n"
 "Last-Translator: \n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
@@ -17,79 +17,79 @@ msgstr ""
 "X-Crowdin-File: django.po\n"
 "X-Crowdin-File-ID: 2\n"
 
-#: dmoj/settings.py:398
+#: dmoj/settings.py:399
 msgid "Catalan"
 msgstr "Каталанский"
 
-#: dmoj/settings.py:399
+#: dmoj/settings.py:400
 msgid "German"
 msgstr "Немецкий"
 
-#: dmoj/settings.py:400
+#: dmoj/settings.py:401
 msgid "Greek"
 msgstr "Греческий"
 
-#: dmoj/settings.py:401
+#: dmoj/settings.py:402
 msgid "English"
 msgstr "Английский"
 
-#: dmoj/settings.py:402
+#: dmoj/settings.py:403
 msgid "Spanish"
 msgstr "Испанский"
 
-#: dmoj/settings.py:403
+#: dmoj/settings.py:404
 msgid "French"
 msgstr "Французский"
 
-#: dmoj/settings.py:404
+#: dmoj/settings.py:405
 msgid "Croatian"
 msgstr "Хорватский"
 
-#: dmoj/settings.py:405
+#: dmoj/settings.py:406
 msgid "Hungarian"
 msgstr "Венгерский"
 
-#: dmoj/settings.py:406
+#: dmoj/settings.py:407
 msgid "Japanese"
 msgstr "Японский"
 
-#: dmoj/settings.py:407
+#: dmoj/settings.py:408
 msgid "Kazakh"
 msgstr "Казахский"
 
-#: dmoj/settings.py:408
+#: dmoj/settings.py:409
 msgid "Korean"
 msgstr "Корейский"
 
-#: dmoj/settings.py:409
+#: dmoj/settings.py:410
 msgid "Brazilian Portuguese"
 msgstr "Бразильский Португальский"
 
-#: dmoj/settings.py:410
+#: dmoj/settings.py:411
 msgid "Romanian"
 msgstr "Румынский"
 
-#: dmoj/settings.py:411
+#: dmoj/settings.py:412
 msgid "Russian"
 msgstr "Русский"
 
-#: dmoj/settings.py:412
+#: dmoj/settings.py:413
 msgid "Serbian (Latin)"
 msgstr "Сербский (латиница)"
 
-#: dmoj/settings.py:413
+#: dmoj/settings.py:414
 msgid "Turkish"
 msgstr "Турецкий"
 
-#: dmoj/settings.py:414
+#: dmoj/settings.py:415
 msgid "Vietnamese"
 msgstr "Вьетнамский"
 
-#: dmoj/settings.py:415
+#: dmoj/settings.py:416
 msgid "Simplified Chinese"
 msgstr "Упрощенный китайский"
 
-#: dmoj/settings.py:416
+#: dmoj/settings.py:417
 msgid "Traditional Chinese"
 msgstr "Традиционный китайский"
 
@@ -287,8 +287,8 @@ msgid "Summary"
 msgstr "Резюме"
 
 #: judge/admin/interface.py:125 judge/admin/profile.py:107
-#: judge/admin/submission.py:218 judge/models/contest.py:500
-#: judge/models/contest.py:632 judge/models/profile.py:349
+#: judge/admin/submission.py:218 judge/models/contest.py:501
+#: judge/models/contest.py:633 judge/models/profile.py:349
 #: judge/models/profile.py:380 judge/models/submission.py:67
 #: judge/models/ticket.py:32
 msgid "user"
@@ -400,8 +400,8 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: judge/admin/problem.py:298 judge/models/contest.py:592
-#: judge/models/contest.py:617 judge/models/contest.py:657
+#: judge/admin/problem.py:298 judge/models/contest.py:593
+#: judge/models/contest.py:618 judge/models/contest.py:658
 #: judge/models/problem.py:505 judge/models/problem.py:510
 #: judge/models/problem.py:533 judge/models/problem.py:593
 #: judge/models/problem_data.py:35 judge/models/submission.py:68
@@ -582,11 +582,11 @@ msgid "AtCoder"
 msgstr "AtCoder"
 
 #: judge/contest_format/atcoder.py:117 judge/contest_format/default.py:79
-#: judge/contest_format/icpc.py:127 judge/contest_format/legacy_ioi.py:97
+#: judge/contest_format/icpc.py:137 judge/contest_format/legacy_ioi.py:97
 msgid "The maximum score submission for each problem will be used."
 msgstr "По каждой задаче будет выбрано лучшее решение."
 
-#: judge/contest_format/atcoder.py:122 judge/contest_format/icpc.py:132
+#: judge/contest_format/atcoder.py:122 judge/contest_format/icpc.py:142
 #, python-format
 msgid "Each submission before the first maximum score submission will incur a **penalty of %d minute**."
 msgid_plural "Each submission before the first maximum score submission will incur a **penalty of %d minutes**."
@@ -642,7 +642,7 @@ msgstr "При равенстве баллов участникам присуж
 msgid "ICPC"
 msgstr "ICPC"
 
-#: judge/contest_format/icpc.py:137
+#: judge/contest_format/icpc.py:147
 msgid "Ties will be broken by the sum of the last score altering submission time on problems with a non-zero score, followed by the time of the last score altering submission."
 msgstr "Штрафное время считается как сумма времён отправки успешных решений по всем решённым задачам. При равенстве баллов выше располагается участник с меньшим штрафным временем. При равенстве баллов и штрафного времени выше располагается участник, раньше достигший своего результата."
 
@@ -933,7 +933,7 @@ msgstr "описание тега"
 msgid "contest tag"
 msgstr "тег соревнования"
 
-#: judge/models/contest.py:53 judge/models/contest.py:153
+#: judge/models/contest.py:53 judge/models/contest.py:154
 msgid "contest tags"
 msgstr "теги соревнований"
 
@@ -1014,7 +1014,7 @@ msgstr "описание"
 msgid "problems"
 msgstr "задачи"
 
-#: judge/models/contest.py:90 judge/models/contest.py:501
+#: judge/models/contest.py:90 judge/models/contest.py:502
 msgid "start time"
 msgstr "время начала"
 
@@ -1027,448 +1027,452 @@ msgstr "время окончания"
 msgid "time limit"
 msgstr "ограничение времени"
 
-#: judge/models/contest.py:93 judge/models/problem.py:155
+#: judge/models/contest.py:93
+msgid "freeze time"
+msgstr ""
+
+#: judge/models/contest.py:94 judge/models/problem.py:155
 msgid "publicly visible"
 msgstr "публично видимый"
 
-#: judge/models/contest.py:94
+#: judge/models/contest.py:95
 msgid "Should be set even for organization-private contests, where it determines whether the contest is visible to members of the specified organizations."
 msgstr "В соревнованиях, доступных только определённым организациям, эта настройка управляет видимостью соревнования для членов организации."
 
-#: judge/models/contest.py:97
+#: judge/models/contest.py:98
 msgid "contest rated"
 msgstr "рейтинговое"
 
-#: judge/models/contest.py:97
+#: judge/models/contest.py:98
 msgid "Whether this contest can be rated."
 msgstr ""
 
-#: judge/models/contest.py:99
+#: judge/models/contest.py:100
 msgid "view contest scoreboard"
 msgstr "могут смотреть результаты"
 
-#: judge/models/contest.py:101
+#: judge/models/contest.py:102
 msgid "These users will be able to view the scoreboard."
 msgstr "Эти пользователи смогут просматривать результаты."
 
-#: judge/models/contest.py:102
+#: judge/models/contest.py:103
 msgid "can see contest submissions"
 msgstr "могут смотреть решения"
 
-#: judge/models/contest.py:104
+#: judge/models/contest.py:105
 msgid "These users will be able to see in-contest submissions."
 msgstr "Эти пользователи смогут просматривать решения, отправленные во время соревнования."
 
-#: judge/models/contest.py:106
+#: judge/models/contest.py:107
 msgid "scoreboard visibility"
 msgstr "видимость результатов"
 
-#: judge/models/contest.py:107
+#: judge/models/contest.py:108
 msgid "Scoreboard visibility through the duration of the contest."
 msgstr "Видимость результатов на протяжении всего соревнования."
 
-#: judge/models/contest.py:109
+#: judge/models/contest.py:110
 msgid "no comments"
 msgstr "выключить комментарии"
 
-#: judge/models/contest.py:110
+#: judge/models/contest.py:111
 msgid "Use clarification system instead of comments."
 msgstr "Использовать систему вопросов вместо комментариев."
 
-#: judge/models/contest.py:112
+#: judge/models/contest.py:113
 msgid "rating floor"
 msgstr ""
 
-#: judge/models/contest.py:113
+#: judge/models/contest.py:114
 msgid "Do not rate users who have a lower rating."
 msgstr ""
 
-#: judge/models/contest.py:114
+#: judge/models/contest.py:115
 msgid "rating ceiling"
 msgstr ""
 
-#: judge/models/contest.py:115
+#: judge/models/contest.py:116
 msgid "Do not rate users who have a higher rating."
 msgstr ""
 
-#: judge/models/contest.py:117
+#: judge/models/contest.py:118
 msgid "rate all"
 msgstr ""
 
-#: judge/models/contest.py:117
+#: judge/models/contest.py:118
 msgid "Rate all users who joined."
 msgstr ""
 
-#: judge/models/contest.py:118
+#: judge/models/contest.py:119
 msgid "exclude from ratings"
 msgstr ""
 
-#: judge/models/contest.py:120
+#: judge/models/contest.py:121
 msgid "private to specific users"
 msgstr "приватное"
 
-#: judge/models/contest.py:121
+#: judge/models/contest.py:122
 msgid "private contestants"
 msgstr "участники с доступом"
 
-#: judge/models/contest.py:122
+#: judge/models/contest.py:123
 msgid "If non-empty, only these users may see the contest."
 msgstr "Если установлено, только эти пользователи смогут увидеть соревнование."
 
-#: judge/models/contest.py:124
+#: judge/models/contest.py:125
 msgid "hide problem tags"
 msgstr "скрыть теги задач"
 
-#: judge/models/contest.py:125
+#: judge/models/contest.py:126
 msgid "Whether problem tags should be hidden by default."
 msgstr "Если установлено, по умолчанию теги задач будут скрыты."
 
-#: judge/models/contest.py:127
+#: judge/models/contest.py:128
 msgid "hide problem authors"
 msgstr "скрыть авторов задач"
 
-#: judge/models/contest.py:128
+#: judge/models/contest.py:129
 msgid "Whether problem authors should be hidden by default."
 msgstr "Если установлено, по умолчанию авторы задач будут скрыты."
 
-#: judge/models/contest.py:130
+#: judge/models/contest.py:131
 msgid "run pretests only"
 msgstr "оценка только на претестах"
 
-#: judge/models/contest.py:131
+#: judge/models/contest.py:132
 msgid "Whether judges should grade pretests only, versus all testcases. Commonly set during a contest, then unset prior to rejudging user submissions when the contest ends."
 msgstr "Если установлено, решения будут проверяться только на претестах. Обычно устанавливается во время соревнования, а после завершения настройка снимается и все решения перетестируются."
 
-#: judge/models/contest.py:135
+#: judge/models/contest.py:136
 msgid "show short form settings display"
 msgstr "показать настройки участникам"
 
-#: judge/models/contest.py:136
+#: judge/models/contest.py:137
 msgid "Whether to show a section containing contest settings on the contest page or not."
 msgstr "Показывать ли раздел, содержащий настройки соревнования, на странице соревнования или нет."
 
-#: judge/models/contest.py:139 judge/models/problem.py:181
+#: judge/models/contest.py:140 judge/models/problem.py:181
 msgid "private to organizations"
 msgstr "приватное для организаций"
 
-#: judge/models/contest.py:140 judge/models/problem.py:179
+#: judge/models/contest.py:141 judge/models/problem.py:179
 #: judge/models/profile.py:99
 msgid "organizations"
 msgstr "организации"
 
-#: judge/models/contest.py:141
+#: judge/models/contest.py:142
 msgid "If non-empty, only these organizations may see the contest."
 msgstr "Если установлено, пользователи только этих организаций смогут увидеть соревнование."
 
-#: judge/models/contest.py:142
+#: judge/models/contest.py:143
 msgid "limit organizations that can join"
 msgstr "ограничить присоединение организациями"
 
-#: judge/models/contest.py:143
+#: judge/models/contest.py:144
 msgid "join organizations"
 msgstr "организации с правом присоединяться"
 
-#: judge/models/contest.py:144
+#: judge/models/contest.py:145
 msgid "If non-empty, only these organizations may join the contest."
 msgstr "Если указано, то присоединиться к соревнованию могут только пользователи этих организаций."
 
-#: judge/models/contest.py:146 judge/models/profile.py:143
+#: judge/models/contest.py:147 judge/models/profile.py:143
 msgid "classes"
 msgstr "классы"
 
-#: judge/models/contest.py:147
+#: judge/models/contest.py:148
 msgid "If organization private, only these classes may see the contest."
 msgstr "Если соревнование приватное для организаций, только эти классы смогут его увидеть."
 
-#: judge/models/contest.py:148 judge/models/interface.py:74
+#: judge/models/contest.py:149 judge/models/interface.py:74
 #: judge/models/problem.py:165
 msgid "OpenGraph image"
 msgstr "Изображение OpenGraph"
 
-#: judge/models/contest.py:149 judge/models/profile.py:58
+#: judge/models/contest.py:150 judge/models/profile.py:58
 msgid "logo override image"
 msgstr "произвольный логотип"
 
-#: judge/models/contest.py:151
+#: judge/models/contest.py:152
 msgid "This image will replace the default site logo for users inside the contest."
 msgstr "Это изображение заменит логотип сайта для участников соревнования."
 
-#: judge/models/contest.py:154
+#: judge/models/contest.py:155
 msgid "the amount of live participants"
 msgstr "количество активных участников"
 
-#: judge/models/contest.py:155
+#: judge/models/contest.py:156
 msgid "contest summary"
 msgstr "короткое описание соревнования"
 
-#: judge/models/contest.py:156 judge/models/problem.py:167
+#: judge/models/contest.py:157 judge/models/problem.py:167
 msgid "Plain-text, shown in meta description tag, e.g. for social media."
 msgstr "Текст, отображаемый в мете описания, например для социальных сетей."
 
-#: judge/models/contest.py:157 judge/models/profile.py:57
+#: judge/models/contest.py:158 judge/models/profile.py:57
 #: judge/models/profile.py:110
 msgid "access code"
 msgstr "код доступа"
 
-#: judge/models/contest.py:158
+#: judge/models/contest.py:159
 msgid "An optional code to prompt contestants before they are allowed to join the contest. Leave it blank to disable."
 msgstr "Код, который участники должны будут ввести для входа в соревнование. Оставьте поле пустым, чтобы выключить."
 
-#: judge/models/contest.py:160 judge/models/problem.py:161
+#: judge/models/contest.py:161 judge/models/problem.py:161
 msgid "personae non gratae"
 msgstr "заблокированные пользователи"
 
-#: judge/models/contest.py:161
+#: judge/models/contest.py:162
 msgid "Bans the selected users from joining this contest."
 msgstr "Запретить выбранным пользователям присоединяться к соревнованию."
 
-#: judge/models/contest.py:162
+#: judge/models/contest.py:163
 msgid "contest format"
 msgstr "формат соревнования"
 
-#: judge/models/contest.py:163
+#: judge/models/contest.py:164
 msgid "The contest format module to use."
 msgstr "Используемый модуль формата соревнования."
 
-#: judge/models/contest.py:164
+#: judge/models/contest.py:165
 msgid "contest format configuration"
 msgstr "конфигурация формата соревнования"
 
-#: judge/models/contest.py:165
+#: judge/models/contest.py:166
 msgid "A JSON object to serve as the configuration for the chosen contest format module. Leave empty to use None. Exact format depends on the contest format selected."
 msgstr "Конфигурация модуля формата соревнования в формате JSON. Оставьте пустое поле, чтобы использовать None. Набор параметров зависит от выбранного формата соревнования."
 
-#: judge/models/contest.py:168
+#: judge/models/contest.py:169
 msgid "contest problem label script"
 msgstr "скрипт для меток задач"
 
-#: judge/models/contest.py:169
+#: judge/models/contest.py:170
 msgid "A custom Lua function to generate problem labels. Requires a single function with an integer parameter, the zero-indexed contest problem index, and returns a string, the label."
 msgstr "Функция на Lua для генерации меток задач. Принимает один целочисленный параметр — порядковый номер задачи, начиная с нуля. Возвращает строку — метку задачи."
 
-#: judge/models/contest.py:172
+#: judge/models/contest.py:173
 msgid "contest lock"
 msgstr ""
 
-#: judge/models/contest.py:173
+#: judge/models/contest.py:174
 msgid "Prevent submissions from this contest from being rejudged after this date."
 msgstr ""
 
-#: judge/models/contest.py:175
+#: judge/models/contest.py:176
 msgid "precision points"
 msgstr ""
 
-#: judge/models/contest.py:177
+#: judge/models/contest.py:178
 msgid "Number of digits to round points to."
 msgstr "Количество знаков после запятой для округления баллов."
 
-#: judge/models/contest.py:479
+#: judge/models/contest.py:480
 msgid "See private contests"
 msgstr "Смотреть приватные соревнования"
 
-#: judge/models/contest.py:480
+#: judge/models/contest.py:481
 msgid "Edit own contests"
 msgstr "Редактировать свои cоревнования"
 
-#: judge/models/contest.py:481
+#: judge/models/contest.py:482
 msgid "Edit all contests"
 msgstr "Редактировать все соревнования"
 
-#: judge/models/contest.py:482
+#: judge/models/contest.py:483
 msgid "Clone contest"
 msgstr "Клонировать соревнования"
 
-#: judge/models/contest.py:483 templates/contest/moss.html:76
+#: judge/models/contest.py:484 templates/contest/moss.html:76
 msgid "MOSS contest"
 msgstr "Проверить на плагиат"
 
-#: judge/models/contest.py:484
+#: judge/models/contest.py:485
 msgid "Rate contests"
 msgstr ""
 
-#: judge/models/contest.py:485
+#: judge/models/contest.py:486
 msgid "Contest access codes"
 msgstr "Управлять кодами доступа к соревнованиям"
 
-#: judge/models/contest.py:486
+#: judge/models/contest.py:487
 msgid "Create private contests"
 msgstr "Создавать приватные соревнования"
 
-#: judge/models/contest.py:487
+#: judge/models/contest.py:488
 msgid "Change contest visibility"
 msgstr "Управлять видимостью соревнования"
 
-#: judge/models/contest.py:488
+#: judge/models/contest.py:489
 msgid "Edit contest problem label script"
 msgstr "Редактировать скрипты для меток задач"
 
-#: judge/models/contest.py:489
+#: judge/models/contest.py:490
 msgid "Change lock status of contest"
 msgstr "Блокировать и разблокировать соревнования"
 
-#: judge/models/contest.py:491 judge/models/contest.py:593
-#: judge/models/contest.py:633 judge/models/contest.py:656
+#: judge/models/contest.py:492 judge/models/contest.py:594
+#: judge/models/contest.py:634 judge/models/contest.py:657
 #: judge/models/submission.py:88
 msgid "contest"
 msgstr "соревнование"
 
-#: judge/models/contest.py:492
+#: judge/models/contest.py:493
 msgid "contests"
 msgstr "соревнования"
 
-#: judge/models/contest.py:499
+#: judge/models/contest.py:500
 msgid "associated contest"
 msgstr "связанное соревнование"
 
-#: judge/models/contest.py:502
+#: judge/models/contest.py:503
 msgid "score"
 msgstr "балл"
 
-#: judge/models/contest.py:503
+#: judge/models/contest.py:504
 msgid "cumulative time"
 msgstr "суммарное время"
 
-#: judge/models/contest.py:504
+#: judge/models/contest.py:505
 msgid "is disqualified"
 msgstr "дисквалифицирован"
 
-#: judge/models/contest.py:505
+#: judge/models/contest.py:506
 msgid "Whether this participation is disqualified."
 msgstr "Дисквалифицирован ли этот участник."
 
-#: judge/models/contest.py:506
+#: judge/models/contest.py:507
 msgid "tie-breaking field"
 msgstr "штрафное время"
 
-#: judge/models/contest.py:507
+#: judge/models/contest.py:508
 msgid "virtual participation id"
 msgstr "идентификатор виртуального участия"
 
-#: judge/models/contest.py:508
+#: judge/models/contest.py:509
 msgid "0 means non-virtual, otherwise the n-th virtual participation."
 msgstr "0 означает невиртуальное, в противном случае n-е виртуальное участие."
 
-#: judge/models/contest.py:509
+#: judge/models/contest.py:510
 msgid "contest format specific data"
 msgstr "данные для формата соревнования"
 
-#: judge/models/contest.py:577
+#: judge/models/contest.py:578
 #, python-format
 msgid "%(user)s spectating in %(contest)s"
 msgstr "%(user)s в %(contest)s (зритель)"
 
-#: judge/models/contest.py:579
+#: judge/models/contest.py:580
 #, python-format
 msgid "%(user)s in %(contest)s, v%(id)d"
 msgstr "%(user)s в %(contest)s, (виртуально #%(id)d)"
 
-#: judge/models/contest.py:582
+#: judge/models/contest.py:583
 #, python-format
 msgid "%(user)s in %(contest)s"
 msgstr "%(user)s в %(contest)s"
 
-#: judge/models/contest.py:585
+#: judge/models/contest.py:586
 msgid "contest participation"
 msgstr "участие в соревновании"
 
-#: judge/models/contest.py:586
+#: judge/models/contest.py:587
 msgid "contest participations"
 msgstr "участия в соревнованиях"
 
-#: judge/models/contest.py:594 judge/models/contest.py:621
+#: judge/models/contest.py:595 judge/models/contest.py:622
 #: judge/models/problem.py:148
 msgid "points"
 msgstr "баллы"
 
-#: judge/models/contest.py:595
+#: judge/models/contest.py:596
 msgid "partial"
 msgstr "частичные баллы"
 
-#: judge/models/contest.py:596 judge/models/contest.py:622
+#: judge/models/contest.py:597 judge/models/contest.py:623
 msgid "is pretested"
 msgstr "оценка только на претестах"
 
-#: judge/models/contest.py:597 judge/models/interface.py:43
+#: judge/models/contest.py:598 judge/models/interface.py:43
 msgid "order"
 msgstr "порядковый номер"
 
-#: judge/models/contest.py:598
+#: judge/models/contest.py:599
 msgid "output prefix length override"
 msgstr "длина префикса вывода"
 
-#: judge/models/contest.py:600
+#: judge/models/contest.py:601
 msgid "max submissions"
 msgstr "максимальное количество посылок"
 
-#: judge/models/contest.py:601
+#: judge/models/contest.py:602
 msgid "Maximum number of submissions for this problem, or leave blank for no limit."
 msgstr "Максимальное количество посылок для этой задачи. Оставьте поле пустым, чтобы снять ограничение."
 
-#: judge/models/contest.py:604
+#: judge/models/contest.py:605
 msgid "Why include a problem you can't submit to?"
 msgstr "Невозможно добавить задачу, в которую нельзя отправлять посылки."
 
-#: judge/models/contest.py:609
+#: judge/models/contest.py:610
 msgid "contest problem"
 msgstr "задача соревнования"
 
-#: judge/models/contest.py:610
+#: judge/models/contest.py:611
 msgid "contest problems"
 msgstr "задача соревнования"
 
-#: judge/models/contest.py:615 judge/models/submission.py:231
+#: judge/models/contest.py:616 judge/models/submission.py:231
 msgid "submission"
 msgstr "решение"
 
-#: judge/models/contest.py:619 judge/models/contest.py:634
+#: judge/models/contest.py:620 judge/models/contest.py:635
 msgid "participation"
 msgstr "участие"
 
-#: judge/models/contest.py:623
+#: judge/models/contest.py:624
 msgid "Whether this submission was ran only on pretests."
 msgstr "Было ли это решение проверено только на претестах."
 
-#: judge/models/contest.py:627
+#: judge/models/contest.py:628
 msgid "contest submission"
 msgstr "решение в соревновании"
 
-#: judge/models/contest.py:628
+#: judge/models/contest.py:629
 msgid "contest submissions"
 msgstr "решения в соревнованиях"
 
-#: judge/models/contest.py:636
+#: judge/models/contest.py:637
 msgid "rank"
 msgstr "место"
 
-#: judge/models/contest.py:637
+#: judge/models/contest.py:638
 msgid "rating"
 msgstr "рейтинг"
 
-#: judge/models/contest.py:638
+#: judge/models/contest.py:639
 msgid "raw rating"
 msgstr ""
 
-#: judge/models/contest.py:639
+#: judge/models/contest.py:640
 msgid "contest performance"
 msgstr ""
 
-#: judge/models/contest.py:640
+#: judge/models/contest.py:641
 msgid "last rated"
 msgstr ""
 
-#: judge/models/contest.py:644
+#: judge/models/contest.py:645
 msgid "contest rating"
 msgstr "рейтинг соревнования"
 
-#: judge/models/contest.py:645
+#: judge/models/contest.py:646
 msgid "contest ratings"
 msgstr "рейтинги соревнований"
 
-#: judge/models/contest.py:664
+#: judge/models/contest.py:665
 msgid "contest moss result"
 msgstr "результат проверки на плагиат"
 
-#: judge/models/contest.py:665
+#: judge/models/contest.py:666
 msgid "contest moss results"
 msgstr "результаты проверок на плагиат"
 
@@ -5085,7 +5089,7 @@ msgstr "Типы"
 #: templates/problem/list.html:218
 #, python-format
 msgid "AC %%"
-msgstr "%% AC"
+msgstr "% AC"
 
 #: templates/problem/manage_submission.html:56
 msgid "Leave empty to not filter by language"
@@ -6487,3 +6491,4 @@ msgstr "Изменить профиль"
 #: templates/widgets/select_all.html:8
 msgid "Check all"
 msgstr "Выбрать все"
+
