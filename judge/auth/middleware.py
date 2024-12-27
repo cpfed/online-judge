@@ -82,16 +82,18 @@ class JWTAuthMiddleware(MiddlewareMixin):
             if username and email:
 
                 user, created = User.objects.get_or_create(email=email, defaults={"username": username}, is_active=True)
-                if created:
-                    if user.username != username:
-                        user.username = username
-                    
+                if created:                    
                     user.set_unusable_password()
                     user.save()
 
                     profile = Profile(user=user)
                     profile.language = Language.objects.get(key=settings.DEFAULT_USER_LANGUAGE)
                     profile.save()
+                else:
+                    if user.username != username:
+                        user.username = username
+                        user.save()
+                        
         except (jwt.ExpiredSignatureError, jwt.InvalidTokenError):
             return
         except (KeyError, UnicodeDecodeError, ValueError):
