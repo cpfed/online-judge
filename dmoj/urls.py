@@ -34,7 +34,9 @@ register_patterns = [
     # Let's use <str:activation_key>, because a bad activation key should still get to the view;
     # that way, it can return a sensible "invalid key" message instead of a confusing 404.
     path('activate/<str:activation_key>/', ActivationView.as_view(), name='registration_activate'),
-    path('register/', RegistrationView.as_view(), name='registration_register'),
+    
+    # path('register/', RegistrationView.as_view(), name='registration_register'),
+    path('register/', RedirectView.as_view(url='https://auth.cpfed.kz/register/'), name='registration_register'),
     path('register/complete/',
          TitledTemplateView.as_view(template_name='registration/registration_complete.html',
                                     title=_('Registration Completed')),
@@ -43,7 +45,8 @@ register_patterns = [
          TitledTemplateView.as_view(template_name='registration/registration_closed.html',
                                     title=_('Registration Not Allowed')),
          name='registration_disallowed'),
-    path('login/', user.CustomLoginView.as_view(), name='auth_login'),
+    # path('login/', user.CustomLoginView.as_view(), name='auth_login'),
+    path('login/', RedirectView.as_view(url='https://auth.cpfed.kz/login/'), name='auth_login'),
     path('logout/', user.UserLogoutView.as_view(), name='auth_logout'),
     path('password/change/', user.CustomPasswordChangeView.as_view(), name='password_change'),
     path('password/change/done/', auth_views.PasswordChangeDoneView.as_view(
