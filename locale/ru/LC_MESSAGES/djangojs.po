@@ -23,8 +23,9 @@ msgid "%d day %h:%m:%s"
 msgid_plural "%d days %h:%m:%s"
 msgstr[0] "%d день %h:%m:%s"
 msgstr[1] "%d дня %h:%m:%s"
+msgstr[1] "%d дня %h:%m:%s"
 msgstr[2] "%d дней %h:%m:%s"
-msgstr[3] "%d дней %h:%m:%s"
+msgstr[3] "%d дня %h:%m:%s"
 
 #: resources/common.js:197
 msgctxt "time format without day"
@@ -39,6 +40,7 @@ msgstr "Проголосовать за оценку задачи"
 #, javascript-format
 msgid "Unable to delete vote: %s"
 msgstr "Не удалось удалить голос: %s"
+msgstr "Не удалось удалить голос: %s"
 
 #: resources/problem-vote.js:28
 #, javascript-format
@@ -49,6 +51,7 @@ msgstr "Изменить оценку (%s)"
 #, javascript-format
 msgid "Unable to cast vote: %s"
 msgstr "Не удалось проголосовать: %s"
+msgstr "Не удалось проголосовать: %s"
 
 #: resources/problem-vote.js:63
 msgid "Number of votes for this point value"
@@ -56,6 +59,7 @@ msgstr "Количество голосов за эту оценку"
 
 #: resources/user_profile.js:47
 msgid "past year"
+msgstr "последний год"
 msgstr "последний год"
 
 #: resources/user_profile.js:64
