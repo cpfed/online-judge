@@ -81,8 +81,11 @@ class JWTAuthMiddleware(MiddlewareMixin):
 
             if username and email:
 
-                user, created = User.objects.get_or_create(username=username, defaults={"email": email}, is_active=True)
+                user, created = User.objects.get_or_create(email=email, defaults={"username": username}, is_active=True)
                 if created:
+                    if user.username != username:
+                        user.username = username
+                    
                     user.set_unusable_password()
                     user.save()
 
