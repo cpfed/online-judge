@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: esep\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-12-28 00:08+0000\n"
-"PO-Revision-Date: 2024-12-28 00:40\n"
+"PO-Revision-Date: 2024-12-28 01:11\n"
 "Last-Translator: \n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
@@ -5231,7 +5231,7 @@ msgstr "Типы"
 #: templates/problem/list.html:218
 #, python-format
 msgid "AC %%"
-msgstr "% AC"
+msgstr "%% AC"
 
 #: templates/problem/manage_submission.html:56
 msgid "Leave empty to not filter by language"
