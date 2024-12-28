@@ -3,6 +3,7 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
     dependencies = [
+        ('judge', '0147_freeze_time'),
         ('judge', '0146_comment_revision_count_v2'),
     ]
 
