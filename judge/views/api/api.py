@@ -1,4 +1,5 @@
 import json
+import string
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -8,6 +9,7 @@ from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
+from django.utils.crypto import get_random_string
 
 from judge.models import Language, Organization, Profile
 
@@ -115,5 +117,45 @@ class SyncRegionFromCPFEDView(View):
             add_org(username, org_id)
 
             return JsonResponse({'detail': 'Region added successfully'}, status=201)
+        except Exception as e:
+            return JsonResponse({'detail': str(e)}, status=400)
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class AddUsersToOrgCPFEDView(View):
+    def post(self, request, token, *args, **kwargs):
+        try:
+            if token != settings.CPFED_TOKEN:
+                return JsonResponse({'detail': 'Unauthorized'}, status=403)
+
+            data = json.loads(request.body)
+
+            org_id = data.get('org_id')
+            emails = data.get('emails')
+
+            if not all([org_id, emails]):
+                return JsonResponse(
+                    {'detail': 'Missing required parameters.'}, status=400,
+                )
+
+            org = get_object_or_404(Organization, id=int(org_id))
+            for user_email in emails:
+                try:
+                    user = User.objects.get(email=user_email)
+                except User.DoesNotExist:
+                    user = None
+                    while user is None:
+                        username = 'tmp_username_' + get_random_string(15, allowed_chars=string.ascii_lowercase)
+                        print(username)
+                        user, created = User.objects.get_or_create(username=username, defaults={'email': user_email})
+                        if not created:
+                            user = None
+                profile, _ = Profile.objects.get_or_create(user=user, defaults={
+                    'language': Language.objects.get(key=settings.DEFAULT_USER_LANGUAGE),
+                    'is_banned_from_problem_voting': True
+                })
+                profile.organizations.add(org)
+
+            return JsonResponse({'detail': 'Users added to org successfully'}, status=201)
         except Exception as e:
             return JsonResponse({'detail': str(e)}, status=400)
