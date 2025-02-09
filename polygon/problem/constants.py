@@ -6,6 +6,7 @@ POLYGON_COMPILERS = {
     'cpp.g++17': 'CPP17',
     'cpp.gcc11-64-winlibs-g++20': 'CPP20',
     'cpp.gcc13-64-winlibs-g++20': 'CPP20',
+    'cpp.gcc14-64-msys2-g++23': 'CPP20',
     'cpp.ms2017': 'CPP17',
     'cpp.msys2-mingw64-9-g++17': 'CPP17',
     'java8': 'JAVA8',
@@ -14,4 +15,5 @@ POLYGON_COMPILERS = {
     'perl.5': 'PERL',
     'python.2': 'PY2',
     'python.3': 'PY3',
+    'python.pypy3-64': 'PY3',
 }
