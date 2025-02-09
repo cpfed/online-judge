@@ -71,9 +71,13 @@
 <details {% if loop.index == 1 %}open{% endif %}>
     <summary>{{ _('Import log') }}</summary>
     <pre><code>
+{% if problem_import.log %}
 {%- for line in problem_import.log.splitlines() %}
 {{ render_log(line) }}
 {% endfor -%}
+{% else %}
+<p> log not found </p>
+{% endif %}
 </code></pre>
 </details>
 <hr/>
