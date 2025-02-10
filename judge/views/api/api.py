@@ -140,21 +140,19 @@ class AddUsersToOrgCPFEDView(View):
 
             org = get_object_or_404(Organization, id=int(org_id))
             for user_email in emails:
-                try:
-                    user = User.objects.get(email=user_email)
-                except User.DoesNotExist:
-                    user = None
-                    while user is None:
-                        username = 'tmp_username_' + get_random_string(15, allowed_chars=string.ascii_lowercase)
-                        print(username)
-                        user, created = User.objects.get_or_create(username=username, defaults={'email': user_email})
-                        if not created:
-                            user = None
-                profile, _ = Profile.objects.get_or_create(user=user, defaults={
-                    'language': Language.objects.get(key=settings.DEFAULT_USER_LANGUAGE),
-                    'is_banned_from_problem_voting': True
-                })
-                profile.organizations.add(org)
+                users = User.objects.filter(email=user_email)
+                while len(users) == 0:
+                    username = 'tmp_username_' + get_random_string(15, allowed_chars=string.ascii_lowercase)
+                    print(username)
+                    user, created = User.objects.get_or_create(username=username, defaults={'email': user_email})
+                    if created:
+                        users = [user]
+                for user in users:
+                    profile, _ = Profile.objects.get_or_create(user=user, defaults={
+                        'language': Language.objects.get(key=settings.DEFAULT_USER_LANGUAGE),
+                        'is_banned_from_problem_voting': True
+                    })
+                    profile.organizations.add(org)
 
             return JsonResponse({'detail': 'Users added to org successfully'}, status=201)
         except Exception as e:
