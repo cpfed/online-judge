@@ -289,7 +289,7 @@ MIDDLEWARE = (
     'judge.middleware.RemoveAcceptLanguageMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'judge.middleware.APIMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'judge.auth.middleware.BasicAuthMiddleware',
     'judge.auth.middleware.JWTAuthMiddleware',
