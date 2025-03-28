@@ -15,6 +15,7 @@ import os
 from django.utils.translation import gettext_lazy as _
 from django_jinja.builtins import DEFAULT_EXTENSIONS
 from jinja2 import select_autoescape
+import sentry_sdk
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -604,12 +605,23 @@ CELERY_WORKER_HIJACK_ROOT_LOGGER = False
 
 WEBAUTHN_RP_ID = None
 
+SENTRY_DSN = None
+
 try:
     with open(os.path.join(os.path.dirname(__file__), 'local_settings.py')) as f:
         exec(f.read(), globals())
 except IOError:
     pass
 
+try:
+    sentry_sdk.init(
+        dsn=SENTRY_DSN,
+        send_default_pii=True,
+        traces_sample_rate=0.1,
+        profiles_sample_rate=0.2, # this is relative to traces (i.e. 0.1*0.2 of total transactions are profiled)
+    )
+except Exception as e:
+    pass
 
 # Check settings are consistent
 assert DMOJ_PROBLEM_MIN_USER_POINTS_VOTE >= DMOJ_PROBLEM_MIN_PROBLEM_POINTS
