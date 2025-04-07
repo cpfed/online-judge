@@ -16,4 +16,5 @@ POLYGON_COMPILERS = {
     'python.2': 'PY2',
     'python.3': 'PY3',
     'python.pypy3-64': 'PY3',
+    'go': 'Go',
 }
