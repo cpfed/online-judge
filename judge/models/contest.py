@@ -355,6 +355,10 @@ class Contest(models.Model):
         if user.profile.id in self.spectator_ids:
             return
 
+        # Contest is not publicly visible
+        if not self.is_visible:
+            raise self.Inaccessible()
+
         # Contest is not private
         if not self.is_private and not self.is_organization_private:
             return
@@ -380,10 +384,6 @@ class Contest(models.Model):
             if in_org and in_users:
                 return
             raise self.PrivateContest()
-
-        # Contest is not publicly visible
-        if not self.is_visible:
-            raise self.Inaccessible()
 
     # Assumes the user can access, to avoid the cost again
     def is_live_joinable_by(self, user):

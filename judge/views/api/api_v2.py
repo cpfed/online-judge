@@ -456,6 +456,7 @@ class APIProblemDetail(APIDetailView):
         return {
             'code': problem.code,
             'name': problem.name,
+            'description': problem.description if problem.is_public else None,
             'authors': list(problem.authors.values_list('user__username', flat=True)),
             'types': list(problem.types.values_list('full_name', flat=True)),
             'group': problem.group.full_name,
