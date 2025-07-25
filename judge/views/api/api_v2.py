@@ -3,15 +3,21 @@ from operator import attrgetter
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist, PermissionDenied, ValidationError
 from django.db.models import Count, F, OuterRef, Prefetch, Q, Subquery
-from django.http import Http404, JsonResponse
+from django.http import Http404, JsonResponse, HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
 from django.utils import timezone
+from django.utils.decorators import method_decorator
 from django.utils.functional import cached_property
+from django.views import View
 from django.views.generic.detail import BaseDetailView
 from django.views.generic.list import BaseListView
+from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
+
+from django.middleware.csrf import get_token
+from django.contrib.auth.decorators import login_required
 
 from judge.models import (
     Contest, ContestParticipation, ContestTag, Judge, Language, Organization, Problem, ProblemType, Profile, Rating,
-    Submission,
+    Submission, SubmissionSource,
 )
 from judge.utils.infinite_paginator import InfinitePaginationMixin
 from judge.utils.raw_sql import join_sql_subquery, use_straight_join
@@ -481,6 +487,40 @@ class APIProblemDetail(APIDetailView):
             ),
             'is_public': problem.is_public,
         }
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class APIProblemSubmit(APIMixin, View):
+    def post(self, request, *args, **kwargs):
+        token = request.POST.get('token')
+        if token != settings.CPFED_TOKEN:
+            return HttpResponseForbidden()
+
+        source = request.POST.get('source')
+        language_key = request.POST.get('language_key')
+        username = request.POST.get('username')
+        problem_code = request.POST.get('problem_code')
+
+        try:
+            profile = Profile.objects.get(user__username=username)
+        except Profile.DoesNotExist:
+            return HttpResponseBadRequest(f'No such user {username}')
+
+        try:
+            problem = Problem.objects.get(code=problem_code)
+        except Problem.DoesNotExist:
+            return HttpResponseBadRequest(f'No such problem {problem_code}')
+
+        try:
+            language = Language.objects.get(key=language_key)
+        except Language.DoesNotExist:
+            return HttpResponseBadRequest(f'No such language {language_key}')
+
+        submission = Submission.objects.create(user=profile, problem=problem, language=language)
+        submission_source = SubmissionSource.objects.create(submission=submission, source=source)
+        submission.judge(force_judge=True, judge_id=None)
+
+        return HttpResponse('Submitted', status=200)
 
 
 class APIUserList(APIListView):

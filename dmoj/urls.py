@@ -267,6 +267,7 @@ urlpatterns = [
         path('contest/<str:contest>', api.api_v2.APIContestDetail.as_view()),
         path('problems', api.api_v2.APIProblemList.as_view()),
         path('problem/<str:problem>', api.api_v2.APIProblemDetail.as_view()),
+        path('problem/<str:problem>/submit', api.api_v2.APIProblemSubmit.as_view()),
         path('users', api.api_v2.APIUserList.as_view()),
         path('user/<str:user>', api.api_v2.APIUserDetail.as_view()),
         path('submissions', api.api_v2.APISubmissionList.as_view()),
@@ -274,7 +275,7 @@ urlpatterns = [
         path('organizations', api.api_v2.APIOrganizationList.as_view()),
         path('participations', api.api_v2.APIContestParticipationList.as_view()),
         path('languages', api.api_v2.APILanguageList.as_view()),
-        path('judges', api.api_v2.APIJudgeList.as_view()),
+        path('judges', api.api_v2.APIJudgeList.as_view())
     ])),
 
     path('api/sync_users/<str:token>/', api.api.SyncUsersFromCPFEDView.as_view(), name='sync_users_from_cpfed'),
