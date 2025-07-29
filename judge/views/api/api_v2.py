@@ -493,34 +493,39 @@ class APIProblemDetail(APIDetailView):
 class APIProblemSubmit(APIMixin, View):
     def post(self, request, *args, **kwargs):
         token = request.POST.get('token')
-        if token != settings.CPFED_TOKEN:
-            return HttpResponseForbidden()
+        if not token or token != settings.CPFED_TOKEN:
+            return JsonResponse({'error': 'Unauthorized access'}, status=401)
 
         source = request.POST.get('source')
         language_key = request.POST.get('language_key')
         username = request.POST.get('username')
         problem_code = request.POST.get('problem_code')
+        if not all([source, language_key, username, problem_code]):
+            return JsonResponse({'error': 'Missing required fields'}, status=400)
 
         try:
             profile = Profile.objects.get(user__username=username)
         except Profile.DoesNotExist:
-            return HttpResponseBadRequest(f'No such user {username}')
+            return JsonResponse({'error': f'No such user {username}'}, status=404)
 
         try:
             problem = Problem.objects.get(code=problem_code)
         except Problem.DoesNotExist:
-            return HttpResponseBadRequest(f'No such problem {problem_code}')
+            return JsonResponse({'error': f'No such problem {problem_code}'}, status=404)
 
         try:
             language = Language.objects.get(key=language_key)
         except Language.DoesNotExist:
-            return HttpResponseBadRequest(f'No such language {language_key}')
+            return JsonResponse({'error': f'No such language {language_key}'}, status=404)
 
-        submission = Submission.objects.create(user=profile, problem=problem, language=language)
-        submission_source = SubmissionSource.objects.create(submission=submission, source=source)
-        submission.judge(force_judge=True, judge_id=None)
+        try:
+            submission = Submission.objects.create(user=profile, problem=problem, language=language)
+            submission_source = SubmissionSource.objects.create(submission=submission, source=source)
+            submission.judge(force_judge=True, judge_id=None)
 
-        return HttpResponse('Submitted', status=200)
+            return JsonResponse({'submission_id': submission.id}, status=200)
+        except Exception as e:
+            return JsonResponse({'error': 'Internal server error occurred', 'details': str(e)}, status=500)
 
 
 class APIUserList(APIListView):
