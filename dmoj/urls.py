@@ -282,7 +282,7 @@ urlpatterns = [
         path('submission/<int:submission_id>', api.api_esep.APISubmissionDetailEsep.as_view()),
         path('users', api.api_esep.APIUserListEsep.as_view()),
         path('user/<str:user>', api.api_esep.APIUserDetailEsep.as_view()),
-        path('problems/<str:user>', api.api_esep.APIProblemListEsep.as_view()),
+        path('problems/<str:username>', api.api_esep.APIProblemListEsep.as_view()),
     ])),
 
     path('api/sync_users/<str:token>/', api.api.SyncUsersFromCPFEDView.as_view(), name='sync_users_from_cpfed'),
