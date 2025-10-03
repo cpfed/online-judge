@@ -17,7 +17,7 @@ from datetime import datetime
 from judge.models import (
     Language, Problem, Profile, Submission, SubmissionSource, ContestParticipation, ProblemType,
 )
-from django.db.models import F, Min, Max, Count, Prefetch
+from django.db.models import F, Min, Max, Count, Prefetch, Q, Value, IntegerField
 
 from judge.ratings import rating_class, rating_progress
 from judge.views.api.api_v2 import APIListView, APIDetailView
@@ -62,11 +62,12 @@ class APIProblemSubmit(View):
             return JsonResponse({'error': f'No such language {language_key}'}, status=404)
 
         try:
+            from judge import event_poster as event
             submission = Submission.objects.create(user=profile, problem=problem, language=language)
             submission_source = SubmissionSource.objects.create(submission=submission, source=source)
             submission.judge(force_judge=True, judge_id=None)
 
-            return JsonResponse({'submission_id': submission.id}, status=200)
+            return JsonResponse({'submission_id': submission.id, 'last_msg': event.last()}, status=200)
         except Exception as e:
             return JsonResponse({'error': 'Internal server error occurred', 'details': str(e)}, status=500)
 
@@ -113,6 +114,7 @@ class APISubmissionDetailEsep(View):
         return JsonResponse({
             'id': submission.id,
             'problem': submission.problem.code,
+            'source': submission.source.source,
             'user': submission.user.user.username,
             'date': submission.date.isoformat(),
             'time': submission.time,
@@ -289,5 +291,88 @@ class APIProblemListEsep(APIListView):
                         })
             except Exception as e:
                 pass
+
+        return data
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class APIProblemTypeProgress(APIListView):
+    def get(self, request, *args, **kwargs):
+        token = get_cpfed_token(request)
+        if not token or token != settings.CPFED_TOKEN:
+            return JsonResponse({'error': 'Unauthorized access'}, status=401)
+
+        full_names_param = request.query_params.get('full_names', '')
+        full_names = [name.strip() for name in full_names_param.split(',') if name.strip()]
+
+        if not isinstance(full_names, list):
+            return JsonResponse({'error': 'full_names must be a list'}, status=400)
+
+        if not full_names:
+            return JsonResponse({'error': 'full_names list cannot be empty'}, status=400)
+
+        username = request.GET.get('username')
+        if not username:
+            return JsonResponse({'error': 'Missing username'}, status=400)
+
+        try:
+            profile = Profile.objects.get(user__username=username)
+        except Profile.DoesNotExist:
+            return JsonResponse({'error': f'No such user {username}'}, status=404)
+
+
+class APIProblemTypeProgressList(APIListView):
+    model = ProblemType
+
+    list_filters = (
+        ('type', 'full_name'),
+    )
+
+    def get_unfiltered_queryset(self):
+        queryset = ProblemType.objects.all()
+
+        username = self.kwargs.get('username')
+
+        if username:
+            try:
+                profile = Profile.objects.get(user__username=username)
+            except Profile.DoesNotExist:
+                return ProblemType.objects.none()
+        else:
+            profile = None
+
+        if profile:
+            queryset = queryset.annotate(
+                total_problems=Count('problem', distinct=True)
+            )
+
+            queryset = queryset.annotate(
+                solved_problems=Count(
+                    'problem',
+                    filter=Q(
+                        problem__submission__user=profile,
+                        problem__submission__result='AC',
+                        problem__submission__case_points__gte=F('problem__submission__case_total')
+                    ),
+                    distinct=True
+                )
+            )
+        else:
+            queryset = queryset.annotate(
+                total_problems=Count('problem', distinct=True),
+                solved_problems=Value(0, output_field=IntegerField())
+            )
+
+        return queryset
+
+    def get_object_data(self, problem_type):
+        data = {
+            'full_name': problem_type.full_name,
+            'total_problems': problem_type.total_problems,
+        }
+
+        if hasattr(problem_type, 'solved_problems'):
+            data['solved_problems'] = problem_type.solved_problems
+            data['total_problems'] = problem_type.total_problems
 
         return data
