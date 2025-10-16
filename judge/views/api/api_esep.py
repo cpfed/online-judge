@@ -134,7 +134,6 @@ class APIUserListEsep(APIListView):
     model = Profile
     list_filters = (
         ('id', 'id'),
-        ('username', 'username'),
         ('organization', 'organizations'),
     )
 
@@ -147,13 +146,24 @@ class APIUserListEsep(APIListView):
             return 10
 
     def get_unfiltered_queryset(self):
-        return (
+        queryset = (
             Profile.objects
             .filter(is_unlisted=False, user__is_active=True)
             .annotate(username=F('user__username'))
-            .order_by('-rating')
             .only('id', 'points', 'performance_points', 'problem_count', 'display_rank', 'rating')
         )
+
+        username_param = self.request.GET.get('username')
+        if username_param:
+            queryset = queryset.filter(user__username__istartswith=username_param)
+
+        sort_by = self.request.GET.get('sort', '-rating')
+        if sort_by == 'rating':
+            queryset = queryset.order_by(F('rating').asc(nulls_last=True))
+        else:
+            queryset = queryset.order_by('-rating')
+
+        return queryset
 
     def get_object_data(self, profile):
         return {
