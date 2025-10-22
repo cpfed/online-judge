@@ -1,6 +1,10 @@
 import json
 from operator import attrgetter
 
+from django.http import StreamingHttpResponse
+import zipfile
+import io
+
 from django.db.models.functions import TruncDate
 from django.utils.formats import date_format
 from django.utils.safestring import mark_safe
@@ -15,7 +19,7 @@ from django.utils.translation import gettext as _
 from datetime import datetime
 
 from judge.models import (
-    Language, Problem, Profile, Submission, SubmissionSource, ContestParticipation, ProblemType,
+    Language, Problem, Profile, Submission, SubmissionSource, ContestParticipation, ProblemType, ContestSubmission,
 )
 from django.db.models import F, Min, Max, Count, Prefetch, Q, Value, IntegerField
 
@@ -386,3 +390,57 @@ class APIProblemTypeProgressList(APIListView):
             data['total_problems'] = problem_type.total_problems
 
         return data
+
+
+class APIDownloadContestSubmissons(View):
+    def get(self, request):
+        token = get_cpfed_token(request)
+        if not token or token != settings.CPFED_TOKEN:
+            return JsonResponse({'error': 'Unauthorized access'}, status=401)
+
+        contest_key = request.GET.get('contest_key')
+        if not contest_key:
+            return JsonResponse({'error': 'contest_key must be provided'}, status=400)
+
+        contest_submissions = ContestSubmission.objects.filter(
+            participation__contest__key=contest_key,
+            participation__virtual=0
+        ).select_related(
+            'submission__user__user',
+            'submission__source',
+            'submission__problem',
+            'submission__language',
+        ).values(
+            'submission__user__user__username',
+            'submission__language__extension',
+            'submission__source__source',
+            'submission__problem__code',
+            'submission__id',
+            'submission__result'
+        ).iterator(chunk_size=100)
+
+        def generate_zip():
+            buffer = io.BytesIO()
+
+            with zipfile.ZipFile(buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:
+                for contest_submission in contest_submissions:
+                    username = contest_submission['submission__user__user__username']
+                    extension = contest_submission['submission__language__extension']
+                    problem_code = contest_submission['submission__problem__code']
+                    source_code = contest_submission['submission__source__source']
+                    submission_id = contest_submission['submission__id']
+                    submission_result = contest_submission['submission__result']
+                    filename = f"{username}-{problem_code}-{submission_id}-{submission_result}.{extension}"
+
+                    zip_file.writestr(filename, source_code.encode('utf-8'))
+
+            buffer.seek(0)
+            yield buffer.read()
+
+        response = StreamingHttpResponse(
+            generate_zip(),
+            content_type='application/zip'
+        )
+        response['Content-Disposition'] = f'attachment; filename={contest_key}_submissions.zip'
+
+        return response

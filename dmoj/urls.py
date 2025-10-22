@@ -286,6 +286,7 @@ urlpatterns = [
         path('problems', api.api_esep.APIProblemListEsep.as_view()),
         path('problem_type_progress/<str:username>', api.api_esep.APIProblemTypeProgressList.as_view(), name='api_problem_type_progress_user'),
         path('problem_type_progress', api.api_esep.APIProblemTypeProgressList.as_view(), name='api_problem_type_progress'),
+        path('download_contest_submissions', api.api_esep.APIDownloadContestSubmissons.as_view(), name='download_contest_submissions')
     ])),
 
     path('api/sync_users/<str:token>/', api.api.SyncUsersFromCPFEDView.as_view(), name='sync_users_from_cpfed'),
