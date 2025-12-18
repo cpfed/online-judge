@@ -4,8 +4,9 @@ from operator import attrgetter
 from django.http import StreamingHttpResponse
 import zipfile
 import io
-
+from django.contrib.auth.models import User
 from django.db.models.functions import TruncDate
+from django.shortcuts import get_object_or_404
 from django.utils.formats import date_format
 from django.utils.safestring import mark_safe
 from django.views import View
@@ -20,6 +21,7 @@ from datetime import datetime
 
 from judge.models import (
     Language, Problem, Profile, Submission, SubmissionSource, ContestParticipation, ProblemType, ContestSubmission,
+    Organization,
 )
 from django.db.models import F, Min, Max, Count, Prefetch, Q, Value, IntegerField
 
@@ -444,3 +446,41 @@ class APIDownloadContestSubmissons(View):
         response['Content-Disposition'] = f'attachment; filename={contest_key}_submissions.zip'
 
         return response
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class APISyncUsersWithEsep(View):
+    def post(self, request, *args, **kwargs):
+        try:
+            token = get_cpfed_token(request)
+            if not token or token != settings.CPFED_TOKEN:
+                return JsonResponse({'error': 'Unauthorized access'}, status=401)
+
+            data = json.loads(request.body)
+
+            org_id = data.get('org_id')
+            emails = data.get('emails')
+            usernames = data.get('usernames')
+
+            if not all([org_id, emails, usernames]):
+                return JsonResponse(
+                    {'detail': 'Missing required parameters.'}, status=400,
+                )
+            if len(usernames) != len(emails):
+                return JsonResponse(
+                    {'detail': 'Usernames and emails length is not same.'}, status=400,
+                )
+
+            org = get_object_or_404(Organization, id=int(org_id))
+            for user_email, username in zip(emails, usernames):
+                user, created = User.objects.get_or_create(email=user_email, username=username)
+                if created:
+                    profile, _ = Profile.objects.get_or_create(user=user, defaults={
+                        'language': Language.objects.get(key=settings.DEFAULT_USER_LANGUAGE),
+                        'is_banned_from_problem_voting': True
+                    })
+                    profile.organizations.add(org)
+
+            return JsonResponse({'detail': 'Users added to org successfully'}, status=201)
+        except Exception as e:
+            return JsonResponse({'detail': str(e)}, status=400)
