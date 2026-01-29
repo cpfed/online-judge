@@ -490,7 +490,6 @@ class APISyncUsersWithEsep(View):
             return JsonResponse({'detail': str(e)}, status=400)
 
 
-@require_http_methods(["POST"])
 def attach_proctoring_token(user, contest):
     response = requests.post(
         'https://api.trustexam.ai/api/external-session/assignment.json',

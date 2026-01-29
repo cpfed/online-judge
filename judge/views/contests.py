@@ -413,7 +413,7 @@ class ContestJoin(LoginRequiredMixin, ContestMixin, SingleObjectMixin, View):
                 participation_type = LIVE
 
                 try:
-                    from api.api_esep import attach_proctoring_token
+                    from judge.views.api.api_esep import attach_proctoring_token
                     attach_proctoring_token(request.user, contest)
                 except Exception as e:
                     import logging
