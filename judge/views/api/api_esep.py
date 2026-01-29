@@ -6,6 +6,7 @@ import zipfile
 import io
 from django.contrib.auth.models import User
 from django.db.models.functions import TruncDate
+from django.core.cache import cache
 from django.shortcuts import get_object_or_404
 from django.utils.formats import date_format
 from django.utils.safestring import mark_safe
@@ -13,6 +14,7 @@ from django.views import View
 from django.http import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_http_methods
 from django.conf import settings
 from django.urls import reverse
 from django.utils import timezone
@@ -28,6 +30,8 @@ from django.db.models import F, Min, Max, Count, Prefetch, Q, Value, IntegerFiel
 from judge.ratings import rating_class, rating_progress
 from judge.views.api.api_v2 import APIListView, APIDetailView
 from judge.views.submission import group_test_cases
+
+import requests
 
 EPOCH = datetime(1970, 1, 1, tzinfo=timezone.utc)
 
@@ -484,3 +488,50 @@ class APISyncUsersWithEsep(View):
             return JsonResponse({'detail': 'Users added to org successfully'}, status=201)
         except Exception as e:
             return JsonResponse({'detail': str(e)}, status=400)
+
+
+@require_http_methods(["POST"])
+def attach_proctoring_token(user, contest):
+    response = requests.post(
+        'https://api.trustexam.ai/api/external-session/assignment.json',
+        params={
+            'api_token': settings.TRUSTEXAM_API_KEY
+        },
+        headers={
+            'Content-Type': 'application/json'
+        },
+        json={
+            "assignment": {
+                "external_id": contest.key,
+                "name": contest.name,
+                "external_url": "https://esep.cpfed.kz",
+                "settings": {
+                    "proctoring_settings": {
+                        "fullscreen_mode": 0,
+                        "focus_detector": 0,
+                        "main_camera_record": False,
+                        "main_camera_upload": False,
+                        "second_camera_record": False,
+                        "second_camera_upload": False,
+                        "second_microphone_record": False,
+                        "second_microphone_upload": False
+                    }
+                }
+            },
+            "student": {
+                "external_id": str(user.id),
+                "name": user.username,
+                "firstname": user.username
+            }
+        }
+    )
+
+    if response.status_code == 200:
+        res = response.json()
+        access_token = res['access_token']
+        token_key = f'proctoring:session:{user.id}:{contest.id}'
+        cache_timeout = contest.contest_window_length.seconds
+        cache.set(token_key, access_token, timeout=cache_timeout)
+        return JsonResponse({'token': res['access_token']}, status=200)
+    else:
+        return JsonResponse({'error': 'Failed to initialize proctoring'}, status=500)

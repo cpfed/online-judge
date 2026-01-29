@@ -411,6 +411,15 @@ class ContestJoin(LoginRequiredMixin, ContestMixin, SingleObjectMixin, View):
 
             if contest.is_live_joinable_by(request.user):
                 participation_type = LIVE
+
+                try:
+                    from api.api_esep import attach_proctoring_token
+                    attach_proctoring_token(request.user, contest)
+                except Exception as e:
+                    import logging
+                    logger = logging.getLogger('judge.contests')
+                    logger.exception('Error while attaching proctoring token: %s', e)
+
             elif contest.is_spectatable_by(request.user):
                 participation_type = SPECTATE
             else:

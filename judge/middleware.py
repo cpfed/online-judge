@@ -194,3 +194,22 @@ class RemoveAcceptLanguageMiddleware:
 
         # Code to be executed for each request/response after the view is called.
         return response
+
+
+class ProctoringMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        user = request.user
+        if user.is_authenticated:
+            profile = user.profile
+            is_in_contest = profile and profile.current_contest is not None
+            if is_in_contest:
+                token_key = f'proctoring:session:{user.id}:{profile.current_contest.contest.id}'
+                token = cache.get(token_key)
+                if token:
+                    request.proctoring_token = token
+
+        response = self.get_response(request)
+        return response
