@@ -527,7 +527,7 @@ def attach_proctoring_token(user, contest):
 
     if response.status_code == 200:
         res = response.json()
-        access_token = res['access_token']
+        access_token = res['external_session']['token']
         token_key = f'proctoring:session:{user.id}:{contest.id}'
         cache_timeout = contest.contest_window_length.seconds
         cache.set(token_key, access_token, timeout=cache_timeout)
