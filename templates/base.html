@@ -281,12 +281,12 @@
 
     function initializeProctoring() {
         try {
-            Proctoring.initialize('.content-wrapper', {
+            Proctoring.initialize('.wrapper', {
                 language: '{{ LANGUAGE_CODE }}',
                 token: '{{ request.proctoring_token }}',
 
                 protector: {
-                    match: '#content .content-description.screen',
+                    match: '#content',
                     textColor: '#000'
                 },
 
