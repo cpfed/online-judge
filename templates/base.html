@@ -268,18 +268,23 @@
 (function() {
     'use strict';
 
-    window.addEventListener('unload', (event) => {
-        sessionStorage.removeItem('proctoring_initialized');
-    });
-
     document.addEventListener('DOMContentLoaded', function() {
         const isProctoringInitialized = sessionStorage.getItem('proctoring_initialized');
 
-        if (!isProctoringInitialized) {
-            console.log('First time in contest - initializing proctoring');
+        const navEntries = performance.getEntriesByType('navigation');
+        const isReload = navEntries.length > 0 && navEntries[0].type === 'reload';
+
+        if (isReload) {
+            // Page was refreshed (F5, Ctrl+R) - clear and re-initialize
+            sessionStorage.removeItem('proctoring_initialized');
             initializeProctoring();
         } else {
-            console.log('Proctoring already initialized in this session - skipping');
+            if (!isProctoringInitialized) {
+                console.log('First time in contest - initializing proctoring');
+                initializeProctoring();
+            } else {
+                console.log('Proctoring already initialized in this session - skipping');
+            }
         }
     });
 
