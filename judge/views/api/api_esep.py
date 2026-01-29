@@ -506,14 +506,38 @@ def attach_proctoring_token(user, contest):
                 "external_url": "https://esep.cpfed.kz",
                 "settings": {
                     "proctoring_settings": {
-                        "fullscreen_mode": 0,
-                        "focus_detector": 0,
-                        "main_camera_record": False,
-                        "main_camera_upload": False,
-                        "second_camera_record": False,
-                        "second_camera_upload": False,
-                        "second_microphone_record": False,
-                        "second_microphone_upload": False
+                      "check_env": True,
+                      "browser_type": "*",
+                      "object_detect": False,
+                      "displays_check": False,
+                      "focus_detector": False,
+                      "noise_detector": False,
+                      "read_clipboard": 0,
+                      "content_protect": False,
+                      "face_landmarker": False,
+                      "fullscreen_mode": False,
+                      "id_verification": False,
+                      "speech_detector": False,
+                      "main_camera_record": False,
+                      "main_camera_upload": False,
+                      "photo_head_identity": 0,
+                      "screen_share_record": True,
+                      "screen_share_upload": False,
+                      "video_head_identity": False,
+                      "head_tracking_client": 0,
+                      "second_camera_record": False,
+                      "second_camera_upload": False,
+
+                      "main_camera_blackhole": False,
+                      "screen_share_blackhole": False,
+                      "second_camera_blackhole": False,
+
+                      "second_microphone_record": False,
+                      "second_microphone_upload": False,
+
+                      "second_microphone_blackhole": False,
+                      "head_tracking_server_realtime": False,
+                      "head_compare_euclidean_distance": 0.5
                     }
                 }
             },
