@@ -166,6 +166,11 @@
         <script type="text/javascript">{{ request.profile.user_script|safe }}</script>
     {% endif %}
 
+    <script src="https://cdn.skypack.dev/@hotwired/turbo"></script>
+    {% if request.in_contest and request.proctoring_token %}
+    <script src="https://cdn.trustexam.ai/extension/app.js"></script>
+    {% endif %}
+
     <noscript>
         <style>
             #content {
@@ -179,6 +184,10 @@
     </noscript>
 </head>
 <body{% if perms.judge.test_site %} data-theme="{{ SITE_THEME_NAME }}"{% endif %}>
+{% if request.in_contest and request.proctoring_token %}
+    <div class="wrapper" id="proctoring-wrapper"></div>
+{% endif %}
+
 <svg width="0" height="0" style="display: block">
     <defs>
         <clipPath id="rating-clip"><circle cx="8" cy="8" r="7"/></clipPath>
@@ -263,7 +272,6 @@
 {% endif %}
 
 {% if request.in_contest and request.proctoring_token %}
-<script src="https://cdn.trustexam.ai/extension/app.js"></script>
 <script>
 (function() {
     'use strict';
@@ -364,8 +372,6 @@
             <hr>
         {% endblock %}
         <div id="content-body">{% block body %}{% endblock %}</div>
-
-        <div class="wrapper" id="proctoring-wrapper"></div>
     </main>
 
     {% if misc_config.announcement %}
