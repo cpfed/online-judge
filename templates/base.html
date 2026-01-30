@@ -166,10 +166,6 @@
         <script type="text/javascript">{{ request.profile.user_script|safe }}</script>
     {% endif %}
 
-    {% if request.in_contest and request.proctoring_token %}
-    <script src="https://cdn.trustexam.ai/extension/app.js"></script>
-    {% endif %}
-
     <noscript>
         <style>
             #content {
@@ -268,89 +264,6 @@
             {% endif %}
         </a>
     </div>
-{% endif %}
-
-{% if request.in_contest and request.proctoring_token %}
-<script>
-(function() {
-    'use strict';
-
-    document.addEventListener('DOMContentLoaded', function() {
-        const isProctoringInitialized = sessionStorage.getItem('proctoring_initialized');
-
-        const navEntries = performance.getEntriesByType('navigation');
-        const isReload = navEntries.length > 0 && navEntries[0].type === 'reload';
-
-        if (isReload) {
-            // Page was refreshed (F5, Ctrl+R) - clear and re-initialize
-            sessionStorage.removeItem('proctoring_initialized');
-            initializeProctoring();
-        } else {
-            if (!isProctoringInitialized) {
-                console.log('First time in contest - initializing proctoring');
-                initializeProctoring();
-            } else {
-                console.log('Proctoring already initialized in this session - skipping');
-            }
-        }
-    });
-
-    function initializeProctoring() {
-        try {
-            Proctoring.initialize('.wrapper', {
-                language: '{{ LANGUAGE_CODE }}',
-                token: '{{ request.proctoring_token }}',
-
-                protector: {
-                    match: '#content',
-                    textColor: '#000'
-                },
-
-                css: {
-                    fontFamily: 'Inter, sans-serif',
-                    primaryColor: '#FF5500',
-                    backgroundColor: '#FAFAFA',
-                    backgroundSecondary: '#F0F0F0',
-                    backgroundWhite: '#FFFFFF',
-                    textColor: '#222222',
-                    textSecondary: '#666666',
-                    textTertiary: '#999999',
-                    borderColor: '#E0E0E0',
-                    activeColor: '#FFC107',
-                    successColor: '#28A745',
-                    errorColor: '#DC3545',
-                },
-
-                onMounted: function() {
-                    sessionStorage.setItem('proctoring_initialized', 'true');
-                },
-
-                onConfigured: function() {
-                },
-
-                onStarted: function() {
-                    console.log('Proctoring: Started');
-                },
-
-                onFinished: function() {
-                    sessionStorage.removeItem('proctoring_initialized');
-                },
-
-                onAction: function(action) {},
-
-                onError: function(error) {
-                    console.error('Proctoring error:', error);
-                    sessionStorage.removeItem('proctoring_initialized');
-                }
-            });
-
-        } catch (error) {
-            console.error('Failed to initialize proctoring:', error);
-            sessionStorage.removeItem('proctoring_initialized');
-        }
-    }
-})();
-</script>
 {% endif %}
 
 <div id="page-container">
