@@ -166,7 +166,7 @@
         <script type="text/javascript">{{ request.profile.user_script|safe }}</script>
     {% endif %}
 
-    <script src="https://cdn.skypack.dev/@hotwired/turbo"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@8/dist/turbo.es2017-umd.js"></script>
     {% if request.in_contest and request.proctoring_token %}
     <script src="https://cdn.trustexam.ai/extension/app.js"></script>
     {% endif %}
