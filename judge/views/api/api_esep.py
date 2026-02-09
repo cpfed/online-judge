@@ -1,4 +1,5 @@
 import json
+from datetime import timedelta
 from operator import attrgetter
 
 from django.http import StreamingHttpResponse
@@ -19,7 +20,6 @@ from django.conf import settings
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import gettext as _
-from datetime import datetime
 
 from judge.models import (
     Language, Problem, Profile, Submission, SubmissionSource, ContestParticipation, ProblemType, ContestSubmission,
@@ -108,10 +108,8 @@ class APISubmissionDetailEsep(View):
                 } for case in batch['cases']
             ]
 
-            # These are individual cases.
             if batch['id'] is None:
                 cases.extend(batch_cases)
-            # This is one batch.
             else:
                 cases.append({
                     'type': 'batch',
@@ -121,7 +119,9 @@ class APISubmissionDetailEsep(View):
                     'total': batch['total'],
                 })
 
-        return JsonResponse({
+        include_achievements = request.GET.get('include_achievements') == 'true'
+
+        res = {
             'id': submission.id,
             'problem': submission.problem.code,
             'source': submission.source.source,
@@ -135,8 +135,84 @@ class APISubmissionDetailEsep(View):
             'result': submission.result,
             'case_points': submission.case_points,
             'case_total': submission.case_total,
-            'cases': cases,
-        }, status=200)
+            'cases': cases
+        }
+        if include_achievements and submission.result == 'AC':
+            is_first_submit = self.is_first_submit(submission)
+            res.update({
+                'is_first_submit': is_first_submit
+            })
+
+            is_first_ac = self.is_first_ac(submission)
+            if is_first_ac:
+                is_ac_on_first_try = self.is_ac_on_first_try(submission)
+                is_mini_streak = self.is_mini_streak(submission)
+                is_corrected_solution = self.is_corrected_solution(submission)
+                is_first_medium = self.is_first_medium(submission)
+                problem_types = [problem_type.name for problem_type in submission.problem.types.all()]
+
+                res.update({
+                    'is_first_ac': is_first_ac,
+                    'is_ac_on_first_try': is_ac_on_first_try,
+                    'is_mini_streak': is_mini_streak,
+                    'is_corrected_solution': is_corrected_solution,
+                    'is_first_medium': is_first_medium,
+                    'problem_types': problem_types,
+                })
+
+        return JsonResponse(res, status=200)
+
+    def is_first_ac(self, submission):
+        is_ac_before = Submission.objects.filter(
+            user=submission.user,
+            problem=submission.problem,
+            result='AC',
+            id__lt=submission.id
+        ).exists()
+
+        return not is_ac_before and submission.result == 'AC'
+
+    def is_ac_on_first_try(self, submission):
+        attempts_count = Submission.objects.filter(
+            user=submission.user,
+            problem=submission.problem,
+            id__lte=submission.id
+        ).count()
+
+        return attempts_count == 1 and submission.result == 'AC'
+
+    def is_mini_streak(self, submission):
+        thirty_mins_ago = timezone.now() - timedelta(minutes=30)
+        recent_submissions = Submission.objects.filter(
+            user=submission.user,
+            result='AC',
+            date__gte=thirty_mins_ago
+        ).values("problem__code").distinct().count()
+        return recent_submissions >= 3 and submission.result == 'AC'
+
+    def is_corrected_solution(self, submission):
+        attempts_before = Submission.objects.filter(
+            user=submission.user,
+            problem=submission.problem,
+            id__lt=submission.id
+        ).count()
+        return 1 <= attempts_before <= 4 and submission.result == 'AC'
+
+    def is_first_submit(self, submission):
+        attempts_before = Submission.objects.filter(
+            user=submission.user
+        ).count()
+        return attempts_before == 1
+
+    def is_first_medium(self, submission):
+        if not submission.problem.group or submission.problem.group.name != 'medium':
+            return False
+
+        return Submission.objects.filter(
+            result='AC',
+            user=submission.user,
+            problem__group__name='medium',
+        ).count() == 1
 
 
 @method_decorator(csrf_exempt, name='dispatch')
