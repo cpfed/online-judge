@@ -7,7 +7,7 @@ from judge.timezone import from_database_time
 
 
 @register_contest_format('custom_ioi')
-class IOIContestFormat(LegacyIOIContestFormat):
+class CustomIOIContestFormat(LegacyIOIContestFormat):
     name = gettext_lazy('Custom IOI')
     config_defaults = {'cumtime': True}
     """
