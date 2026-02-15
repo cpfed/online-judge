@@ -80,19 +80,29 @@ class JWTAuthMiddleware(MiddlewareMixin):
             email = payload.get("email")
 
             if username and email:
+                from django.db import IntegrityError
 
-                user, created = User.objects.get_or_create(email=email, defaults={"username": username}, is_active=True)
-                if created:                    
-                    user.set_unusable_password()
-                    user.save()
-
-                    profile = Profile(user=user)
-                    profile.language = Language.objects.get(key=settings.DEFAULT_USER_LANGUAGE)
-                    profile.save()
-                else:
-                    if user.username != username:
-                        user.username = username
+                try:
+                    user, created = User.objects.get_or_create(email=email, defaults={"username": username}, is_active=True)
+                    if created:
+                        user.set_unusable_password()
                         user.save()
+
+                        profile = Profile(user=user)
+                        profile.language = Language.objects.get(key=settings.DEFAULT_USER_LANGUAGE)
+                        profile.save()
+                    else:
+                        if user.username != username:
+                            user.username = username
+                            user.save()
+                except IntegrityError:
+                    try:
+                        user = User.objects.get(username=username, is_active=True)
+                        if user.email != email:
+                            user.email = email
+                            user.save()
+                    except User.DoesNotExist:
+                        return
                         
         except (jwt.ExpiredSignatureError, jwt.InvalidTokenError):
             return
