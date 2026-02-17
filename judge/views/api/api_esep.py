@@ -328,7 +328,7 @@ class APIProblemListEsep(APIListView):
         ('partial', 'partial'),
     )
     list_filters = (
-        ('type', 'types__full_name'),
+        ('type', 'types__name'),
     )
 
     def get_unfiltered_queryset(self):
@@ -338,7 +338,7 @@ class APIProblemListEsep(APIListView):
             .prefetch_related(
                 Prefetch(
                     'types',
-                    queryset=ProblemType.objects.only('full_name'),
+                    queryset=ProblemType.objects.only('name'),
                     to_attr='type_list',
                 ),
             )
@@ -360,7 +360,7 @@ class APIProblemListEsep(APIListView):
         data = {
             'code': problem.code,
             'name': problem.name,
-            'types': list(map(attrgetter('full_name'), problem.type_list)),
+            'types': list(map(attrgetter('name'), problem.type_list)),
             'group': problem.group.full_name,
             'ac_rate': problem.ac_rate,
             'is_organization_private': problem.is_organization_private,
@@ -398,14 +398,14 @@ class APIProblemTypeProgress(APIListView):
         if not token or token != settings.CPFED_TOKEN:
             return JsonResponse({'error': 'Unauthorized access'}, status=401)
 
-        full_names_param = request.query_params.get('full_names', '')
-        full_names = [name.strip() for name in full_names_param.split(',') if name.strip()]
+        names_param = request.query_params.get('names', '')
+        names = [name.strip() for name in names_param.split(',') if name.strip()]
 
-        if not isinstance(full_names, list):
-            return JsonResponse({'error': 'full_names must be a list'}, status=400)
+        if not isinstance(names, list):
+            return JsonResponse({'error': 'names must be a list'}, status=400)
 
-        if not full_names:
-            return JsonResponse({'error': 'full_names list cannot be empty'}, status=400)
+        if not names:
+            return JsonResponse({'error': 'names list cannot be empty'}, status=400)
 
         username = request.GET.get('username')
         if not username:
@@ -421,7 +421,7 @@ class APIProblemTypeProgressList(APIListView):
     model = ProblemType
 
     list_filters = (
-        ('type', 'full_name'),
+        ('type', 'name'),
     )
 
     def get_unfiltered_queryset(self):
@@ -463,7 +463,7 @@ class APIProblemTypeProgressList(APIListView):
 
     def get_object_data(self, problem_type):
         data = {
-            'full_name': problem_type.full_name,
+            'name': problem_type.name,
             'total_problems': problem_type.total_problems,
         }
 
