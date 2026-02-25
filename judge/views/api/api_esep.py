@@ -566,6 +566,33 @@ class APISyncUsersWithEsep(View):
             return JsonResponse({'detail': str(e)}, status=400)
 
 
+@method_decorator(csrf_exempt, name='dispatch')
+class APIRegisterUserFromCpfed(View):
+    def post(self, request, *args, **kwargs):
+        try:
+            token = get_cpfed_token(request)
+            if not token or token != settings.CPFED_TOKEN:
+                return JsonResponse({'error': 'Unauthorized access'}, status=401)
+
+            data = json.loads(request.body)
+
+            email = data.get('email')
+            username = data.get('username')
+            if not username or not email:
+                return JsonResponse({'error': 'username and email must be provided'}, status=400)
+
+            user, created = User.objects.get_or_create(username=username, defaults={"email": email, "is_active": True})
+            if not created:
+                raise Exception("User already exists")
+
+            user.set_unusable_password()
+            user.save()
+
+            return JsonResponse({'detail': 'User registered to esep'}, status=201)
+        except Exception as e:
+            return JsonResponse({'detail': str(e)}, status=400)
+
+
 def attach_proctoring_token(user, contest):
     response = requests.post(
         'https://api.trustexam.ai/api/external-session/assignment.json',

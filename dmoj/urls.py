@@ -46,7 +46,7 @@ register_patterns = [
                                     title=_('Registration Not Allowed')),
          name='registration_disallowed'),
     # path('login/', user.CustomLoginView.as_view(), name='auth_login'),
-    path('login/', RedirectView.as_view(url='https://auth.cpfed.kz/login/?to_esep'), name='auth_login'),
+    path('login/', RedirectView.as_view(url='https://cpfed.kz/login/?to_esep'), name='auth_login'),
     path('logout/', user.UserLogoutView.as_view(), name='auth_logout'),
     path('password/change/', user.CustomPasswordChangeView.as_view(), name='password_change'),
     path('password/change/done/', auth_views.PasswordChangeDoneView.as_view(
@@ -288,6 +288,7 @@ urlpatterns = [
         path('problem_type_progress', api.api_esep.APIProblemTypeProgressList.as_view(), name='api_problem_type_progress'),
         path('download_contest_submissions', api.api_esep.APIDownloadContestSubmissons.as_view(), name='download_contest_submissions'),
         path('sync_users_with_esep', api.api_esep.APISyncUsersWithEsep.as_view(), name='sync_users_with_esep'),
+        path('register_user', api.api_esep.APIRegisterUserFromCpfed.as_view(), name='register_user_from_cpfed')
     ])),
 
     path('api/sync_users/<str:token>/', api.api.SyncUsersFromCPFEDView.as_view(), name='sync_users_from_cpfed'),
