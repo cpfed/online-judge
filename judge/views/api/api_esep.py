@@ -584,7 +584,7 @@ class APIRegisterUserFromCpfed(View):
             user, created = User.objects.get_or_create(username=username, defaults={"email": email, "is_active": True})
             if not created:
                 raise Exception("User already exists")
-            profile = Profile.objects.get_or_create(user=request.user, defaults={
+            profile = Profile.objects.get_or_create(user=user, defaults={
                 'language': Language.objects.get(key=settings.DEFAULT_USER_LANGUAGE),
                 'is_banned_from_problem_voting': True
             })[0]
