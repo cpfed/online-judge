@@ -70,7 +70,7 @@ class JWTAuthMiddleware(MiddlewareMixin):
         user = None
         
         try:
-            token = request.COOKIES.get('cpfed_auth')
+            token = request.COOKIES.get('cpfed_auth') or request.GET.get('token')
             if not token:
                 return
 
