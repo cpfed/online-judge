@@ -528,6 +528,21 @@ class APIDownloadContestSubmissons(View):
         return response
 
 
+class APIHasSubmissionPermission(View):
+    def get(self, request, submission_id, *args, **kwargs):
+        token = get_cpfed_token(request)
+        if not token or token != settings.CPFED_TOKEN:
+            return JsonResponse({'error': 'Unauthorized access'}, status=401)
+        username = request.GET.get('username')
+        if not username:
+            return JsonResponse({'error': 'Username parameter is required'}, status=400)
+
+        if Submission.objects.filter(id=submission_id, user__user__username=username).exists():
+            return JsonResponse({}, status=200)
+        else:
+            return JsonResponse({'error': 'Permission denied'}, status=403)  # Forbidden
+
+
 @method_decorator(csrf_exempt, name='dispatch')
 class APISyncUsersWithEsep(View):
     def post(self, request, *args, **kwargs):

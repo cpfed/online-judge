@@ -280,6 +280,7 @@ urlpatterns = [
     path('api/esep/', include([
         path('problem/<str:problem_code>/submit', api.api_esep.APIProblemSubmit.as_view()),
         path('submission/<int:submission_id>', api.api_esep.APISubmissionDetailEsep.as_view()),
+        path('has_submission_permission/<int:submission_id>', api.api_esep.APIHasSubmissionPermission.as_view()),
         path('users', api.api_esep.APIUserListEsep.as_view()),
         path('user/<str:user>', api.api_esep.APIUserDetailEsep.as_view()),
         path('problems/<str:username>', api.api_esep.APIProblemListEsep.as_view()),
