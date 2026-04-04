@@ -568,13 +568,15 @@ class APISyncUsersWithEsep(View):
 
             org = get_object_or_404(Organization, id=int(org_id))
             for user_email, username in zip(emails, usernames):
-                user, created = User.objects.get_or_create(email=user_email, username=username)
-                if created:
-                    profile, _ = Profile.objects.get_or_create(user=user, defaults={
-                        'language': Language.objects.get(key=settings.DEFAULT_USER_LANGUAGE),
-                        'is_banned_from_problem_voting': True
-                    })
-                    profile.organizations.add(org)
+                try:
+                    user = User.objects.get(username=username)
+                except User.DoesNotExist:
+                    user = User.objects.create(username=username, email=user_email)
+                profile, _ = Profile.objects.get_or_create(user=user, defaults={
+                    'language': Language.objects.get(key=settings.DEFAULT_USER_LANGUAGE),
+                    'is_banned_from_problem_voting': True
+                })
+                profile.organizations.add(org)
 
             return JsonResponse({'detail': 'Users added to org successfully'}, status=201)
         except Exception as e:

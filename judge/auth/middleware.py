@@ -83,18 +83,19 @@ class JWTAuthMiddleware(MiddlewareMixin):
                 from django.db import IntegrityError
 
                 try:
-                    user, created = User.objects.get_or_create(email=email, defaults={"username": username}, is_active=True)
+                    user, created = User.objects.get_or_create(email=email, defaults={"username": username, "is_active": True})
                     if created:
                         user.set_unusable_password()
                         user.save()
-
-                        profile = Profile(user=user)
-                        profile.language = Language.objects.get(key=settings.DEFAULT_USER_LANGUAGE)
-                        profile.save()
                     else:
                         if user.username != username:
                             user.username = username
                             user.save()
+                except User.MultipleObjectsReturned:
+                    try:
+                        user = User.objects.get(username=username)
+                    except User.DoesNotExist:
+                        user = User.objects.filter(email=email).first()
                 except IntegrityError:
                     try:
                         user = User.objects.get(username=username, is_active=True)
@@ -103,6 +104,15 @@ class JWTAuthMiddleware(MiddlewareMixin):
                             user.save()
                     except User.DoesNotExist:
                         return
+
+                if user is None:
+                    return
+
+                # Ensure profile exists for the user
+                if not Profile.objects.filter(user=user).exists():
+                    profile = Profile(user=user)
+                    profile.language = Language.objects.get(key=settings.DEFAULT_USER_LANGUAGE)
+                    profile.save()
                         
         except (jwt.ExpiredSignatureError, jwt.InvalidTokenError):
             return
