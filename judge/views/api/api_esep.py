@@ -23,7 +23,7 @@ from django.utils.translation import gettext as _
 
 from judge.models import (
     Language, Problem, Profile, Submission, SubmissionSource, ContestParticipation, ProblemType, ContestSubmission,
-    Organization,
+    Organization, Solution,
 )
 from django.db.models import F, Min, Max, Count, Prefetch, Q, Value, IntegerField
 
@@ -612,6 +612,25 @@ class APIRegisterUserFromCpfed(View):
             return JsonResponse({'detail': 'User registered to esep'}, status=201)
         except Exception as e:
             return JsonResponse({'detail': str(e)}, status=400)
+
+
+class APIProblemEditorial(View):
+    def get(self, request, *args, **kwargs):
+        token = get_cpfed_token(request)
+        if not token or token != settings.CPFED_TOKEN:
+            return JsonResponse({'error': 'Unauthorized access'}, status=401)
+        code = request.GET.get('code')
+        if not code:
+            return JsonResponse({'error': 'code is required'}, status=400)
+
+        try:
+            solution = Solution.objects.filter(problem__code=code, is_public=True)
+            return JsonResponse({
+                'content': solution.content,
+                'created_at': solution.publish_on
+            }, status=200)
+        except Solution.DoesNotExist:
+            return JsonResponse({'error': f'No editorial or problem with {code}'}, status=404)
 
 
 def attach_proctoring_token(user, contest):
