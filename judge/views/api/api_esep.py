@@ -624,7 +624,7 @@ class APIProblemEditorial(View):
             return JsonResponse({'error': 'code is required'}, status=400)
 
         try:
-            solution = Solution.objects.filter(problem__code=code, is_public=True)
+            solution = Solution.objects.get(problem__code=code, is_public=True)
             return JsonResponse({
                 'content': solution.content,
                 'created_at': solution.publish_on
