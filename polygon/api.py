@@ -1,4 +1,5 @@
 import hashlib
+import inspect
 import secrets
 import time
 from dataclasses import dataclass
@@ -87,7 +88,9 @@ def get_problem(problem_id: int) -> Problem:
     if len(response) > 1:
         raise ProblemImportError(f'Invalid Polygon response: multiple problems for ID {problem_id}')
 
-    problem = Problem(**response[0])
+    valid_keys = inspect.signature(Problem).parameters.keys()
+    filtered = {k: v for k, v in response[0].items() if k in valid_keys}
+    problem = Problem(**filtered)
 
     return problem
 
