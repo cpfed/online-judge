@@ -1,11 +1,12 @@
 import json
 from datetime import timedelta, datetime
+from functools import partial
 from operator import attrgetter
 
 from django.http import StreamingHttpResponse
 import zipfile
 import io
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AnonymousUser, User
 from django.db.models.functions import TruncDate
 from django.core.cache import cache
 from django.shortcuts import get_object_or_404
@@ -23,12 +24,13 @@ from django.utils.translation import gettext as _
 
 from judge.models import (
     Language, Problem, Profile, Submission, SubmissionSource, ContestParticipation, ProblemType, ContestSubmission,
-    Organization, Solution,
+    Organization, Solution, Contest,
 )
 from django.db.models import F, Min, Max, Count, Prefetch, Q, Value, IntegerField
 
 from judge.ratings import rating_class, rating_progress
 from judge.views.api.api_v2 import APIListView, APIDetailView
+from judge.views.contests import base_contest_ranking_list, get_contest_ranking_list
 from judge.views.submission import group_test_cases
 
 import requests
@@ -631,6 +633,120 @@ class APIProblemEditorial(View):
             }, status=200)
         except Solution.DoesNotExist:
             return JsonResponse({'error': f'No editorial or problem with {code}'}, status=404)
+
+
+def _format_standings_time(seconds):
+    if seconds is None:
+        return None
+    seconds = int(seconds)
+    return f'{seconds // 3600:02d}:{(seconds % 3600) // 60:02d}:{seconds % 60:02d}'
+
+
+def _serialize_standings_row(rank, ranking_profile, contest_problems):
+    data = (ranking_profile.participation.format_data or {})
+    scores = []
+    for cp in contest_problems:
+        cell = data.get(str(cp.id))
+        if cell:
+            scores.append({
+                'code': cp.problem.code,
+                'points': cell.get('points'),
+                'time': _format_standings_time(cell.get('time')),
+                'penalty': cell.get('penalty', 0),
+                'frozen': bool(cell.get('frozen', False)),
+            })
+        else:
+            scores.append({
+                'code': cp.problem.code,
+                'points': None,
+                'time': None,
+                'penalty': 0,
+                'frozen': False,
+            })
+    return {
+        'rank': rank,
+        'user_id': ranking_profile.id,
+        'username': ranking_profile.username,
+        'scores': scores,
+        'total': {
+            'points': ranking_profile.points,
+            'time': _format_standings_time(ranking_profile.cumtime),
+        },
+    }
+
+
+def compute_standings(contest_key, username=None):
+    contest = Contest.objects.get(key=contest_key)
+
+    profile = None
+    if username:
+        profile = Profile.objects.select_related('user').get(user__username=username)
+
+    viewer = profile.user if profile else AnonymousUser()
+    can_see_full = contest.can_see_full_scoreboard(viewer)
+
+    if can_see_full:
+        users, problems = get_contest_ranking_list(
+            None, contest, show_current_virtual=False,
+        )
+    elif profile is not None:
+        queryset = contest.users.filter(user=profile, virtual=ContestParticipation.LIVE)
+        users, problems = get_contest_ranking_list(
+            None, contest,
+            ranking_list=partial(base_contest_ranking_list, queryset=queryset),
+            show_current_virtual=False,
+            ranker=lambda items, key: (('???', item) for item in items),
+        )
+    else:
+        problems = list(
+            contest.contest_problems.select_related('problem')
+            .defer('problem__description').order_by('order'),
+        )
+        users = []
+
+    rows = [_serialize_standings_row(rank, p, problems) for rank, p in users]
+
+    return {
+        'contest': {
+            'key': contest.key,
+            'name': contest.name,
+            'format': contest.format_name,
+            'start_time': contest.start_time.isoformat() if contest.start_time else None,
+            'end_time': contest.end_time.isoformat() if contest.end_time else None,
+        },
+        'problems': [
+            {
+                'code': cp.problem.code,
+                'name': cp.problem.name,
+                'order': cp.order,
+                'points': cp.points,
+            }
+            for cp in problems
+        ],
+        'can_see_full_scoreboard': can_see_full,
+        'rows': rows,
+    }
+
+
+class APIStandings(View):
+    def get(self, request, *args, **kwargs):
+        token = get_cpfed_token(request)
+        if not token or token != settings.CPFED_TOKEN:
+            return JsonResponse({'error': 'Unauthorized access'}, status=401)
+
+        contest_key = request.GET.get('contest_key')
+        username = request.GET.get('username')
+        if not contest_key:
+            return JsonResponse({'error': 'contest_key is required'}, status=400)
+
+        try:
+            payload = compute_standings(contest_key, username=username)
+        except Contest.DoesNotExist:
+            return JsonResponse({'error': f'No such contest with {contest_key}'}, status=404)
+        except Profile.DoesNotExist:
+            return JsonResponse({'error': f'No such user {username}'}, status=404)
+
+        return JsonResponse(payload, status=200)
 
 
 def attach_proctoring_token(user, contest):
