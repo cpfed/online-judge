@@ -793,7 +793,7 @@ class APIContestUserProblemSubmissions(View):
         submissions = (
             Submission.objects
             .filter(contest_object=contest, user=profile, problem=problem)
-            .select_related('language')
+            .select_related('language', 'problem', 'contest_object')
             .order_by('-id')
         )
 
@@ -810,6 +810,7 @@ class APIContestUserProblemSubmissions(View):
                     'status': sub.status,
                     'result': sub.result,
                     'language': sub.language.key if sub.language_id else None,
+                    'can_see_detail': sub.can_see_detail(viewer),
                 }
                 for sub in submissions
             ],
