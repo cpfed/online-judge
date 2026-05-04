@@ -539,10 +539,19 @@ class APIHasSubmissionPermission(View):
         if not username:
             return JsonResponse({'error': 'Username parameter is required'}, status=400)
 
-        if Submission.objects.filter(id=submission_id, user__user__username=username).exists():
+        try:
+            submission = Submission.objects.get(id=submission_id)
+        except Submission.DoesNotExist:
+            return JsonResponse({'error': f'No such submission {submission_id}'}, status=404)
+
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            return JsonResponse({'error': f'No such user {username}'}, status=404)
+
+        if submission.can_see_detail(user):
             return JsonResponse({}, status=200)
-        else:
-            return JsonResponse({'error': 'Permission denied'}, status=403)  # Forbidden
+        return JsonResponse({'error': 'Permission denied'}, status=403)
 
 
 @method_decorator(csrf_exempt, name='dispatch')
@@ -663,10 +672,14 @@ def _serialize_standings_row(rank, ranking_profile, contest_problems):
                 'penalty': 0,
                 'frozen': False,
             })
+    profile = ranking_profile.participation.user
+    rating = profile.rating
     return {
         'rank': rank,
         'user_id': ranking_profile.id,
         'username': ranking_profile.username,
+        'rating': rating,
+        'rating_tier': rating_class(rating) if rating is not None else None,
         'scores': scores,
         'total': {
             'points': ranking_profile.points,
@@ -726,6 +739,81 @@ def compute_standings(contest_key, username=None):
         'can_see_full_scoreboard': can_see_full,
         'rows': rows,
     }
+
+
+class APIContestUserProblemSubmissions(View):
+    """List submissions for one user on one problem within a contest.
+
+    Source code is intentionally NOT included; use the existing submission
+    detail endpoint (with its own permission gate) for full content.
+    """
+
+    def get(self, request, *args, **kwargs):
+        token = get_cpfed_token(request)
+        if not token or token != settings.CPFED_TOKEN:
+            return JsonResponse({'error': 'Unauthorized access'}, status=401)
+
+        contest_key = request.GET.get('contest_key')
+        username = request.GET.get('username')
+        problem_code = request.GET.get('problem_code')
+        viewer_username = request.GET.get('viewer')
+        if not contest_key or not username or not problem_code:
+            return JsonResponse(
+                {'error': 'contest_key, username and problem_code are required'},
+                status=400,
+            )
+
+        try:
+            contest = Contest.objects.get(key=contest_key)
+        except Contest.DoesNotExist:
+            return JsonResponse({'error': f'No such contest with {contest_key}'}, status=404)
+
+        try:
+            profile = Profile.objects.select_related('user').get(user__username=username)
+        except Profile.DoesNotExist:
+            return JsonResponse({'error': f'No such user {username}'}, status=404)
+
+        try:
+            problem = Problem.objects.get(code=problem_code)
+        except Problem.DoesNotExist:
+            return JsonResponse({'error': f'No such problem {problem_code}'}, status=404)
+
+        viewer = AnonymousUser()
+        if viewer_username:
+            try:
+                viewer = User.objects.get(username=viewer_username)
+            except User.DoesNotExist:
+                return JsonResponse({'error': f'No such viewer {viewer_username}'}, status=404)
+
+        if not contest.can_see_full_scoreboard(viewer) and (
+            not viewer.is_authenticated or viewer.username != username
+        ):
+            return JsonResponse({'error': 'Permission denied'}, status=403)
+
+        submissions = (
+            Submission.objects
+            .filter(contest_object=contest, user=profile, problem=problem)
+            .select_related('language')
+            .order_by('-id')
+        )
+
+        return JsonResponse({
+            'submissions': [
+                {
+                    'id': sub.id,
+                    'date': sub.date.isoformat() if sub.date else None,
+                    'time': sub.time,
+                    'memory': sub.memory,
+                    'points': sub.points,
+                    'case_points': sub.case_points,
+                    'case_total': sub.case_total,
+                    'status': sub.status,
+                    'result': sub.result,
+                    'language': sub.language.key if sub.language_id else None,
+                }
+                for sub in submissions
+            ],
+        }, status=200)
 
 
 class APIStandings(View):
