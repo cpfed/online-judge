@@ -22,11 +22,13 @@ from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import gettext as _
 
+
 from judge.models import (
     Language, Problem, Profile, Submission, SubmissionSource, ContestParticipation, ProblemType, ContestSubmission,
-    Organization, Solution, Contest,
+    Organization, Solution, Contest, Ticket, TicketMessage
 )
 from django.db.models import F, Min, Max, Count, Prefetch, Q, Value, IntegerField
+from django.contrib.contenttypes.models import ContentType
 
 from judge.ratings import rating_class, rating_progress
 from judge.views.api.api_v2 import APIListView, APIDetailView
@@ -816,7 +818,531 @@ class APIContestUserProblemSubmissions(View):
             ],
         }, status=200)
 
+class APIContestProblems(View):
+    def get(self, request, contest_key, *args, **kwargs):
+        token = get_cpfed_token(request)
+        if not token or token != settings.CPFED_TOKEN:
+            return JsonResponse({'error': 'Unauthorized access'}, status=401)
 
+        try:
+            contest = Contest.objects.get(key = contest_key)
+        except Contest.DoesNotExist:
+            return JsonResponse({'error': f'No such contest {contest_key}'}, status=404)
+
+        username = request.GET.get('username')
+        profile = None
+        if username:
+            try:
+                profile = Profile.objects.get(user__username = username)
+            except Profile.DoesNotExist:
+                pass
+
+        if contest.is_organization_private:
+            if profile is None:
+                return JsonResponse({'error': 'Username required for private contest'}, status=400)
+            in_org = profile.organizations.filter(
+                id__in = contest.organizations.values('id'),
+            ).exists()
+            if not in_org:
+                return JsonResponse({'error': 'You are not a member of of the contest organization'}, status=403)
+        else:
+            if not contest.ended:
+                return JsonResponse({'error': 'Contest problems are available only after the contest ends'}, status=403)
+
+        contest_problems = (
+            contest.contest_problems
+            .select_related('problem','problem__group')
+            .prefetch_related(
+                Prefetch(
+                    'problem__types',
+                    queryset=ProblemType.objects.only('name'),
+                    to_attr='type_list',
+                ),
+            )
+            .defer('problem__description')
+            .order_by('order')
+        )
+
+        problems = []
+        for index, cp in enumerate(contest_problems):
+            p = cp.problem
+
+            data = {
+                'label': contest.get_label_for_problem(index),
+                'order': cp.order,
+                'points': int(cp.points),
+                'partial': cp.partial,
+                'is_pretested': cp.is_pretested,
+                'max_submissions': cp.max_submissions or None,
+                'code': p.code,
+                'name': p.name,
+                'time_limit': p.time_limit,
+                'memory_limit': p.memory_limit,
+                'ac_rate': p.ac_rate,
+                'types': [t.name for t in p.type_list],
+                'group': p.group.full_name if p.group else None,
+            }
+
+            if profile:
+                is_solved = Submission.objects.filter(
+                    user=profile, problem=p, result='AC',
+                    case_points__gte=F('case_total'),
+                ).exists()
+                if is_solved:
+                    data['user_status'] = 'AC'
+                else:
+                    last = (
+                        Submission.objects
+                        .filter(user=profile, problem=p)
+                        .order_by('-judged_date')
+                        .first()
+                    )
+                    data['user_status'] = last.result if last else 'N'
+            problems.append(data)
+
+        return JsonResponse({
+            'contest': {
+                'key': contest.key,
+                'name': contest.name,
+                'start_time': contest.start_time.isoformat() if contest.start_time else None,
+                'end_time': contest.end_time.isoformat() if contest.end_time else None,
+                'time_limit': contest.time_limit.total_seconds() if contest.time_limit else None,
+                'format_name': contest.format_name,
+                'is_organization_private': contest.is_organization_private,
+            },
+            'problems': problems,
+        }, status=200)
+
+@method_decorator(csrf_exempt, name='dispatch')
+class APIContestGrantAccess(View):
+    """Добавить пользователей во все организации контеста.
+
+    Server-to-server операция: cpfed-web вызывает её от имени админа,
+    чтобы дать списку юзеров доступ к organization-private контесту.
+    """
+
+    def post(self, request, contest_key, *args, **kwargs):
+        token = get_cpfed_token(request)
+        if not token or token != settings.CPFED_TOKEN:
+            return JsonResponse({'error': 'Unauthorized access'}, status=401)
+
+        try:
+            contest = Contest.objects.get(key=contest_key)
+        except Contest.DoesNotExist:
+            return JsonResponse({'error': f'No such contest {contest_key}'}, status=404)
+
+        try:
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON body'}, status=400)
+
+        usernames = data.get('usernames')
+        if not isinstance(usernames, list) or not usernames:
+            return JsonResponse({'error': 'usernames must be a non-empty list'}, status=400)
+
+        organizations = list(contest.organizations.all())
+        if not organizations:
+            return JsonResponse(
+                {'error': 'Contest has no associated organizations; cannot grant access'},
+                status=400,
+            )
+
+        added = []
+        not_found = []
+
+        for username in usernames:
+            try:
+                profile = Profile.objects.get(user__username=username)
+            except Profile.DoesNotExist:
+                not_found.append(username)
+                continue
+
+            for org in organizations:
+                profile.organizations.add(org)
+
+            added.append(username)
+
+        return JsonResponse({
+            'contest': contest.key,
+            'organizations': [
+                {'id': org.id, 'slug': org.slug, 'name': org.name}
+                for org in organizations
+            ],
+            'added': added,
+            'not_found': not_found,
+        }, status=200)
+
+@method_decorator(csrf_exempt, name = 'dispatch')
+class APIProblemTickets(View):
+    def get(self, request, problem_code, *args, **kwargs):
+        token = get_cpfed_token(request)
+        if not token or token != settings.CPFED_TOKEN:
+            return JsonResponse({'error': 'Unauthorized access'}, status = 401)
+
+        try:
+            problem = Problem.objects.get(code = problem_code)
+        except Problem.DoesNotExist:
+            return JsonResponse({'error': f'No such problem {problem_code}'}, status=404)
+
+        username = request.GET.get('username')
+        if not username:
+            return JsonResponse({'error': 'Username required'}, status=400)
+
+        try:
+            profile = Profile.objects.get(user__username = username)
+        except Profile.DoesNotExist:
+            return JsonResponse({'error': f'No such user {username}'}, status = 404)
+
+        is_curator = False
+        contest_key = request.GET.get('contest')
+        if contest_key:
+            try:
+                contest = Contest.objects.get(key = contest_key)
+                is_curator = (
+                    contest.authors.filter(id=profile.id).exists()
+                    or contest.curators.filter(id=profile.id).exists()
+                    or contest.testers.filter(id=profile.id).exists()
+                )
+            except Contest.DoesNotExist:
+                pass
+
+        problem_ct = ContentType.objects.get_for_model(Problem)
+        tickets_qs = Ticket.objects.filter(
+            content_type = problem_ct,
+            object_id = problem.id,
+        )
+
+        if not is_curator:
+            tickets_qs = tickets_qs.filter(user=profile)
+
+            since = request.GET.get('since')
+            if since:
+                from django.utils.dateparse import parse_datetime
+                since_dt = parse_datetime(since)
+                if since_dt:
+                    tickets_qs = tickets_qs.filter(time__gte=since_dt)
+
+
+        tickets_qs = (
+            tickets_qs
+            .select_related('user__user')
+            .prefetch_related('messages')
+            .order_by('-time')
+        )
+
+        tickets = []
+        for t in tickets_qs:
+            messages_list = list(t.messages.order_by('time'))
+            last = messages_list[-1] if messages_list else None
+
+            ticket_data = {
+                'id': t.id,
+                'title': t.title,
+                'time': t.time.isoformat(),
+                'is_open': t.is_open,
+                'author': t.user.user.username,
+                'message_count': len(messages_list),
+                'last_message_time': last.time.isoformat() if last else t.time.isoformat(),
+            }
+
+            if is_curator:
+                ticket_data['messages'] = [
+                    {
+                        'id': m.id,
+                        'body': m.body,
+                        'time': m.time.isoformat(),
+                        'author': m.user.user.username,
+                        'is_mine': (m.user_id == profile.id),
+                    }
+                    for m in messages_list
+                ]
+
+            tickets.append(ticket_data)
+
+        return JsonResponse({
+            'problem': {
+                'code': problem.code,
+                'name': problem.name,
+            },
+            'is_curator': is_curator,
+            'tickets': tickets
+        }, status = 200)
+
+    def post(self, request, problem_code, *args, **kwargs):
+        token = get_cpfed_token(request)
+        if not token or token != settings.CPFED_TOKEN:
+            return JsonResponse({'error': 'Unauthorized access'}, status=401)
+
+        try:
+            problem = Problem.objects.get(code = problem_code)
+        except Problem.DoesNotExist:
+            return JsonResponse({'error': f'No such problem {problem_code}'}, status=404)
+
+        try:
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON body'}, status=400)
+
+        username = data.get('username')
+        body = data.get('body')
+        title = data.get('title')
+
+        if not username:
+            return JsonResponse({'error': 'Username is required'}, status=400)
+        if not body:
+            return JsonResponse({'error': 'Body is required'}, status=400)
+
+        try:
+            profile = Profile.objects.get(user__username = username)
+        except Profile.DoesNotExist:
+            return JsonResponse({'error': f'No such user {username}'}, status=404)
+
+        if not title:
+            title = f'Вопрос по задаче {problem.name}'[:100]
+
+        ticket = Ticket.objects.create(
+            title = title,
+            user = profile,
+            content_type = ContentType.objects.get_for_model(Problem),
+            object_id = problem.id,
+        )
+
+        message = TicketMessage.objects.create(
+            ticket = ticket,
+            user = profile,
+            body = body,
+        )
+
+        return JsonResponse({
+            'ticket': {
+                'id': ticket.id,
+                'title': ticket.title,
+                'time': ticket.time.isoformat(),
+                'is_open': ticket.is_open,
+                'author': profile.user.username,
+            },
+            'message': {
+                'id': message.id,
+                'body': message.body,
+                'time': message.time.isoformat(),
+                'author': profile.user.username,
+            },
+        }, status=201)
+
+class APITicketDetail(View):
+    def get(self, request, ticket_id, *args, **kwargs):
+        token = get_cpfed_token(request)
+        if not token or token!=settings.CPFED_TOKEN:
+            return JsonResponse({'error': 'Unauthorized access'}, status=401)
+
+        try:
+            ticket = Ticket.objects.select_related('user__user').get(id = ticket_id)
+        except Ticket.DoesNotExist:
+            return JsonResponse({'error': f'No such ticket {ticket_id}'}, status=404)
+
+        username = request.GET.get('username')
+        if not username:
+            return JsonResponse({'error': 'Username required'}, status=400)
+
+        try:
+            profile = Profile.objects.get(user__username = username)
+        except Profile.DoesNotExist:
+            return JsonResponse({'error': f'No such user {username}'}, status=404)
+
+        is_author = (ticket.user_id == profile.id)
+        is_curator = False
+
+        contest_key = request.GET.get('contest')
+        if contest_key:
+            try:
+                contest = Contest.objects.get(key = contest_key)
+                is_curator = (
+                    contest.authors.filter(id=profile.id).exists()
+                    or contest.curators.filter(id=profile.id).exists()
+                    or contest.testers.filter(id=profile.id).exists()
+                )
+            except Contest.DoesNotExist:
+                pass
+
+        if not (is_author or is_curator):
+            return JsonResponse({'error': 'Permission denied'}, status=403)
+
+        messages = (
+            ticket.messages
+            .select_related('user__user')
+            .order_by('time')
+        )
+
+        messages_list = [
+            {
+                'id': m.id,
+                'body': m.body,
+                'time': m.time.isoformat(),
+                'author': m.user.user.username,
+                'is_mine': (m.user_id == profile.id)
+            }
+            for m in messages
+        ]
+
+        problem_info = None
+        if isinstance(ticket.linked_item, Problem):
+            problem_info = {
+                'code': ticket.linked_item.code,
+                'name': ticket.linked_item.name,
+            }
+
+        return JsonResponse({
+            'ticket': {
+                'id': ticket.id,
+                'title': ticket.title,
+                'time': ticket.time.isoformat(),
+                'is_open': ticket.is_open,
+                'author': ticket.user.user.username,
+                'is_author': is_author,
+            },
+            'problem': problem_info,
+            'messages': messages_list,
+            'is_curator': is_curator,
+        }, status=200)
+
+@method_decorator(csrf_exempt, name='dispatch')
+class APITicketMessages(View):
+    def post(self, request, ticket_id, *args, **kwargs):
+        token = get_cpfed_token(request)
+        if not token or token != settings.CPFED_TOKEN:
+            return JsonResponse({'error': 'Unauthorized access'}, status=401)
+
+        try:
+            ticket = Ticket.objects.select_related('user__user').get(id=ticket_id)
+        except Ticket.DoesNotExist:
+            return JsonResponse({'error': f'No such ticket {ticket_id}'}, status=404)
+
+        try:
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON body'}, status=400)
+
+        username = data.get('username')
+        body = data.get('body')
+        contest_key = data.get('contest_key')
+
+        if not username or not body:
+            return JsonResponse({'error': 'username and body required'}, status=400)
+
+        try:
+            profile = Profile.objects.get(user__username=username)
+        except Profile.DoesNotExist:
+            return JsonResponse({'error': f'No such user {username}'}, status=404)
+
+        is_author = (ticket.user_id == profile.id)
+        is_curator = False
+        if contest_key:
+            try:
+                contest = Contest.objects.get(key=contest_key)
+                is_curator = (
+                    contest.authors.filter(id=profile.id).exists()
+                    or contest.curators.filter(id=profile.id).exists()
+                    or contest.testers.filter(id=profile.id).exists()
+                )
+            except Contest.DoesNotExist:
+                pass
+
+        if not (is_author or is_curator):
+            return JsonResponse({'error': 'Permission denied'}, status=403)
+
+        if not ticket.is_open and not is_curator:
+            return JsonResponse({'error': 'Ticket is closed'}, status=400)
+
+        message = TicketMessage.objects.create(
+            ticket=ticket,
+            user=profile,
+            body=body,
+        )
+
+        if is_curator:
+            ticket.is_open = False
+            ticket.save(update_fields=['is_open'])
+
+        return JsonResponse({
+            'message': {
+                'id': message.id,
+                'body': message.body,
+                'time': message.time.isoformat(),
+                'author': profile.user.username,
+            },
+            'ticket_closed': not ticket.is_open,
+        }, status=201)
+
+@method_decorator(csrf_exempt, name='dispatch')
+class APIProblemBroadcast(View):
+    def post(self, request, problem_code, *args, **kwargs):
+        token = get_cpfed_token(request)
+        if not token or token != settings.CPFED_TOKEN:
+            return JsonResponse({'error': 'Unauthorized access'}, status=401)
+
+        try:
+            problem = Problem.objects.get(code=problem_code)
+        except Problem.DoesNotExist:
+            return JsonResponse({'error': f'No such problem {problem_code}'}, status=404)
+
+        try:
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON body'}, status=400)
+
+        username = data.get('username')
+        body = data.get('body')
+        contest_key = data.get('contest_key')
+
+        if not username or not body or not contest_key:
+            return JsonResponse({'error': 'username, body, contest_key required'}, status=400)
+
+        try:
+            profile = Profile.objects.get(user__username=username)
+        except Profile.DoesNotExist:
+            return JsonResponse({'error': f'No such user {username}'}, status=404)
+
+        try:
+            contest = Contest.objects.get(key=contest_key)
+        except Contest.DoesNotExist:
+            return JsonResponse({'error': f'No such contest {contest_key}'}, status=404)
+
+        is_curator = (
+            contest.authors.filter(id=profile.id).exists()
+            or contest.curators.filter(id=profile.id).exists()
+            or contest.testers.filter(id=profile.id).exists()
+        )
+
+        if not is_curator:
+            tickets_qs = tickets_qs.filter(user=profile)
+
+            since = request.GET.get('since')
+            if since:
+                from django.utils.dateparse import parse_datetime
+                since_dt = parse_datetime(since)
+                if since_dt:
+                    tickets_qs = tickets_qs.filter(time__gte=since_dt)
+
+        problem_ct = ContentType.objects.get_for_model(Problem)
+        open_tickets = Ticket.objects.filter(
+            content_type=problem_ct,
+            object_id=problem.id,
+            is_open=True,
+        )
+
+        created = []
+        for t in open_tickets:
+            msg = TicketMessage.objects.create(ticket=t, user=profile, body=body)
+            t.is_open = False
+            t.save(update_fields=['is_open'])
+            created.append({'ticket_id': t.id, 'message_id': msg.id})
+
+        return JsonResponse({
+            'broadcasted_to': len(created),
+            'created': created,
+        }, status=201)
+
+@method_decorator(csrf_exempt, name='dispatch')
 class APIStandings(View):
     def get(self, request, *args, **kwargs):
         token = get_cpfed_token(request)
