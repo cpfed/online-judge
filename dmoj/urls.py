@@ -293,6 +293,11 @@ urlpatterns = [
         path('problem_editorial', api.api_esep.APIProblemEditorial.as_view()),
         path('standings', api.api_esep.APIStandings.as_view()),
         path('contest_user_submissions', api.api_esep.APIContestUserProblemSubmissions.as_view()),
+        path('contest/<str:contest_key>/problems', api.api_esep.APIContestProblems.as_view()),
+        path('problem/<str:problem_code>/tickets', api.api_esep.APIProblemTickets.as_view()),
+        path('tickets/<int:ticket_id>', api.api_esep.APITicketDetail.as_view()),
+        path('tickets/<int:ticket_id>/messages', api.api_esep.APITicketMessages.as_view()),
+        path('problem/<str:problem_code>/broadcast', api.api_esep.APIProblemBroadcast.as_view()),
     ])),
 
     path('api/sync_users/<str:token>/', api.api.SyncUsersFromCPFEDView.as_view(), name='sync_users_from_cpfed'),
