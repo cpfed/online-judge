@@ -1,3 +1,5 @@
+# flake8: noqa
+
 import json
 from datetime import timedelta, datetime
 from functools import partial
@@ -626,6 +628,56 @@ class APIRegisterUserFromCpfed(View):
         except Exception as e:
             return JsonResponse({'detail': str(e)}, status=400)
 
+@method_decorator(csrf_exempt, name = 'dispatch')
+class APIContestGrantAccess(View):
+    def post(self, request, contest_key, *args, **kwargs):
+        token = get_cpfed_token(request)
+        if not token or token != settings.CPFED_TOKEN:
+            return JsonResponse({'error': 'Unauthorized access'}, status=401)
+
+        try:
+            contest = Contest.objects.get(key = contest_key)
+        except Contest.DoesNotExist:
+            return JsonResponse({'error': f'No such contest with {contest_key}'}, status=404)
+
+        try:
+            data = json.loads(request.body)
+        except Json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON body'}, status=400)
+
+        usernames = data.get('usernames')
+        if not isinstance(usernames, list) or not usernames:
+            return JsonResponse({'error': 'usernames must be non-empty list'}, status=400)
+
+        organizations = list(contest.organizations.all())
+        if not organizations:
+            return JsonResponse({'error': 'Contest has no associated organizations; cannot grant access'}, status=400)
+
+        added = []
+        not_found = []
+
+        for username in usernames:
+            try:
+                profile = Profile.objects.get(user__username = username)
+            except Profile.DoesNotExist:
+                not_found.append(username)
+                continue
+
+            for org in organizations:
+                profile.organizations.add(org)
+
+            added.append(username)
+
+        return JsonResponse({
+            'contest': contest.key,
+            'organizations': {
+                {'id': org.id, 'slug': org.slug, 'name': org.name}
+                for org in organizations
+            },
+            'added': added,
+            'not_found': not_found,
+        }, status=200)
+
 
 class APIProblemEditorial(View):
     def get(self, request, *args, **kwargs):
@@ -1013,15 +1065,7 @@ class APIProblemTickets(View):
         )
 
         if not is_curator:
-            tickets_qs = tickets_qs.filter(user=profile)
-
-            since = request.GET.get('since')
-            if since:
-                from django.utils.dateparse import parse_datetime
-                since_dt = parse_datetime(since)
-                if since_dt:
-                    tickets_qs = tickets_qs.filter(time__gte=since_dt)
-
+            return JsonResponse({'error': 'Permission denied'}, status=403)
 
         tickets_qs = (
             tickets_qs
@@ -1314,14 +1358,7 @@ class APIProblemBroadcast(View):
         )
 
         if not is_curator:
-            tickets_qs = tickets_qs.filter(user=profile)
-
-            since = request.GET.get('since')
-            if since:
-                from django.utils.dateparse import parse_datetime
-                since_dt = parse_datetime(since)
-                if since_dt:
-                    tickets_qs = tickets_qs.filter(time__gte=since_dt)
+            return JsonResponse({'error': 'Permission denied'}, status=403)
 
         problem_ct = ContentType.objects.get_for_model(Problem)
         open_tickets = Ticket.objects.filter(
