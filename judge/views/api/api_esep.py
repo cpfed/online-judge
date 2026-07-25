@@ -1424,16 +1424,21 @@ class APIContestTickets(View):
                 ],
             })
 
-        announcements = [
-            {
-                'id': a.id,
-                'body': a.body,
-                'author': a.author.user.username,
-                'time': a.time.isoformat(),
-                'is_mine': (a.author_id == profile.id),
-            }
-            for a in contest.announcements.select_related('author__user').all()
-        ]
+        # Объявления некритичны: если приложение esep ещё не мигрировано (нет таблицы),
+        # не роняем весь чат — просто отдаём пустой список.
+        try:
+            announcements = [
+                {
+                    'id': a.id,
+                    'body': a.body,
+                    'author': a.author.user.username,
+                    'time': a.time.isoformat(),
+                    'is_mine': (a.author_id == profile.id),
+                }
+                for a in contest.announcements.select_related('author__user').all()
+            ]
+        except Exception:
+            announcements = []
 
         return JsonResponse({
             'contest': {'key': contest.key, 'name': contest.name},
