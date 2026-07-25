@@ -30,6 +30,7 @@ from judge.models import (
     Language, Problem, Profile, Submission, SubmissionSource, ContestParticipation, ProblemType, ContestSubmission,
     Organization, Solution, Contest, Ticket, TicketMessage
 )
+from esep.models import ContestAnnouncement
 from django.db.models import F, Min, Max, Count, Prefetch, Q, Value, IntegerField
 from django.contrib.contenttypes.models import ContentType
 
@@ -101,6 +102,17 @@ class APISubmissionDetailEsep(View):
         except Submission.DoesNotExist:
             return JsonResponse({'error': f'No such submission {submission_id}'}, status=404)
 
+        # Исходный код отдаём только если зритель реально имеет право его видеть.
+        # Без валидного зрителя (username) source не раскрываем — защита в глубину.
+        username = request.GET.get('username')
+        can_see_source = False
+        if username:
+            try:
+                viewer = User.objects.get(username=username)
+                can_see_source = submission.can_see_detail(viewer)
+            except User.DoesNotExist:
+                can_see_source = False
+
         cases = []
         for batch in group_test_cases(submission.test_cases.all())[0]:
             batch_cases = [
@@ -131,7 +143,7 @@ class APISubmissionDetailEsep(View):
         res = {
             'id': submission.id,
             'problem': submission.problem.code,
-            'source': submission.source.source,
+            'source': submission.source.source if can_see_source else None,
             'user': submission.user.user.username,
             'date': submission.date.isoformat(),
             'time': submission.time,
@@ -1412,10 +1424,22 @@ class APIContestTickets(View):
                 ],
             })
 
+        announcements = [
+            {
+                'id': a.id,
+                'body': a.body,
+                'author': a.author.user.username,
+                'time': a.time.isoformat(),
+                'is_mine': (a.author_id == profile.id),
+            }
+            for a in contest.announcements.select_related('author__user').all()
+        ]
+
         return JsonResponse({
             'contest': {'key': contest.key, 'name': contest.name},
             'is_curator': is_curator,
             'tickets': tickets,
+            'announcements': announcements,
         }, status=200)
 
 @method_decorator(csrf_exempt, name='dispatch')
@@ -1448,6 +1472,55 @@ class APICuratedContests(View):
         } for c in qs]
 
         return JsonResponse({'contests': contests}, status=200)
+
+@method_decorator(csrf_exempt, name='dispatch')
+class APIContestAnnouncement(View):
+    # Объявление на весь контест (куратор -> всем участникам). Показывается в чате и шлёт уведомления.
+    def post(self, request, contest_key, *args, **kwargs):
+        token = get_cpfed_token(request)
+        if not token or token != settings.CPFED_TOKEN:
+            return JsonResponse({'error': 'Unauthorized access'}, status=401)
+
+        try:
+            contest = Contest.objects.get(key=contest_key)
+        except Contest.DoesNotExist:
+            return JsonResponse({'error': f'No such contest {contest_key}'}, status=404)
+
+        try:
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON body'}, status=400)
+
+        username = data.get('username')
+        body = data.get('body')
+        if not username or not body:
+            return JsonResponse({'error': 'username and body required'}, status=400)
+
+        try:
+            profile = Profile.objects.get(user__username=username)
+        except Profile.DoesNotExist:
+            return JsonResponse({'error': f'No such user {username}'}, status=404)
+
+        is_curator = (
+            contest.authors.filter(id=profile.id).exists()
+            or contest.curators.filter(id=profile.id).exists()
+            or contest.testers.filter(id=profile.id).exists()
+        )
+        if not is_curator:
+            return JsonResponse({'error': 'Permission denied'}, status=403)
+
+        announcement = ContestAnnouncement.objects.create(
+            contest=contest,
+            author=profile,
+            body=body,
+        )
+
+        return JsonResponse({
+            'id': announcement.id,
+            'body': announcement.body,
+            'author': profile.user.username,
+            'time': announcement.time.isoformat(),
+        }, status=201)
 
 @method_decorator(csrf_exempt, name='dispatch')
 class APIStandings(View):

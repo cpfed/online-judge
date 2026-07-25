@@ -258,6 +258,7 @@ INSTALLED_APPS += (
     'django.contrib.admin',
     'judge',
     'polygon',
+    'esep',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.flatpages',
