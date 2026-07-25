@@ -22,6 +22,7 @@ from django.views.decorators.http import require_http_methods
 from django.conf import settings
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.dateparse import parse_datetime
 from django.utils.translation import gettext as _
 
 
@@ -1328,6 +1329,125 @@ class APIProblemBroadcast(View):
             'broadcasted_to': len(created),
             'created': created,
         }, status=201)
+
+@method_decorator(csrf_exempt, name='dispatch')
+class APIContestTickets(View):
+    # Тикеты по ВСЕМ задачам контеста: куратор видит все, обычный участник — только свои.
+    # Используется для агрегированного чата «все задачи» и для глобальных уведомлений.
+    def get(self, request, contest_key, *args, **kwargs):
+        token = get_cpfed_token(request)
+        if not token or token != settings.CPFED_TOKEN:
+            return JsonResponse({'error': 'Unauthorized access'}, status=401)
+
+        username = request.GET.get('username')
+        if not username:
+            return JsonResponse({'error': 'Username required'}, status=400)
+
+        try:
+            contest = Contest.objects.get(key=contest_key)
+        except Contest.DoesNotExist:
+            return JsonResponse({'error': f'No such contest {contest_key}'}, status=404)
+
+        try:
+            profile = Profile.objects.get(user__username=username)
+        except Profile.DoesNotExist:
+            return JsonResponse({'error': f'No such user {username}'}, status=404)
+
+        is_curator = (
+            contest.authors.filter(id=profile.id).exists()
+            or contest.curators.filter(id=profile.id).exists()
+            or contest.testers.filter(id=profile.id).exists()
+        )
+
+        problem_ids = list(contest.problems.values_list('id', flat=True))
+        problem_ct = ContentType.objects.get_for_model(Problem)
+
+        tickets_qs = (
+            Ticket.objects.filter(content_type=problem_ct, object_id__in=problem_ids)
+            .select_related('user__user')
+            .prefetch_related('messages__user__user')
+            .order_by('-time')
+        )
+        if not is_curator:
+            # Участник видит только собственные тикеты.
+            tickets_qs = tickets_qs.filter(user=profile)
+
+        # object_id -> (code, name) одним запросом, чтобы не дёргать GenericForeignKey по одному.
+        prob_map = {
+            p.id: (p.code, p.name)
+            for p in Problem.objects.filter(id__in=problem_ids).only('id', 'code', 'name')
+        }
+
+        since_raw = request.GET.get('since')
+        since_dt = parse_datetime(since_raw) if since_raw else None
+
+        tickets = []
+        for t in tickets_qs:
+            msgs = sorted(t.messages.all(), key=lambda m: m.time)
+            last_time = msgs[-1].time if msgs else t.time
+            # `since` — только для облегчения полла уведомлений: пропускаем ветки без активности.
+            # Полные сообщения всё равно отдаём, чтобы клиент отрисовал/определил новое.
+            if since_dt is not None and timezone.is_aware(since_dt) and last_time < since_dt:
+                continue
+            code, name = prob_map.get(t.object_id, (None, None))
+            tickets.append({
+                'id': t.id,
+                'title': t.title,
+                'time': t.time.isoformat(),
+                'is_open': t.is_open,
+                'author': t.user.user.username,
+                'problem_code': code,
+                'problem_name': name,
+                'message_count': len(msgs),
+                'last_message_time': last_time.isoformat(),
+                'messages': [
+                    {
+                        'id': m.id,
+                        'body': m.body,
+                        'time': m.time.isoformat(),
+                        'author': m.user.user.username,
+                        'is_mine': (m.user_id == profile.id),
+                    }
+                    for m in msgs
+                ],
+            })
+
+        return JsonResponse({
+            'contest': {'key': contest.key, 'name': contest.name},
+            'is_curator': is_curator,
+            'tickets': tickets,
+        }, status=200)
+
+@method_decorator(csrf_exempt, name='dispatch')
+class APICuratedContests(View):
+    # Все контесты, где пользователь автор/куратор/тестер. Без фильтра по времени DMOJ —
+    # во время виртуального участия контест уже завершён; активность фильтрует cpfed.
+    def get(self, request, username, *args, **kwargs):
+        token = get_cpfed_token(request)
+        if not token or token != settings.CPFED_TOKEN:
+            return JsonResponse({'error': 'Unauthorized access'}, status=401)
+
+        try:
+            profile = Profile.objects.get(user__username=username)
+        except Profile.DoesNotExist:
+            return JsonResponse({'error': f'No such user {username}'}, status=404)
+
+        qs = (
+            Contest.objects.filter(
+                Q(authors=profile) | Q(curators=profile) | Q(testers=profile)
+            )
+            .distinct()
+            .only('key', 'name', 'start_time', 'end_time')
+        )
+
+        contests = [{
+            'key': c.key,
+            'name': c.name,
+            'start': c.start_time.isoformat() if c.start_time else None,
+            'end': c.end_time.isoformat() if c.end_time else None,
+        } for c in qs]
+
+        return JsonResponse({'contests': contests}, status=200)
 
 @method_decorator(csrf_exempt, name='dispatch')
 class APIStandings(View):
