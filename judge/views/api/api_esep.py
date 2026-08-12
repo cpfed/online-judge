@@ -28,7 +28,7 @@ from django.utils.translation import gettext as _
 
 from judge.models import (
     Language, Problem, Profile, Submission, SubmissionSource, ContestParticipation, ProblemType, ContestSubmission,
-    Organization, Solution, Contest, Ticket, TicketMessage
+    ContestProblem, Organization, Solution, Contest, Ticket, TicketMessage
 )
 from esep.models import ContestAnnouncement
 from django.db.models import F, Min, Max, Count, Prefetch, Q, Value, IntegerField
@@ -61,6 +61,7 @@ class APIProblemSubmit(View):
         source = request.POST.get('source')
         language_key = request.POST.get('language_key')
         username = request.POST.get('username')
+        contest_key = request.POST.get('contest_key')
         if not all([source, language_key, username]):
             return JsonResponse({'error': 'Missing required fields'}, status=400)
 
@@ -79,9 +80,58 @@ class APIProblemSubmit(View):
         except Language.DoesNotExist:
             return JsonResponse({'error': f'No such language {language_key}'}, status=404)
 
+        # Живой контест: посылка должна прикрепиться к участию, иначе она не попадёт в
+        # таблицу результатов. Без валидного живого участия — отказ, а не «архивная» посылка.
+        contest = None
+        contest_problem = None
+        participation = None
+        if contest_key:
+            try:
+                contest = Contest.objects.get(key=contest_key)
+            except Contest.DoesNotExist:
+                return JsonResponse({'error': f'No such contest {contest_key}'}, status=404)
+
+            participation = (
+                ContestParticipation.objects
+                .filter(contest=contest, user=profile, virtual=ContestParticipation.LIVE)
+                .order_by('-real_start')
+                .first()
+            )
+            if participation is None:
+                return JsonResponse(
+                    {'error': 'You are not participating in this contest', 'reason': 'not_participating'},
+                    status=400,
+                )
+
+            now = timezone.now()
+            if participation.start and now < participation.start:
+                return JsonResponse(
+                    {'error': 'Contest has not started for you', 'reason': 'not_started'}, status=400)
+            if participation.end_time and now > participation.end_time:
+                return JsonResponse(
+                    {'error': 'Your contest time is over', 'reason': 'window_closed'}, status=400)
+
+            contest_problem = ContestProblem.objects.filter(contest=contest, problem=problem).first()
+            if contest_problem is None:
+                return JsonResponse(
+                    {'error': 'Problem is not part of this contest', 'reason': 'problem_not_in_contest'},
+                    status=400,
+                )
+
         try:
             from judge import event_poster as event
             submission = Submission.objects.create(user=profile, problem=problem, language=language)
+
+            if contest_problem is not None:
+                submission.contest_object = contest
+                submission.locked_after = contest.locked_after
+                submission.save(update_fields=['contest_object', 'locked_after'])
+                ContestSubmission.objects.create(
+                    submission=submission,
+                    problem=contest_problem,
+                    participation=participation,
+                )
+
             submission_source = SubmissionSource.objects.create(submission=submission, source=source)
             submission.judge(force_judge=True, judge_id=None)
 
@@ -736,6 +786,18 @@ def compute_standings(contest_key, username=None):
 
     rows = [_serialize_standings_row(rank, p, problems) for rank, p in users]
 
+    # Заморозка скорборда: freeze_time — смещение от старта, после которого ячейки
+    # помечаются frozen (формат ICPC). Отдаём наружу, чтобы фронт показал баннер/таймер.
+    freeze_seconds = contest.freeze_time.total_seconds() if contest.freeze_time else None
+    if freeze_seconds is not None and contest.start_time:
+        freeze_at = contest.start_time + contest.freeze_time
+        freeze_at_iso = freeze_at.isoformat()
+        # Заморожено, только когда точка заморозки уже пройдена и контест ещё идёт.
+        is_frozen_now = timezone.now() >= freeze_at and not contest.ended
+    else:
+        freeze_at_iso = None
+        is_frozen_now = False
+
     return {
         'contest': {
             'key': contest.key,
@@ -743,6 +805,9 @@ def compute_standings(contest_key, username=None):
             'format': contest.format_name,
             'start_time': contest.start_time.isoformat() if contest.start_time else None,
             'end_time': contest.end_time.isoformat() if contest.end_time else None,
+            'freeze_time': freeze_seconds,
+            'freeze_at': freeze_at_iso,
+            'is_frozen_now': is_frozen_now,
         },
         'problems': [
             {
@@ -1477,6 +1542,147 @@ class APICuratedContests(View):
         } for c in qs]
 
         return JsonResponse({'contests': contests}, status=200)
+
+def _live_participation_payload(participation):
+    if participation is None:
+        return None
+    return {
+        'id': participation.id,
+        'virtual': participation.virtual,
+        'real_start': participation.real_start.isoformat() if participation.real_start else None,
+        'start': participation.start.isoformat() if participation.start else None,
+        'end_time': participation.end_time.isoformat() if participation.end_time else None,
+        'ended': participation.ended,
+        'score': participation.score,
+        'cumtime': participation.cumtime,
+    }
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class APIContestParticipation(View):
+    # Состояние живого участия пользователя в контесте — для гейтинга UI в cpfed.
+    def get(self, request, contest_key, *args, **kwargs):
+        token = get_cpfed_token(request)
+        if not token or token != settings.CPFED_TOKEN:
+            return JsonResponse({'error': 'Unauthorized access'}, status=401)
+
+        username = request.GET.get('username')
+        if not username:
+            return JsonResponse({'error': 'Username required'}, status=400)
+
+        try:
+            contest = Contest.objects.get(key=contest_key)
+        except Contest.DoesNotExist:
+            return JsonResponse({'error': f'No such contest {contest_key}'}, status=404)
+
+        try:
+            profile = Profile.objects.get(user__username=username)
+        except Profile.DoesNotExist:
+            return JsonResponse({'error': f'No such user {username}'}, status=404)
+
+        user = profile.user
+        participation = (
+            ContestParticipation.objects
+            .filter(contest=contest, user=profile, virtual=ContestParticipation.LIVE)
+            .order_by('-real_start')
+            .first()
+        )
+
+        return JsonResponse({
+            'contest': {
+                'key': contest.key,
+                'name': contest.name,
+                'format': contest.format_name,
+                'start_time': contest.start_time.isoformat() if contest.start_time else None,
+                'end_time': contest.end_time.isoformat() if contest.end_time else None,
+                'freeze_time': contest.freeze_time.total_seconds() if contest.freeze_time else None,
+                'time_limit': contest.time_limit.total_seconds() if contest.time_limit else None,
+            },
+            'started': contest.started,
+            'ended': contest.ended,
+            'accessible': contest.is_accessible_by(user),
+            'is_live_joinable': contest.is_live_joinable_by(user),
+            'has_completed': contest.has_completed_contest(user),
+            'needs_access_code': bool(contest.access_code) and not contest.is_editable_by(user),
+            'banned': contest.banned_users.filter(id=profile.id).exists(),
+            'in_contest': (
+                profile.current_contest is not None
+                and profile.current_contest.contest_id == contest.id
+            ),
+            'participation': _live_participation_payload(participation),
+        }, status=200)
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class APIContestJoin(View):
+    # Вход в идущий контест (аналог ContestJoin, но без сессии/CSRF — по сервисному токену).
+    def post(self, request, contest_key, *args, **kwargs):
+        token = get_cpfed_token(request)
+        if not token or token != settings.CPFED_TOKEN:
+            return JsonResponse({'error': 'Unauthorized access'}, status=401)
+
+        try:
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON body'}, status=400)
+
+        username = data.get('username')
+        access_code = data.get('access_code')
+        if not username:
+            return JsonResponse({'error': 'username is required'}, status=400)
+
+        try:
+            contest = Contest.objects.get(key=contest_key)
+        except Contest.DoesNotExist:
+            return JsonResponse({'error': f'No such contest {contest_key}'}, status=404)
+
+        try:
+            profile = Profile.objects.get(user__username=username)
+        except Profile.DoesNotExist:
+            return JsonResponse({'error': f'No such user {username}'}, status=404)
+
+        user = profile.user
+
+        if not contest.is_accessible_by(user):
+            return JsonResponse({'error': 'Contest is not accessible', 'reason': 'inaccessible'}, status=403)
+
+        if not contest.started and not contest.is_editable_by(user):
+            return JsonResponse({'error': 'Contest is not ongoing', 'reason': 'not_started'}, status=403)
+
+        if contest.ended:
+            return JsonResponse({'error': 'Contest has ended', 'reason': 'ended'}, status=403)
+
+        if not user.is_superuser and contest.banned_users.filter(id=profile.id).exists():
+            return JsonResponse({'error': 'Banned from this contest', 'reason': 'banned'}, status=403)
+
+        if contest.access_code and not contest.is_editable_by(user) and access_code != contest.access_code:
+            return JsonResponse({'error': 'Access code required or incorrect', 'reason': 'bad_access_code'}, status=403)
+
+        if contest.is_live_joinable_by(user):
+            participation_type = ContestParticipation.LIVE
+        elif contest.is_spectatable_by(user):
+            participation_type = ContestParticipation.SPECTATE
+        else:
+            reason = 'already_completed' if contest.has_completed_contest(user) else 'not_joinable'
+            return JsonResponse({'error': 'You are not able to join this contest', 'reason': reason}, status=403)
+
+        participation, _created = ContestParticipation.objects.get_or_create(
+            contest=contest, user=profile, virtual=participation_type,
+            defaults={'real_start': timezone.now()},
+        )
+
+        # Именно current_contest заставляет посылки прикрепляться к контесту.
+        profile.current_contest = participation
+        profile.save()
+        contest._updating_stats_only = True
+        contest.update_user_count()
+
+        return JsonResponse({
+            'joined': True,
+            'spectating': participation_type == ContestParticipation.SPECTATE,
+            'participation': _live_participation_payload(participation),
+        }, status=200)
+
 
 @method_decorator(csrf_exempt, name='dispatch')
 class APIContestAnnouncement(View):
