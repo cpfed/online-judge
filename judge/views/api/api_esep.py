@@ -91,10 +91,14 @@ class APIProblemSubmit(View):
             except Contest.DoesNotExist:
                 return JsonResponse({'error': f'No such contest {contest_key}'}, status=404)
 
+            # LIVE — обычный участник; SPECTATE — админ контеста (автор/куратор/тестер).
+            # Посылки спектатора прикрепляем к контесту, но в LIVE-рейтинг они не попадают
+            # (ранжирование фильтрует virtual=LIVE), как и в самом DMOJ.
             participation = (
                 ContestParticipation.objects
-                .filter(contest=contest, user=profile, virtual=ContestParticipation.LIVE)
-                .order_by('-real_start')
+                .filter(contest=contest, user=profile,
+                        virtual__in=[ContestParticipation.LIVE, ContestParticipation.SPECTATE])
+                .order_by('-virtual', '-real_start')
                 .first()
             )
             if participation is None:
@@ -124,7 +128,9 @@ class APIProblemSubmit(View):
 
             if contest_problem is not None:
                 submission.contest_object = contest
-                submission.locked_after = contest.locked_after
+                # locked_after ставим только живым участникам (как в judge/views/problem.py).
+                if participation.virtual == ContestParticipation.LIVE:
+                    submission.locked_after = contest.locked_after
                 submission.save(update_fields=['contest_object', 'locked_after'])
                 ContestSubmission.objects.create(
                     submission=submission,
@@ -1581,10 +1587,13 @@ class APIContestParticipation(View):
             return JsonResponse({'error': f'No such user {username}'}, status=404)
 
         user = profile.user
+        # Админы контеста (авторы/кураторы/тестеры) заходят как SPECTATE, а не LIVE —
+        # отдаём любое из них, иначе фронт решит, что участия нет, и выкинет их со страницы.
         participation = (
             ContestParticipation.objects
-            .filter(contest=contest, user=profile, virtual=ContestParticipation.LIVE)
-            .order_by('-real_start')
+            .filter(contest=contest, user=profile,
+                    virtual__in=[ContestParticipation.LIVE, ContestParticipation.SPECTATE])
+            .order_by('-virtual', '-real_start')
             .first()
         )
 
@@ -1610,6 +1619,31 @@ class APIContestParticipation(View):
                 and profile.current_contest.contest_id == contest.id
             ),
             'participation': _live_participation_payload(participation),
+        }, status=200)
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class APIContestCurators(View):
+    # Список админов контеста (авторы/кураторы/тестеры). Одинаков для всех зрителей,
+    # поэтому cpfed кеширует его на контест и проверяет членство в памяти — вместо того
+    # чтобы спрашивать «а я куратор?» для каждого пользователя отдельно.
+    def get(self, request, contest_key, *args, **kwargs):
+        token = get_cpfed_token(request)
+        if not token or token != settings.CPFED_TOKEN:
+            return JsonResponse({'error': 'Unauthorized access'}, status=401)
+
+        try:
+            contest = Contest.objects.get(key=contest_key)
+        except Contest.DoesNotExist:
+            return JsonResponse({'error': f'No such contest {contest_key}'}, status=404)
+
+        usernames = set()
+        for rel in (contest.authors, contest.curators, contest.testers):
+            usernames.update(rel.select_related('user').values_list('user__username', flat=True))
+
+        return JsonResponse({
+            'contest': {'key': contest.key, 'name': contest.name},
+            'curators': sorted(usernames),
         }, status=200)
 
 
