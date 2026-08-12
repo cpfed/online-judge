@@ -300,6 +300,7 @@ urlpatterns = [
         path('contest/<str:contest_key>/participation', api.api_esep.APIContestParticipation.as_view()),
         path('contest/<str:contest_key>/join', api.api_esep.APIContestJoin.as_view()),
         path('contest/<str:contest_key>/curators', api.api_esep.APIContestCurators.as_view()),
+        path('contest/<str:contest_key>/submissions', api.api_esep.APIContestSubmissions.as_view()),
         path('user/<str:username>/curated_contests', api.api_esep.APICuratedContests.as_view()),
         path('tickets/<int:ticket_id>', api.api_esep.APITicketDetail.as_view()),
         path('tickets/<int:ticket_id>/messages', api.api_esep.APITicketMessages.as_view()),

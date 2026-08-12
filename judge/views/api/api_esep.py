@@ -1623,6 +1623,67 @@ class APIContestParticipation(View):
 
 
 @method_decorator(csrf_exempt, name='dispatch')
+class APIContestSubmissions(View):
+    # Лента посылок контеста для вкладки «Статус».
+    # Повторяет правило DMOJ (judge/views/submission.py): пока контест идёт, зритель без
+    # полного доступа к скорборду — или при включённой заморозке — видит только свои посылки.
+    # Завершённый контест отдаём целиком (виртуальное участие показывает «призраков»).
+    MAX_ROWS = 2000
+
+    def get(self, request, contest_key, *args, **kwargs):
+        token = get_cpfed_token(request)
+        if not token or token != settings.CPFED_TOKEN:
+            return JsonResponse({'error': 'Unauthorized access'}, status=401)
+
+        try:
+            contest = Contest.objects.get(key=contest_key)
+        except Contest.DoesNotExist:
+            return JsonResponse({'error': f'No such contest {contest_key}'}, status=404)
+
+        username = request.GET.get('username')
+        profile = None
+        user = AnonymousUser()
+        if username:
+            try:
+                profile = Profile.objects.get(user__username=username)
+                user = profile.user
+            except Profile.DoesNotExist:
+                return JsonResponse({'error': f'No such user {username}'}, status=404)
+
+        restricted = not contest.ended and (
+            not contest.can_see_full_scoreboard(user) or contest.freeze_time is not None
+        )
+        if restricted and profile is None:
+            return JsonResponse({'submissions': [], 'restricted': True}, status=200)
+
+        queryset = (
+            Submission.objects
+            .filter(contest_object=contest)
+            .select_related('user__user', 'problem', 'language')
+            .order_by('-id')
+        )
+        if restricted:
+            queryset = queryset.filter(user=profile)
+
+        submissions = [
+            {
+                'id': s.id,
+                'user': s.user.user.username,
+                'problem': s.problem.code,
+                'date': s.date.isoformat() if s.date else None,
+                'language': s.language.key if s.language_id else None,
+                'time': s.time,
+                'memory': s.memory,
+                'points': s.points,
+                'result': s.result,
+            }
+            for s in queryset[:self.MAX_ROWS]
+        ]
+
+        return JsonResponse({'submissions': submissions, 'restricted': restricted}, status=200)
+
+
+@method_decorator(csrf_exempt, name='dispatch')
 class APIContestCurators(View):
     # Список админов контеста (авторы/кураторы/тестеры). Одинаков для всех зрителей,
     # поэтому cpfed кеширует его на контест и проверяет членство в памяти — вместо того
