@@ -31,6 +31,7 @@ from judge.models import (
     ContestProblem, Organization, Solution, Contest, Ticket, TicketMessage
 )
 from esep.models import ContestAnnouncement
+from django.db import transaction
 from django.db.models import F, Min, Max, Count, Prefetch, Q, Value, IntegerField
 from django.contrib.contenttypes.models import ContentType
 
@@ -80,6 +81,41 @@ class APIProblemSubmit(View):
         except Language.DoesNotExist:
             return JsonResponse({'error': f'No such language {language_key}'}, status=404)
 
+        # Проверки, которые в DMOJ живут в ProblemSubmit (judge/views/problem.py) и мимо
+        # которых этот API-путь раньше проходил целиком.
+        # 65536 — тот же предел, что у формы DMOJ (judge/forms.py: source max_length).
+        source_max_length = getattr(settings, 'DMOJ_SUBMISSION_SOURCE_MAX_LENGTH', 65536)
+        if len(source) > source_max_length:
+            return JsonResponse(
+                {'error': 'Source is too long', 'reason': 'source_too_long'}, status=400)
+
+        if not problem.allowed_languages.filter(id=language.id).exists():
+            return JsonResponse(
+                {'error': f'Language {language_key} is not allowed for this problem',
+                 'reason': 'language_not_allowed'},
+                status=403,
+            )
+
+        if not profile.user.is_superuser and problem.banned_users.filter(id=profile.id).exists():
+            return JsonResponse(
+                {'error': 'You are banned from submitting to this problem', 'reason': 'banned'},
+                status=403,
+            )
+
+        # Анти-флуд: как в DMOJ — не больше DMOJ_SUBMISSION_LIMIT неотсуженных посылок.
+        if not profile.user.has_perm('judge.spam_submission'):
+            pending = (
+                Submission.objects
+                .filter(user=profile, rejudged_date__isnull=True)
+                .exclude(status__in=['D', 'IE', 'CE', 'AB'])
+                .count()
+            )
+            if pending >= settings.DMOJ_SUBMISSION_LIMIT:
+                return JsonResponse(
+                    {'error': 'You submitted too many submissions', 'reason': 'too_many_pending'},
+                    status=429,
+                )
+
         # Живой контест: посылка должна прикрепиться к участию, иначе она не попадёт в
         # таблицу результатов. Без валидного живого участия — отказ, а не «архивная» посылка.
         contest = None
@@ -122,23 +158,69 @@ class APIProblemSubmit(View):
                     status=400,
                 )
 
-        try:
-            from judge import event_poster as event
-            submission = Submission.objects.create(user=profile, problem=problem, language=language)
-
-            if contest_problem is not None:
-                submission.contest_object = contest
-                # locked_after ставим только живым участникам (как в judge/views/problem.py).
-                if participation.virtual == ContestParticipation.LIVE:
-                    submission.locked_after = contest.locked_after
-                submission.save(update_fields=['contest_object', 'locked_after'])
-                ContestSubmission.objects.create(
-                    submission=submission,
-                    problem=contest_problem,
-                    participation=participation,
+            # Лимит попыток по задаче (ContestProblem.max_submissions). В DMOJ он проверяется
+            # только во вьюхе, поэтому через API его раньше можно было полностью обойти.
+            if contest_problem.max_submissions:
+                used = (
+                    ContestSubmission.objects
+                    .filter(participation=participation, problem=contest_problem)
+                    .exclude(submission__status='IE')
+                    .count()
+                )
+                if used >= contest_problem.max_submissions:
+                    return JsonResponse(
+                        {'error': 'You have exceeded the submission limit for this problem',
+                         'reason': 'max_submissions'},
+                        status=403,
+                    )
+        else:
+            # Без contest_key посылка уходит «в архив». Если задача принадлежит контесту,
+            # в котором пользователь сейчас участвует, это молчаливый ноль: решение примут,
+            # но оно не попадёт в таблицу. Лучше явно отказать и увести на страницу контеста.
+            active = ContestParticipation.objects.filter(
+                user=profile,
+                virtual__in=[ContestParticipation.LIVE, ContestParticipation.SPECTATE],
+                contest__contest_problems__problem=problem,
+            ).select_related('contest').distinct()
+            for part in active:
+                if part.end_time and timezone.now() > part.end_time:
+                    continue
+                if part.contest.ended:
+                    continue
+                return JsonResponse(
+                    {'error': 'Submit this problem from the contest page so it counts',
+                     'reason': 'use_contest_submit', 'contest_key': part.contest.key},
+                    status=400,
                 )
 
-            submission_source = SubmissionSource.objects.create(submission=submission, source=source)
+            if not problem.is_accessible_by(profile.user):
+                return JsonResponse(
+                    {'error': 'Problem is not accessible', 'reason': 'problem_not_accessible'},
+                    status=403,
+                )
+
+        try:
+            from judge import event_poster as event
+
+            # Атомарно, как в DMOJ: иначе упавший SubmissionSource оставит в таблице
+            # результатов вечную попытку на 0 баллов без исходника.
+            with transaction.atomic():
+                submission = Submission.objects.create(user=profile, problem=problem, language=language)
+
+                if contest_problem is not None:
+                    submission.contest_object = contest
+                    # locked_after ставим только живым участникам (как в judge/views/problem.py).
+                    if participation.virtual == ContestParticipation.LIVE:
+                        submission.locked_after = contest.locked_after
+                    submission.save(update_fields=['contest_object', 'locked_after'])
+                    ContestSubmission.objects.create(
+                        submission=submission,
+                        problem=contest_problem,
+                        participation=participation,
+                    )
+
+                submission_source = SubmissionSource.objects.create(submission=submission, source=source)
+
             submission.judge(force_judge=True, judge_id=None)
 
             return JsonResponse({'submission_id': submission.id, 'last_msg': event.last()}, status=200)
@@ -724,7 +806,7 @@ def _format_standings_time(seconds):
     return f'{seconds // 3600:02d}:{(seconds % 3600) // 60:02d}:{seconds % 60:02d}'
 
 
-def _serialize_standings_row(rank, ranking_profile, contest_problems):
+def _serialize_standings_row(rank, ranking_profile, contest_problems, viewer_username=None):
     data = (ranking_profile.participation.format_data or {})
     scores = []
     for cp in contest_problems:
@@ -753,6 +835,9 @@ def _serialize_standings_row(rank, ranking_profile, contest_problems):
         'username': ranking_profile.username,
         'rating': rating,
         'rating_tier': rating_class(rating) if rating is not None else None,
+        # Нужен фронту, чтобы подсветить свою строку и показать вкладку «мои результаты»:
+        # раньше isMe появлялся только в виртуальном скорборде.
+        'isMe': bool(viewer_username) and ranking_profile.username == viewer_username,
         'scores': scores,
         'total': {
             'points': ranking_profile.points,
@@ -790,7 +875,7 @@ def compute_standings(contest_key, username=None):
         )
         users = []
 
-    rows = [_serialize_standings_row(rank, p, problems) for rank, p in users]
+    rows = [_serialize_standings_row(rank, p, problems, viewer_username=username) for rank, p in users]
 
     # Заморозка скорборда: freeze_time — смещение от старта, после которого ячейки
     # помечаются frozen (формат ICPC). Отдаём наружу, чтобы фронт показал баннер/таймер.
@@ -1053,15 +1138,35 @@ class APIContestProblemDetail(View):
             return JsonResponse({'error': f'No such problem {problem_code} in contest'}, status=404)
 
         problem = contest_problem.problem
+
+        # Условие на языке пользователя (как ProblemDetail в DMOJ): основной текст задачи
+        # хранится на settings.LANGUAGE_CODE, а ru/kk лежат в ProblemTranslation.
+        name, description, translated = problem.name, problem.description, False
+        language = request.GET.get('language')
+        if language:
+            translation = problem.translations.filter(language=language).first()
+            if translation is None and '-' in language:
+                translation = problem.translations.filter(language=language.split('-')[0]).first()
+            if translation is not None:
+                name, description, translated = translation.name, translation.description, True
+
         return JsonResponse({
             'code': problem.code,
-            'name': problem.name,
-            'description': problem.description,
+            'name': name,
+            'description': description,
+            'translated': translated,
+            'language': language if translated else settings.LANGUAGE_CODE,
             'time_limit': problem.time_limit,
             'memory_limit': problem.memory_limit,
             'points': int(contest_problem.points),
             'partial': contest_problem.partial,
+            'max_submissions': contest_problem.max_submissions or None,
             'group': problem.group.full_name if problem.group else None,
+            # Список языков задачи (DMOJ ограничивает форму отправки тем же набором).
+            # Без него cpfed предлагает захардкоженный список и ловит 403 при отправке.
+            'languages': list(
+                problem.allowed_languages.order_by('name').values('key', 'name', 'common_name'),
+            ),
         }, status=200)
 
 
