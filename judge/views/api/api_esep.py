@@ -904,6 +904,168 @@ class APIContestUserProblemSubmissions(View):
             ],
         }, status=200)
 
+def _is_contest_admin(contest, profile):
+    if profile is None:
+        return False
+    return (
+        contest.authors.filter(id=profile.id).exists()
+        or contest.curators.filter(id=profile.id).exists()
+        or contest.testers.filter(id=profile.id).exists()
+    )
+
+
+def _contest_problems_denial(contest, profile):
+    """Кто может видеть задачи/условия контеста.
+
+    Возвращает JsonResponse с отказом либо None, если доступ разрешён.
+    Правила прежние (приватный по организации — только члены организации, публичный —
+    только после завершения), плюс явный доступ для админов контеста и его участников:
+    без этого живой участник не мог открыть ни список задач, ни условие.
+    """
+    if profile is not None:
+        if _is_contest_admin(contest, profile):
+            return None
+        in_contest = ContestParticipation.objects.filter(
+            contest=contest, user=profile,
+            virtual__in=[ContestParticipation.LIVE, ContestParticipation.SPECTATE],
+        ).exists()
+        if in_contest:
+            return None
+
+    if contest.is_organization_private:
+        if profile is None:
+            return JsonResponse({'error': 'Username required for private contest'}, status=400)
+        in_org = profile.organizations.filter(
+            id__in=contest.organizations.values('id'),
+        ).exists()
+        if not in_org:
+            return JsonResponse({'error': 'You are not a member of the contest organization'}, status=403)
+        return None
+
+    if not contest.ended:
+        return JsonResponse(
+            {'error': 'Contest problems are available only after the contest ends'}, status=403)
+    return None
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class APIContestRosterCheck(View):
+    # Предполётная проверка перед контестом: для списка ников cpfed говорим, у кого есть
+    # профиль в ESEP (именно по нику — по нему резолвятся вход и посылки) и кто состоит в
+    # организации контеста (для приватных контестов без этого не видны задачи).
+    MAX_USERNAMES = 5000
+
+    def post(self, request, contest_key, *args, **kwargs):
+        token = get_cpfed_token(request)
+        if not token or token != settings.CPFED_TOKEN:
+            return JsonResponse({'error': 'Unauthorized access'}, status=401)
+
+        try:
+            contest = Contest.objects.get(key=contest_key)
+        except Contest.DoesNotExist:
+            return JsonResponse({'error': f'No such contest {contest_key}'}, status=404)
+
+        try:
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON body'}, status=400)
+
+        usernames = data.get('usernames')
+        if not isinstance(usernames, list):
+            return JsonResponse({'error': 'usernames must be a list'}, status=400)
+        usernames = [u for u in usernames if isinstance(u, str) and u][:self.MAX_USERNAMES]
+
+        existing = set(
+            Profile.objects.filter(user__username__in=usernames)
+            .values_list('user__username', flat=True)
+        )
+
+        org_ids = list(contest.organizations.values_list('id', flat=True))
+        if contest.is_organization_private and org_ids:
+            in_org = set(
+                Profile.objects
+                .filter(user__username__in=usernames, organizations__id__in=org_ids)
+                .values_list('user__username', flat=True)
+            )
+        else:
+            # Организация не требуется — считаем всех существующих «прошедшими» проверку.
+            in_org = set(existing)
+
+        results = [
+            {'username': u, 'exists': u in existing, 'in_org': u in in_org}
+            for u in usernames
+        ]
+
+        return JsonResponse({
+            'contest': {
+                'key': contest.key,
+                'name': contest.name,
+                'is_organization_private': contest.is_organization_private,
+                'organizations': list(contest.organizations.values_list('name', flat=True)),
+                'has_access_code': bool(contest.access_code),
+                'start_time': contest.start_time.isoformat() if contest.start_time else None,
+                'end_time': contest.end_time.isoformat() if contest.end_time else None,
+                'freeze_time': contest.freeze_time.total_seconds() if contest.freeze_time else None,
+                'is_rated': contest.is_rated,
+                'format': contest.format_name,
+            },
+            'checked': len(results),
+            'missing_profile': sorted(u for u in usernames if u not in existing),
+            'not_in_org': sorted(u for u in usernames if u in existing and u not in in_org),
+            'results': results,
+        }, status=200)
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class APIContestProblemDetail(View):
+    # Условие задачи контеста. DMOJ v2 отдаёт description только для публичных задач и
+    # только аноним-доступным, поэтому во время контеста условие берём отсюда — с проверкой,
+    # что зритель действительно участник (или админ контеста).
+    def get(self, request, contest_key, problem_code, *args, **kwargs):
+        token = get_cpfed_token(request)
+        if not token or token != settings.CPFED_TOKEN:
+            return JsonResponse({'error': 'Unauthorized access'}, status=401)
+
+        try:
+            contest = Contest.objects.get(key=contest_key)
+        except Contest.DoesNotExist:
+            return JsonResponse({'error': f'No such contest {contest_key}'}, status=404)
+
+        username = request.GET.get('username')
+        profile = None
+        if username:
+            try:
+                profile = Profile.objects.get(user__username=username)
+            except Profile.DoesNotExist:
+                pass
+
+        denial = _contest_problems_denial(contest, profile)
+        if denial is not None:
+            return denial
+
+        contest_problem = (
+            ContestProblem.objects
+            .filter(contest=contest, problem__code=problem_code)
+            .select_related('problem', 'problem__group')
+            .first()
+        )
+        if contest_problem is None:
+            return JsonResponse({'error': f'No such problem {problem_code} in contest'}, status=404)
+
+        problem = contest_problem.problem
+        return JsonResponse({
+            'code': problem.code,
+            'name': problem.name,
+            'description': problem.description,
+            'time_limit': problem.time_limit,
+            'memory_limit': problem.memory_limit,
+            'points': int(contest_problem.points),
+            'partial': contest_problem.partial,
+            'group': problem.group.full_name if problem.group else None,
+        }, status=200)
+
+
+@method_decorator(csrf_exempt, name='dispatch')
 class APIContestProblems(View):
     def get(self, request, contest_key, *args, **kwargs):
         token = get_cpfed_token(request)
@@ -923,17 +1085,9 @@ class APIContestProblems(View):
             except Profile.DoesNotExist:
                 pass
 
-        if contest.is_organization_private:
-            if profile is None:
-                return JsonResponse({'error': 'Username required for private contest'}, status=400)
-            in_org = profile.organizations.filter(
-                id__in = contest.organizations.values('id'),
-            ).exists()
-            if not in_org:
-                return JsonResponse({'error': 'You are not a member of of the contest organization'}, status=403)
-        else:
-            if not contest.ended:
-                return JsonResponse({'error': 'Contest problems are available only after the contest ends'}, status=403)
+        denial = _contest_problems_denial(contest, profile)
+        if denial is not None:
+            return denial
 
         contest_problems = (
             contest.contest_problems
