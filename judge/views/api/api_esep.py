@@ -292,6 +292,9 @@ class APISubmissionDetailEsep(View):
             'result': submission.result,
             'case_points': submission.case_points,
             'case_total': submission.case_total,
+            # Контест посылки — по нему cpfed отличает админа соревнования от участника
+            # (админу исходники нужны для разбора, участнику — нет).
+            'contest_key': submission.contest_object.key if submission.contest_object else None,
             'cases': cases
         }
         if include_achievements and submission.result == 'AC':
