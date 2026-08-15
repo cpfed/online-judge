@@ -1946,6 +1946,65 @@ class APIContestSubmissions(View):
 
 
 @method_decorator(csrf_exempt, name='dispatch')
+class APIContestSchedule(View):
+    # Расписание контеста правят в админке cpfed, а enforcement (приём посылок, заморозка,
+    # ranking) идёт по времени DMOJ. Пока их не синхронизировали, таймер у участника
+    # показывал одно, а ESEP отвечал другое — «время идёт, а решения не принимаются».
+    def post(self, request, contest_key, *args, **kwargs):
+        token = get_cpfed_token(request)
+        if not token or token != settings.CPFED_TOKEN:
+            return JsonResponse({'error': 'Unauthorized access'}, status=401)
+
+        try:
+            contest = Contest.objects.get(key=contest_key)
+        except Contest.DoesNotExist:
+            return JsonResponse({'error': f'No such contest {contest_key}'}, status=404)
+
+        try:
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON body'}, status=400)
+
+        start = parse_datetime(data.get('start_time') or '')
+        end = parse_datetime(data.get('end_time') or '')
+        if start is None or end is None:
+            return JsonResponse(
+                {'error': 'start_time and end_time must be ISO datetimes',
+                 'reason': 'bad_datetime'},
+                status=400,
+            )
+        if end <= start:
+            return JsonResponse(
+                {'error': 'end_time must be after start_time', 'reason': 'bad_range'},
+                status=400,
+            )
+
+        if contest.start_time == start and contest.end_time == end:
+            return JsonResponse({'changed': False, 'rescored': 0}, status=200)
+
+        contest.start_time = start
+        contest.end_time = end
+        contest.save(update_fields=['start_time', 'end_time'])
+
+        # Штрафное время живого участника считается от contest.start_time
+        # (ContestParticipation.start), поэтому после сдвига таблица результатов
+        # становится неверной. Админка DMOJ на сохранении делает ровно это же
+        # (ContestAdmin._rescore), только через Celery — здесь считаем на месте,
+        # чтобы не зависеть от брокера.
+        rescored = 0
+        for participation in contest.users.iterator():
+            participation.recompute_results()
+            rescored += 1
+
+        return JsonResponse({
+            'changed': True,
+            'rescored': rescored,
+            'start_time': contest.start_time.isoformat(),
+            'end_time': contest.end_time.isoformat(),
+        }, status=200)
+
+
+@method_decorator(csrf_exempt, name='dispatch')
 class APIContestCurators(View):
     # Список админов контеста (авторы/кураторы/тестеры). Одинаков для всех зрителей,
     # поэтому cpfed кеширует его на контест и проверяет членство в памяти — вместо того
