@@ -467,10 +467,15 @@ class APIUserDetailEsep(APIDetailView):
             'score': ContestParticipation.objects.get(contest=rating.contest, user=profile, virtual=0).score
         } for rating in ratings]
 
+        # Только зачтённые решения: график активности подписан «решено», а считались
+        # все посылки подряд — WA, TLE, CE и повторы одной задачи. Порог цветов на фронте
+        # (1-3 / 4-6 / 7-8 / 9+) тоже рассчитан на решения, а не на попытки.
+        # distinct по задаче: пять посылок одной задачи в день — это одна решённая задача.
         submissions = (
             profile.submission_set
+            .filter(result='AC')
             .annotate(date_only=TruncDate('date'))
-            .values('date_only').annotate(cnt=Count('id'))
+            .values('date_only').annotate(cnt=Count('problem_id', distinct=True))
         )
 
         submission_data = {
