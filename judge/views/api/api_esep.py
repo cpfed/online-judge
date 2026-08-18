@@ -28,7 +28,7 @@ from django.utils.translation import gettext as _
 
 from judge.models import (
     Language, Problem, Profile, Submission, SubmissionSource, ContestParticipation, ProblemType, ContestSubmission,
-    ContestProblem, Organization, Solution, Contest, Ticket, TicketMessage
+    ContestProblem, Organization, Solution, Contest, Ticket, TicketMessage, ProblemTranslation
 )
 from esep.models import ContestAnnouncement
 from django.db import transaction
@@ -1182,6 +1182,26 @@ class APIContestProblemDetail(View):
         }, status=200)
 
 
+def _translated_problem_name(problem, language):
+    """Имя задачи на запрошенном языке; при отсутствии перевода — оригинал.
+
+    Работает по prefetch-нутому translation_list, чтобы не делать запрос на задачу.
+    """
+    if not language:
+        return problem.name
+
+    candidates = [language]
+    if '-' in language:
+        candidates.append(language.split('-')[0])
+
+    for candidate in candidates:
+        for translation in getattr(problem, 'translation_list', []):
+            if translation.language == candidate:
+                return translation.name
+
+    return problem.name
+
+
 @method_decorator(csrf_exempt, name='dispatch')
 class APIContestProblems(View):
     def get(self, request, contest_key, *args, **kwargs):
@@ -1206,10 +1226,19 @@ class APIContestProblems(View):
         if denial is not None:
             return denial
 
+        # Название задачи на языке пользователя. Обёртка «Задача {label}. {name}» была
+        # переведена, а само имя приходило на языке-оригинале.
+        language = request.GET.get('language')
+
         contest_problems = (
             contest.contest_problems
             .select_related('problem','problem__group')
             .prefetch_related(
+                Prefetch(
+                    'problem__translations',
+                    queryset=ProblemTranslation.objects.only('problem_id', 'language', 'name'),
+                    to_attr='translation_list',
+                ),
                 Prefetch(
                     'problem__types',
                     queryset=ProblemType.objects.only('name'),
@@ -1232,7 +1261,7 @@ class APIContestProblems(View):
                 'is_pretested': cp.is_pretested,
                 'max_submissions': cp.max_submissions or None,
                 'code': p.code,
-                'name': p.name,
+                'name': _translated_problem_name(p, language),
                 'time_limit': p.time_limit,
                 'memory_limit': p.memory_limit,
                 'ac_rate': p.ac_rate,
@@ -1241,20 +1270,27 @@ class APIContestProblems(View):
             }
 
             if profile:
-                is_solved = Submission.objects.filter(
-                    user=profile, problem=p, result='AC',
-                    case_points__gte=F('case_total'),
-                ).exists()
-                if is_solved:
+                # Статус считаем ПО ЭТОМУ КОНТЕСТУ. Раньше фильтра по контесту не было,
+                # и задача, сданная в архиве или на другом соревновании, светилась
+                # решённой прямо посреди текущего.
+                mine = Submission.objects.filter(
+                    user=profile, problem=p, contest_object=contest,
+                )
+
+                solved = mine.filter(result='AC', case_points__gte=F('case_total')).exists()
+                if solved:
                     data['user_status'] = 'AC'
                 else:
-                    last = (
-                        Submission.objects
-                        .filter(user=profile, problem=p)
-                        .order_by('-judged_date')
-                        .first()
-                    )
+                    last = mine.order_by('-judged_date').first()
                     data['user_status'] = last.result if last else 'N'
+
+                # Лучший результат в долях от максимума — по нему фронт отличает частичное
+                # решение от нулевого: одного user_status для этого не хватает.
+                best = mine.exclude(case_total=0).exclude(case_points__isnull=True).aggregate(
+                    ratio=Max(F('case_points') / F('case_total')),
+                )['ratio']
+                data['user_score_ratio'] = float(best) if best is not None else None
+
             problems.append(data)
 
         return JsonResponse({
