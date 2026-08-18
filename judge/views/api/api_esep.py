@@ -193,7 +193,16 @@ class APIProblemSubmit(View):
                     status=400,
                 )
 
-            if not problem.is_accessible_by(profile.user):
+            # Дорешивание. После конца контеста Profile.update_contest снимает
+            # current_contest, и is_accessible_by перестаёт пускать к неопубликованной
+            # задаче — то есть участник теряет доступ к тому, что легально решал час назад.
+            # Кто в контесте участвовал, тому задачу отдаём: посылка идёт без
+            # contest_object и в таблицу результатов не попадает.
+            participated = ContestParticipation.objects.filter(
+                user=profile, contest__contest_problems__problem=problem,
+            ).exists()
+
+            if not participated and not problem.is_accessible_by(profile.user):
                 return JsonResponse(
                     {'error': 'Problem is not accessible', 'reason': 'problem_not_accessible'},
                     status=403,
@@ -2184,7 +2193,7 @@ def attach_proctoring_token(user, contest):
             "assignment": {
                 "external_id": contest.key,
                 "name": contest.name,
-                "external_url": "https://esep.cpfed.kz",
+                "external_url": "https://esep-old.cpfed.kz",
                 "settings": {
                     "proctoring_settings": {
                       "check_env": True,
