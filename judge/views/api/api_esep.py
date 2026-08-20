@@ -778,6 +778,10 @@ class APIRegisterUserFromCpfed(View):
 
             email = data.get('email')
             username = data.get('username')
+            # Отображаемое имя. Раньше этот путь его не заполнял (в отличие от
+            # api.py:_create_profile_for_user), и все, кто пришёл через подтверждение
+            # почты, оставались в таблице результатов под ником.
+            full_name = (data.get('full_name') or '').strip()[:100]
             if not username or not email:
                 return JsonResponse({'error': 'username and email must be provided'}, status=400)
 
@@ -786,7 +790,8 @@ class APIRegisterUserFromCpfed(View):
                 raise Exception("User already exists")
             profile = Profile.objects.get_or_create(user=user, defaults={
                 'language': Language.objects.get(key=settings.DEFAULT_USER_LANGUAGE),
-                'is_banned_from_problem_voting': True
+                'is_banned_from_problem_voting': True,
+                'username_display_override': full_name,
             })[0]
 
             user.set_unusable_password()
@@ -850,6 +855,10 @@ def _serialize_standings_row(rank, ranking_profile, contest_problems, viewer_use
         'rank': rank,
         'user_id': ranking_profile.id,
         'username': ranking_profile.username,
+        # Отображаемое имя = username_display_override или ник (Profile.display_name).
+        # Как в самом DMOJ: в таблице виден display_name, а ссылка и ключи — по нику.
+        # Берём с namedtuple ранжирования, где оно уже есть, иначе с профиля.
+        'display_name': getattr(ranking_profile, 'display_name', None) or profile.display_name,
         'rating': rating,
         'rating_tier': rating_class(rating) if rating is not None else None,
         # Нужен фронту, чтобы подсветить свою строку и показать вкладку «мои результаты»:
@@ -1048,6 +1057,71 @@ def _contest_problems_denial(contest, profile):
         return JsonResponse(
             {'error': 'Contest problems are available only after the contest ends'}, status=403)
     return None
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class APIUserDisplayNames(View):
+    # Массовая простановка отображаемых имён: имя живёт в cpfed, а показывает его ESEP.
+    # Нужна для тех, кто заводился через подтверждение почты — тот путь имя не передавал,
+    # и в таблице результатов такие участники до сих пор значатся ником.
+    MAX_USERS = 5000
+
+    def post(self, request, *args, **kwargs):
+        token = get_cpfed_token(request)
+        if not token or token != settings.CPFED_TOKEN:
+            return JsonResponse({'error': 'Unauthorized access'}, status=401)
+
+        try:
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON body'}, status=400)
+
+        users = data.get('users')
+        if not isinstance(users, list):
+            return JsonResponse({'error': 'users must be a list of {username, full_name}'}, status=400)
+
+        # username -> имя. Пустое имя означает «снять переопределение», поэтому не
+        # выбрасываем его: так админ может вернуть участника к нику.
+        wanted = {}
+        for item in users[:self.MAX_USERS]:
+            if not isinstance(item, dict):
+                continue
+            username = item.get('username')
+            if not isinstance(username, str) or not username:
+                continue
+            wanted[username] = (item.get('full_name') or '').strip()[:100]
+
+        if not wanted:
+            return JsonResponse({'updated': 0, 'unchanged': 0, 'missing': []}, status=200)
+
+        profiles = (
+            Profile.objects
+            .filter(user__username__in=list(wanted))
+            .select_related('user')
+        )
+
+        updated = 0
+        unchanged = 0
+        found = set()
+        to_save = []
+        for profile in profiles:
+            found.add(profile.user.username)
+            name = wanted[profile.user.username]
+            if profile.username_display_override == name:
+                unchanged += 1
+                continue
+            profile.username_display_override = name
+            to_save.append(profile)
+            updated += 1
+
+        if to_save:
+            Profile.objects.bulk_update(to_save, ['username_display_override'])
+
+        return JsonResponse({
+            'updated': updated,
+            'unchanged': unchanged,
+            'missing': sorted(set(wanted) - found),
+        }, status=200)
 
 
 @method_decorator(csrf_exempt, name='dispatch')
