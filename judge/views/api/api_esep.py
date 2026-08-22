@@ -996,23 +996,62 @@ class APIContestUserProblemSubmissions(View):
             .order_by('-id')
         )
 
+        # Заморозка прячет результаты в скорборде, но этот список отдавал их как есть:
+        # ячейка показывала «?», а по клику был виден настоящий вердикт. Пока идёт
+        # заморозка, чужие посылки после её начала отдаём без результата.
+        # Точка заморозки — та же, что в скорборде (см. compute_standings).
+        freeze_at = None
+        if contest.freeze_time is not None and contest.start_time:
+            freeze_at = contest.start_time + contest.freeze_time
+        frozen_now = freeze_at is not None and timezone.now() >= freeze_at and not contest.ended
+
+        # Свои посылки участник видит всегда — свой результат он и так знает.
+        viewer_profile = getattr(viewer, 'profile', None) if viewer.is_authenticated else None
+        sees_through_freeze = (
+            (viewer.is_authenticated and viewer.username == username)
+            or _is_contest_admin(contest, viewer_profile)
+            or (viewer.is_authenticated and contest.is_editable_by(viewer))
+        )
+        hide_after_freeze = frozen_now and not sees_through_freeze
+
+        def serialize(sub):
+            row = {
+                'id': sub.id,
+                'date': sub.date.isoformat() if sub.date else None,
+                'language': sub.language.key if sub.language_id else None,
+            }
+
+            if hide_after_freeze and sub.date is not None and sub.date >= freeze_at:
+                row.update({
+                    'time': None,
+                    'memory': None,
+                    'points': None,
+                    'case_points': None,
+                    'case_total': None,
+                    'status': None,
+                    'result': None,
+                    'can_see_detail': False,
+                    'frozen': True,
+                })
+                return row
+
+            row.update({
+                'time': sub.time,
+                'memory': sub.memory,
+                'points': sub.points,
+                'case_points': sub.case_points,
+                'case_total': sub.case_total,
+                'status': sub.status,
+                'result': sub.result,
+                'can_see_detail': sub.can_see_detail(viewer),
+                'frozen': False,
+            })
+            return row
+
         return JsonResponse({
-            'submissions': [
-                {
-                    'id': sub.id,
-                    'date': sub.date.isoformat() if sub.date else None,
-                    'time': sub.time,
-                    'memory': sub.memory,
-                    'points': sub.points,
-                    'case_points': sub.case_points,
-                    'case_total': sub.case_total,
-                    'status': sub.status,
-                    'result': sub.result,
-                    'language': sub.language.key if sub.language_id else None,
-                    'can_see_detail': sub.can_see_detail(viewer),
-                }
-                for sub in submissions
-            ],
+            'frozen': hide_after_freeze,
+            'freeze_at': freeze_at.isoformat() if freeze_at else None,
+            'submissions': [serialize(sub) for sub in submissions],
         }, status=200)
 
 def _is_contest_admin(contest, profile):
