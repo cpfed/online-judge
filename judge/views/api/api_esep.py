@@ -909,8 +909,10 @@ def compute_standings(contest_key, username=None):
     if freeze_seconds is not None and contest.start_time:
         freeze_at = contest.start_time + contest.freeze_time
         freeze_at_iso = freeze_at.isoformat()
-        # Заморожено, только когда точка заморозки уже пройдена и контест ещё идёт.
-        is_frozen_now = timezone.now() >= freeze_at and not contest.ended
+        # Заморожено с момента freeze_at и до тех пор, пока жюри не снимет заморозку
+        # (не уберёт freeze_time). Конец контеста её не снимает: icpc.py помечает
+        # ячейку frozen без оглядки на окончание, и «?» в таблице остаются висеть.
+        is_frozen_now = timezone.now() >= freeze_at
     else:
         freeze_at_iso = None
         is_frozen_now = False
@@ -997,13 +999,15 @@ class APIContestUserProblemSubmissions(View):
         )
 
         # Заморозка прячет результаты в скорборде, но этот список отдавал их как есть:
-        # ячейка показывала «?», а по клику был виден настоящий вердикт. Пока идёт
+        # ячейка показывала «?», а по клику был виден настоящий вердикт. Пока держится
         # заморозка, чужие посылки после её начала отдаём без результата.
-        # Точка заморозки — та же, что в скорборде (см. compute_standings).
+        # Точка заморозки — та же, что в скорборде, и держится она столько же: до конца
+        # контеста заморозку не снимает — «?» в таблице висят, пока жюри не уберёт
+        # freeze_time, значит и вердикты до тех пор показывать нельзя.
         freeze_at = None
         if contest.freeze_time is not None and contest.start_time:
             freeze_at = contest.start_time + contest.freeze_time
-        frozen_now = freeze_at is not None and timezone.now() >= freeze_at and not contest.ended
+        frozen_now = freeze_at is not None and timezone.now() >= freeze_at
 
         # Свои посылки участник видит всегда — свой результат он и так знает.
         viewer_profile = getattr(viewer, 'profile', None) if viewer.is_authenticated else None
