@@ -2079,8 +2079,27 @@ class APIContestSubmissions(View):
             except Profile.DoesNotExist:
                 return JsonResponse({'error': f'No such user {username}'}, status=404)
 
-        restricted = not contest.ended and (
-            not contest.can_see_full_scoreboard(user) or contest.freeze_time is not None
+        # Ограничение ленты держится столько же, сколько «?» в таблице: конец
+        # контеста заморозку не снимает, её снимает жюри.
+        freeze_at = None
+        if contest.freeze_time is not None and contest.start_time:
+            freeze_at = contest.start_time + contest.freeze_time
+        frozen_now = freeze_at is not None and timezone.now() >= freeze_at
+
+        # Жюри лента нужна целиком и всегда — по ней смотрят, что происходит в зале.
+        is_admin = (
+            _is_contest_admin(contest, profile)
+            or (user.is_authenticated and contest.is_editable_by(user))
+        )
+
+        restricted = not is_admin and (
+            # Заморозка держится и после финиша — ровно пока в таблице висят «?».
+            frozen_now
+            # Правило для участников оставляем прежним: пока контест идёт и у него
+            # настроена заморозка, чужие посылки в ленте не показываем.
+            or (not contest.ended and (
+                not contest.can_see_full_scoreboard(user) or contest.freeze_time is not None
+            ))
         )
         if restricted and profile is None:
             return JsonResponse({'submissions': [], 'restricted': True}, status=200)
