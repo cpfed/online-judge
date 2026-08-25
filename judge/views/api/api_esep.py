@@ -202,11 +202,23 @@ class APIProblemSubmit(View):
                 user=profile, contest__contest_problems__problem=problem,
             ).exists()
 
+            # Виртуальное участие живёт на стороне cpfed: строки ContestParticipation
+            # у такого решателя нет, и `participated` его не спасает. Но задача из уже
+            # завершённого соревнования, которое ему доступно, — это то же дорешивание:
+            # посылка идёт без contest_object и ни на какую таблицу не влияет.
             if not participated and not problem.is_accessible_by(profile.user):
-                return JsonResponse(
-                    {'error': 'Problem is not accessible', 'reason': 'problem_not_accessible'},
-                    status=403,
+                upsolvable = any(
+                    c.is_accessible_by(profile.user)
+                    for c in Contest.objects.filter(
+                        contest_problems__problem=problem,
+                        end_time__lt=timezone.now(),
+                    ).distinct()
                 )
+                if not upsolvable:
+                    return JsonResponse(
+                        {'error': 'Problem is not accessible', 'reason': 'problem_not_accessible'},
+                        status=403,
+                    )
 
         try:
             from judge import event_poster as event
