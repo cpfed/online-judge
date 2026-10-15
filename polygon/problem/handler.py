@@ -128,7 +128,10 @@ def prepare_properties(context: ImportContext, config: ProblemConfig, statements
         description=main_statement.description,
         partial=partial,
         points=total_points,
-        translations=other_statements,
+        # Keep the primary statement too: its language need not be LANGUAGE_CODE.
+        # The existing translations table provides explicit language selection and
+        # identifies the original without extending DMOJ's Problem model.
+        translations=[statement for statement in statements if statement.language is not None],
         tutorial=tutorials,
         group=ProblemGroup.objects.order_by('id').first(),  # Uncategorized
     )

@@ -30,6 +30,8 @@ POLYGON_TO_DMOJ_LANG = {
     'russian': 'ru',
     'serbian': 'sr-latn',
     'turkish': 'tr',
+    'uzbek': 'uz',
+    'uz': 'uz',
     'vietnamese': 'vi',
     'chinese': 'zh-hans',
 }
@@ -268,7 +270,23 @@ def process_images(context: ImportContext, statement_folder: str, text: str) -> 
     return text
 
 
+UZBEK_STATEMENT_HEADINGS = {
+    'Input': 'Kiruvchi maʼlumotlar',
+    'Output': 'Chiquvchi maʼlumotlar',
+    'Interaction': 'Oʻzaro aloqa',
+    'Scoring': 'Baholash',
+    'Samples': 'Misollar',
+    'Input {}': 'Kiruvchi maʼlumotlar {}',
+    'Output {}': 'Chiquvchi maʼlumotlar {}',
+    'Notes': 'Izohlar',
+}
+
+
 def parse_problem_properties(language: str, problem_properties: dict[str, Any]) -> str:
+    def heading(text: str, translated: str) -> str:
+        # Statement headings are content, independent of the website's gettext catalogue.
+        return UZBEK_STATEMENT_HEADINGS[text] if language == 'uz' else translated
+
     def header(text: str, level: int = 2) -> str:
         return f'\n{"#" * level} {text}\n\n'
 
@@ -276,31 +294,31 @@ def parse_problem_properties(language: str, problem_properties: dict[str, Any]) 
         description = pandoc_tex_to_markdown(problem_properties['legend'])
 
         if problem_properties['input']:
-            description += header(_('Input'))
+            description += header(heading('Input', _('Input')))
             description += pandoc_tex_to_markdown(problem_properties['input'])
 
         if problem_properties['output']:
-            description += header(_('Output'))
+            description += header(heading('Output', _('Output')))
             description += pandoc_tex_to_markdown(problem_properties['output'])
 
         if problem_properties['interaction']:
-            description += header(_('Interaction'))
+            description += header(heading('Interaction', _('Interaction')))
             description += pandoc_tex_to_markdown(problem_properties['interaction'])
 
         if problem_properties['scoring']:
-            description += header(_('Scoring'))
+            description += header(heading('Scoring', _('Scoring')))
             description += pandoc_tex_to_markdown(problem_properties['scoring'])
 
         if problem_properties['sampleTests']:
-            description += header(_('Samples'))
+            description += header(heading('Samples', _('Samples')))
             for i, sample in enumerate(problem_properties['sampleTests'], start=1):
-                description += header(_('Input {}').format(i), level=3)
+                description += header(heading('Input {}', _('Input {}')).format(i), level=3)
                 description += '```\n' + sample['input'].strip() + '\n```\n'
-                description += header(_('Output {}').format(i), level=3)
+                description += header(heading('Output {}', _('Output {}')).format(i), level=3)
                 description += '```\n' + sample['output'].strip() + '\n```\n'
 
         if problem_properties['notes']:
-            description += header(_('Notes'))
+            description += header(heading('Notes', _('Notes')))
             description += pandoc_tex_to_markdown(problem_properties['notes'])
 
         return description
