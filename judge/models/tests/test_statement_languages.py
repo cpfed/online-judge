@@ -11,6 +11,7 @@ from django.conf import settings
 from django.forms import modelform_factory
 from django.test import RequestFactory, TestCase, override_settings
 from django.utils import timezone
+from django.utils.translation import get_language, override
 from esep.statement_languages import resolve_statement
 from lxml import etree
 
@@ -73,9 +74,20 @@ class StatementLanguageTestCase(CommonDataMixin, TestCase):
                 self.assertIn('Baholash', uz.description)
                 self.assertIn('Misollar', uz.description)
                 self.assertIn('Izohlar', uz.description)
+                self.assertIn('### Kiruvchi maʼlumotlar 1\n', uz.description)
+                self.assertIn('### Chiquvchi maʼlumotlar 1\n', uz.description)
                 self.assertIn('1 2', uz.description)
                 self.assertIn('a+b', uz.description)
                 disallowed_characters_validator(uz.description)
+
+    def test_statement_language_is_independent_of_active_language(self):
+        with override('ru'):
+            statements = parse_statements(self.make_package(['uzbek', 'english']))
+            descriptions = {item.language: item.description for item in statements}
+            self.assertIn('## Kiruvchi maʼlumotlar\n', descriptions['uz'])
+            self.assertIn('## Input\n', descriptions['en'])
+            self.assertNotIn('Kiruvchi maʼlumotlar', descriptions['en'])
+            self.assertEqual(get_language(), 'ru')
 
     def test_reimport_preserves_primary_translation_and_admin_editing(self):
         ProblemGroup.objects.get_or_create(name='group', defaults={'full_name': 'Group'})

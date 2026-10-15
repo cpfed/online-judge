@@ -36,10 +36,13 @@ jobs:
       run: |
         wget https://github.com/jgm/pandoc/releases/download/3.1.8/pandoc-3.1.8-1-amd64.deb
         sudo dpkg -i pandoc-3.1.8-1-amd64.deb
+        sudo apt-get install -y gettext
         pip install wheel
         pip install -r requirements.txt
         pip install mysqlclient coverage
         cp .ci.settings.py dmoj/local_settings.py
+    - name: Compile translations
+      run: python manage.py compilemessages
     - name: Start MySQL
       run: sudo systemctl start mysql.service
     - name: Run unit tests
