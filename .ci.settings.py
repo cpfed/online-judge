@@ -1,4 +1,6 @@
 COMPRESS_OUTPUT_DIR = 'cache'
+# Same deployment setting as documented in docs/uzbek-statements.md.
+LANGUAGES = [*LANGUAGES, ('uz', 'Uzbek')]
 STATICFILES_FINDERS += ('compressor.finders.CompressorFinder',)
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 

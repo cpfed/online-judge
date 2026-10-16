@@ -31,6 +31,7 @@ from judge.models import (
     ContestProblem, Organization, Solution, Contest, Ticket, TicketMessage, ProblemTranslation
 )
 from esep.models import ContestAnnouncement
+from esep.statement_languages import resolve_statement
 from django.db import transaction
 from django.db.models import F, Min, Max, Count, Prefetch, Q, Value, IntegerField
 from django.contrib.contenttypes.models import ContentType
@@ -1285,23 +1286,11 @@ class APIContestProblemDetail(View):
 
         problem = contest_problem.problem
 
-        # Условие на языке пользователя (как ProblemDetail в DMOJ): основной текст задачи
-        # хранится на settings.LANGUAGE_CODE, а ru/kk лежат в ProblemTranslation.
-        name, description, translated = problem.name, problem.description, False
-        language = request.GET.get('language')
-        if language:
-            translation = problem.translations.filter(language=language).first()
-            if translation is None and '-' in language:
-                translation = problem.translations.filter(language=language.split('-')[0]).first()
-            if translation is not None:
-                name, description, translated = translation.name, translation.description, True
+        statement = resolve_statement(problem, request.GET.get('language'))
 
         return JsonResponse({
             'code': problem.code,
-            'name': name,
-            'description': description,
-            'translated': translated,
-            'language': language if translated else settings.LANGUAGE_CODE,
+            **statement,
             'time_limit': problem.time_limit,
             'memory_limit': problem.memory_limit,
             'points': int(contest_problem.points),

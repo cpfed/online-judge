@@ -30,6 +30,8 @@ POLYGON_TO_DMOJ_LANG = {
     'russian': 'ru',
     'serbian': 'sr-latn',
     'turkish': 'tr',
+    'uzbek': 'uz',
+    'uz': 'uz',
     'vietnamese': 'vi',
     'chinese': 'zh-hans',
 }
