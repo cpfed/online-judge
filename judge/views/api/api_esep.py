@@ -44,6 +44,12 @@ from judge.views.submission import group_test_cases
 import requests
 
 EPOCH = datetime(1970, 1, 1, tzinfo=timezone.utc)
+DISPLAY_NAME_MAX_LENGTH = Profile._meta.get_field('username_display_override').max_length
+
+
+def _normalize_display_name(value):
+    return (value or '').strip()[:DISPLAY_NAME_MAX_LENGTH]
+
 
 def get_cpfed_token(request):
     token = None
@@ -794,7 +800,7 @@ class APIRegisterUserFromCpfed(View):
             # Отображаемое имя. Раньше этот путь его не заполнял (в отличие от
             # api.py:_create_profile_for_user), и все, кто пришёл через подтверждение
             # почты, оставались в таблице результатов под ником.
-            full_name = (data.get('full_name') or '').strip()[:100]
+            full_name = _normalize_display_name(data.get('full_name'))
             if not username or not email:
                 return JsonResponse({'error': 'username and email must be provided'}, status=400)
 
@@ -1145,7 +1151,7 @@ class APIUserDisplayNames(View):
             username = item.get('username')
             if not isinstance(username, str) or not username:
                 continue
-            wanted[username] = (item.get('full_name') or '').strip()[:100]
+            wanted[username] = _normalize_display_name(item.get('full_name'))
 
         if not wanted:
             return JsonResponse({'updated': 0, 'unchanged': 0, 'missing': []}, status=200)
