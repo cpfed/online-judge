@@ -1,9 +1,9 @@
 import json
 
-from django.test import TestCase, override_settings
-from django.urls import reverse
+from django.test import RequestFactory, TestCase, override_settings
 
 from judge.models.tests.util import CommonDataMixin, create_organization, create_user
+from judge.views.api.api import RemoveUsersFromOrgCPFEDView
 
 
 @override_settings(CPFED_TOKEN='test-cpfed-token')
@@ -18,14 +18,15 @@ class RemoveUsersFromOrgCPFEDViewTestCase(CommonDataMixin, TestCase):
         self.kept_user.profile.organizations.add(self.organizations['open'])
 
     def request(self, token='test-cpfed-token', data=None):
-        return self.client.post(
-            reverse('remove_users_from_org_cpfed', args=[token]),
+        request = RequestFactory().post(
+            '/api/remove-users-from-org/',
             data=json.dumps(data or {
                 'org_id': self.organizations['open'].id,
                 'emails': ['REMOVED@example.com', 'missing@example.com'],
             }),
             content_type='application/json',
         )
+        return RemoveUsersFromOrgCPFEDView.as_view()(request, token=token)
 
     def test_removes_matching_members_only_from_requested_organization(self):
         response = self.request()
