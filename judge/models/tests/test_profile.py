@@ -49,6 +49,19 @@ class ProfileTestCase(CommonDataMixin, TestCase):
     def test_username(self):
         self.assertEqual(str(self.profile), self.profile.username)
 
+    def test_long_display_name(self):
+        display_name = 'Team ' + 'x' * 245
+        field = self.profile._meta.get_field('username_display_override')
+
+        self.assertEqual(field.max_length, 256)
+        self.assertEqual(field.clean(display_name, self.profile), display_name)
+
+        self.profile.username_display_override = display_name
+        self.profile.save(update_fields=['username_display_override'])
+        self.profile.refresh_from_db()
+
+        self.assertEqual(self.profile.display_name, display_name)
+
     def test_organization(self):
         self.assertIsNone(self.users['superuser'].profile.organization)
         self.assertEqual(self.profile.organization, self.organizations['open'])
