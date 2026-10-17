@@ -153,3 +153,37 @@ class AddUsersToOrgCPFEDView(View):
             return JsonResponse({'detail': 'Users added to org successfully'}, status=201)
         except Exception as e:
             return JsonResponse({'detail': str(e)}, status=400)
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class RemoveUsersFromOrgCPFEDView(View):
+    def post(self, request, token, *args, **kwargs):
+        try:
+            if token != settings.CPFED_TOKEN:
+                return JsonResponse({'detail': 'Unauthorized'}, status=403)
+
+            data = json.loads(request.body)
+            org_id = data.get('org_id')
+            emails = data.get('emails')
+
+            if not org_id or not isinstance(emails, list) or not emails:
+                return JsonResponse(
+                    {'detail': 'Missing or invalid required parameters.'}, status=400,
+                )
+
+            normalized_emails = {email.strip().lower() for email in emails if isinstance(email, str) and email.strip()}
+            if not normalized_emails:
+                return JsonResponse({'detail': 'No valid emails supplied.'}, status=400)
+
+            org = get_object_or_404(Organization, id=int(org_id))
+            profiles = list(org.members.filter(user__email__in=normalized_emails).distinct())
+            if profiles:
+                org.members.remove(*profiles)
+
+            return JsonResponse({
+                'detail': 'Users removed from org successfully',
+                'requested': len(normalized_emails),
+                'removed': len(profiles),
+            })
+        except Exception as e:
+            return JsonResponse({'detail': str(e)}, status=400)
