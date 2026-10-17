@@ -30,10 +30,11 @@ class RemoveUsersFromOrgCPFEDViewTestCase(CommonDataMixin, TestCase):
 
     def test_removes_matching_members_only_from_requested_organization(self):
         response = self.request()
+        payload = json.loads(response.content)
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json()['requested'], 2)
-        self.assertEqual(response.json()['removed'], 1)
+        self.assertEqual(payload['requested'], 2)
+        self.assertEqual(payload['removed'], 1)
         self.assertNotIn(self.removed_user.profile, self.organizations['open'])
         self.assertIn(self.kept_user.profile, self.organizations['open'])
         self.assertIn(self.removed_user.profile, self.other_organization)
