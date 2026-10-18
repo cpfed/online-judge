@@ -41,6 +41,7 @@
 {% block body %}
 <p>{{ _('by') }} <strong>{{ problemsource.author.username }}</strong></p>
 <p>{{ _('Polygon problem') }} <a href="https://polygon.codeforces.com/problems?problemId={{ problemsource.polygon_id }}" target="_blank">{{ problemsource.polygon_id }}</a></p>
+{% if problemsource.import_url %}<p>{{ _('Custom import URL') }}: <a href="{{ problemsource.import_url }}" target="_blank">{{ problemsource.import_url }}</a></p>{% endif %}
 {% if problemsource.main_submission is not none %}
 {% set submission = problemsource.main_submission %}
 <p>{{ _('Main correct solution') }}: <a href="{{ url('submission_status', submission.id) }}">{{ submission.long_status }},
