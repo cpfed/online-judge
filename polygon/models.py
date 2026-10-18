@@ -7,6 +7,8 @@ from judge.models import Problem, Profile, Submission
 
 class ProblemSource(models.Model):
     polygon_id = models.IntegerField(unique=True, null=False)
+    # If set, this URL is downloaded instead of the package from Polygon API
+    import_url = models.URLField(max_length=1024, blank=True, default='')
     author = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='problem_sources')
     main_submission = models.ForeignKey(
         Submission,

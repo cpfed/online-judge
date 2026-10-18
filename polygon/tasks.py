@@ -5,6 +5,7 @@ import tempfile
 import zipfile
 from pathlib import Path
 
+import requests
 from celery import shared_task
 from celery.app.task import Task
 from lxml import etree as ET
@@ -38,6 +39,16 @@ def prepare_archive(logger: logging.Logger, problem_id: int, path: Path) -> None
         logger.warning('There is no package for latest revision %s', problem.revision)
 
 
+def download_archive(url: str, path: Path) -> None:
+    with requests.get(url, stream=True, timeout=60) as response:
+        if response.status_code != 200:
+            raise ProblemImportError(f'Custom import URL returned unexpected status code {response.status_code}')
+
+        with path.open('wb') as f:
+            for chunk in response.iter_content(chunk_size=16384):
+                f.write(chunk)
+
+
 @shared_task(bind=True)
 def import_problem(self: Task, problem_source_id: int, profile_id: int):
     problem_source = ProblemSource.objects.get(id=problem_source_id)
@@ -65,7 +76,10 @@ def import_problem(self: Task, problem_source_id: int, profile_id: int):
             archive_path = temp_dir / 'archive.zip'
 
             task.report('Downloading problem archive')
-            prepare_archive(logger, problem_source.polygon_id, archive_path)
+            if problem_source.import_url:
+                download_archive(problem_source.import_url, archive_path)
+            else:
+                prepare_archive(logger, problem_source.polygon_id, archive_path)
 
             with zipfile.ZipFile(archive_path) as package:
                 if 'problem.xml' not in package.namelist():

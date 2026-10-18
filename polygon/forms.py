@@ -12,6 +12,13 @@ class ImportForm(forms.Form):
         help_text=_('Numeric problem ID from Polygon'),
     )
 
+    import_url = forms.URLField(
+        label=_('Custom import URL'),
+        required=False,
+        max_length=1024,
+        help_text=_('Optional. If provided, the package is downloaded from this URL instead of Polygon API'),
+    )
+
     code = forms.CharField(
         label=_('Problem code'),
         max_length=20,

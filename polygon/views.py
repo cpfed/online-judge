@@ -31,6 +31,7 @@ class ImportProblemView(PermissionRequiredMixin, FormView):
             # Ensure changes are committed
             problem_source = ProblemSource(
                 polygon_id=form.cleaned_data['polygon_id'],
+                import_url=form.cleaned_data['import_url'],
                 author=self.request.profile,
                 problem_code=form.cleaned_data['code'],
             )
