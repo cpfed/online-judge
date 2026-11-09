@@ -141,7 +141,7 @@ class StatementLanguageTestCase(CommonDataMixin, TestCase):
     def test_contest_api_language_and_access_checks(self):
         problem = create_problem('apitest', name='Original', description='Original body')
         ProblemTranslation.objects.create(problem=problem, language='uz', name='Masala', description='Shart')
-        contest = create_contest('uzround', end_time=timezone.now() - timezone.timedelta(hours=1))
+        contest = create_contest('uzround', is_visible=True, end_time=timezone.now() - timezone.timedelta(hours=1))
         create_contest_problem(contest=contest, problem=problem)
         factory = RequestFactory()
         request = factory.get('/', {'language': 'uz'}, HTTP_AUTHORIZATION=f'Bearer {settings.CPFED_TOKEN}')

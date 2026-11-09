@@ -831,7 +831,15 @@ class APIProblemEditorial(View):
             return JsonResponse({'error': 'code is required'}, status=400)
 
         try:
-            solution = Solution.objects.get(problem__code=code, is_public=True)
+            # cpfed exposes this response publicly. The service token does not
+            # grant access to private problems or scheduled editorials.
+            solution = Solution.objects.get(
+                problem__code=code,
+                problem__is_public=True,
+                problem__is_organization_private=False,
+                is_public=True,
+                publish_on__lt=timezone.now(),
+            )
             return JsonResponse({
                 'content': solution.content,
                 'created_at': solution.publish_on
@@ -899,6 +907,9 @@ def compute_standings(contest_key, username=None):
         profile = Profile.objects.select_related('user').get(user__username=username)
 
     viewer = profile.user if profile else AnonymousUser()
+    # Scoreboard visibility does not check whether the viewer may access this contest.
+    if not contest.is_accessible_by(viewer) or not contest.can_see_own_scoreboard(viewer):
+        raise Contest.Inaccessible()
     can_see_full = contest.can_see_full_scoreboard(viewer)
 
     if can_see_full:
@@ -1005,6 +1016,9 @@ class APIContestUserProblemSubmissions(View):
             except User.DoesNotExist:
                 return JsonResponse({'error': f'No such viewer {viewer_username}'}, status=404)
 
+        if not contest.is_accessible_by(viewer):
+            return JsonResponse({'error': f'No such contest with {contest_key}'}, status=404)
+
         if not contest.can_see_full_scoreboard(viewer) and (
             not viewer.is_authenticated or viewer.username != username
         ):
@@ -1088,16 +1102,16 @@ def _is_contest_admin(contest, profile):
 
 
 def _contest_problems_denial(contest, profile):
-    """Кто может видеть задачи/условия контеста.
+    """Require contest access and keep statements hidden until the contest starts."""
+    viewer = profile.user if profile is not None else AnonymousUser()
+    if _is_contest_admin(contest, profile) or contest.is_editable_by(viewer):
+        return None
+    if not contest.is_accessible_by(viewer):
+        return JsonResponse({'error': 'No such contest'}, status=404)
+    if not contest.started:
+        return JsonResponse({'error': 'Contest has not started'}, status=403)
 
-    Возвращает JsonResponse с отказом либо None, если доступ разрешён.
-    Правила прежние (приватный по организации — только члены организации, публичный —
-    только после завершения), плюс явный доступ для админов контеста и его участников:
-    без этого живой участник не мог открыть ни список задач, ни условие.
-    """
     if profile is not None:
-        if _is_contest_admin(contest, profile):
-            return None
         in_contest = ContestParticipation.objects.filter(
             contest=contest, user=profile,
             virtual__in=[ContestParticipation.LIVE, ContestParticipation.SPECTATE],
@@ -1106,14 +1120,14 @@ def _contest_problems_denial(contest, profile):
             return None
 
     if contest.is_organization_private:
-        if profile is None:
-            return JsonResponse({'error': 'Username required for private contest'}, status=400)
-        in_org = profile.organizations.filter(
-            id__in=contest.organizations.values('id'),
-        ).exists()
-        if not in_org:
-            return JsonResponse({'error': 'You are not a member of the contest organization'}, status=403)
-        return None
+        # A scoreboard-only grant passes access_check but must not grant statements.
+        # Preserve access for actual organization/class members after the start.
+        if profile is not None and (
+            profile.organizations.filter(id__in=contest.organizations.values('id')).exists()
+            or profile.classes.filter(id__in=contest.classes.values('id')).exists()
+        ):
+            return None
+        return JsonResponse({'error': 'You are not a member of the contest organization'}, status=403)
 
     if not contest.ended:
         return JsonResponse(
@@ -2356,7 +2370,7 @@ class APIStandings(View):
 
         try:
             payload = compute_standings(contest_key, username=username)
-        except Contest.DoesNotExist:
+        except (Contest.DoesNotExist, Contest.Inaccessible):
             return JsonResponse({'error': f'No such contest with {contest_key}'}, status=404)
         except Profile.DoesNotExist:
             return JsonResponse({'error': f'No such user {username}'}, status=404)
