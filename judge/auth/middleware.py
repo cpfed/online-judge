@@ -1,12 +1,13 @@
 import base64
 
+import jwt
+from django.conf import settings
 from django.contrib import auth
+from django.contrib.auth.models import User
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.deprecation import MiddlewareMixin
-import jwt
-from judge.models import Profile, Language
-from django.contrib.auth.models import User
-from django.conf import settings
+
+from judge.models import Language, Profile
 
 
 class BasicAuthMiddleware(MiddlewareMixin):
@@ -51,7 +52,6 @@ class BasicAuthMiddleware(MiddlewareMixin):
         auth.logout(request)
 
 
-
 class JWTAuthMiddleware(MiddlewareMixin):
     def process_request(self, request):
         # AuthenticationMiddleware is required so that request.user exists.
@@ -62,13 +62,13 @@ class JWTAuthMiddleware(MiddlewareMixin):
                 ' MIDDLEWARE setting to insert'
                 " 'django.contrib.auth.middleware.AuthenticationMiddleware'"
                 ' before the RemoteUserMiddleware class.')
-        
+
         # We don't want to use JWT auth when the secret is not set
         if settings.JWT_SECRET == '':
             return
 
         user = None
-        
+
         try:
             token = request.COOKIES.get('cpfed_auth') or request.GET.get('token')
             if not token:
@@ -76,14 +76,16 @@ class JWTAuthMiddleware(MiddlewareMixin):
 
             payload = jwt.decode(token, settings.JWT_SECRET, algorithms=['HS256'])
 
-            username = payload.get("username") 
-            email = payload.get("email")
+            username = payload.get('username')
+            email = payload.get('email')
 
             if username and email:
                 from django.db import IntegrityError
 
                 try:
-                    user, created = User.objects.get_or_create(email=email, defaults={"username": username, "is_active": True})
+                    user, created = User.objects.get_or_create(
+                        email=email, defaults={'username': username, 'is_active': True},
+                    )
                     if created:
                         user.set_unusable_password()
                         user.save()
@@ -113,7 +115,7 @@ class JWTAuthMiddleware(MiddlewareMixin):
                     profile = Profile(user=user)
                     profile.language = Language.objects.get(key=settings.DEFAULT_USER_LANGUAGE)
                     profile.save()
-                        
+
         except (jwt.ExpiredSignatureError, jwt.InvalidTokenError):
             return
         except (KeyError, UnicodeDecodeError, ValueError):
@@ -125,11 +127,10 @@ class JWTAuthMiddleware(MiddlewareMixin):
             else:
                 self._remove_invalid_user(request)
 
-    
         if user:
-             # Assign the specific backend to the user
+            # Assign the specific backend to the user
             user.backend = 'django.contrib.auth.backends.ModelBackend'
-            
+
             request.user = user
             auth.login(request, user)
 
@@ -137,7 +138,7 @@ class JWTAuthMiddleware(MiddlewareMixin):
         if 'cpfed_auth' in request.COOKIES:
             response.delete_cookie('cpfed_auth')
         return response
-        
+
     def clean_username(self, username, request):
         backend_str = request.session[auth.BACKEND_SESSION_KEY]
         backend = auth.load_backend(backend_str)
