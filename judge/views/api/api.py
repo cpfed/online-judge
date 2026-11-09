@@ -6,10 +6,10 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError, transaction
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
+from django.utils.crypto import get_random_string
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
-from django.utils.crypto import get_random_string
 
 from judge.models import Language, Organization, Profile
 
@@ -146,7 +146,7 @@ class AddUsersToOrgCPFEDView(View):
                     user = User.objects.create(username=username, email=user_email)
                 profile, _ = Profile.objects.get_or_create(user=user, defaults={
                     'language': Language.objects.get(key=settings.DEFAULT_USER_LANGUAGE),
-                    'is_banned_from_problem_voting': True
+                    'is_banned_from_problem_voting': True,
                 })
                 profile.organizations.add(org)
 

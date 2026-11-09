@@ -11,7 +11,9 @@ from judge.models import Contest, Profile
 
 class ContestAnnouncement(models.Model):
     contest = models.ForeignKey(Contest, verbose_name=_('contest'), related_name='announcements', on_delete=CASCADE)
-    author = models.ForeignKey(Profile, verbose_name=_('author'), related_name='contest_announcements', on_delete=CASCADE)
+    author = models.ForeignKey(
+        Profile, verbose_name=_('author'), related_name='contest_announcements', on_delete=CASCADE,
+    )
     body = models.TextField(verbose_name=_('announcement body'))
     time = models.DateTimeField(verbose_name=_('announcement time'), auto_now_add=True)
 

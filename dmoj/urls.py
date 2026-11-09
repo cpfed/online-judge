@@ -16,7 +16,7 @@ from judge.views import TitledTemplateView, api, blog, comment, contests, langua
     two_factor, user, widgets
 from judge.views.problem_data import ProblemDataView, ProblemSubmissionDiff, \
     problem_data_file, problem_init_view
-from judge.views.register import ActivationView, RegistrationView
+from judge.views.register import ActivationView
 from judge.views.select2 import AssigneeSelect2View, ClassSelect2View, CommentSelect2View, ContestSelect2View, \
     ContestUserSearchSelect2View, OrganizationSelect2View, ProblemSelect2View, TicketUserSelect2View, \
     UserSearchSelect2View, UserSelect2View
@@ -34,7 +34,7 @@ register_patterns = [
     # Let's use <str:activation_key>, because a bad activation key should still get to the view;
     # that way, it can return a sensible "invalid key" message instead of a confusing 404.
     path('activate/<str:activation_key>/', ActivationView.as_view(), name='registration_activate'),
-    
+
     # path('register/', RegistrationView.as_view(), name='registration_register'),
     path('register/', RedirectView.as_view(url='https://auth.cpfed.kz/register/'), name='registration_register'),
     path('register/complete/',
@@ -274,7 +274,7 @@ urlpatterns = [
         path('organizations', api.api_v2.APIOrganizationList.as_view()),
         path('participations', api.api_v2.APIContestParticipationList.as_view()),
         path('languages', api.api_v2.APILanguageList.as_view()),
-        path('judges', api.api_v2.APIJudgeList.as_view())
+        path('judges', api.api_v2.APIJudgeList.as_view()),
     ])),
 
     path('api/esep/', include([
@@ -285,9 +285,12 @@ urlpatterns = [
         path('user/<str:user>', api.api_esep.APIUserDetailEsep.as_view()),
         path('problems/<str:username>', api.api_esep.APIProblemListEsep.as_view()),
         path('problems', api.api_esep.APIProblemListEsep.as_view()),
-        path('problem_type_progress/<str:username>', api.api_esep.APIProblemTypeProgressList.as_view(), name='api_problem_type_progress_user'),
-        path('problem_type_progress', api.api_esep.APIProblemTypeProgressList.as_view(), name='api_problem_type_progress'),
-        path('download_contest_submissions', api.api_esep.APIDownloadContestSubmissons.as_view(), name='download_contest_submissions'),
+        path('problem_type_progress/<str:username>', api.api_esep.APIProblemTypeProgressList.as_view(),
+             name='api_problem_type_progress_user'),
+        path('problem_type_progress', api.api_esep.APIProblemTypeProgressList.as_view(),
+             name='api_problem_type_progress'),
+        path('download_contest_submissions', api.api_esep.APIDownloadContestSubmissons.as_view(),
+             name='download_contest_submissions'),
         path('sync_users_with_esep', api.api_esep.APISyncUsersWithEsep.as_view(), name='sync_users_with_esep'),
         path('register_user', api.api_esep.APIRegisterUserFromCpfed.as_view(), name='register_user_from_cpfed'),
         path('problem_editorial', api.api_esep.APIProblemEditorial.as_view()),
